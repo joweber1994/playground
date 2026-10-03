@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="tf_modeling">
+  <title>tf_modeling</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-180.png">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div>
+        <h1>tf_modeling</h1>
+        <p>Offline. Die Formel wird auf diesem Gerät gerechnet.</p>
+      </div>
+      <div class="examples" id="examples">
+        <button type="button" data-example="teiler">Teiler</button>
+        <button type="button" data-example="tiefpass">Tiefpass</button>
+        <button type="button" data-example="inverter">Inverter</button>
+        <button type="button" data-example="">Leer</button>
+      </div>
+    </header>
+    <div class="stage">
+      <p class="hint" id="hint">Ziehe R, C, L oder eine Quelle auf die Fläche. Masse nicht vergessen. Mit Draht verbindest du zwei Pins.</p>
+      <svg id="board" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    <section class="result" aria-live="polite">
+      <div class="row">
+        <strong>Ergebnis</strong>
+        <span>
+          <button type="button" id="zoom-out" aria-label="Verkleinern">−</button>
+          <button type="button" id="zoom-in" aria-label="Vergrößern">+</button>
+          <button type="button" id="solve" class="primary">Lösen</button>
+        </span>
+      </div>
+      <p id="result"></p>
+    </section>
+    <div class="inspector" id="inspector" hidden>
+      <label>Name<input id="name" autocomplete="off"></label>
+      <label>Wert<input id="value" autocomplete="off"></label>
+      <label>Netz<input id="net" autocomplete="off" placeholder="out"></label>
+      <button type="button" id="rotate">Drehen</button>
+      <button type="button" id="delete">Löschen</button>
+    </div>
+    <div class="tools" id="palette">
+      <button type="button" data-tool="select">Wählen</button>
+      <button type="button" data-tool="wire">Draht</button>
+      <button type="button" data-type="R">R</button>
+      <button type="button" data-type="C">C</button>
+      <button type="button" data-type="L">L</button>
+      <button type="button" data-type="V">Quelle V</button>
+      <button type="button" data-type="I">Quelle I</button>
+      <button type="button" data-type="G">gm</button>
+      <button type="button" data-type="O">OP</button>
+      <button type="button" data-type="GND">Masse</button>
+    </div>
+  </div>
+  <div id="ghost" class="ghost" hidden></div>
+  <script src="solver.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
