@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Chore Wars">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0c0e13">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="Chore Wars ist ein gamifizierter Haushalts-Aufgaben-Tracker für zwei Spieler und funktioniert offline.">
+  <title>Chore Wars – Haushalts-Duell</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20180%22%3E%3Crect%20width%3D%22180%22%20height%3D%22180%22%20rx%3D%2240%22%20fill%3D%22%230c0e13%22%2F%3E%3Crect%20x%3D%228%22%20y%3D%228%22%20width%3D%22164%22%20height%3D%22164%22%20rx%3D%2234%22%20fill%3D%22%23171c27%22%20stroke%3D%22%23f6c453%22%20stroke-width%3D%226%22%2F%3E%3Cpath%20d%3D%22M90%2038l46%2018v40c0%2032-20%2052-46%2062-26-10-46-30-46-62V56l46-18z%22%20fill%3D%22%23121722%22%20stroke%3D%22%232ee6c7%22%20stroke-width%3D%225%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M78%2096l8%208%2018-22%22%20fill%3D%22none%22%20stroke%3D%22%23f6c453%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20180%22%3E%3Crect%20width%3D%22180%22%20height%3D%22180%22%20rx%3D%2240%22%20fill%3D%22%230c0e13%22%2F%3E%3Crect%20x%3D%228%22%20y%3D%228%22%20width%3D%22164%22%20height%3D%22164%22%20rx%3D%2234%22%20fill%3D%22%23171c27%22%20stroke%3D%22%23f6c453%22%20stroke-width%3D%226%22%2F%3E%3Cpath%20d%3D%22M90%2038l46%2018v40c0%2032-20%2052-46%2062-26-10-46-30-46-62V56l46-18z%22%20fill%3D%22%23121722%22%20stroke%3D%22%232ee6c7%22%20stroke-width%3D%225%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M78%2096l8%208%2018-22%22%20fill%3D%22none%22%20stroke%3D%22%23f6c453%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 180 180" aria-hidden="true">
+          <rect width="180" height="180" rx="40" fill="#0c0e13"/>
+          <rect x="8" y="8" width="164" height="164" rx="34" fill="#171c27" stroke="#f6c453" stroke-width="6"/>
+          <path d="M90 38l46 18v40c0 32-20 52-46 62-26-10-46-30-46-62V56l46-18z" fill="#121722" stroke="#2ee6c7" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M78 96l8 8 18-22" fill="none" stroke="#f6c453" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <p class="eyebrow">Haushalts-Duell</p>
+          <h1>Chore Wars</h1>
+        </div>
+      </div>
+      <p id="connectivity" class="connectivity">Lokal auf diesem Gerät</p>
+      <div class="scoreboard" aria-label="Punktestand">
+        <article class="player player-p1" id="card-p1">
+          <p class="player-name">Spieler 1</p>
+          <p class="score"><span id="score-p1" class="score-value" data-value="0">0</span><span class="sr-only"> Punkte</span></p>
+          <p class="rank" id="rank-p1">Rekrut</p>
+          <p class="crown" id="crown-p1" hidden>Führung</p>
+        </article>
+        <p class="vs" aria-hidden="true">VS</p>
+        <article class="player player-p2" id="card-p2">
+          <p class="player-name">Spieler 2</p>
+          <p class="score"><span id="score-p2" class="score-value" data-value="0">0</span><span class="sr-only"> Punkte</span></p>
+          <p class="rank" id="rank-p2">Rekrut</p>
+          <p class="crown" id="crown-p2" hidden>Führung</p>
+        </article>
+      </div>
+      <p id="leader" class="leader">Gleichstand</p>
+      <div class="duel" aria-hidden="true">
+        <span id="bar-p1"></span>
+        <span id="bar-p2"></span>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="chores" aria-labelledby="chores-heading">
+        <div class="section-head">
+          <h2 id="chores-heading">Aufgaben</h2>
+          <p class="hint">Wer die Aufgabe erledigt, holt die Punkte.</p>
+        </div>
+        <ul id="chore-list" class="chore-list"></ul>
+      </section>
+
+      <section class="history-panel" aria-labelledby="history-heading">
+        <div class="section-head">
+          <h2 id="history-heading">Letzte Erledigungen</h2>
+          <p class="hint">Maximal die letzten 5 Einträge.</p>
+        </div>
+        <p id="history-empty" class="empty">Noch keine Aufgaben erledigt.</p>
+        <ol id="history-list" class="history-list" hidden></ol>
+        <button id="reset-btn" class="reset" type="button">Punkte zurücksetzen</button>
+      </section>
+    </main>
+  </div>
+  <p id="live" class="sr-only" aria-live="polite"></p>
+  <noscript>
+    <p class="noscript">Chore Wars braucht JavaScript. Punkte bleiben danach lokal auf diesem Gerät, ohne weitere Serveranfrage.</p>
+  </noscript>
+  <script src="./app.js"></script>
+</body>
+</html>
