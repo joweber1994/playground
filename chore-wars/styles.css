@@ -187,6 +187,11 @@ h1 {
 }
 
 .player-name {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -378,7 +383,12 @@ h2 {
 }
 
 .claim-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
   font-size: 0.92rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .claim-p1 {
@@ -408,8 +418,104 @@ h2 {
   opacity: 0.72;
 }
 
+.chore-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tool,
+.undo,
+.sheet-choice {
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.tool {
+  flex: 1 1 auto;
+}
+
+.tool:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.tool-danger {
+  color: var(--danger);
+}
+
+.add,
+.backup {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 12px;
+  border-radius: 14px;
+  font-weight: 800;
+}
+
+.add {
+  border: 1px solid rgba(246, 196, 83, 0.55);
+  color: var(--gold);
+}
+
+.backup {
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.add:active,
+.backup:active,
+.tool:active:not(:disabled),
+.undo:active,
+.sheet-choice:active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.stats-panel,
 .history-panel {
   margin-top: 26px;
+}
+
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stats-card {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg-elev);
+}
+
+.stats-name {
+  font-weight: 800;
+}
+
+.stats-p1 .stats-name {
+  color: var(--p1);
+}
+
+.stats-p2 .stats-name {
+  color: var(--p2);
+}
+
+.stats-count {
+  margin-top: 2px;
+}
+
+.stats-top {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
 }
 
 .history-list {
@@ -422,6 +528,12 @@ h2 {
   gap: 2px 12px;
   padding: 11px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.undo {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: 6px;
 }
 
 .history-who {
@@ -466,6 +578,144 @@ h2 {
 
 .reset:active {
   background: rgba(255, 139, 154, 0.08);
+}
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.sheet-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(480px, 100%);
+  max-height: min(92dvh, 720px);
+  overflow: hidden;
+  padding: 18px 16px calc(16px + env(safe-area-inset-bottom));
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+  background: #171c27;
+  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.sheet-panel form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.sheet-body {
+  flex: 1 1 auto;
+  overflow: auto;
+  min-height: 0;
+  margin-top: 8px;
+}
+
+.sheet-copy {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.sheet-copy + .sheet-copy {
+  margin-top: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.field span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-elev-2);
+  color: var(--text);
+  font-size: 16px;
+}
+
+.sheet-choice {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  color: var(--text);
+  text-align: left;
+}
+
+.sheet-error {
+  margin-top: 12px;
+  color: var(--danger);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.sheet-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.sheet-actions:has(.sheet-submit[hidden]) {
+  grid-template-columns: 1fr;
+}
+
+.sheet-cancel,
+.sheet-submit {
+  min-height: 48px;
+  border-radius: 14px;
+  font-weight: 800;
+}
+
+.sheet-cancel {
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.sheet-submit {
+  background: var(--gold);
+  color: #1a1408;
+}
+
+.sheet-submit.is-danger {
+  background: transparent;
+  border: 1px solid rgba(255, 139, 154, 0.55);
+  color: var(--danger);
+}
+
+.file-input {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0.01;
 }
 
 .burst {
@@ -564,6 +814,15 @@ h2 {
 
   .claim-p2:hover {
     filter: brightness(1.05);
+  }
+
+  .reset:hover,
+  .tool:hover:not(:disabled),
+  .add:hover,
+  .backup:hover,
+  .undo:hover,
+  .sheet-choice:hover {
+    background: rgba(255, 255, 255, 0.04);
   }
 
   .reset:hover {

@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0c0e13">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="Chore Wars ist ein gamifizierter Haushalts-Aufgaben-Tracker für zwei Spieler und funktioniert offline.">
+  <meta name="description" content="Chore Wars ist ein Haushalts-Duell für zwei Spieler. Aufgaben und Namen lassen sich in der App ändern. Der Stand bleibt auf dem Gerät.">
   <title>Chore Wars – Haushalts-Duell</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20180%22%3E%3Crect%20width%3D%22180%22%20height%3D%22180%22%20rx%3D%2240%22%20fill%3D%22%230c0e13%22%2F%3E%3Crect%20x%3D%228%22%20y%3D%228%22%20width%3D%22164%22%20height%3D%22164%22%20rx%3D%2234%22%20fill%3D%22%23171c27%22%20stroke%3D%22%23f6c453%22%20stroke-width%3D%226%22%2F%3E%3Cpath%20d%3D%22M90%2038l46%2018v40c0%2032-20%2052-46%2062-26-10-46-30-46-62V56l46-18z%22%20fill%3D%22%23121722%22%20stroke%3D%22%232ee6c7%22%20stroke-width%3D%225%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M78%2096l8%208%2018-22%22%20fill%3D%22none%22%20stroke%3D%22%23f6c453%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
@@ -33,21 +33,7 @@
         </div>
       </div>
       <p id="connectivity" class="connectivity">Lokal auf diesem Gerät</p>
-      <div class="scoreboard" aria-label="Punktestand">
-        <article class="player player-p1" id="card-p1">
-          <p class="player-name">Spieler 1</p>
-          <p class="score"><span id="score-p1" class="score-value" data-value="0">0</span><span class="sr-only"> Punkte</span></p>
-          <p class="rank" id="rank-p1">Rekrut</p>
-          <p class="crown" id="crown-p1" hidden>Führung</p>
-        </article>
-        <p class="vs" aria-hidden="true">VS</p>
-        <article class="player player-p2" id="card-p2">
-          <p class="player-name">Spieler 2</p>
-          <p class="score"><span id="score-p2" class="score-value" data-value="0">0</span><span class="sr-only"> Punkte</span></p>
-          <p class="rank" id="rank-p2">Rekrut</p>
-          <p class="crown" id="crown-p2" hidden>Führung</p>
-        </article>
-      </div>
+      <div class="scoreboard" id="scoreboard" aria-label="Punktestand"></div>
       <p id="leader" class="leader">Gleichstand</p>
       <div class="duel" aria-hidden="true">
         <span id="bar-p1"></span>
@@ -62,16 +48,26 @@
           <p class="hint">Wer die Aufgabe erledigt, holt die Punkte.</p>
         </div>
         <ul id="chore-list" class="chore-list"></ul>
+        <button id="add-chore" class="add" type="button">Aufgabe hinzufügen</button>
+      </section>
+
+      <section class="stats-panel" aria-labelledby="stats-heading">
+        <div class="section-head">
+          <h2 id="stats-heading">Statistik</h2>
+          <p class="hint">Zählt weiter, auch wenn die Punkte zurückgesetzt werden.</p>
+        </div>
+        <ul id="stats-list" class="stats-list"></ul>
       </section>
 
       <section class="history-panel" aria-labelledby="history-heading">
         <div class="section-head">
           <h2 id="history-heading">Letzte Erledigungen</h2>
-          <p class="hint">Maximal die letzten 5 Einträge.</p>
+          <p class="hint">Die letzten 50 Einträge. Die neueste Buchung lässt sich rückgängig machen.</p>
         </div>
         <p id="history-empty" class="empty">Noch keine Aufgaben erledigt.</p>
         <ol id="history-list" class="history-list" hidden></ol>
         <button id="reset-btn" class="reset" type="button">Punkte zurücksetzen</button>
+        <button id="backup-btn" class="backup" type="button">Sicherung</button>
       </section>
     </main>
   </div>
@@ -79,6 +75,22 @@
   <noscript>
     <p class="noscript">Chore Wars braucht JavaScript. Punkte bleiben danach lokal auf diesem Gerät, ohne weitere Serveranfrage.</p>
   </noscript>
+  <div id="sheet" class="sheet" hidden>
+    <button type="button" class="sheet-backdrop" data-sheet-close aria-label="Schließen"></button>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <form id="sheet-form" novalidate>
+        <h2 id="sheet-title"></h2>
+        <div id="sheet-body" class="sheet-body"></div>
+        <p id="sheet-error" class="sheet-error" role="alert" hidden></p>
+        <div class="sheet-actions">
+          <button type="button" class="sheet-cancel" id="sheet-cancel" data-sheet-close>Abbrechen</button>
+          <button type="submit" class="sheet-submit" id="sheet-submit">Sichern</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <input id="import-file" class="file-input" type="file" accept="application/json,.json">
+  <script src="./state.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

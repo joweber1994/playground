@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Chore Wars",
   "short_name": "Chore Wars",
-  "description": "Gamifizierter Haushalts-Aufgaben-Tracker für zwei Spieler. Funktioniert nach dem ersten Laden offline.",
+  "description": "Haushalts-Duell für zwei Spieler. Aufgaben und Namen lassen sich ändern. Der Stand bleibt auf dem Gerät.",
   "lang": "de",
   "dir": "ltr",
   "start_url": "./index.html",
