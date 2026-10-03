@@ -1,3 +1,3 @@
 # playground
 
-Chore Wars liegt in [`Spielerei/`](Spielerei/). Die App ist ein offline-fähiger Haushalts-Tracker für zwei Spieler. Öffnen mit `Spielerei/index.html`.
+Chore Wars liegt in [`chore-wars/`](chore-wars/). Die App ist ein offline-fähiger Haushalts-Tracker für zwei Spieler. Öffnen mit `chore-wars/index.html`.
