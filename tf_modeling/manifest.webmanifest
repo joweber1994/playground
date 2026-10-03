@@ -1,0 +1,18 @@
+{
+  "name": "tf_modeling",
+  "short_name": "tf_modeling",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#241c14",
+  "theme_color": "#241c14",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
