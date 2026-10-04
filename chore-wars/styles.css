@@ -159,6 +159,63 @@ h1 {
   background: var(--p2);
 }
 
+.sync-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.sync-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex: 0 0 auto;
+}
+
+.sync-status.is-live::before {
+  background: var(--p1);
+}
+
+.sync-status.is-wait::before {
+  background: var(--gold);
+}
+
+.sync-status.is-bad::before {
+  background: var(--p2);
+}
+
+.rules-details {
+  margin-top: 12px;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.rules-details summary {
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.rules-box {
+  width: 100%;
+  margin-top: 8px;
+  min-height: 9em;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-elev-2);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 16px;
+  line-height: 1.35;
+  resize: vertical;
+}
+
 .scoreboard {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
