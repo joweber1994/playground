@@ -1,5 +1,5 @@
 /* Chore Wars – offline cache. Bump CACHE_VERSION when shipped assets change. */
-var CACHE_VERSION = 'chore-wars-v6';
+var CACHE_VERSION = 'chore-wars-v7';
 
 var ASSETS = [
   './',

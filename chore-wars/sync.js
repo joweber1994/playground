@@ -9,6 +9,7 @@
   var URL_KEY = 'chore-wars-firebase-url';
   var HOUSEHOLD_KEY = 'chore-wars-household-id';
   var UPDATED_KEY = 'chore-wars-sync-at';
+  var DEFAULT_DATABASE_URL = 'https://chore-wars-f5565-default-rtdb.europe-west1.firebasedatabase.app';
   var SECRET_MIN = 8;
   var SECRET_MAX = 80;
 
@@ -344,6 +345,7 @@
     URL_KEY: URL_KEY,
     HOUSEHOLD_KEY: HOUSEHOLD_KEY,
     UPDATED_KEY: UPDATED_KEY,
+    DEFAULT_DATABASE_URL: DEFAULT_DATABASE_URL,
     SECRET_MIN: SECRET_MIN,
     SECRET_MAX: SECRET_MAX,
     RULES_TEXT: RULES_TEXT,
