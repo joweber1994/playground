@@ -7,10 +7,14 @@
   var CLAIM_LOCK_MS = 450;
   var locks = new Set();
   var state = api.defaultState();
-  var sheetState = { onSubmit: null, lastFocus: null };
+  var listFilter = { categoryId: 'all', query: '' };
+  var sheetState = { onSubmit: null, lastFocus: null, generation: 0 };
 
   var els = {
     list: document.getElementById('chore-list'),
+    filters: document.getElementById('filters'),
+    search: document.getElementById('chore-search'),
+    choreEmpty: document.getElementById('chore-empty'),
     history: document.getElementById('history-list'),
     empty: document.getElementById('history-empty'),
     stats: document.getElementById('stats-list'),
@@ -215,64 +219,154 @@
     return button;
   }
 
+  function sortedCategories() {
+    return state.categories.slice().sort(function (a, b) { return a.sort - b.sort; });
+  }
+
+  function categoryById(id) {
+    for (var i = 0; i < state.categories.length; i += 1) {
+      if (state.categories[i].id === id) return state.categories[i];
+    }
+    return null;
+  }
+
+  function choreById(id) {
+    for (var i = 0; i < state.chores.length; i += 1) {
+      if (state.chores[i].id === id) return state.chores[i];
+    }
+    return null;
+  }
+
+  function choresIn(categoryId) {
+    return state.chores.filter(function (chore) {
+      if (categoryId === 'none') return !chore.categoryId;
+      return chore.categoryId === categoryId;
+    }).sort(function (a, b) { return a.sort - b.sort; });
+  }
+
+  function matchesQuery(chore) {
+    var query = listFilter.query.trim().toLowerCase();
+    if (!query) return true;
+    return chore.title.toLowerCase().indexOf(query) !== -1;
+  }
+
+  function hasUncategorized() {
+    return state.chores.some(function (chore) { return !chore.categoryId; });
+  }
+
+  function ensureFilter() {
+    if (listFilter.categoryId === 'all' || listFilter.categoryId === 'none') return;
+    if (!categoryById(listFilter.categoryId)) listFilter.categoryId = 'all';
+  }
+
+  function chipButton(label, id, active) {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'chip' + (active ? ' is-active' : '');
+    button.dataset.filter = id;
+    button.textContent = label;
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    return button;
+  }
+
+  function renderFilters() {
+    ensureFilter();
+    els.filters.replaceChildren();
+    els.filters.append(chipButton('Alle', 'all', listFilter.categoryId === 'all'));
+    sortedCategories().forEach(function (category) {
+      els.filters.append(chipButton(category.name, category.id, listFilter.categoryId === category.id));
+    });
+    if (hasUncategorized() || listFilter.categoryId === 'none') {
+      els.filters.append(chipButton('Ohne Kategorie', 'none', listFilter.categoryId === 'none'));
+    }
+    var manage = document.createElement('button');
+    manage.type = 'button';
+    manage.className = 'chip';
+    manage.id = 'manage-categories';
+    manage.textContent = 'Kategorien';
+    els.filters.append(manage);
+  }
+
+  function visibleGroups() {
+    var groups = [];
+    if (listFilter.categoryId === 'all') {
+      sortedCategories().forEach(function (category) {
+        groups.push({ id: category.id, label: category.name, chores: choresIn(category.id).filter(matchesQuery) });
+      });
+      groups.push({ id: 'none', label: 'Ohne Kategorie', chores: choresIn('none').filter(matchesQuery) });
+      return groups.filter(function (group) { return group.chores.length > 0; });
+    }
+    var chores = choresIn(listFilter.categoryId).filter(matchesQuery);
+    return [{ id: listFilter.categoryId, label: '', chores: chores }];
+  }
+
+  function choreCard(chore) {
+    var item = element('li', 'chore-card');
+    item.dataset.chore = chore.id;
+
+    var title = document.createElement('button');
+    title.type = 'button';
+    title.className = 'chore-title';
+    title.dataset.edit = chore.id;
+    title.textContent = chore.title;
+    title.setAttribute('aria-label', chore.title + ' bearbeiten');
+
+    var top = element('div', 'chore-top');
+    top.append(title, element('p', 'points-badge', api.punkteLabel(chore.points)));
+
+    var actions = element('div', 'claims');
+    state.players.forEach(function (player) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'claim claim-' + player.id;
+      button.dataset.player = player.id;
+      button.setAttribute(
+        'aria-label',
+        chore.title + ' für ' + player.name + ' holen, ' + api.punkteLabel(chore.points)
+      );
+      var line = element('span', 'claim-line');
+      line.append(
+        element('span', 'claim-name', player.name),
+        element('span', 'claim-points', '+' + chore.points)
+      );
+      button.append(element('span', 'claim-kicker', 'Holen'), line);
+      actions.append(button);
+    });
+
+    item.append(top, actions);
+    return item;
+  }
+
+  function renderChoreList() {
+    var groups = visibleGroups();
+    var shown = 0;
+    els.list.replaceChildren();
+    groups.forEach(function (group) {
+      shown += group.chores.length;
+      if (listFilter.categoryId === 'all' && group.label) {
+        var label = element('li', 'group-label', group.label);
+        label.setAttribute('role', 'presentation');
+        els.list.append(label);
+      }
+      group.chores.forEach(function (chore) {
+        els.list.append(choreCard(chore));
+      });
+    });
+    var query = listFilter.query.trim();
+    if (shown === 0) {
+      els.choreEmpty.hidden = false;
+      els.choreEmpty.textContent = query
+        ? 'Keine Aufgabe passt zur Suche.'
+        : 'Keine Aufgaben in dieser Kategorie.';
+    } else {
+      els.choreEmpty.hidden = true;
+    }
+  }
+
   function renderChores() {
     locks.clear();
-    els.list.replaceChildren();
-    var chores = state.chores.slice().sort(function (a, b) { return a.sort - b.sort; });
-    chores.forEach(function (chore, index) {
-      var item = element('li', 'chore-card');
-      item.dataset.chore = chore.id;
-
-      var top = element('div', 'chore-top');
-      top.append(
-        element('h3', 'chore-title', chore.title),
-        element('p', 'points-badge', api.punkteLabel(chore.points))
-      );
-
-      var tools = element('div', 'chore-tools');
-      tools.append(
-        toolButton('Hoch', {
-          'data-move': '-1',
-          'aria-label': chore.title + ' nach oben',
-          disabled: index === 0
-        }),
-        toolButton('Runter', {
-          'data-move': '1',
-          'aria-label': chore.title + ' nach unten',
-          disabled: index === chores.length - 1
-        }),
-        toolButton('Bearbeiten', {
-          'data-edit': chore.id,
-          'aria-label': chore.title + ' bearbeiten'
-        }),
-        toolButton('Löschen', {
-          'data-delete': chore.id,
-          'aria-label': chore.title + ' löschen'
-        }, 'tool tool-danger')
-      );
-
-      var actions = element('div', 'claims');
-      state.players.forEach(function (player) {
-        var button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'claim claim-' + player.id;
-        button.dataset.player = player.id;
-        button.setAttribute(
-          'aria-label',
-          chore.title + ' für ' + player.name + ' holen, ' + api.punkteLabel(chore.points)
-        );
-        var line = element('span', 'claim-line');
-        line.append(
-          element('span', 'claim-name', player.name),
-          element('span', 'claim-points', '+' + chore.points)
-        );
-        button.append(element('span', 'claim-kicker', 'Holen'), line);
-        actions.append(button);
-      });
-
-      item.append(top, tools, actions);
-      els.list.append(item);
-    });
+    renderFilters();
+    renderChoreList();
   }
 
   function renderHistory() {
@@ -354,6 +448,7 @@
   }
 
   function openSheet(config) {
+    sheetState.generation += 1;
     sheetState.lastFocus = document.activeElement;
     sheetState.onSubmit = config.onSubmit || null;
     els.sheetTitle.textContent = config.title;
@@ -408,24 +503,127 @@
     return input;
   }
 
+  function categorySelect(selected) {
+    var select = document.createElement('select');
+    select.name = 'category';
+    var empty = document.createElement('option');
+    empty.value = '';
+    empty.textContent = 'Ohne Kategorie';
+    select.append(empty);
+    sortedCategories().forEach(function (category) {
+      var option = document.createElement('option');
+      option.value = category.id;
+      option.textContent = category.name;
+      select.append(option);
+    });
+    select.value = selected && categoryById(selected) ? selected : '';
+    return select;
+  }
+
+  function presetCategory() {
+    if (listFilter.categoryId === 'all' || listFilter.categoryId === 'none') return '';
+    return listFilter.categoryId;
+  }
+
+  function canMove(chore, direction) {
+    var siblings = choresIn(chore.categoryId ? chore.categoryId : 'none');
+    var index = -1;
+    for (var i = 0; i < siblings.length; i += 1) {
+      if (siblings[i].id === chore.id) index = i;
+    }
+    var target = index + direction;
+    return index >= 0 && target >= 0 && target < siblings.length;
+  }
+
   function openChoreSheet(chore) {
+    var current = chore ? choreById(chore.id) || chore : null;
     openSheet({
-      title: chore ? 'Aufgabe bearbeiten' : 'Aufgabe hinzufügen',
+      title: current ? 'Aufgabe bearbeiten' : 'Aufgabe hinzufügen',
       submitLabel: 'Sichern',
       build: function (body) {
+        var selected = current ? current.categoryId : presetCategory();
         body.append(
-          field('Titel', textInput('title', chore ? chore.title : '', api.TITLE_MAX, 'sentences')),
-          field('Punkte', pointsInput(chore ? chore.points : 10))
+          field('Titel', textInput('title', current ? current.title : '', api.TITLE_MAX, 'sentences')),
+          field('Punkte', pointsInput(current ? current.points : 10)),
+          field('Kategorie', categorySelect(selected))
         );
+        if (!current) return;
+        var moves = element('div', 'sheet-move');
+        moves.append(
+          toolButton('Hoch', {
+            'data-sheet-move': '-1',
+            'aria-label': 'In der Kategorie nach oben',
+            disabled: !canMove(current, -1)
+          }),
+          toolButton('Runter', {
+            'data-sheet-move': '1',
+            'aria-label': 'In der Kategorie nach unten',
+            disabled: !canMove(current, 1)
+          })
+        );
+        var remove = toolButton('Löschen', {
+          'data-sheet-delete': current.id,
+          'aria-label': current.title + ' löschen'
+        }, 'sheet-choice tool-danger');
+        body.append(moves, remove);
       },
       onSubmit: function () {
         var title = els.sheetBody.querySelector('[name="title"]').value;
         var points = els.sheetBody.querySelector('[name="points"]').value;
-        var result = chore
-          ? api.updateChore(state, chore.id, { title: title, points: points })
-          : api.addChore(state, { title: title, points: points });
+        var categoryId = els.sheetBody.querySelector('[name="category"]').value;
+        var input = { title: title, points: points, categoryId: categoryId };
+        var result = current
+          ? api.updateChore(state, current.id, input)
+          : api.addChore(state, input);
         if (!result.ok) return result.error;
-        commit(result.state, chore ? 'Aufgabe geändert.' : 'Aufgabe hinzugefügt.');
+        commit(result.state, current ? 'Aufgabe geändert.' : 'Aufgabe hinzugefügt.');
+        return null;
+      }
+    });
+  }
+
+  function openCategorySheet() {
+    openSheet({
+      title: 'Kategorien',
+      cancelLabel: 'Schließen',
+      build: function (body) {
+        if (state.categories.length === 0) {
+          body.append(element('p', 'sheet-copy', 'Noch keine Kategorie. Aufgaben können auch ohne Kategorie bleiben.'));
+        }
+        sortedCategories().forEach(function (category) {
+          var row = element('div', 'category-row');
+          row.append(element('p', 'category-name', category.name));
+          var actions = element('div', 'category-actions');
+          actions.append(
+            toolButton('Umbenennen', { 'data-category-rename': category.id }),
+            toolButton('Löschen', {
+              'data-category-delete': category.id,
+              'aria-label': category.name + ' löschen'
+            }, 'tool tool-danger')
+          );
+          row.append(actions);
+          body.append(row);
+        });
+        body.append(field('Neue Kategorie', textInput('categoryName', '', api.NAME_MAX, 'words')));
+        var add = toolButton('Kategorie anlegen', { 'data-category-add': '1' }, 'sheet-choice');
+        body.append(add);
+      }
+    });
+  }
+
+  function openRenameCategorySheet(category) {
+    openSheet({
+      title: 'Kategorie umbenennen',
+      submitLabel: 'Sichern',
+      build: function (body) {
+        body.append(field('Name', textInput('name', category.name, api.NAME_MAX, 'words')));
+      },
+      onSubmit: function () {
+        var name = els.sheetBody.querySelector('[name="name"]').value;
+        var result = api.renameCategory(state, category.id, name);
+        if (!result.ok) return result.error;
+        commit(result.state, 'Kategorie geändert.');
+        openCategorySheet();
         return null;
       }
     });
@@ -474,6 +672,25 @@
         var result = api.deleteChore(state, chore.id);
         if (!result.ok) return result.error;
         commit(result.state, 'Aufgabe gelöscht.');
+        return null;
+      }
+    });
+  }
+
+  function openDeleteCategorySheet(category) {
+    openConfirmSheet({
+      title: 'Kategorie löschen',
+      submitLabel: 'Löschen',
+      lines: [
+        '„' + category.name + '“ wird entfernt.',
+        'Die Aufgaben bleiben unter Ohne Kategorie.'
+      ],
+      onSubmit: function () {
+        var result = api.deleteCategory(state, category.id);
+        if (!result.ok) return result.error;
+        if (listFilter.categoryId === category.id) listFilter.categoryId = 'none';
+        commit(result.state, 'Kategorie gelöscht.');
+        openCategorySheet();
         return null;
       }
     });
@@ -660,6 +877,74 @@
     renderStats();
     updateConnectivity();
 
+    els.filters.addEventListener('click', function (event) {
+      var manage = event.target.closest('#manage-categories');
+      if (manage) {
+        openCategorySheet();
+        return;
+      }
+      var chip = event.target.closest('[data-filter]');
+      if (!chip) return;
+      listFilter.categoryId = chip.dataset.filter;
+      renderChores();
+    });
+
+    els.search.addEventListener('input', function () {
+      listFilter.query = els.search.value;
+      renderChoreList();
+    });
+
+    els.sheetBody.addEventListener('click', function (event) {
+      var move = event.target.closest('[data-sheet-move]');
+      if (move && !move.disabled) {
+        var current = choreById(els.sheetBody.querySelector('[data-sheet-delete]') && els.sheetBody.querySelector('[data-sheet-delete]').getAttribute('data-sheet-delete'));
+        if (!current) return;
+        var titleValue = els.sheetBody.querySelector('[name="title"]').value;
+        var pointsValue = els.sheetBody.querySelector('[name="points"]').value;
+        var categoryValue = els.sheetBody.querySelector('[name="category"]').value;
+        var moved = api.moveChore(state, current.id, Number(move.getAttribute('data-sheet-move')));
+        if (!moved.ok) {
+          showSheetError(moved.error);
+          return;
+        }
+        commit(moved.state, 'Reihenfolge geändert.');
+        openChoreSheet(choreById(current.id));
+        els.sheetBody.querySelector('[name="title"]').value = titleValue;
+        els.sheetBody.querySelector('[name="points"]').value = pointsValue;
+        els.sheetBody.querySelector('[name="category"]').value = categoryValue;
+        return;
+      }
+      var remove = event.target.closest('[data-sheet-delete]');
+      if (remove) {
+        var chore = choreById(remove.getAttribute('data-sheet-delete'));
+        if (chore) openDeleteSheet(chore);
+        return;
+      }
+      var rename = event.target.closest('[data-category-rename]');
+      if (rename) {
+        var category = categoryById(rename.getAttribute('data-category-rename'));
+        if (category) openRenameCategorySheet(category);
+        return;
+      }
+      var drop = event.target.closest('[data-category-delete]');
+      if (drop) {
+        var target = categoryById(drop.getAttribute('data-category-delete'));
+        if (target) openDeleteCategorySheet(target);
+        return;
+      }
+      var addCategory = event.target.closest('[data-category-add]');
+      if (addCategory) {
+        var name = els.sheetBody.querySelector('[name="categoryName"]').value;
+        var result = api.addCategory(state, name);
+        if (!result.ok) {
+          showSheetError(result.error);
+          return;
+        }
+        commit(result.state, 'Kategorie angelegt.');
+        openCategorySheet();
+      }
+    });
+
     els.list.addEventListener('click', function (event) {
       var claimButton = event.target.closest('button[data-player]');
       if (claimButton && !claimButton.disabled) {
@@ -667,40 +952,10 @@
         if (card) claim(card, claimButton);
         return;
       }
-      var move = event.target.closest('button[data-move]');
-      if (move && !move.disabled) {
-        var moveCard = move.closest('[data-chore]');
-        if (!moveCard) return;
-        var moved = api.moveChore(state, moveCard.dataset.chore, Number(move.dataset.move));
-        if (!moved.ok) {
-          announce(moved.error);
-          return;
-        }
-        commit(moved.state, 'Reihenfolge geändert.');
-        return;
-      }
       var edit = event.target.closest('button[data-edit]');
       if (edit) {
-        var editCard = edit.closest('[data-chore]');
-        var chore = null;
-        if (editCard) {
-          for (var i = 0; i < state.chores.length; i += 1) {
-            if (state.chores[i].id === editCard.dataset.chore) chore = state.chores[i];
-          }
-        }
+        var chore = choreById(edit.getAttribute('data-edit'));
         if (chore) openChoreSheet(chore);
-        return;
-      }
-      var remove = event.target.closest('button[data-delete]');
-      if (remove) {
-        var deleteCard = remove.closest('[data-chore]');
-        var target = null;
-        if (deleteCard) {
-          for (var d = 0; d < state.chores.length; d += 1) {
-            if (state.chores[d].id === deleteCard.dataset.chore) target = state.chores[d];
-          }
-        }
-        if (target) openDeleteSheet(target);
       }
     });
 
@@ -739,11 +994,13 @@
         closeSheet();
         return;
       }
+      var generation = sheetState.generation;
       var error = sheetState.onSubmit();
       if (error) {
         showSheetError(error);
         return;
       }
+      if (sheetState.generation !== generation) return;
       closeSheet();
     });
 

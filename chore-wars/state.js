@@ -19,6 +19,20 @@
   var PLAYER_IDS = ['p1', 'p2'];
   var DEFAULT_NAMES = { p1: 'Spieler 1', p2: 'Spieler 2' };
 
+  var DEFAULT_CATEGORIES = [
+    { id: 'kitchen', name: 'Küche', sort: 0 },
+    { id: 'bath', name: 'Bad', sort: 1 },
+    { id: 'home', name: 'Haushalt', sort: 2 },
+    { id: 'camper', name: 'Camper', sort: 3 }
+  ];
+
+  var DEFAULT_CHORE_CATEGORY = {
+    trash: 'home',
+    dishwasher: 'kitchen',
+    bathroom: 'bath',
+    camper: 'camper'
+  };
+
   var DEFAULT_CHORES = [
     { id: 'trash', title: 'Müll & Altglas wegbringen', points: 10, sort: 0 },
     { id: 'dishwasher', title: 'Spülmaschine ausräumen', points: 15, sort: 1 },
@@ -44,21 +58,35 @@
       id: chore.id,
       title: chore.title,
       points: chore.points,
-      sort: chore.sort
+      sort: chore.sort,
+      categoryId: chore.categoryId || null
     };
   }
 
+  function copyCategory(category) {
+    return { id: category.id, name: category.name, sort: category.sort };
+  }
+
+  function defaultCategories() {
+    return DEFAULT_CATEGORIES.map(copyCategory);
+  }
+
   function defaultChores() {
-    return DEFAULT_CHORES.map(copyChore);
+    return DEFAULT_CHORES.map(function (chore) {
+      var next = copyChore(chore);
+      next.categoryId = DEFAULT_CHORE_CATEGORY[chore.id] || null;
+      return next;
+    });
   }
 
   function defaultState() {
     return {
-      version: 2,
+      version: 3,
       players: [
         { id: 'p1', name: DEFAULT_NAMES.p1, score: 0 },
         { id: 'p2', name: DEFAULT_NAMES.p2, score: 0 }
       ],
+      categories: defaultCategories(),
       chores: defaultChores(),
       history: [],
       totals: []
@@ -151,15 +179,79 @@
     return players;
   }
 
-  function reindex(chores) {
-    return chores.map(function (chore, index) {
-      var next = copyChore(chore);
+  function categoryExists(categories, id) {
+    for (var i = 0; i < categories.length; i += 1) {
+      if (categories[i].id === id) return true;
+    }
+    return false;
+  }
+
+  function reindexCategories(categories) {
+    return categories.map(function (category, index) {
+      var next = copyCategory(category);
       next.sort = index;
       return next;
     });
   }
 
-  function choresFrom(data) {
+  function categoriesFrom(data) {
+    if (!data || !Array.isArray(data.categories)) {
+      return { list: defaultCategories(), seeded: true };
+    }
+    var seen = {};
+    var names = {};
+    var parsed = [];
+    data.categories.forEach(function (category, index) {
+      if (!category || typeof category !== 'object' || typeof category.id !== 'string') return;
+      var id = category.id.trim();
+      if (!id || id.length > 80 || seen[id]) return;
+      var name = cleanName(category.name, '');
+      if (!name || names[name.toLowerCase()]) return;
+      var sort = Number(category.sort);
+      seen[id] = true;
+      names[name.toLowerCase()] = true;
+      parsed.push({
+        id: id,
+        name: name,
+        sort: Number.isFinite(sort) ? sort : index
+      });
+    });
+    parsed.sort(function (a, b) { return a.sort - b.sort; });
+    return { list: reindexCategories(parsed), seeded: false };
+  }
+
+  function resolvedCategoryId(chore, id, categories, seeded) {
+    var explicit = chore && typeof chore.categoryId === 'string' ? chore.categoryId.trim() : '';
+    if (explicit && categoryExists(categories, explicit)) return explicit;
+    if (seeded && DEFAULT_CHORE_CATEGORY[id] && categoryExists(categories, DEFAULT_CHORE_CATEGORY[id])) {
+      return DEFAULT_CHORE_CATEGORY[id];
+    }
+    return null;
+  }
+
+  function orderChores(chores, categories) {
+    var ordered = [];
+    categories.forEach(function (category) {
+      var rows = chores.filter(function (chore) { return chore.categoryId === category.id; });
+      rows.sort(function (a, b) { return a.sort - b.sort; });
+      rows.forEach(function (chore, index) {
+        var next = copyChore(chore);
+        next.sort = index;
+        ordered.push(next);
+      });
+    });
+    var loose = chores.filter(function (chore) { return !chore.categoryId; });
+    loose.sort(function (a, b) { return a.sort - b.sort; });
+    loose.forEach(function (chore, index) {
+      var next = copyChore(chore);
+      next.categoryId = null;
+      next.sort = index;
+      ordered.push(next);
+    });
+    return ordered;
+  }
+
+  function choresFrom(data, categories, seeded) {
     if (!data || !Array.isArray(data.chores)) return defaultChores();
     var seen = {};
     var parsed = [];
@@ -178,12 +270,12 @@
         id: id,
         title: title,
         points: points,
-        sort: Number.isFinite(sort) ? sort : index
+        sort: Number.isFinite(sort) ? sort : index,
+        categoryId: resolvedCategoryId(chore, id, categories, seeded)
       });
     });
     if (parsed.length === 0) return defaultChores();
-    parsed.sort(function (a, b) { return a.sort - b.sort; });
-    return reindex(parsed);
+    return orderChores(parsed, categories);
   }
 
   function isHistoryItem(item) {
@@ -274,10 +366,12 @@
   function migrate(data) {
     if (!data || typeof data !== 'object') return defaultState();
     var players = playersFrom(data);
+    var parsedCategories = categoriesFrom(data);
     var state = {
-      version: 2,
+      version: 3,
       players: players,
-      chores: choresFrom(data),
+      categories: parsedCategories.list,
+      chores: choresFrom(data, parsedCategories.list, parsedCategories.seeded),
       history: historyFrom(data, players),
       totals: Array.isArray(data.totals) ? sanitizeTotals(data.totals) : totalsFromHistory(historyFrom(data, players))
     };
@@ -289,6 +383,28 @@
       if (state.chores[i].id === id) return state.chores[i];
     }
     return null;
+  }
+
+  function findCategory(state, id) {
+    for (var i = 0; i < state.categories.length; i += 1) {
+      if (state.categories[i].id === id) return state.categories[i];
+    }
+    return null;
+  }
+
+  function categoryNameTaken(categories, name, exceptId) {
+    var lower = name.toLowerCase();
+    for (var i = 0; i < categories.length; i += 1) {
+      if (categories[i].id !== exceptId && categories[i].name.toLowerCase() === lower) return true;
+    }
+    return false;
+  }
+
+  function readCategoryName(value) {
+    if (typeof value !== 'string' || collapseSpaces(value).length < 1) return fail('Name fehlt.');
+    var name = collapseSpaces(value);
+    if (name.length > NAME_MAX) return fail('Name ist zu lang.');
+    return { ok: true, value: name };
   }
 
   function bumpTotal(state, playerId, choreId, title, delta) {
@@ -360,23 +476,35 @@
     return next;
   }
 
+  function readChoreCategory(state, input, current) {
+    if (!input || !Object.prototype.hasOwnProperty.call(input, 'categoryId')) {
+      return { ok: true, value: current == null ? null : current };
+    }
+    if (input.categoryId == null || input.categoryId === '') return { ok: true, value: null };
+    if (!categoryExists(state.categories, input.categoryId)) return fail('Kategorie fehlt.');
+    return { ok: true, value: input.categoryId };
+  }
+
   function addChore(state, input, options) {
     var title = readTitle(input && input.title);
     if (!title.ok) return title;
     var points = readPoints(input && input.points);
     if (!points.ok) return points;
     var next = migrate(state);
+    var category = readChoreCategory(next, input, null);
+    if (!category.ok) return category;
     var sort = 0;
     next.chores.forEach(function (chore) {
-      if (chore.sort >= sort) sort = chore.sort + 1;
+      if (chore.categoryId === category.value && chore.sort >= sort) sort = chore.sort + 1;
     });
     next.chores.push({
       id: options && options.id ? options.id : uid(),
       title: title.value,
       points: points.value,
-      sort: sort
+      sort: sort,
+      categoryId: category.value
     });
-    next.chores = reindex(next.chores.slice().sort(function (a, b) { return a.sort - b.sort; }));
+    next.chores = orderChores(next.chores, next.categories);
     return ok(next);
   }
 
@@ -388,11 +516,17 @@
     var next = migrate(state);
     var chore = findChore(next, id);
     if (!chore) return fail('Aufgabe fehlt.');
+    var category = readChoreCategory(next, input || {}, chore.categoryId);
+    if (!category.ok) return category;
+    var moved = chore.categoryId !== category.value;
     chore.title = title.value;
     chore.points = points.value;
+    chore.categoryId = category.value;
+    if (moved) chore.sort = 1000000;
     next.totals.forEach(function (row) {
       if (row.choreId === id) row.title = title.value;
     });
+    next.chores = orderChores(next.chores, next.categories);
     return ok(next);
   }
 
@@ -400,25 +534,67 @@
     var next = migrate(state);
     if (next.chores.length <= 1) return fail('Die letzte Aufgabe bleibt bestehen.');
     if (!findChore(next, id)) return fail('Aufgabe fehlt.');
-    next.chores = reindex(next.chores.filter(function (chore) { return chore.id !== id; }));
+    next.chores = orderChores(next.chores.filter(function (chore) { return chore.id !== id; }), next.categories);
     return ok(next);
   }
 
   function moveChore(state, id, direction) {
     var next = migrate(state);
-    var chores = next.chores.slice().sort(function (a, b) { return a.sort - b.sort; });
+    var chore = findChore(next, id);
+    if (!chore) return fail('Aufgabe fehlt.');
+    var siblings = next.chores.filter(function (item) {
+      return item.categoryId === chore.categoryId;
+    }).sort(function (a, b) { return a.sort - b.sort; });
     var index = -1;
-    for (var i = 0; i < chores.length; i += 1) {
-      if (chores[i].id === id) index = i;
+    for (var i = 0; i < siblings.length; i += 1) {
+      if (siblings[i].id === id) index = i;
     }
     var target = index + direction;
-    if (index < 0 || target < 0 || target >= chores.length) {
+    if (index < 0 || target < 0 || target >= siblings.length) {
       return fail('Die Aufgabe lässt sich nicht verschieben.');
     }
-    var current = chores[index];
-    chores[index] = chores[target];
-    chores[target] = current;
-    next.chores = reindex(chores);
+    var sort = siblings[index].sort;
+    siblings[index].sort = siblings[target].sort;
+    siblings[target].sort = sort;
+    next.chores = orderChores(next.chores, next.categories);
+    return ok(next);
+  }
+
+  function addCategory(state, name, options) {
+    var cleaned = readCategoryName(name);
+    if (!cleaned.ok) return cleaned;
+    var next = migrate(state);
+    if (categoryNameTaken(next.categories, cleaned.value)) return fail('Diese Kategorie gibt es schon.');
+    next.categories.push({
+      id: options && options.id ? options.id : uid(),
+      name: cleaned.value,
+      sort: next.categories.length
+    });
+    next.categories = reindexCategories(next.categories);
+    return ok(next);
+  }
+
+  function renameCategory(state, id, name) {
+    var cleaned = readCategoryName(name);
+    if (!cleaned.ok) return cleaned;
+    var next = migrate(state);
+    var category = findCategory(next, id);
+    if (!category) return fail('Kategorie fehlt.');
+    if (categoryNameTaken(next.categories, cleaned.value, id)) return fail('Diese Kategorie gibt es schon.');
+    category.name = cleaned.value;
+    return ok(next);
+  }
+
+  function deleteCategory(state, id) {
+    var next = migrate(state);
+    if (!findCategory(next, id)) return fail('Kategorie fehlt.');
+    next.categories = reindexCategories(next.categories.filter(function (category) {
+      return category.id !== id;
+    }));
+    next.chores.forEach(function (chore) {
+      if (chore.categoryId === id) chore.categoryId = null;
+    });
+    next.chores = orderChores(next.chores, next.categories);
     return ok(next);
   }
 
@@ -476,7 +652,7 @@
     if (!data || typeof data !== 'object' || Array.isArray(data)) {
       return fail('Diese Datei ist kein Chore-Wars-Stand.');
     }
-    if (data.version !== 2 || !Array.isArray(data.players) || !Array.isArray(data.chores) || data.chores.length === 0) {
+    if ((data.version !== 2 && data.version !== 3) || !Array.isArray(data.players) || !Array.isArray(data.chores) || data.chores.length === 0) {
       return fail('Diese Datei ist kein Chore-Wars-Stand.');
     }
     var state = migrate(data);
@@ -530,6 +706,9 @@
     updateChore: updateChore,
     deleteChore: deleteChore,
     moveChore: moveChore,
+    addCategory: addCategory,
+    renameCategory: renameCategory,
+    deleteCategory: deleteCategory,
     renamePlayer: renamePlayer,
     playerStats: playerStats,
     serialize: serialize,
