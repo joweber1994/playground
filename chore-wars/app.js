@@ -24,6 +24,8 @@
     empty: document.getElementById('history-empty'),
     stats: document.getElementById('stats-list'),
     reset: document.getElementById('reset-btn'),
+    undo: document.getElementById('undo-btn'),
+    redo: document.getElementById('redo-btn'),
     backup: document.getElementById('backup-btn'),
     add: document.getElementById('add-chore'),
     leader: document.getElementById('leader'),
@@ -381,8 +383,10 @@
     els.history.replaceChildren();
     els.empty.hidden = items.length > 0;
     els.history.hidden = items.length === 0;
+    if (els.undo) els.undo.disabled = items.length === 0;
+    if (els.redo) els.redo.disabled = !state.redo || state.redo.length === 0;
 
-    items.forEach(function (entry, index) {
+    items.forEach(function (entry) {
       var row = element('li', 'history-item history-' + entry.playerId);
       var when = document.createElement('time');
       when.dateTime = new Date(entry.at).toISOString();
@@ -394,12 +398,6 @@
         element('span', 'history-what', entry.title),
         when
       );
-      if (index === 0) {
-        row.append(toolButton('Rückgängig', {
-          'data-undo': '1',
-          'aria-label': 'Letzte Buchung rückgängig machen'
-        }, 'undo'));
-      }
       els.history.append(row);
     });
   }
@@ -711,17 +709,44 @@
   }
 
   function openResetSheet() {
-    openConfirmSheet({
-      title: 'Punkte zurücksetzen',
-      submitLabel: 'Zurücksetzen',
-      lines: [
-        'Punkte und der Verlauf werden geleert.',
-        'Aufgaben, Namen und die Statistik bleiben.',
-        'Das kann nicht rückgängig gemacht werden.'
-      ],
-      onSubmit: function () {
-        commit(api.resetScores(state), 'Punkte und Verlauf wurden zurückgesetzt.');
-        return null;
+    openSheet({
+      title: 'Zurücksetzen',
+      cancelLabel: 'Abbrechen',
+      build: function (body) {
+        body.append(element('p', 'sheet-copy', 'Aufgaben und Namen bleiben erhalten.'));
+        var scores = toolButton('Punkte zurücksetzen', {}, 'sheet-choice');
+        var everything = toolButton('Alles zurücksetzen', {}, 'sheet-choice tool-danger');
+        scores.addEventListener('click', function () {
+          openConfirmSheet({
+            title: 'Punkte zurücksetzen',
+            submitLabel: 'Zurücksetzen',
+            lines: [
+              'Punkte und der Verlauf werden geleert.',
+              'Die Statistik bleibt.',
+              'Das kann nicht rückgängig gemacht werden.'
+            ],
+            onSubmit: function () {
+              commit(api.resetScores(state), 'Punkte und Verlauf wurden zurückgesetzt.');
+              return null;
+            }
+          });
+        });
+        everything.addEventListener('click', function () {
+          openConfirmSheet({
+            title: 'Alles zurücksetzen',
+            submitLabel: 'Alles zurücksetzen',
+            lines: [
+              'Punkte, Verlauf und Statistik werden geleert.',
+              'Aufgaben und Namen bleiben.',
+              'Das kann nicht rückgängig gemacht werden.'
+            ],
+            onSubmit: function () {
+              commit(api.resetAll(state), 'Punkte, Verlauf und Statistik wurden zurückgesetzt.');
+              return null;
+            }
+          });
+        });
+        body.append(scores, everything);
       }
     });
   }
@@ -1221,9 +1246,8 @@
       if (player) openRenameSheet(player);
     });
 
-    els.history.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-undo]');
-      if (!button) return;
+    els.undo.addEventListener('click', function () {
+      if (els.undo.disabled) return;
       var entry = state.history[0];
       var result = api.undo(state);
       if (!result.ok) {
@@ -1233,6 +1257,20 @@
       var message = entry
         ? 'Rückgängig: ' + entry.playerName + ', ' + entry.title + '.'
         : 'Buchung rückgängig gemacht.';
+      commit(result.state, message);
+    });
+
+    els.redo.addEventListener('click', function () {
+      if (els.redo.disabled) return;
+      var entry = state.redo && state.redo[0];
+      var result = api.redo(state);
+      if (!result.ok) {
+        announce(result.error);
+        return;
+      }
+      var message = entry
+        ? 'Wiederholt: ' + entry.playerName + ', ' + entry.title + '.'
+        : 'Buchung wiederhergestellt.';
       commit(result.state, message);
     });
 

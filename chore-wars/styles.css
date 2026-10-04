@@ -635,7 +635,22 @@ h2 {
   line-height: 1.4;
 }
 
+.history-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.history-actions + .empty {
+  margin-top: 10px;
+}
+
+.history-actions .tool {
+  flex: 1 1 0;
+}
+
 .history-list {
+  margin-top: 8px;
   border-top: 1px solid var(--line);
 }
 
