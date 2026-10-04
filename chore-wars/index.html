@@ -47,6 +47,12 @@
           <h2 id="chores-heading">Aufgaben</h2>
           <p class="hint">Wer die Aufgabe erledigt, holt die Punkte.</p>
         </div>
+        <div id="filters" class="filters" aria-label="Kategorien"></div>
+        <label class="search-field">
+          <span class="sr-only">Aufgaben suchen</span>
+          <input id="chore-search" class="search-input" type="search" placeholder="Aufgabe suchen" enterkeyhint="search" autocomplete="off">
+        </label>
+        <p id="chore-empty" class="empty" hidden>Keine Aufgaben in dieser Kategorie.</p>
         <ul id="chore-list" class="chore-list"></ul>
         <button id="add-chore" class="add" type="button">Aufgabe hinzufügen</button>
       </section>

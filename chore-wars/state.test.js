@@ -101,7 +101,7 @@ assertEqual(reset.history.length, 0, 'Reset leert den Verlauf');
 assertEqual(reset.chores.length, 4, 'Reset behält die Aufgaben');
 assertEqual(reset.totals[0].count, 2, 'Reset behält die Statistik');
 
-var added = api.addChore(reset, { title: '  Pflanzen gießen ', points: '12' }, { id: 'plants' });
+var added = api.addChore(reset, { title: '  Pflanzen gießen ', points: '12', categoryId: 'camper' }, { id: 'plants' });
 assert(added.ok, 'Aufgabe hinzufügen');
 assertEqual(added.state.chores[added.state.chores.length - 1].title, 'Pflanzen gießen', 'Titel wird beschnitten');
 assertEqual(added.state.chores[added.state.chores.length - 1].points, 12, 'Punkte aus Text');
@@ -161,5 +161,61 @@ assertEqual(api.rankFor(0), 'Rekrut', 'Rang am Anfang');
 assertEqual(api.rankFor(600), 'Legende', 'höchster Rang');
 assertEqual(api.leaderSentence(booked.state), 'Spieler 1 führt mit 50 Punkten', 'Führungssatz');
 assertEqual(api.punkteLabel(1), '1 Punkt', 'Einzahl');
+
+assertEqual(fresh.categories.length, 4, 'vier Startkategorien');
+assertEqual(fresh.chores.filter(function (chore) { return chore.id === 'bathroom'; })[0].categoryId, 'bath', 'Bad gehört zu Bad');
+assertEqual(fresh.chores.filter(function (chore) { return chore.id === 'dishwasher'; })[0].categoryId, 'kitchen', 'Spülmaschine gehört zur Küche');
+assertEqual(legacy.chores.filter(function (chore) { return chore.id === 'bathroom'; })[0].categoryId, 'bath', 'alter Stand bekommt Kategorien');
+assertEqual(named.chores.filter(function (chore) { return chore.id === 'floor'; })[0].categoryId, null, 'fremde Aufgabe bleibt ohne Kategorie');
+
+var cleared = api.migrate({
+  version: 2,
+  players: [
+    { id: 'p1', name: 'Angelika', score: 15 },
+    { id: 'p2', name: 'Johannes', score: 10 }
+  ],
+  categories: [],
+  chores: [
+    { id: 'bathroom', title: 'Bad putzen', points: 50, sort: 0 }
+  ],
+  history: [],
+  totals: []
+});
+assertEqual(cleared.categories.length, 0, 'geleerte Kategorien bleiben leer');
+assertEqual(cleared.players[0].name, 'Angelika', 'Namen aus Version 2 bleiben');
+assertEqual(cleared.chores[0].categoryId, null, 'ohne Kategorienliste wird nichts neu zugeordnet');
+
+var oldFile = api.parseImport(JSON.stringify({
+  version: 2,
+  players: [
+    { id: 'p1', name: 'Angelika', score: 15 },
+    { id: 'p2', name: 'Johannes', score: 10 }
+  ],
+  chores: [
+    { id: 'bathroom', title: 'Bad putzen', points: 50, sort: 0 },
+    { id: 'dishwasher', title: 'Spülmaschine ausräumen', points: 15, sort: 1 }
+  ],
+  history: [],
+  totals: []
+}));
+assert(oldFile.ok, 'alte Sicherung lässt sich laden');
+assertEqual(oldFile.state.players[0].score, 15, 'Punkte der alten Sicherung');
+assertEqual(oldFile.state.chores.filter(function (chore) { return chore.id === 'bathroom'; })[0].categoryId, 'bath', 'Bad aus der Sicherung');
+
+var kitchen = api.addCategory(fresh, '  Abstellraum ', { id: 'store' });
+assert(kitchen.ok, 'Kategorie anlegen');
+assertEqual(kitchen.state.categories[kitchen.state.categories.length - 1].name, 'Abstellraum', 'Kategoriename wird beschnitten');
+assert(!api.addCategory(kitchen.state, 'abstellraum').ok, 'gleiche Kategorie');
+var renamedCategory = api.renameCategory(kitchen.state, 'store', 'Keller');
+assert(renamedCategory.ok, 'Kategorie umbenennen');
+var dropped = api.deleteCategory(renamedCategory.state, 'bath');
+assert(dropped.ok, 'Kategorie löschen');
+assertEqual(dropped.state.chores.filter(function (chore) { return chore.id === 'bathroom'; })[0].categoryId, null, 'Aufgabe wird ohne Kategorie');
+assert(api.deleteCategory(api.migrate({ version: 3, players: fresh.players, categories: [], chores: fresh.chores, history: [], totals: [] }), 'bath').ok === false, 'fehlende Kategorie');
+
+var parked = api.updateChore(added.state, 'plants', { title: 'Pflanzen gießen', points: 12, categoryId: null });
+assert(parked.ok, 'Aufgabe aus der Kategorie nehmen');
+assertEqual(parked.state.chores.filter(function (chore) { return chore.id === 'plants'; })[0].categoryId, null, 'ohne Kategorie gespeichert');
+assert(!api.moveChore(parked.state, 'plants', -1).ok, 'allein in der Kategorie kein Verschieben');
 
 console.log('state.test.js: ok');
