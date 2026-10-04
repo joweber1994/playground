@@ -15,6 +15,10 @@ function assertEqual(actual, expected, label) {
 var rulesFile = fs.readFileSync(path.join(__dirname, 'database.rules.json'), 'utf8');
 assertEqual(rulesFile, sync.RULES_TEXT, 'Regeln im Modul und in der Datei');
 
+var configured = sync.normalizeDatabaseUrl(sync.DEFAULT_DATABASE_URL);
+assert(configured.ok, 'die feste Datenbank ist gültig');
+assertEqual(configured.value, 'https://chore-wars-f5565-default-rtdb.europe-west1.firebasedatabase.app', 'feste Datenbank ohne Schrägstrich');
+
 var plain = sync.normalizeDatabaseUrl('https://haus.firebaseio.com');
 assert(plain.ok, 'firebaseio wird akzeptiert');
 assertEqual(plain.value, 'https://haus.firebaseio.com', 'Basis-Adresse bleibt erhalten');
