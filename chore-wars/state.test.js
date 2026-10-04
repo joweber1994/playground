@@ -127,6 +127,7 @@ assertEqual(wiped.players[0].name, 'Alex', 'Alles-Reset behält den Namen');
 assertEqual(wiped.history.length, 0, 'Alles-Reset leert den Verlauf');
 assertEqual(wiped.redo.length, 0, 'Alles-Reset leert Wiederholen');
 assertEqual(wiped.totals.length, 0, 'Alles-Reset leert die Statistik');
+assertEqual(api.playerStats(wiped).filter(function (row) { return row.claims !== 0; }).length, 0, 'Alles-Reset zeigt keine Erledigungen mehr');
 assertEqual(wiped.chores.length, 4, 'Alles-Reset behält die Aufgaben');
 assertEqual(api.migrate({ version: 3, players: wiped.players, chores: wiped.chores, history: wiped.history, totals: wiped.totals }).redo.length, 0, 'alter Stand ohne Wiederholen bleibt gültig');
 
