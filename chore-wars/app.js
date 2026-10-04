@@ -708,21 +708,44 @@
     });
   }
 
+  function completionSentence() {
+    return api.playerStats(state).map(function (row) {
+      var count = row.claims === 1 ? '1 Erledigung' : row.claims + ' Erledigungen';
+      return row.name + ' hat ' + count;
+    }).join(', ');
+  }
+
   function openResetSheet() {
     openSheet({
       title: 'Zurücksetzen',
       cancelLabel: 'Abbrechen',
       build: function (body) {
-        body.append(element('p', 'sheet-copy', 'Aufgaben und Namen bleiben erhalten.'));
-        var scores = toolButton('Punkte zurücksetzen', {}, 'sheet-choice');
+        body.append(element('p', 'sheet-copy', 'Alles zurücksetzen löscht Punkte, Verlauf und die Erledigungen. Aufgaben und Namen bleiben.'));
         var everything = toolButton('Alles zurücksetzen', {}, 'sheet-choice tool-danger');
+        var scores = toolButton('Nur die Punkte zurücksetzen', {}, 'sheet-choice');
+        everything.addEventListener('click', function () {
+          var done = completionSentence();
+          openConfirmSheet({
+            title: 'Alles zurücksetzen',
+            submitLabel: 'Alles zurücksetzen',
+            lines: [
+              done + '.',
+              'Punkte, Verlauf und alle Erledigungen werden gelöscht.',
+              'Aufgaben und Namen bleiben. Das kann nicht rückgängig gemacht werden.'
+            ],
+            onSubmit: function () {
+              commit(api.resetAll(state), 'Punkte, Verlauf und Erledigungen wurden zurückgesetzt.');
+              return null;
+            }
+          });
+        });
         scores.addEventListener('click', function () {
           openConfirmSheet({
-            title: 'Punkte zurücksetzen',
-            submitLabel: 'Zurücksetzen',
+            title: 'Nur die Punkte',
+            submitLabel: 'Punkte zurücksetzen',
             lines: [
               'Punkte und der Verlauf werden geleert.',
-              'Die Statistik bleibt.',
+              'Die Erledigungen bleiben stehen.',
               'Das kann nicht rückgängig gemacht werden.'
             ],
             onSubmit: function () {
@@ -731,22 +754,7 @@
             }
           });
         });
-        everything.addEventListener('click', function () {
-          openConfirmSheet({
-            title: 'Alles zurücksetzen',
-            submitLabel: 'Alles zurücksetzen',
-            lines: [
-              'Punkte, Verlauf und Statistik werden geleert.',
-              'Aufgaben und Namen bleiben.',
-              'Das kann nicht rückgängig gemacht werden.'
-            ],
-            onSubmit: function () {
-              commit(api.resetAll(state), 'Punkte, Verlauf und Statistik wurden zurückgesetzt.');
-              return null;
-            }
-          });
-        });
-        body.append(scores, everything);
+        body.append(everything, scores);
       }
     });
   }
@@ -1130,7 +1138,15 @@
     }).catch(function (error) {
       console.error('Service Worker konnte nicht registriert werden.', error);
     });
-    navigator.serviceWorker.addEventListener('controllerchange', updateConnectivity);
+    var hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      updateConnectivity();
+      if (!hadController) {
+        hadController = true;
+        return;
+      }
+      window.location.reload();
+    });
     navigator.serviceWorker.ready.then(updateConnectivity).catch(function () {});
   }
 
