@@ -92,14 +92,43 @@ assert(undone.ok, 'Rückgängig gelingt');
 assertEqual(undone.state.players[0].score, 50, 'Punkte der letzten Buchung fallen weg');
 assertEqual(undone.state.history.length, 1, 'eine Buchung bleibt');
 assertEqual(undone.state.totals[0].count, 1, 'Zähler sinkt');
+assertEqual(undone.state.redo.length, 1, 'rückgängig gemachte Buchung bleibt für Wiederholen');
+assertEqual(undone.state.redo[0].id, 'buch-2', 'Wiederholen merkt dieselbe Buchung');
 assert(!api.undo(api.defaultState()).ok, 'ohne Verlauf gibt es nichts zurückzunehmen');
+
+var redone = api.redo(undone.state);
+assert(redone.ok, 'Wiederholen gelingt');
+assertEqual(redone.state.players[0].score, 100, 'Punkte der Buchung kehren zurück');
+assertEqual(redone.state.history.length, 2, 'beide Buchungen stehen wieder im Verlauf');
+assertEqual(redone.state.history[0].id, 'buch-2', 'dieselbe Buchung liegt wieder oben');
+assertEqual(redone.state.totals[0].count, 2, 'Zähler steigt wieder');
+assertEqual(redone.state.redo.length, 0, 'nichts weiter zum Wiederholen');
+assert(!api.redo(redone.state).ok, 'ohne zurückgenommene Buchung gibt es nichts wiederherzustellen');
+
+var afterUndo = api.undo(again.state).state;
+var freshClaim = api.claim(afterUndo, 'trash', 'p2', { now: 2500, id: 'buch-neu' });
+assertEqual(freshClaim.state.redo.length, 0, 'eine neue Buchung verwirft Wiederholen');
+
+var cappedRedo = api.undo(again.state).state;
+cappedRedo.players[0].score = api.SCORE_CAP;
+assert(!api.redo(cappedRedo).ok, 'an der Obergrenze wird nicht wiederhergestellt');
 
 var reset = api.resetScores(again.state);
 assertEqual(reset.players[0].score, 0, 'Reset leert die Punkte');
 assertEqual(reset.players[0].name, 'Alex', 'Reset behält den Namen');
 assertEqual(reset.history.length, 0, 'Reset leert den Verlauf');
+assertEqual(reset.redo.length, 0, 'Reset leert Wiederholen');
 assertEqual(reset.chores.length, 4, 'Reset behält die Aufgaben');
 assertEqual(reset.totals[0].count, 2, 'Reset behält die Statistik');
+
+var wiped = api.resetAll(api.undo(again.state).state);
+assertEqual(wiped.players[0].score, 0, 'Alles-Reset leert die Punkte');
+assertEqual(wiped.players[0].name, 'Alex', 'Alles-Reset behält den Namen');
+assertEqual(wiped.history.length, 0, 'Alles-Reset leert den Verlauf');
+assertEqual(wiped.redo.length, 0, 'Alles-Reset leert Wiederholen');
+assertEqual(wiped.totals.length, 0, 'Alles-Reset leert die Statistik');
+assertEqual(wiped.chores.length, 4, 'Alles-Reset behält die Aufgaben');
+assertEqual(api.migrate({ version: 3, players: wiped.players, chores: wiped.chores, history: wiped.history, totals: wiped.totals }).redo.length, 0, 'alter Stand ohne Wiederholen bleibt gültig');
 
 var added = api.addChore(reset, { title: '  Pflanzen gießen ', points: '12', categoryId: 'camper' }, { id: 'plants' });
 assert(added.ok, 'Aufgabe hinzufügen');

@@ -89,6 +89,7 @@
       categories: defaultCategories(),
       chores: defaultChores(),
       history: [],
+      redo: [],
       totals: []
     };
   }
@@ -373,6 +374,7 @@
       categories: parsedCategories.list,
       chores: choresFrom(data, parsedCategories.list, parsedCategories.seeded),
       history: historyFrom(data, players),
+      redo: historyFrom({ history: data && data.redo }, players),
       totals: Array.isArray(data.totals) ? sanitizeTotals(data.totals) : totalsFromHistory(historyFrom(data, players))
     };
     return state;
@@ -454,6 +456,7 @@
       at: Math.floor(Number(now))
     });
     if (next.history.length > HISTORY_LIMIT) next.history = next.history.slice(0, HISTORY_LIMIT);
+    next.redo = [];
     bumpTotal(next, player.id, chore.id, chore.title, 1);
     return ok(next);
   }
@@ -466,6 +469,23 @@
     if (player) player.score = Math.max(0, player.score - entry.points);
     bumpTotal(next, entry.playerId, entry.choreId, entry.title, -1);
     next.history = next.history.slice(1);
+    next.redo = [entry].concat(next.redo).slice(0, HISTORY_LIMIT);
+    return ok(next);
+  }
+
+  function redo(state) {
+    var next = migrate(state);
+    if (next.redo.length === 0) return fail('Nichts zum Wiederherstellen.');
+    var entry = next.redo[0];
+    var player = playerById(next.players, entry.playerId);
+    if (!player) return fail('Spieler fehlt.');
+    if (player.score + entry.points > SCORE_CAP) {
+      return fail(player.name + ' hat die maximale Punktzahl erreicht.');
+    }
+    player.score += entry.points;
+    next.history = [entry].concat(next.history).slice(0, HISTORY_LIMIT);
+    next.redo = next.redo.slice(1);
+    bumpTotal(next, entry.playerId, entry.choreId, entry.title, 1);
     return ok(next);
   }
 
@@ -473,6 +493,13 @@
     var next = migrate(state);
     next.players.forEach(function (player) { player.score = 0; });
     next.history = [];
+    next.redo = [];
+    return next;
+  }
+
+  function resetAll(state) {
+    var next = resetScores(state);
+    next.totals = [];
     return next;
   }
 
@@ -701,7 +728,9 @@
     migrate: migrate,
     claim: claim,
     undo: undo,
+    redo: redo,
     resetScores: resetScores,
+    resetAll: resetAll,
     addChore: addChore,
     updateChore: updateChore,
     deleteChore: deleteChore,

@@ -69,11 +69,15 @@
       <section class="history-panel" aria-labelledby="history-heading">
         <div class="section-head">
           <h2 id="history-heading">Letzte Erledigungen</h2>
-          <p class="hint">Die letzten 50 Einträge. Die neueste Buchung lässt sich rückgängig machen.</p>
+          <p class="hint">Die letzten 50 Einträge. Die neueste Buchung lässt sich rückgängig machen und wiederholen.</p>
+        </div>
+        <div class="history-actions">
+          <button id="undo-btn" class="tool" type="button" disabled>Rückgängig</button>
+          <button id="redo-btn" class="tool" type="button" disabled>Wiederholen</button>
         </div>
         <p id="history-empty" class="empty">Noch keine Aufgaben erledigt.</p>
         <ol id="history-list" class="history-list" hidden></ol>
-        <button id="reset-btn" class="reset" type="button">Punkte zurücksetzen</button>
+        <button id="reset-btn" class="reset" type="button">Zurücksetzen</button>
         <button id="backup-btn" class="backup" type="button">Sicherung</button>
       </section>
     </main>
