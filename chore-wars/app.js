@@ -891,13 +891,19 @@
     });
   }
 
+  function activeDatabaseUrl() {
+    if (!syncApi) return '';
+    var normalized = syncApi.normalizeDatabaseUrl(syncApi.DEFAULT_DATABASE_URL);
+    return normalized.ok ? normalized.value : '';
+  }
+
   function startSession() {
     stopSession();
     if (!syncApi) {
       setSyncStatus('local');
       return;
     }
-    var url = readStored(syncApi.URL_KEY);
+    var url = activeDatabaseUrl();
     var id = readStored(syncApi.HOUSEHOLD_KEY);
     if (!url || !id) {
       setSyncStatus('local');
@@ -928,14 +934,14 @@
 
   function openSyncSheet() {
     if (!syncApi) return;
-    var connected = !!(readStored(syncApi.URL_KEY) && readStored(syncApi.HOUSEHOLD_KEY));
+    var connected = !!readStored(syncApi.HOUSEHOLD_KEY);
     openSheet({
       title: 'Gemeinsam nutzen',
       cancelLabel: 'Schließen',
       submitLabel: 'Verbinden',
       build: function (body) {
-        body.append(element('p', 'sheet-copy', 'Beide Handys tragen dieselbe Datenbank-Adresse und dasselbe Kennwort ein. Danach gelten Punkte, Aufgaben und Namen für beide.'));
-        body.append(element('p', 'sheet-copy', 'Einmalig in Firebase eine Realtime Database anlegen, unter Rules den Text unten einfügen und veröffentlichen. Danach die angezeigte Datenbank-Adresse hier eintragen.'));
+        body.append(element('p', 'sheet-copy', 'Die Datenbank ist eingetragen. Beide Handys tragen dasselbe Kennwort ein. Danach gelten Punkte, Aufgaben und Namen für beide.'));
+        body.append(element('p', 'sheet-copy', 'Einmalig in Firebase unter Rules den Text unten einfügen und veröffentlichen. Sonst lehnt die Datenbank den Zugriff ab.'));
         var details = document.createElement('details');
         details.className = 'rules-details';
         var summary = document.createElement('summary');
@@ -947,19 +953,12 @@
         rules.rows = 6;
         rules.setAttribute('aria-label', 'Firebase-Regeln');
         details.append(summary, rules);
-        var url = textInput('databaseUrl', readStored(syncApi.URL_KEY), 200, 'off');
-        url.type = 'url';
-        url.inputMode = 'url';
-        url.autocapitalize = 'off';
-        url.autocorrect = 'off';
-        url.spellcheck = false;
-        url.placeholder = 'https://name.firebaseio.com';
         var secret = textInput('secret', '', syncApi.SECRET_MAX, 'off');
         secret.autocapitalize = 'off';
         secret.autocorrect = 'off';
         secret.spellcheck = false;
         secret.placeholder = 'Mindestens 8 Zeichen, auf beiden Geräten gleich';
-        body.append(details, field('Datenbank-Adresse', url), field('Gemeinsames Kennwort', secret));
+        body.append(details, field('Gemeinsames Kennwort', secret));
         if (connected) {
           body.append(element('p', 'sheet-copy', 'Trennen lässt die Punkte auf diesem Gerät und in Firebase liegen. Zum erneuten Verbinden dasselbe Kennwort eintragen.'));
           var disconnect = toolButton('Verbindung trennen', {}, 'sheet-choice');
@@ -979,11 +978,10 @@
           sheetState.onClose = null;
           previous();
         }
-        var urlResult = syncApi.normalizeDatabaseUrl(els.sheetBody.querySelector('[name="databaseUrl"]').value);
-        if (!urlResult.ok) return urlResult.error;
+        var chosenUrl = activeDatabaseUrl();
+        if (!chosenUrl) return 'Die Datenbank-Adresse fehlt.';
         var secretResult = syncApi.readSecret(els.sheetBody.querySelector('[name="secret"]').value);
         if (!secretResult.ok) return secretResult.error;
-        var chosenUrl = urlResult.value;
         var pending = true;
         sheetState.onClose = function () { pending = false; };
         els.sheetSubmit.disabled = true;
