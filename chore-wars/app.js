@@ -2,13 +2,18 @@
   'use strict';
 
   var api = window.ChoreWarsState;
+  var syncApi = window.ChoreWarsSync;
   if (!api) return;
 
   var CLAIM_LOCK_MS = 450;
   var locks = new Set();
   var state = api.defaultState();
   var listFilter = { categoryId: 'all', query: '' };
-  var sheetState = { onSubmit: null, lastFocus: null, generation: 0 };
+  var sheetState = { onSubmit: null, onClose: null, lastFocus: null, generation: 0 };
+  var suppressPush = false;
+  var session = null;
+  var localUpdatedAt = 0;
+  var syncStatus = 'local';
 
   var els = {
     list: document.getElementById('chore-list'),
@@ -24,6 +29,7 @@
     leader: document.getElementById('leader'),
     scoreboard: document.getElementById('scoreboard'),
     connectivity: document.getElementById('connectivity'),
+    sync: document.getElementById('sync-status'),
     live: document.getElementById('live'),
     bar1: document.getElementById('bar-p1'),
     bar2: document.getElementById('bar-p2'),
@@ -60,6 +66,7 @@
   function save() {
     try {
       localStorage.setItem(api.STORAGE_KEY, JSON.stringify(api.serialize(state)));
+      if (!suppressPush && session) session.noteLocalEdit();
       return true;
     } catch (error) {
       return false;
@@ -439,18 +446,25 @@
   }
 
   function closeSheet() {
+    var hook = sheetState.onClose;
+    sheetState.onClose = null;
     els.sheet.hidden = true;
     if (els.app) els.app.removeAttribute('inert');
     var back = sheetState.lastFocus;
     sheetState.onSubmit = null;
     sheetState.lastFocus = null;
     if (back && back.isConnected && typeof back.focus === 'function') back.focus();
+    if (hook) hook();
   }
 
   function openSheet(config) {
+    var previous = sheetState.onClose;
+    sheetState.onClose = null;
+    if (previous) previous();
     sheetState.generation += 1;
     sheetState.lastFocus = document.activeElement;
     sheetState.onSubmit = config.onSubmit || null;
+    sheetState.onClose = config.onClose || null;
     els.sheetTitle.textContent = config.title;
     els.sheetBody.replaceChildren();
     if (config.build) config.build(els.sheetBody);
@@ -763,6 +777,234 @@
     });
   }
 
+  function readStored(key) {
+    try {
+      return localStorage.getItem(key) || '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function writeStored(key, value) {
+    try {
+      if (value) localStorage.setItem(key, value);
+      else localStorage.removeItem(key);
+    } catch (error) { /* Speicher voll oder gesperrt */ }
+  }
+
+  function playerLine(players) {
+    return (players || []).map(function (player) {
+      return (player.name || 'Spieler') + ' ' + (player.score || 0);
+    }).join(' · ');
+  }
+
+  function isUntouched() {
+    return JSON.stringify(api.serialize(state)) === JSON.stringify(api.serialize(api.defaultState()));
+  }
+
+  function renderSyncStatus() {
+    if (!els.sync) return;
+    var labels = {
+      local: 'Nur dieses Gerät',
+      connecting: 'Verbinden…',
+      live: 'Gemeinsam verbunden',
+      saving: 'Wird übertragen…',
+      offline: 'Gemeinsam, gerade offline',
+      reconnecting: 'Erneut verbinden…',
+      error: 'Verbindung fehlgeschlagen',
+      denied: 'Firebase verweigert den Zugriff',
+      invalid: 'Gemeinsamer Stand unlesbar',
+      rejected: 'Firebase hat den Stand abgelehnt',
+      ask: 'Welcher Stand gilt?'
+    };
+    els.sync.textContent = labels[syncStatus] || labels.local;
+    els.sync.classList.toggle('is-live', syncStatus === 'live');
+    els.sync.classList.toggle('is-wait', syncStatus === 'connecting' || syncStatus === 'saving' || syncStatus === 'offline' || syncStatus === 'reconnecting' || syncStatus === 'ask');
+    els.sync.classList.toggle('is-bad', syncStatus === 'error' || syncStatus === 'denied' || syncStatus === 'invalid' || syncStatus === 'rejected');
+  }
+
+  function setSyncStatus(name) {
+    var changed = syncStatus !== name;
+    syncStatus = name;
+    renderSyncStatus();
+    if (!changed) return;
+    if (name === 'denied') announce('Firebase verweigert den Zugriff. Die Regeln aus dem Blatt müssen veröffentlicht sein.');
+    else if (name === 'rejected') announce('Firebase hat den Stand abgelehnt.');
+    else if (name === 'invalid') announce('Der gemeinsame Stand ist unlesbar.');
+    else if (name === 'error') announce('Die Verbindung ist fehlgeschlagen.');
+  }
+
+  function stopSession() {
+    if (session) session.close();
+    session = null;
+  }
+
+  function adoptRemote(remote) {
+    var parsed = api.parseImport(remote.state);
+    if (!parsed.ok) return false;
+    suppressPush = true;
+    state = parsed.state;
+    var saved = save();
+    suppressPush = false;
+    localUpdatedAt = remote.updatedAt;
+    if (syncApi) writeStored(syncApi.UPDATED_KEY, String(remote.updatedAt));
+    renderChores();
+    renderHistory();
+    renderStats();
+    renderScores(false);
+    announce(withSaveNote(api.leaderSentence(state) + '.', saved));
+    return true;
+  }
+
+  function askWhichStand(remote) {
+    return new Promise(function (resolve) {
+      var settled = false;
+      function finish(choice) {
+        if (settled) return;
+        settled = true;
+        sheetState.onClose = null;
+        resolve(choice);
+      }
+      var remoteLine = playerLine(remote.state && remote.state.players);
+      var localLine = playerLine(state.players);
+      openSheet({
+        title: 'Zwei Stände',
+        cancelLabel: 'Abbrechen',
+        onClose: function () { finish('cancel'); },
+        build: function (body) {
+          body.append(element('p', 'sheet-copy', 'Auf diesem Gerät und im gemeinsamen Haushalt liegen unterschiedliche Punkte. Einer der beiden Stände gilt danach für beide.'));
+          if (localLine) body.append(element('p', 'sheet-copy', 'Dieses Gerät: ' + localLine));
+          if (remoteLine) body.append(element('p', 'sheet-copy', 'Gemeinsam: ' + remoteLine));
+          var keep = toolButton('Stand dieses Geräts verwenden', {}, 'sheet-choice');
+          var take = toolButton('Gemeinsamen Stand übernehmen', {}, 'sheet-choice');
+          keep.addEventListener('click', function () {
+            finish('push');
+            closeSheet();
+          });
+          take.addEventListener('click', function () {
+            finish('adopt');
+            closeSheet();
+          });
+          body.append(keep, take);
+        }
+      });
+    });
+  }
+
+  function startSession() {
+    stopSession();
+    if (!syncApi) {
+      setSyncStatus('local');
+      return;
+    }
+    var url = readStored(syncApi.URL_KEY);
+    var id = readStored(syncApi.HOUSEHOLD_KEY);
+    if (!url || !id) {
+      setSyncStatus('local');
+      return;
+    }
+    session = syncApi.createSession({
+      databaseURL: url,
+      householdId: id,
+      getSnapshot: function () {
+        return {
+          state: api.serialize(state),
+          updatedAt: localUpdatedAt,
+          untouched: isUntouched()
+        };
+      },
+      setUpdatedAt: function (value) {
+        localUpdatedAt = value;
+        writeStored(syncApi.UPDATED_KEY, String(value));
+      },
+      adopt: adoptRemote,
+      ask: askWhichStand,
+      onStatus: setSyncStatus,
+      fetch: window.fetch.bind(window),
+      EventSource: window.EventSource,
+      now: function () { return Date.now(); }
+    });
+  }
+
+  function openSyncSheet() {
+    if (!syncApi) return;
+    var connected = !!(readStored(syncApi.URL_KEY) && readStored(syncApi.HOUSEHOLD_KEY));
+    openSheet({
+      title: 'Gemeinsam nutzen',
+      cancelLabel: 'Schließen',
+      submitLabel: 'Verbinden',
+      build: function (body) {
+        body.append(element('p', 'sheet-copy', 'Beide Handys tragen dieselbe Datenbank-Adresse und dasselbe Kennwort ein. Danach gelten Punkte, Aufgaben und Namen für beide.'));
+        body.append(element('p', 'sheet-copy', 'Einmalig in Firebase eine Realtime Database anlegen, unter Rules den Text unten einfügen und veröffentlichen. Danach die angezeigte Datenbank-Adresse hier eintragen.'));
+        var details = document.createElement('details');
+        details.className = 'rules-details';
+        var summary = document.createElement('summary');
+        summary.textContent = 'Regeln zum Kopieren';
+        var rules = document.createElement('textarea');
+        rules.className = 'rules-box';
+        rules.readOnly = true;
+        rules.value = syncApi.RULES_TEXT;
+        rules.rows = 6;
+        rules.setAttribute('aria-label', 'Firebase-Regeln');
+        details.append(summary, rules);
+        var url = textInput('databaseUrl', readStored(syncApi.URL_KEY), 200, 'off');
+        url.type = 'url';
+        url.inputMode = 'url';
+        url.autocapitalize = 'off';
+        url.autocorrect = 'off';
+        url.spellcheck = false;
+        url.placeholder = 'https://name.firebaseio.com';
+        var secret = textInput('secret', '', syncApi.SECRET_MAX, 'off');
+        secret.autocapitalize = 'off';
+        secret.autocorrect = 'off';
+        secret.spellcheck = false;
+        secret.placeholder = 'Mindestens 8 Zeichen, auf beiden Geräten gleich';
+        body.append(details, field('Datenbank-Adresse', url), field('Gemeinsames Kennwort', secret));
+        if (connected) {
+          body.append(element('p', 'sheet-copy', 'Trennen lässt die Punkte auf diesem Gerät und in Firebase liegen. Zum erneuten Verbinden dasselbe Kennwort eintragen.'));
+          var disconnect = toolButton('Verbindung trennen', {}, 'sheet-choice');
+          disconnect.addEventListener('click', function () {
+            stopSession();
+            writeStored(syncApi.HOUSEHOLD_KEY, '');
+            setSyncStatus('local');
+            closeSheet();
+            announce('Nur noch dieses Gerät.');
+          });
+          body.append(disconnect);
+        }
+      },
+      onSubmit: function () {
+        if (sheetState.onClose) {
+          var previous = sheetState.onClose;
+          sheetState.onClose = null;
+          previous();
+        }
+        var urlResult = syncApi.normalizeDatabaseUrl(els.sheetBody.querySelector('[name="databaseUrl"]').value);
+        if (!urlResult.ok) return urlResult.error;
+        var secretResult = syncApi.readSecret(els.sheetBody.querySelector('[name="secret"]').value);
+        if (!secretResult.ok) return secretResult.error;
+        var chosenUrl = urlResult.value;
+        var pending = true;
+        sheetState.onClose = function () { pending = false; };
+        els.sheetSubmit.disabled = true;
+        syncApi.householdId(secretResult.value).then(function (id) {
+          if (!pending) return;
+          sheetState.onClose = null;
+          writeStored(syncApi.URL_KEY, chosenUrl);
+          writeStored(syncApi.HOUSEHOLD_KEY, id);
+          closeSheet();
+          announce('Verbinden…');
+          startSession();
+        }).catch(function () {
+          if (!pending) return;
+          els.sheetSubmit.disabled = false;
+          showSheetError('Das Kennwort konnte nicht verarbeitet werden.');
+        });
+        return 'stay';
+      }
+    });
+  }
+
   function openBackupSheet() {
     openSheet({
       title: 'Sicherung',
@@ -771,11 +1013,13 @@
         body.append(element('p', 'sheet-copy', 'Die Datei enthält Aufgaben, Namen, Punkte, Verlauf und Statistik.'));
         var saveButton = toolButton('Stand sichern', {}, 'sheet-choice');
         var loadButton = toolButton('Stand laden', {}, 'sheet-choice');
+        var shareButton = toolButton('Gemeinsam nutzen', {}, 'sheet-choice');
         saveButton.addEventListener('click', exportStand);
         loadButton.addEventListener('click', function () {
           els.importFile.click();
         });
-        body.append(saveButton, loadButton);
+        shareButton.addEventListener('click', openSyncSheet);
+        body.append(saveButton, loadButton, shareButton);
       }
     });
   }
@@ -869,7 +1113,15 @@
     var hadCurrent = false;
     try { hadCurrent = !!localStorage.getItem(api.STORAGE_KEY); } catch (error) { hadCurrent = false; }
     state = load();
-    if (!hadCurrent) save();
+    if (syncApi) {
+      var storedUpdatedAt = Number(readStored(syncApi.UPDATED_KEY));
+      localUpdatedAt = isFinite(storedUpdatedAt) ? storedUpdatedAt : 0;
+    }
+    if (!hadCurrent) {
+      suppressPush = true;
+      save();
+      suppressPush = false;
+    }
     renderScoreboard();
     renderChores();
     renderScores(false);
@@ -987,6 +1239,7 @@
     els.add.addEventListener('click', function () { openChoreSheet(null); });
     els.reset.addEventListener('click', openResetSheet);
     els.backup.addEventListener('click', openBackupSheet);
+    if (els.sync) els.sync.addEventListener('click', openSyncSheet);
 
     els.sheetForm.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -996,6 +1249,7 @@
       }
       var generation = sheetState.generation;
       var error = sheetState.onSubmit();
+      if (error === 'stay') return;
       if (error) {
         showSheetError(error);
         return;
@@ -1033,10 +1287,18 @@
       reader.readAsText(file);
     });
 
-    window.addEventListener('online', updateConnectivity);
-    window.addEventListener('offline', updateConnectivity);
+    window.addEventListener('online', function () {
+      updateConnectivity();
+      if (session) session.retry();
+    });
+    window.addEventListener('offline', function () {
+      updateConnectivity();
+      if (session) setSyncStatus('offline');
+    });
     window.setInterval(refreshTimes, 30000);
     registerServiceWorker();
+    renderSyncStatus();
+    startSession();
   }
 
   init();
