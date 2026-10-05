@@ -74,6 +74,17 @@ var typed = meals.matchOfferText('Hackfleisch und Paprika, 2.99');
 assert(typed.indexOf('hackfleisch') !== -1, 'Hackfleisch wird erkannt');
 assert(typed.indexOf('paprika') !== -1, 'Paprika wird erkannt');
 assertEqual(meals.matchOfferText('Salz').length, 0, 'Vorrat ohne Angebot wird nicht als Angebot erkannt');
+assert(meals.matchOfferText('Gemischtes Hackfleisch').indexOf('hackfleisch') !== -1, 'Gemischtes Hackfleisch zählt');
+assert(meals.matchOfferText('Hähnchen-Unterkeulen').indexOf('haehnchen') !== -1, 'Hähnchen-Unterkeulen zählen');
+assert(meals.matchOfferText('Seelachsfilet').indexOf('fisch') !== -1, 'Seelachs ist Fisch');
+assert(meals.matchOfferText('Seelachsfilet').indexOf('lachs') === -1, 'Seelachs ist kein Lachs');
+assert(meals.matchOfferText('Lamm Lachse').indexOf('lachs') === -1, 'Lamm Lachse ist kein Lachs');
+assert(meals.matchOfferText('Rinder Gulasch').indexOf('gulasch') !== -1, 'Gulasch wird erkannt');
+assert(meals.matchOfferText('Rinder Gulasch').indexOf('hackfleisch') === -1, 'Rinder Gulasch ist kein Hackfleisch');
+assert(meals.matchOfferText('schwarze Tomaten').indexOf('passata') === -1, 'frische Tomaten sind keine Passata');
+assert(meals.matchOfferText('Bio-Tomaten, passiert').indexOf('passata') !== -1, 'passierte Tomaten zählen');
+assert(meals.matchOfferText('Meraner Weinkäse').indexOf('kaese') !== -1, 'Weinkäse zählt als Käse');
+assert(meals.matchOfferText('Berchtesgadener Land Bergbauernmilch').indexOf('milch') !== -1, 'Bergbauernmilch zählt');
 
 var list = meals.shoppingList(ideas, null);
 assert(Array.isArray(list), 'Einkaufsliste ist eine Liste');

@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0c0e13">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="Wochenessen schlägt Gerichte für zwei aus angekreuzten Prechtl-Angeboten vor und baut die Einkaufsliste.">
+  <meta name="description" content="Wochenessen liest die Angebote von Prechtl, Aldi Süd, Penny und Lidl und schlägt daraus Gerichte für zwei vor.">
   <title>Wochenessen</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
@@ -40,31 +40,30 @@
     </header>
 
     <main class="content">
-      <section class="panel" aria-labelledby="market-heading">
+      <section class="panel" aria-labelledby="week-heading">
         <div class="section-head">
-          <h2 id="market-heading">Markt</h2>
-          <p class="hint">Der Prospekt gilt für alle Prechtl-Märkte. Der gewählte Markt steht auf der Einkaufsliste.</p>
+          <h2 id="week-heading">Angebote dieser Woche</h2>
+          <p id="week-line" class="hint"></p>
+          <p id="week-note" class="banner" hidden></p>
         </div>
-        <label class="field">
-          <span class="sr-only">Prechtl-Markt</span>
-          <select id="market"></select>
-        </label>
-        <a id="prospekt" class="prospekt" href="https://www.prechtl.de/aktuelles/" target="_blank" rel="noopener noreferrer">Prospekt öffnen</a>
-        <p id="week-note" class="banner" hidden>Neue Woche. Die Angebote der letzten Woche sind geleert, der Vorrat bleibt.</p>
+        <div id="stores" class="stores"></div>
+        <p id="unavailable" class="hint"></p>
       </section>
 
       <section class="panel" aria-labelledby="offers-heading">
         <div class="section-head">
-          <h2 id="offers-heading">Angebote</h2>
-          <p class="hint">Im Prospekt ankreuzen oder den Namen eintragen. Die App liest das Blatt nicht selbst aus.</p>
+          <h2 id="offers-heading">Gelesene Angebote</h2>
+          <p id="store-note" class="hint"></p>
         </div>
-        <div id="offers"></div>
+        <a id="prospekt" class="prospekt" href="https://www.prechtl.de/aktuelles/" target="_blank" rel="noopener noreferrer">Prospekt öffnen</a>
+        <div id="matched" class="chips" aria-label="Erkannte Zutaten"></div>
+        <div id="offer-scroll" class="offer-scroll"></div>
         <form id="offer-form" class="offer-form" autocomplete="off">
           <label class="field grow">
-            <span class="sr-only">Artikel aus dem Prospekt</span>
-            <input id="offer-text" type="text" placeholder="z. B. Hackfleisch" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+            <span class="sr-only">Weiteren Artikelnamen ergänzen</span>
+            <input id="offer-text" type="text" placeholder="Noch etwas aus dem Blatt" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
           </label>
-          <button type="submit">Eintragen</button>
+          <button type="submit">Ergänzen</button>
         </form>
         <p id="offer-note" class="hint" role="status"></p>
       </section>
@@ -85,12 +84,22 @@
         <div id="ideas"></div>
       </section>
 
-      <section class="panel" aria-labelledby="shop-heading">
+      <section class="panel" aria-labelledby="choice-heading">
         <div class="section-head">
-          <h2 id="shop-heading">Einkaufsliste</h2>
-          <p class="hint">Nur das, was für die ausgewählten Gerichte noch fehlt.</p>
+          <h2 id="choice-heading">Wo einkaufen?</h2>
+          <p class="hint">Die Liste gilt für den Supermarkt, den du hier wählst. Bei Prechtl ist das Angebot in jedem Markt gleich.</p>
         </div>
-        <p id="shop-empty" class="empty">Sobald Angebote markiert sind, stehen hier die fehlenden Zutaten.</p>
+        <label class="field">
+          <span class="sr-only">Supermarkt</span>
+          <select id="store-select"></select>
+        </label>
+        <label id="market-wrap" class="field market-wrap">
+          <span class="field-label">Prechtl-Markt</span>
+          <select id="market"></select>
+        </label>
+        <h2 id="shop-heading">Einkaufsliste</h2>
+        <p class="hint">Nur das, was für die ausgewählten Gerichte noch fehlt.</p>
+        <p id="shop-empty" class="empty">Sobald ein Gericht auf der Liste liegt, stehen hier die fehlenden Zutaten.</p>
         <ul id="shop-list" class="shop-list"></ul>
       </section>
     </main>
@@ -100,6 +109,7 @@
     <p class="note">Wochenessen braucht JavaScript. Der Prospekt lässt sich auch so öffnen.</p>
   </noscript>
   <script src="./meals.js"></script>
+  <script src="./offers.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

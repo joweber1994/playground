@@ -30,6 +30,7 @@
     { id: 'haehnchen', name: 'Hähnchen', group: 'fleisch', offer: true, aliases: ['haehnchen', 'huhn', 'hähnchenbrust'] },
     { id: 'pute', name: 'Pute', group: 'fleisch', offer: true, aliases: ['putenbrust', 'putengeschnetzeltes'] },
     { id: 'schnitzel', name: 'Schnitzel', group: 'fleisch', offer: true, aliases: ['schweineschnitzel'] },
+    { id: 'gulasch', name: 'Gulasch', group: 'fleisch', offer: true, aliases: ['gulaschfleisch'] },
     { id: 'gyros', name: 'Gyros', group: 'fleisch', offer: true, aliases: [] },
     { id: 'bratwurst', name: 'Bratwurst', group: 'fleisch', offer: true, aliases: ['würstchen'] },
     { id: 'speck', name: 'Speck', group: 'fleisch', offer: true, aliases: ['bauchspeck'] },
@@ -59,7 +60,7 @@
     { id: 'nudeln', name: 'Nudeln', group: 'vorrat', offer: true, pantry: true, pantryDefault: true, aliases: ['pasta', 'spaghetti', 'penne'] },
     { id: 'reis', name: 'Reis', group: 'vorrat', offer: true, pantry: true, pantryDefault: true, aliases: [] },
     { id: 'spaetzle', name: 'Spätzle', group: 'vorrat', offer: true, aliases: ['spaetzle'] },
-    { id: 'passata', name: 'Passierte Tomaten', group: 'vorrat', offer: true, aliases: ['tomaten', 'passata', 'tomatensauce'] },
+    { id: 'passata', name: 'Passierte Tomaten', group: 'vorrat', offer: true, aliases: ['passata', 'passierte', 'passiert', 'tomatensauce', 'mutti'] },
     { id: 'bohnen', name: 'Bohnen', group: 'vorrat', offer: true, aliases: ['kidneybohnen', 'bohnen'] },
     { id: 'linsen', name: 'Linsen', group: 'vorrat', offer: true, pantry: true, pantryDefault: false, aliases: [] },
     { id: 'mais', name: 'Mais', group: 'vorrat', offer: true, aliases: [] },
@@ -154,6 +155,17 @@
         'Zusammen anrichten.'
       ],
       ingredients: [ing('schnitzel', '2'), ing('kartoffeln', '600 g'), ing('oel', '3 EL'), ing('salz', '1 Prise'), ing('pfeffer', '1 Prise')]
+    },
+    {
+      id: 'gulasch',
+      title: 'Gulasch mit Nudeln',
+      minutes: 45,
+      steps: [
+        'Zwiebeln anbraten, Gulasch dazu und scharf anrösten.',
+        'Mit Brühe ablöschen und weich schmoren.',
+        'Nudeln dazu. Für zwei Teller.'
+      ],
+      ingredients: [ing('gulasch', '500 g'), ing('nudeln', '200 g'), ing('zwiebel', '1'), ing('paprika', '1'), ing('bruehe', '200 ml')]
     },
     {
       id: 'gyros',
@@ -405,8 +417,25 @@
     var needle = String(term || '').toLowerCase();
     if (!needle || !token) return false;
     if (token === needle) return true;
-    if (token.length >= 4 && (token.indexOf(needle) === 0 || needle.indexOf(token) === 0)) return true;
+    if (needle.length < 4 || token.length < 4) return false;
+    if (token === 'lachse' && needle === 'lachs') return false;
+    if (token === 'preis' && needle === 'reis') return false;
+    if (token.indexOf(needle) === 0) return true;
+    if (needle.indexOf(token) === 0 && needle.length - token.length <= 2) return true;
+    var suffix = { 'käse': 1, 'milch': 1, 'wurst': 1, 'speck': 1, 'schinken': 1, 'fleisch': 1, 'brot': 1, 'sahne': 1, 'butter': 1, 'schnitzel': 1, 'joghurt': 1 };
+    if (suffix[needle] && token.length > needle.length && token.lastIndexOf(needle) === token.length - needle.length) return true;
     return false;
+  }
+
+  function idsFromOffers(offers) {
+    var found = [];
+    (offers || []).forEach(function (offer) {
+      var text = offer && typeof offer === 'object' ? offer.name : offer;
+      matchOfferText(text).forEach(function (id) {
+        if (found.indexOf(id) === -1) found.push(id);
+      });
+    });
+    return found;
   }
 
   function matchOfferText(text) {
@@ -503,6 +532,7 @@
     freshState: freshState,
     normalizeState: normalizeState,
     matchOfferText: matchOfferText,
+    idsFromOffers: idsFromOffers,
     suggest: suggest,
     chosenIds: chosenIds,
     shoppingList: shoppingList
