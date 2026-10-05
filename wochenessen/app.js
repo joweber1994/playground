@@ -8,6 +8,7 @@
   var STORAGE_KEY = 'wochenessen-v1';
   var state = meals.freshState(new Date());
   state.storeIds = [catalog.stores[0].id];
+  state.categoryId = 'alle';
   state.extras = {};
 
   var els = {
@@ -18,6 +19,7 @@
     unavailable: document.getElementById('unavailable'),
     storeNote: document.getElementById('store-note'),
     prospekte: document.getElementById('prospekte'),
+    categories: document.getElementById('offer-categories'),
     matched: document.getElementById('matched'),
     offerScroll: document.getElementById('offer-scroll'),
     extraWrap: document.getElementById('extra-store-wrap'),
@@ -173,6 +175,7 @@
     } else {
       next.storeIds = [bestStoreId(next.pantry)];
     }
+    next.categoryId = meals.offerCategoryById(saved && saved.categoryId).id;
     return { state: next, weekChanged: loaded.weekChanged };
   }
 
@@ -301,10 +304,42 @@
     });
   }
 
+  function categoryCounts(rows) {
+    var counts = {};
+    meals.OFFER_CATEGORIES.forEach(function (cat) { counts[cat.id] = 0; });
+    counts.alle = rows.length;
+    rows.forEach(function (row) {
+      var id = meals.offerCategory(row.name);
+      if (typeof counts[id] !== 'number') id = 'sonstiges';
+      counts[id] += 1;
+    });
+    return counts;
+  }
+
+  function renderCategories(rows) {
+    var counts = categoryCounts(rows);
+    if (state.categoryId !== 'alle' && !counts[state.categoryId]) state.categoryId = 'alle';
+    els.categories.innerHTML = meals.OFFER_CATEGORIES.filter(function (cat) {
+      return cat.id === 'alle' || counts[cat.id] > 0;
+    }).map(function (cat) {
+      var on = cat.id === state.categoryId;
+      return '<button type="button" class="chip" data-category="' + cat.id + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
+        escapeHtml(cat.label + ' ' + counts[cat.id]) + '</button>';
+    }).join('');
+  }
+
   function renderOfferList(stores) {
     var rows = combinedRows(stores);
-    if (!rows.length) {
+    renderCategories(rows);
+    if (state.categoryId !== 'alle') {
+      rows = rows.filter(function (row) { return meals.offerCategory(row.name) === state.categoryId; });
+    }
+    if (!combinedRows(stores).length) {
       els.offerScroll.innerHTML = '<p class="empty offer-empty">In diesen Prospekten stehen keine Lebensmittel.</p>';
+      return;
+    }
+    if (!rows.length) {
+      els.offerScroll.innerHTML = '<p class="empty offer-empty">In dieser Kategorie ist nichts reduziert.</p>';
       return;
     }
     var showStore = stores.length > 1;
@@ -324,6 +359,7 @@
     if (!stores.length) {
       els.storeNote.textContent = 'Wähl mindestens einen Supermarkt. Die Angebote werden zusammengezählt.';
       els.prospekte.innerHTML = '';
+      els.categories.innerHTML = '';
       renderMatched([]);
       els.offerScroll.innerHTML = '<p class="empty offer-empty">Noch kein Prospekt ausgewählt.</p>';
       return;
@@ -568,6 +604,18 @@
     }
     els.stores.addEventListener('click', onStoreClick);
     els.storePicks.addEventListener('click', onStoreClick);
+
+    els.categories.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-category]');
+      if (!button) return;
+      var id = meals.offerCategoryById(button.getAttribute('data-category')).id;
+      if (state.categoryId === id) return;
+      state.categoryId = id;
+      save();
+      renderStoreDetail();
+      if (els.offerScroll) els.offerScroll.scrollTop = 0;
+      announce(meals.offerCategoryById(id).label);
+    });
 
     els.market.addEventListener('change', function () {
       state.marketId = meals.marketById(els.market.value).id;

@@ -90,4 +90,19 @@ assert(bothMeals.length > prechtlMeals.length, 'Aldi und Prechtl zusammen schlag
 assert(aldiIds.indexOf('fisch') === -1 && prechtlIds.indexOf('fisch') !== -1, 'Fisch gibt es bei Prechtl');
 assert(prechtlIds.indexOf('hackfleisch') === -1 && aldiIds.indexOf('hackfleisch') !== -1, 'Hackfleisch gibt es bei Aldi');
 
+offers.stores.forEach(function (item) {
+  var counts = {};
+  meals.OFFER_CATEGORIES.forEach(function (cat) { counts[cat.id] = 0; });
+  item.offers.forEach(function (offer) {
+    var id = meals.offerCategory(offer.name);
+    assert(typeof counts[id] === 'number', 'bekannte Kategorie für ' + offer.name);
+    counts[id] += 1;
+  });
+  var sum = 0;
+  meals.OFFER_CATEGORIES.forEach(function (cat) {
+    if (cat.id !== 'alle') sum += counts[cat.id];
+  });
+  assertEqual(sum, item.offers.length, item.id + ' Kategorien decken jeden Artikel');
+});
+
 console.log('offers tests ok');

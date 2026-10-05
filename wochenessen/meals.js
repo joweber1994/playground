@@ -463,6 +463,94 @@
     return found;
   }
 
+  var OFFER_CATEGORIES = [
+    { id: 'alle', label: 'Alle' },
+    { id: 'fleisch', label: 'Fleisch' },
+    { id: 'fisch', label: 'Fisch' },
+    { id: 'gemuese', label: 'Gemüse und Obst' },
+    { id: 'kuehl', label: 'Kühlregal' },
+    { id: 'backwaren', label: 'Brot' },
+    { id: 'vorrat', label: 'Vorrat' },
+    { id: 'fertig', label: 'Fertig' },
+    { id: 'getraenke', label: 'Getränke' },
+    { id: 'suesses', label: 'Snacks' },
+    { id: 'sonstiges', label: 'Weiteres' }
+  ];
+
+  var CATEGORY_RULES = [
+    { id: 'getraenke', mode: 'suffix', terms: ['saft', 'schorle', 'drink', 'cola', 'bier', 'pils', 'sekt', 'wasser'] },
+    { id: 'suesses', mode: 'suffix', terms: ['kuchen', 'torte', 'keks', 'riegel', 'chips'] },
+    { id: 'kuehl', mode: 'suffix', terms: ['käse', 'milch', 'joghurt', 'butter', 'quark'] },
+    { id: 'fleisch', mode: 'suffix', terms: ['wurst', 'schinken', 'speck', 'fleisch', 'haxe'] },
+    { id: 'fertig', mode: 'suffix', terms: ['suppe', 'eintopf', 'pizza'] },
+    { id: 'getraenke', mode: 'prefix', terms: ['cola', 'bier', 'wein', 'wasser', 'saft', 'whisky', 'whiskey', 'sekt', 'champagner', 'likör', 'vodka', 'gin', 'prosecco', 'smoothie', 'energy', 'mineral', 'glühwein', 'pastis', 'aperitif', 'radler', 'spritz', 'kaffee', 'tee', 'teekanne', 'espresso', 'cappuccino', 'caffe', 'limonade', 'limo', 'brause', 'softdrink', 'eistee', 'schorle', 'comet', 'pepsi', 'volvic', 'lavazza', 'amecke', 'williams', 'chardonnay', 'pinot', 'riesling', 'sauvignon', 'merlot', 'burgunder', 'matcha', 'vin', 'pfefferer', 'bubbly'] },
+    { id: 'suesses', mode: 'contains', terms: ['nuss', 'mandel', 'cashew', 'erdnuss'] },
+    { id: 'suesses', mode: 'prefix', terms: ['schoko', 'schokolade', 'choco', 'keks', 'bonbon', 'gummi', 'haribo', 'praline', 'chips', 'snack', 'riegel', 'milka', 'nutella', 'kinder', 'twix', 'eis', 'nougat', 'kakao', 'cacao', 'muffin', 'donut', 'cookie', 'waffel', 'adventskalender', 'ferrero', 'storck', 'snickers', 'oreo', 'merci', 'duplo', 'hanuta', 'prinzen', 'toblerone', 'beukelaer', 'konfitüre', 'konfiture', 'marmelade', 'schnitten', 'mikado', 'pastille', 'churros', 'pastel', 'magdalena', 'knabber', 'studentenfutter', 'tortilla', 'chio', 'flips', 'funny', 'pom', 'erdnüsse', 'peanut'] },
+    { id: 'fisch', mode: 'contains', terms: ['muschel'] },
+    { id: 'fleisch', mode: 'contains', terms: ['geräuchert', 'räucher'] },
+    { id: 'suesses', mode: 'contains', terms: ['pastill', 'honig'] },
+    { id: 'fisch', mode: 'prefix', terms: ['fisch', 'lachs', 'thunfisch', 'seelachs', 'garnele', 'muschel', 'muscheln', 'forelle', 'saibling', 'hering', 'dorade', 'sushi', 'kabeljau', 'scholle', 'krebs', 'tintenfisch'] },
+    { id: 'fleisch', mode: 'prefix', terms: ['fleisch', 'wurst', 'schinken', 'speck', 'schnitzel', 'hack', 'gulasch', 'hähnchen', 'haehnchen', 'huhn', 'pute', 'puten', 'rind', 'schwein', 'lamm', 'salami', 'leberkäse', 'steak', 'bratwurst', 'wiener', 'mortadella', 'aufschnitt', 'mett', 'haxe', 'roulade', 'gyros', 'burger', 'hackfleisch', 'filet', 'geflügel', 'ente', 'frikadelle', 'leberwurst', 'cabanossi', 'schaschlik', 'eisbein', 'ossobuco', 'bresaola', 'salsiccia', 'chorizo', 'tyrolini', 'geräuchert', 'rohpolnisch'] },
+    { id: 'gemuese', mode: 'suffix', terms: ['traube', 'trauben', 'beere', 'beeren'] },
+    { id: 'gemuese', mode: 'prefix', terms: ['apfel', 'äpfel', 'banane', 'traube', 'salat', 'tomate', 'gurke', 'paprika', 'zwiebel', 'kartoffel', 'möhre', 'karotte', 'brokkoli', 'champignon', 'pilz', 'orange', 'mango', 'birne', 'beere', 'zitrone', 'kiwi', 'ananas', 'melone', 'kohl', 'spinat', 'zucchini', 'fenchel', 'zwetschge', 'feige', 'obst', 'gemüse', 'avocado', 'ingwer', 'knoblauch', 'lauch', 'erdbeere', 'himbeere', 'kirsche', 'pfirsich', 'pflaume', 'mandarine', 'clementine', 'grapefruit', 'limette', 'kürbis', 'spargel', 'pitahaya', 'kumato', 'patatas'] },
+    { id: 'kuehl', mode: 'prefix', terms: ['käse', 'kaese', 'milch', 'joghurt', 'jogurt', 'butter', 'sahne', 'quark', 'schmand', 'mozzarella', 'ei', 'eier', 'frischkäse', 'margarine', 'kiri', 'rama', 'arla', 'cremefine', 'almighurt', 'parmigiano', 'grana', 'padano', 'hummus'] },
+    { id: 'backwaren', mode: 'prefix', terms: ['brot', 'brötchen', 'semmel', 'toast', 'baguette', 'croissant', 'aufback', 'knödel', 'knoedel', 'laugen', 'wecken', 'vinschgerl', 'kornspitz', 'backwelt', 'chinois', 'tostado'] },
+    { id: 'backwaren', mode: 'suffix', terms: ['brot', 'brote', 'brötchen', 'semmel'] },
+    { id: 'vorrat', mode: 'prefix', terms: ['nudel', 'pasta', 'reis', 'mehl', 'öl', 'olivenöl', 'zucker', 'sauce', 'ketchup', 'mayo', 'mayonnaise', 'essig', 'müsli', 'muesli', 'hafer', 'passata', 'passiert', 'mutti', 'tomatenmark', 'linse', 'linsen', 'mais', 'pesto', 'couscous', 'gewürz', 'pfeffer', 'salz', 'senf', 'brühe', 'konserve', 'rapso', 'ebly', 'weizen', 'dip'] },
+    { id: 'vorrat', mode: 'suffix', terms: ['reis', 'nudel', 'nudeln', 'öl', 'mehl', 'zucker'] },
+    { id: 'fertig', mode: 'prefix', terms: ['pizza', 'flammkuchen', 'maultasche', 'fertiggericht', 'mikrowelle', 'terrine', 'tortellini', 'ravioli', 'lasagne', 'auflauf', 'pfannengericht', 'noodle', 'soba'] }
+  ];
+
+  function categoryTermHits(token, term, mode) {
+    if (!token || !term) return false;
+    if (token === 'preis' && term === 'reis') return false;
+    if (token === 'schwein' && term === 'wein') return false;
+    if (token === 'eisbein' && term === 'eis') return false;
+    if (token === 'lachse' && term === 'lachs') return false;
+    if (token === 'leberkäse' && term === 'käse') return false;
+    if (token === 'pfefferer' && term === 'pfeffer') return false;
+    if (token === term) return true;
+    if (mode === 'suffix') {
+      var minLength = term === 'öl' ? 2 : 3;
+      return term.length >= minLength && token.length > term.length && token.lastIndexOf(term) === token.length - term.length;
+    }
+    if (term.length < 4 || token.length < 4) return false;
+    if (mode === 'contains') return term.length >= 4 && token.indexOf(term) !== -1;
+    if (token.indexOf(term) !== 0) return false;
+    var rest = token.slice(term.length);
+    if (rest === 'kuchen' || rest === 'torte') return false;
+    return true;
+  }
+
+  function offerCategory(name) {
+    var text = String(name || '').toLowerCase();
+    if (text.indexOf('hot dog') !== -1) return 'fleisch';
+    if (text.indexOf('la mia') !== -1) return 'fertig';
+    var words = tokens(name);
+    for (var i = 0; i < CATEGORY_RULES.length; i += 1) {
+      var rule = CATEGORY_RULES[i];
+      var hit = words.some(function (word) {
+        return rule.terms.some(function (term) {
+          return categoryTermHits(word, term, rule.mode);
+        });
+      });
+      if (hit) return rule.id;
+    }
+    var ids = matchOfferText(name);
+    if (ids.length) {
+      var info = ingredient(ids[0]);
+      if (info && info.group) return info.group;
+    }
+    return 'sonstiges';
+  }
+
+  function offerCategoryById(id) {
+    for (var i = 0; i < OFFER_CATEGORIES.length; i += 1) {
+      if (OFFER_CATEGORIES[i].id === id) return OFFER_CATEGORIES[i];
+    }
+    return OFFER_CATEGORIES[0];
+  }
+
   function hasId(list, id) {
     return list.indexOf(id) !== -1;
   }
@@ -602,6 +690,9 @@
     PORTIONS: PORTIONS,
     MARKETS: MARKETS,
     GROUPS: GROUPS,
+    OFFER_CATEGORIES: OFFER_CATEGORIES,
+    offerCategory: offerCategory,
+    offerCategoryById: offerCategoryById,
     INGREDIENTS: INGREDIENTS,
     RECIPES: RECIPES,
     ingredient: ingredient,
