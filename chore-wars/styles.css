@@ -106,10 +106,33 @@ ol {
   border-bottom: 1px solid var(--line);
 }
 
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+}
+
+.home-link {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-elev-2);
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
 }
 
 .logo {

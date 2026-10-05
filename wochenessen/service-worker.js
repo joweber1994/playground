@@ -1,13 +1,12 @@
-/* Chore Wars – offline cache. Bump CACHE_VERSION when shipped assets change. */
-var CACHE_VERSION = 'chore-wars-v10';
-var CACHE_PREFIX = 'chore-wars-';
+/* Wochenessen – offline cache. Only wochenessen-* caches are deleted. */
+var CACHE_VERSION = 'wochenessen-v1';
+var CACHE_PREFIX = 'wochenessen-';
 
 var ASSETS = [
   './',
   './index.html',
   './styles.css',
-  './state.js',
-  './sync.js',
+  './meals.js',
   './app.js',
   './manifest.json',
   './service-worker.js',
