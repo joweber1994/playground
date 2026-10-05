@@ -419,8 +419,9 @@
       stages > 1 ? '<label class="checkline"><input id="by-day" type="checkbox"' + (state.options.colorByDay ? " checked" : "") + "> Etappen farblich</label>" : "",
       '<p id="map-status" class="status"></p>',
       stageListHtml(),
-      '<button type="button" id="share-svg" class="primary">SVG teilen</button>',
-      '<button type="button" id="share-png" class="secondary">Bild teilen</button>'
+      '<button type="button" id="share-svg" class="primary">' + (saveOnDesktop() ? "SVG speichern" : "SVG teilen") + "</button>",
+      '<button type="button" id="share-png" class="secondary">' + (saveOnDesktop() ? "Bild speichern" : "Bild teilen") + "</button>",
+      saveOnDesktop() ? '<p class="status">Im Fenster den Ordner Desktop wählen. Die Datei liegt danach dort.</p>' : ""
     ].join("");
   }
 
@@ -841,7 +842,28 @@
     shareBlob(state.pngBlob, fileSlug(state.options.title || drawn.scene.title) + ".png", "image/png");
   }
 
+  function saveOnDesktop() {
+    return Boolean(window.showSaveFilePicker) && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  }
+
   function shareBlob(blob, filename, mime) {
+    if (saveOnDesktop()) {
+      var extension = filename.slice(filename.lastIndexOf("."));
+      var types = {};
+      types[mime] = [extension];
+      window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description: "Tourkarte", accept: types }]
+      }).then(function (handle) {
+        return handle.createWritable();
+      }).then(function (writable) {
+        return writable.write(blob).then(function () { return writable.close(); });
+      }).catch(function (error) {
+        if (error && error.name === "AbortError") return;
+        downloadBlob(blob, filename);
+      });
+      return;
+    }
     var file = new File([blob], filename, { type: mime });
     if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
       navigator.share({ files: [file], title: "Tourkarte" }).catch(function (error) {
