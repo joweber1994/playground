@@ -1,6 +1,6 @@
 /* Haushalt – offline cache for the menu and Wochenessen.
    Only haushalt-* caches are deleted, so Chore Wars and Wochenessen keep theirs. */
-var CACHE_VERSION = 'haushalt-v1';
+var CACHE_VERSION = 'haushalt-v2';
 var CACHE_PREFIX = 'haushalt-';
 
 var ASSETS = [
@@ -15,6 +15,7 @@ var ASSETS = [
   './wochenessen/index.html',
   './wochenessen/styles.css',
   './wochenessen/meals.js',
+  './wochenessen/offers.js',
   './wochenessen/app.js',
   './wochenessen/manifest.json',
   './wochenessen/service-worker.js',
