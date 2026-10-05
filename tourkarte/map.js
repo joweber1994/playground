@@ -433,16 +433,22 @@
         hmWidth = Math.max(hmWidth, estimate(item.hm, summarySize, 0.58));
         titleWidth = Math.max(titleWidth, estimate(item.title, summarySize, 0.56));
       });
+      var placesWidth = 0;
+      rows.forEach(function (item) {
+        placesWidth = Math.max(placesWidth, estimate(item.places || "", summarySize, 0.56));
+      });
       var x = margin + column * (columnWidth + columnGap);
       var baseline = summaryTop + summarySize + row * summaryRow;
       var square = summarySize * 0.72;
-      var right = x + columnWidth;
-      var hmX = right;
-      var kmX = right - hmWidth - summarySize * 0.7;
+      var step = summarySize * 0.55;
       var titleX = x + square + 8;
-      var dateX = titleX + titleWidth + summarySize * 0.45;
-      var placesX = dateX + estimate("30.9.", summarySize, 0.56) + summarySize * 0.4;
-      var placesMax = kmX - kmWidth - summarySize * 0.55 - placesX;
+      var dateX = titleX + titleWidth + step;
+      var placesX = dateX + estimate("30.9.", summarySize, 0.56) + step;
+      var room = x + columnWidth - placesX - kmWidth - hmWidth - step * 2.4;
+      placesWidth = Math.min(placesWidth, Math.max(summarySize * 2.2, room));
+      var kmX = placesX + placesWidth + step + kmWidth;
+      var hmX = kmX + step + hmWidth;
+      var placesMax = placesWidth;
       caption.push({ op: "rect", x: x, y: baseline - square * 0.82, w: square, h: square, fill: entry.color });
       caption.push(textItem(titleX, baseline, entry.title, summarySize, options.ink, "sans", "regular", "start"));
       if (entry.date) caption.push(textItem(dateX, baseline, entry.date, summarySize, options.muted, "sans", "regular", "start"));

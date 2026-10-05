@@ -264,8 +264,9 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
 
 .stage-line {
   display: grid;
-  grid-template-columns: 7.4rem 3.4rem 1fr 5.4rem 6.6rem;
-  gap: 8px;
+  grid-template-columns: 7.4rem 3.4rem auto 5.4rem 6.6rem;
+  justify-content: start;
+  column-gap: 0.7rem;
   align-items: baseline;
 }
 
