@@ -225,10 +225,12 @@
     var gain = gains.every(function (value) { return value == null; }) ? null : gains.reduce(function (sum, value) { return sum + (value || 0); }, 0);
     var colors = stageColors(prepared.stages, options);
     var facts = stageFacts(tour);
-    var summary = summaryLines(facts, options.stagePlaces, colors, width - 2 * Math.max(90, Math.round(Math.min(width, height) * 0.068)));
+    var columns = facts.length > 8 ? 2 : 1;
+    var inner = width - 2 * Math.max(90, Math.round(Math.min(width, height) * 0.068));
+    var summary = summaryLines(facts, options.stagePlaces, colors, inner / columns - 40);
     var legend = summary.length || !(options.colorByDay && prepared.stages.length > 1) ? [] : legendEntries(prepared.stages, colors);
     var frame = layout(width, height, title, dates, statsLine(distance, gain, prepared.stages.length), legend, summary, options);
-    var stroke = clamp(Math.min(frame.map[2], frame.map[3]) * 0.0048, 5.2, 10.5);
+    var stroke = clamp(Math.min(frame.map[2], frame.map[3]) * 0.0062, options.colorByDay ? 7.4 : 5.4, 12);
     var items = [{ op: "rect", x: 0, y: 0, w: width, h: height, fill: options.paper }];
     var fitted = null;
     var tiles = [];
@@ -392,9 +394,11 @@
     var legendRows = legend.length ? wrapLegend(legend, legendSize, mapW) : [];
     var rowH = legendSize + 12;
     var legendBlock = legendRows.length * rowH + (legendRows.length ? gap * 0.45 : 0);
-    var summarySize = Math.max(15, Math.round(titleSize * 0.28));
-    var summaryRow = summarySize + 9;
-    var summaryBlock = summary.length ? summary.length * summaryRow + gap * 0.4 : 0;
+    var columns = summary.length > 8 ? 2 : 1;
+    var summaryRows = Math.ceil(summary.length / columns) || 0;
+    var summarySize = Math.max(16, Math.round(titleSize * (columns === 2 ? 0.26 : 0.3)));
+    var summaryRow = summarySize + 12;
+    var summaryBlock = summaryRows ? summaryRows * summaryRow + gap * 0.45 : 0;
     var statsBaseline = height - margin - legendBlock - summaryBlock;
     var dateBaseline = null;
     var titleBaseline;
@@ -416,12 +420,17 @@
     legendRows.forEach(function (row, rowIndex) {
       caption = caption.concat(legendItems(row, margin, legendTop + legendSize + rowIndex * rowH, legendSize, options.ink));
     });
-    var summaryTop = legendTop + legendRows.length * rowH + (summary.length ? gap * 0.45 : 0);
+    var summaryTop = legendTop + legendRows.length * rowH + (summary.length ? gap * 0.5 : 0);
+    var columnGap = 28;
+    var columnWidth = (mapW - (columns - 1) * columnGap) / columns;
     summary.forEach(function (entry, index) {
-      var baseline = summaryTop + summarySize + index * summaryRow;
-      var square = summarySize * 0.62;
-      caption.push({ op: "rect", x: margin, y: baseline - square * 0.82, w: square, h: square, fill: entry[0] });
-      caption.push(textItem(margin + square + 8, baseline, entry[1], summarySize, options.ink, "sans", "regular", "start"));
+      var column = Math.floor(index / summaryRows);
+      var row = index - column * summaryRows;
+      var x = margin + column * (columnWidth + columnGap);
+      var baseline = summaryTop + summarySize + row * summaryRow;
+      var square = summarySize * 0.72;
+      caption.push({ op: "rect", x: x, y: baseline - square * 0.82, w: square, h: square, fill: entry[0] });
+      caption.push(textItem(x + square + 8, baseline, entry[1], summarySize, options.ink, "sans", "regular", "start"));
     });
     return {
       map: mapRect,
@@ -669,11 +678,25 @@
   }
 
   function dayColor(index, total) {
-    if (total <= DAY_COLORS.length) return DAY_COLORS[index];
-    var hue = (index * 137.508) % 360;
-    var light = 30 + (index % 4) * 6;
-    var sat = 42 + (index % 3) * 8;
+    var count = Math.max(total, 1);
+    var step = Math.max(1, Math.floor(count / 2));
+    while (gcd(step, count) !== 1) step += 1;
+    var slot = count === 1 ? 0 : (index * step) % count;
+    var hue = count === 1 ? 16 : slot * (360 / count);
+    var light = [32, 42, 36, 46][index % 4];
+    var sat = [66, 74, 58, 70][index % 4];
     return hslToHex(hue, sat, light);
+  }
+
+  function gcd(a, b) {
+    var x = Math.abs(a);
+    var y = Math.abs(b);
+    while (y) {
+      var rest = x % y;
+      x = y;
+      y = rest;
+    }
+    return x || 1;
   }
 
   function hslToHex(hue, sat, light) {
@@ -723,6 +746,14 @@
         hmLabel: gain == null ? "" : formatHm(gain)
       };
     });
+  }
+
+  function largerPlace(address, fallback) {
+    var source = address || {};
+    var name = source.city || source.town || source.municipality || "";
+    name = String(name).replace(/^(Bashkia|Komuna|Dimos)\s+/i, "").trim();
+    if (!name) name = String(fallback || "").trim();
+    return name;
   }
 
   function summaryLines(facts, places, colors, width) {
@@ -1039,6 +1070,7 @@
     buildScene: buildScene,
     sceneToSvg: sceneToSvg,
     stageFacts: stageFacts,
+    largerPlace: largerPlace,
     parseHex: parseHex,
     mercatorView: mercatorView
   };

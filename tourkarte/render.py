@@ -563,11 +563,14 @@ def _date_line(tour: Tour) -> str | None:
 
 
 def day_color(index: int, total: int) -> str:
-    if total <= len(DAY_COLORS):
-        return DAY_COLORS[index]
-    hue = (index * 137.508) % 360
-    light = 30 + (index % 4) * 6
-    sat = 42 + (index % 3) * 8
+    count = max(total, 1)
+    step = max(1, count // 2)
+    while math.gcd(step, count) != 1:
+        step += 1
+    slot = 0 if count == 1 else (index * step) % count
+    hue = 16 if count == 1 else slot * (360 / count)
+    light = (32, 42, 36, 46)[index % 4]
+    sat = (66, 74, 58, 70)[index % 4]
     return _hsl_hex(hue, sat, light)
 
 

@@ -176,7 +176,7 @@ class RenderTest(unittest.TestCase):
         self.assertIn("Album &amp; Tal", text)
         self.assertIn("#123456", text)
         self.assertIn("#abcdef", text)
-        self.assertIn("#1e4d5c", text)
+        self.assertIn(day_color(1, 2), text)
         self.assertIn("12.–13. Juni 2026", text)
         self.assertIn("2 Etappen", text)
         self.assertIn("km", text)
@@ -187,7 +187,7 @@ class RenderTest(unittest.TestCase):
     def test_each_stage_gets_its_own_color(self):
         colors = [day_color(index, 17) for index in range(17)]
         self.assertEqual(len(set(colors)), 17)
-        self.assertEqual(colors[1], "#1e4d5c")
+        self.assertNotEqual(colors[0], colors[1])
 
     def test_custom_page_size(self):
         scene = build_scene(example_tour(), Options(page_mm=(280, 280)))

@@ -6,6 +6,14 @@ function assert(condition, label) {
   if (!condition) throw new Error(label);
 }
 
+function colorDistance(a, b) {
+  var total = 0;
+  for (var channel = 0; channel < 3; channel += 1) {
+    total += Math.abs(parseInt(a.slice(1 + channel * 2, 3 + channel * 2), 16) - parseInt(b.slice(1 + channel * 2, 3 + channel * 2), 16));
+  }
+  return total;
+}
+
 function assertEqual(actual, expected, label) {
   if (actual !== expected) throw new Error(label + ": " + JSON.stringify(actual) + " != " + JSON.stringify(expected));
 }
@@ -50,7 +58,8 @@ north.forEach(function (point) {
 var svg = map.sceneToSvg(scene);
 assert(svg.indexOf("Album &amp; Tal") !== -1, "Titel maskiert");
 assert(svg.indexOf("#123456") !== -1, "Linienfarbe");
-assert(svg.indexOf("#1e4d5c") !== -1, "zweite Etappe");
+var stageStrokes = scene.items.filter(function (item) { return item.op === "polyline"; }).map(function (item) { return item.stroke; });
+assert(stageStrokes.length >= 2 && stageStrokes[0] !== stageStrokes[1], "Etappenfarben unterscheiden sich");
 assert(svg.indexOf("12.–13. Juni 2026") !== -1, "Datum");
 assert(svg.indexOf('width="210mm"') !== -1, "Quadrat");
 assert(svg.indexOf("Joch") !== -1, "Wegpunkt auf der Karte");
@@ -94,8 +103,10 @@ for (var colorIndex = 0; colorIndex < 17; colorIndex += 1) {
   var day = map.dayColor(colorIndex, 17);
   assert(!seen[day], "Farbe doppelt " + day);
   seen[day] = true;
+  if (colorIndex) assert(colorDistance(map.dayColor(colorIndex - 1, 17), day) > 80, "Nachbarfarben zu ähnlich");
 }
-assertEqual(map.dayColor(1, 17), "#1e4d5c", "zweite Etappenfarbe");
+assertEqual(map.largerPlace({ suburb: "Lagjja 2", city: "Shkodër", municipality: "Bashkia Shkodër" }), "Shkodër", "Stadt vor Stadtteil");
+assertEqual(map.largerPlace({ municipality: "Bashkia Tiranë" }), "Tiranë", "Gemeinde ohne Vorsilbe");
 var named = map.sceneToSvg(map.buildScene(tour, {
   title: "Beispieltour",
   stagePlaces: [{ start: "Landeck", end: "Imst" }, { start: "Imst", end: "Innsbruck" }]

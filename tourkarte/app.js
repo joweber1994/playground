@@ -86,7 +86,10 @@
     else if (state.mode === "map") screen.innerHTML = mapHtml();
     bind();
     if (state.mode === "pick") paintRides();
-    if (state.mode === "map") refreshPreview();
+    if (state.mode === "map") {
+      refreshPreview();
+      fillPlaces();
+    }
   }
 
   function bind() {
@@ -226,6 +229,72 @@
       return TourkarteMap.dayColor(index, count);
     }
     return state.options.route;
+  }
+
+  function fillPlaces() {
+    if (!state.tour || state.fillingPlaces) return;
+    ensurePlaces((state.tour.stages || []).length);
+    var jobs = [];
+    (state.tour.stages || []).forEach(function (stage, index) {
+      var points = [];
+      (stage.segments || []).forEach(function (segment) { points = points.concat(segment || []); });
+      if (points.length < 2) return;
+      [["start", points[0]], ["end", points[points.length - 1]]].forEach(function (pair) {
+        if (!state.options.stagePlaces[index][pair[0]]) jobs.push({ index: index, key: pair[0], point: pair[1] });
+      });
+    });
+    if (!jobs.length) return;
+    var generation = state.placeGeneration || 0;
+    state.fillingPlaces = true;
+    var cursor = 0;
+    function step() {
+      if (generation !== state.placeGeneration) {
+        state.fillingPlaces = false;
+        return;
+      }
+      if (cursor >= jobs.length) {
+        state.fillingPlaces = false;
+        var done = document.getElementById("map-status");
+        if (done) done.textContent = "";
+        refreshPreview();
+        return;
+      }
+      var job = jobs[cursor];
+      cursor += 1;
+      var status = document.getElementById("map-status");
+      if (status) status.textContent = "Orte werden gesucht, " + cursor + " von " + jobs.length;
+      nearestTown(job.point).then(function (name) {
+        if (generation !== state.placeGeneration || !name) return;
+        var input = document.querySelector('[data-stage="' + job.index + '"][data-place="' + job.key + '"]');
+        var typed = input ? input.value.trim() : state.options.stagePlaces[job.index][job.key];
+        if (typed) return;
+        state.options.stagePlaces[job.index][job.key] = name;
+        if (input) input.value = name;
+      }).catch(function () {}).then(function () {
+        setTimeout(step, 1100);
+      });
+    }
+    step();
+  }
+
+  var townCache = {};
+
+  function nearestTown(point) {
+    if (!point || point.lat == null || point.lon == null) return Promise.resolve("");
+    var key = Number(point.lat).toFixed(2) + "," + Number(point.lon).toFixed(2);
+    if (!townCache[key]) {
+      var url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=1&zoom=10&lat=" + encodeURIComponent(point.lat) + "&lon=" + encodeURIComponent(point.lon);
+      townCache[key] = fetch(url, { headers: { "Accept-Language": "de,en" } }).then(function (response) {
+        if (!response.ok) throw new Error("Ort");
+        return response.json();
+      }).then(function (payload) {
+        return TourkarteMap.largerPlace(payload && payload.address, payload && payload.name);
+      }).catch(function (error) {
+        delete townCache[key];
+        throw error;
+      });
+    }
+    return townCache[key];
   }
 
   function paintStageDots() {
@@ -571,6 +640,7 @@
         state.source = "strava";
         if (!state.options.title && stages.length === 1) state.options.title = stages[0].name;
         state.options.stagePlaces = [];
+        state.placeGeneration = (state.placeGeneration || 0) + 1;
         state.mode = "map";
         state.error = "";
         render();
@@ -627,6 +697,7 @@
       state.skipped = [];
       state.options.title = state.tour.name || "";
       state.options.stagePlaces = [];
+      state.placeGeneration = (state.placeGeneration || 0) + 1;
       state.error = "";
       state.mode = "map";
       render();
@@ -647,6 +718,7 @@
       state.skipped = [];
       state.options.title = state.tour.name || "Beispieltour";
       state.options.stagePlaces = [];
+      state.placeGeneration = (state.placeGeneration || 0) + 1;
       state.mode = "map";
       render();
     }).catch(function (error) {
@@ -687,7 +759,7 @@
     preview.innerHTML = drawn.svg;
     var status = document.getElementById("map-status");
     if (!drawn.scene.tiles || !drawn.scene.tiles.length) {
-      if (status) status.textContent = "";
+      if (status && !state.fillingPlaces) status.textContent = "";
       rememberPicture(drawn.svg, drawn.scene, generation);
       return;
     }
@@ -698,7 +770,7 @@
       var node = document.getElementById("preview");
       if (node) node.innerHTML = svg;
       state.embeddedSvg = svg;
-      if (status) status.textContent = missing ? "Ein Teil der Karte konnte nicht geladen werden." : "";
+      if (status && !state.fillingPlaces) status.textContent = missing ? "Ein Teil der Karte konnte nicht geladen werden." : "";
       rememberPicture(svg, drawn.scene, generation);
     });
   }
