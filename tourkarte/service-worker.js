@@ -1,5 +1,5 @@
-/* Tourkarte – App-Hülle fürs iPhone. Strava selbst wird nicht gecacht. */
-var CACHE_VERSION = "tourkarte-v10";
+/* Tourkarte – App-Hülle fürs iPhone. Strava und Komoot selbst werden nicht gecacht. */
+var CACHE_VERSION = "tourkarte-v14";
 var CACHE_PREFIX = "tourkarte-";
 
 var ASSETS = [
@@ -9,6 +9,7 @@ var ASSETS = [
   "./app.js",
   "./map.js",
   "./strava.js",
+  "./komoot.js",
   "./manifest.json",
   "./service-worker.js",
   "./icon.svg",

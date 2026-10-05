@@ -10,9 +10,7 @@ function assertEqual(actual, expected, label) {
   }
 }
 
-assertEqual(meals.MARKETS.length, 5, 'fünf Prechtl-Märkte');
-assertEqual(meals.marketById('oberaudorf').name, 'Oberaudorf', 'Marktname');
-assertEqual(meals.marketById('fehlt').id, 'raubling', 'unbekannter Markt fällt auf Raubling');
+assert(!meals.MARKETS && !meals.marketById, 'keine Filialauswahl');
 assert(meals.RECIPES.length >= 16, 'genug Rezepte für eine Woche');
 assert(meals.defaultPantry().indexOf('nudeln') !== -1, 'Nudeln gelten als zu Hause');
 assert(meals.defaultPantry().indexOf('eier') !== -1, 'Eier gelten als zu Hause');
@@ -32,7 +30,7 @@ var rolled = meals.normalizeState({
 }, monday);
 assert(rolled.weekChanged, 'neue Woche wird erkannt');
 assertEqual(rolled.state.offers.length, 0, 'Angebote der alten Woche fallen weg');
-assertEqual(rolled.state.marketId, 'bad-aibling', 'der Markt bleibt');
+assertEqual(rolled.state.marketId, undefined, 'gespeicherte Filiale wird ignoriert');
 assertEqual(rolled.state.pantry[0], 'zwiebel', 'Vorrat bleibt');
 assertEqual(rolled.state.picked, null, 'Auswahl der alten Woche fällt weg');
 
@@ -47,6 +45,7 @@ assert(!kept.weekChanged, 'dieselbe Woche bleibt');
 assertEqual(kept.state.offers.length, 1, 'nur bekannte Angebote bleiben');
 assertEqual(kept.state.pantry.length, 0, 'leerer Vorrat bleibt leer');
 assertEqual(kept.state.picked.length, 0, 'leere Auswahl bleibt leer');
+assertEqual(kept.state.marketId, undefined, 'Filiale der gleichen Woche wird ignoriert');
 
 assertEqual(meals.suggest([], meals.defaultPantry()).length, 0, 'ohne Angebot kein Vorschlag');
 
@@ -99,9 +98,36 @@ assert(meals.matchOfferText('Fischthekensalat').indexOf('salat') === -1, 'Fischt
 
 var list = meals.shoppingList(ideas, null);
 assert(Array.isArray(list), 'Einkaufsliste ist eine Liste');
+assertEqual(list.length, 0, 'ohne Auswahl bleibt die Einkaufsliste leer');
 var chosen = meals.chosenIds(ideas, null);
-assert(chosen.length > 0 && chosen.length <= 3, 'ohne Auswahl gelten die ersten drei');
+assertEqual(chosen.length, 0, 'ohne Auswahl ist nichts ausgewählt');
 assertEqual(meals.chosenIds(ideas, []).length, 0, 'abgewählte Liste bleibt leer');
+var explicit = meals.chosenIds(ideas, [ideas[0].id, 'fehlt']);
+assertEqual(explicit.length, 1, 'gespeicherte Auswahl bleibt');
+assertEqual(explicit[0], ideas[0].id, 'das gewählte Gericht bleibt');
+var bareList = meals.shoppingList(bare, null);
+assertEqual(bareList.length, 0, 'null wird nicht zu den ersten Gerichten');
+var pickedBare = meals.shoppingList(bare, ['hackpfanne']);
+assert(pickedBare.some(function (item) { return item.id === 'reis'; }), 'gewähltes Gericht bringt seine Zutaten');
+var emptyPlan = meals.shopPlan(ideas, null, []);
+assertEqual(emptyPlan.offers.length, 0, 'ohne Auswahl keine Angebotsgruppen');
+assertEqual(emptyPlan.missing.length, 0, 'ohne Auswahl keine fehlenden Zutaten');
+
+var keptNull = meals.normalizeState({
+  weekKey: meals.weekKey(monday),
+  offers: ['hackfleisch'],
+  pantry: [],
+  picked: null
+}, monday);
+assertEqual(keptNull.state.picked, null, 'gespeichertes null bleibt leer und wird nicht aufgefüllt');
+
+var keptPick = meals.normalizeState({
+  weekKey: meals.weekKey(monday),
+  offers: ['hackfleisch'],
+  pantry: [],
+  picked: ['hackpfanne', 'unbekannt']
+}, monday);
+assertEqual(keptPick.state.picked.join(','), 'hackpfanne', 'explizite Auswahl bleibt');
 
 var both = meals.suggest(['hackfleisch', 'bohnen', 'mais', 'passata'], []);
 var chili = null;
@@ -132,7 +158,8 @@ function plannedItem(id) {
 }
 assertEqual(plannedItem('hackfleisch').label, 'Aldi Süd', 'Hackfleisch liegt bei Aldi');
 assertEqual(plannedItem('fisch').label, 'Prechtl', 'Fisch liegt bei Prechtl');
-assertEqual(plannedItem('kaese').label, 'Aldi Süd oder Prechtl', 'Käse gibt es in beiden Märkten');
+assert(plannedItem('fisch').label.indexOf('Raubling') === -1, 'Gruppenname nennt keine Filiale');
+assertEqual(plannedItem('kaese').label, 'Aldi Süd oder Prechtl', 'Käse gibt es in beiden Ketten');
 assertEqual(planned.missing.length, 1, 'Sahne bleibt übrig');
 assertEqual(planned.missing[0].id, 'sahne', 'die fehlende Zutat ist Sahne');
 
@@ -146,5 +173,105 @@ assertEqual(meals.offerCategory('Apfelsaft'), 'getraenke', 'Apfelsaft ist ein Ge
 assertEqual(meals.offerCategory('Milka Schokolade'), 'suesses', 'Schokolade ist ein Snack');
 assertEqual(meals.offerCategory('HAPPY END Küchentücher'), 'sonstiges', 'Küchentücher bleiben übrig');
 assertEqual(meals.offerCategoryById('fehlt').id, 'alle', 'unbekannte Kategorie ist Alle');
+
+var own = meals.suggest([], [], [{
+  id: 'c1',
+  custom: true,
+  title: 'Eigene Suppe',
+  minutes: 25,
+  steps: ['Köcheln.'],
+  ingredients: [{ id: 'nudeln', amount: '200 g' }, { id: 'zwiebel', amount: '1' }],
+  rev: 1
+}]);
+assertEqual(own.length, 1, 'eigenes Gericht bleibt ohne Prospekt sichtbar');
+assert(own[0].custom, 'eigenes Gericht ist markiert');
+assertEqual(own[0].missing.length, 2, 'ohne Vorrat stehen beide Zutaten auf der Liste');
+
+var evenings = meals.cleanEvenings([
+  { day: 'mo', recipeId: 'c1', cook: 'Alex', rev: 2 },
+  { day: 'mo', recipeId: 'alt', cook: 'Sam', rev: 1 },
+  { day: 'xx', recipeId: 'c1', cook: 'Niemand', rev: 9 }
+]);
+assertEqual(evenings.length, 1, 'nur bekannte Tage bleiben');
+assertEqual(evenings[0].cook, 'Alex', 'neuere Kochzeit gewinnt');
+
+var stock = meals.addInventory([], 'Reis', '500 g', 2);
+assert(stock.created, 'Reis wird eingetragen');
+var stockRows = [{ id: meals.nextInventoryId(stock.inventory), name: stock.draft.name, amount: stock.draft.amount, rev: stock.draft.rev, deleted: false }];
+assert(meals.coveredIds(stockRows).indexOf('reis') !== -1, 'Reis im Vorrat deckt die Zutat');
+var homeIdeas = meals.suggest(['hackfleisch', 'paprika'], meals.coveredIds(stockRows));
+var homePfanne = null;
+homeIdeas.forEach(function (recipe) { if (recipe.id === 'hackpfanne') homePfanne = recipe; });
+assert(homePfanne && homePfanne.missing.every(function (item) { return item.id !== 'reis'; }), 'gedeckter Reis bleibt vom Zettel');
+var oil = meals.addInventory([], 'Olivenöl', '', 1);
+var oilRows = [{ id: 'v1', name: oil.draft.name, amount: '', rev: 1, deleted: false }];
+assert(meals.coveredIds(oilRows).indexOf('oel') !== -1, 'Olivenöl deckt Öl');
+var coffee = meals.addInventory([], 'Kaffee', '1 Packung', 1);
+assert(coffee.created, 'unbekannter Name bleibt ein Vorratseintrag');
+assertEqual(meals.coveredIds([{ id: 'v1', name: 'Kaffee', amount: '1 Packung', rev: 1, deleted: false }]).length, 0, 'unbekannter Vorrat erfindet keine Zutat');
+var mergedStock = meals.addInventory(stockRows, 'reis', '1 kg', 4);
+assert(mergedStock.merged, 'derselbe Name wird zusammengeführt');
+assertEqual(mergedStock.inventory.length, 1, 'aus Reis und reis wird eine Zeile');
+assertEqual(mergedStock.inventory[0].amount, '1 kg', 'die neue Menge ersetzt die alte');
+assertEqual(mergedStock.inventory[0].name, 'Reis', 'die erste Schreibweise bleibt');
+var blankName = meals.addInventory(stockRows, '   ', '1', 5);
+assert(!blankName.ok && blankName.reason === 'empty', 'leerer Name wird abgelehnt');
+var seeded = meals.ensureInventory(null, meals.defaultPantry());
+meals.defaultPantry().forEach(function (id) {
+  assert(meals.coveredIds(seeded).indexOf(id) !== -1, 'Startvorrat deckt ' + id);
+});
+var clearedStock = meals.ensureInventory({ inventorySet: true, inventory: [] }, meals.defaultPantry());
+assertEqual(clearedStock.length, 0, 'geleerter Vorrat wird nicht wieder befüllt');
+
+var catalogTitle = meals.RECIPES.filter(function (recipe) { return recipe.id === 'hackpfanne'; })[0].title;
+var editedIdeas = meals.suggest(['hackfleisch', 'paprika'], [], [], [{
+  id: 'hackpfanne',
+  title: 'Schnelle Pfanne',
+  minutes: 20,
+  steps: ['Anbraten.', 'Fertig.'],
+  ingredients: [
+    { id: 'hackfleisch', amount: '300 g' },
+    { id: 'paprika', amount: '1' },
+    { id: 'salat', amount: '1 Kopf' }
+  ],
+  rev: 5
+}]);
+var editedPfanne = null;
+editedIdeas.forEach(function (recipe) { if (recipe.id === 'hackpfanne') editedPfanne = recipe; });
+assert(editedPfanne, 'das geänderte Gericht bleibt ein Vorschlag');
+assertEqual(editedPfanne.title, 'Schnelle Pfanne', 'der Titel kommt aus der Änderung');
+assert(editedPfanne.edited, 'die Änderung ist markiert');
+assertEqual(editedPfanne.steps.join('|'), 'Anbraten.|Fertig.', 'die Schritte bleiben am Gericht');
+assert(editedPfanne.missing.some(function (item) { return item.id === 'salat'; }), 'die neue Zutat fehlt auf dem Zettel');
+assert(editedPfanne.missing.every(function (item) { return item.id !== 'reis'; }), 'weggelassener Reis kommt nicht auf den Zettel');
+assertEqual(meals.RECIPES.filter(function (recipe) { return recipe.id === 'hackpfanne'; })[0].title, catalogTitle, 'der eingebaute Katalog bleibt');
+var editedPlan = meals.shopPlan(editedIdeas, ['hackpfanne'], [
+  { id: 'aldi', name: 'Aldi Süd', offers: ['hackfleisch', 'paprika'] }
+]);
+assert(editedPlan.missing.some(function (item) { return item.id === 'salat'; }), 'der Einkaufsplan folgt der geänderten Zutat');
+assert(editedPlan.missing.every(function (item) { return item.id !== 'reis'; }), 'der Plan lässt die entfernte Zutat weg');
+var editedOfferIds = [];
+editedPlan.offers.forEach(function (group) {
+  group.items.forEach(function (item) { editedOfferIds.push(item.id); });
+});
+assert(editedOfferIds.indexOf('hackfleisch') !== -1, 'Angebote nutzen die geänderten Zutaten');
+assert(editedOfferIds.indexOf('reis') === -1, 'Reis ist kein Angebot mehr an diesem Gericht');
+var restoredIdeas = meals.suggest(['hackfleisch', 'paprika'], [], [], meals.resetOverride([{
+  id: 'hackpfanne',
+  title: 'Schnelle Pfanne',
+  minutes: 20,
+  steps: ['Anbraten.'],
+  ingredients: [
+    { id: 'hackfleisch', amount: '300 g' },
+    { id: 'salat', amount: '1' }
+  ],
+  rev: 5
+}], 'hackpfanne', 9));
+var restoredPfanne = null;
+restoredIdeas.forEach(function (recipe) { if (recipe.id === 'hackpfanne') restoredPfanne = recipe; });
+assertEqual(restoredPfanne.title, 'Hackpfanne mit Paprika', 'Zurücksetzen zeigt das ursprüngliche Gericht');
+assert(!restoredPfanne.edited, 'nach dem Zurücksetzen ist nichts mehr geändert');
+assert(restoredPfanne.missing.some(function (item) { return item.id === 'reis'; }), 'die ursprüngliche Zutat ist wieder nötig');
+assert(restoredPfanne.steps.length >= 2, 'das ursprüngliche Rezept hängt wieder am Gericht');
 
 console.log('meals tests ok');

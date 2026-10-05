@@ -33,6 +33,8 @@ assert(!sync.normalizeDatabaseUrl('https://example.com').ok, 'fremde Hosts bleib
 assert(!sync.normalizeDatabaseUrl('https://haus.firebaseio.com/households/x').ok, 'kein Pfad');
 assert(!sync.normalizeDatabaseUrl('https://haus.firebaseio.com/?auth=1').ok, 'keine Parameter');
 assert(!sync.normalizeDatabaseUrl('https://user:pass@haus.firebaseio.com').ok, 'kein eingebettetes Kennwort');
+assert(sync.SECRET_KEY && sync.SECRET_KEY !== sync.URL_KEY && sync.SECRET_KEY !== sync.HOUSEHOLD_KEY, 'Kennwort liegt getrennt vom Haushaltspfad');
+assert(sync.standUrl('https://haus.firebaseio.com', 'ab'.repeat(32)).indexOf('geheimnis') === -1, 'der Firebase-Pfad enthält das Kennwort nicht');
 
 assert(!sync.readSecret('kurz').ok, 'zu kurzes Kennwort');
 assert(sync.readSecret('  haushalt1  ').ok, 'Kennwort wird beschnitten');

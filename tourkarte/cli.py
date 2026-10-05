@@ -1,8 +1,9 @@
-"""Kommandozeile: GPX zeichnen und Strava-Fahrten holen."""
+"""Kommandozeile: GPX zeichnen, Strava-Fahrten und Komoot-Touren holen."""
 
 from __future__ import annotations
 
 import argparse
+import getpass
 import os
 import sys
 from datetime import date
@@ -10,6 +11,13 @@ from pathlib import Path
 
 from .geo import format_km
 from .gpx import load_paths
+from .komoot import (
+    DEFAULT_TOKEN_PATH as KOMOOT_TOKEN_PATH,
+    Komoot,
+    KomootError,
+    KomootStore,
+    pull_tours,
+)
 from .render import Options, build_scene, write_png, write_svg
 from .strava import (
     DEFAULT_REDIRECT,
@@ -33,11 +41,15 @@ def main(argv=None) -> int:
             return cmd_auth(args)
         if args.command == "strava-pull":
             return cmd_pull(args)
+        if args.command == "komoot-auth":
+            return cmd_komoot_auth(args)
+        if args.command == "komoot-pull":
+            return cmd_komoot_pull(args)
         if args.command == "serve":
             from .serve import serve
 
             return serve(args.port, open_browser=not args.no_browser)
-    except (ValueError, StravaError, OSError) as error:
+    except (ValueError, StravaError, KomootError, OSError) as error:
         print(f"tourkarte: {error}", file=sys.stderr)
         return 1
     print("tourkarte: unbekannter Befehl.", file=sys.stderr)
@@ -85,6 +97,24 @@ def build_parser() -> argparse.ArgumentParser:
     pull.add_argument("--out", default="gpx", help="Ordner für die GPX-Dateien")
     pull.add_argument("--full", action="store_true", help="alle GPS-Punkte statt der hohen Auflösung")
     pull.add_argument("--token-file", default=str(DEFAULT_TOKEN_PATH))
+
+    komoot_auth = commands.add_parser("komoot-auth", help="Komoot-Zugang auf diesem Rechner speichern")
+    komoot_auth.add_argument("--email", default=os.environ.get("KOMOOT_EMAIL"))
+    komoot_auth.add_argument("--token-file", default=str(KOMOOT_TOKEN_PATH))
+
+    komoot_pull = commands.add_parser("komoot-pull", help="Komoot-Touren als GPX speichern")
+    komoot_pull.add_argument("--after", help="erster Tag, einschließlich, JJJJ-MM-TT")
+    komoot_pull.add_argument("--before", help="letzter Tag, einschließlich, JJJJ-MM-TT")
+    komoot_pull.add_argument("--id", action="append", type=int, dest="ids", help="eine Tournummer, mehrfach erlaubt")
+    komoot_pull.add_argument("--sport", default="bike", choices=("bike", "all"), help="bike oder all")
+    komoot_pull.add_argument(
+        "--kind",
+        default="recorded",
+        choices=("recorded", "planned", "all"),
+        help="recorded, planned oder all",
+    )
+    komoot_pull.add_argument("--out", default="gpx", help="Ordner für die GPX-Dateien")
+    komoot_pull.add_argument("--token-file", default=str(KOMOOT_TOKEN_PATH))
 
     serve_cmd = commands.add_parser("serve", help="Tourkarte im Browser dieses Rechners öffnen")
     serve_cmd.add_argument("--port", type=int, default=8765)
@@ -160,6 +190,41 @@ def cmd_pull(args) -> int:
         activity_ids=args.ids,
         resolution=None if args.full else "high",
     )
+    return _print_pull(results, args.out)
+
+
+def cmd_komoot_auth(args) -> int:
+    email = (args.email or "").strip()
+    if "@" not in email:
+        raise ValueError("Die Komoot-E-Mail fehlt. Sie kommt aus der Komoot-Anmeldung.")
+    if not sys.stdin.isatty():
+        raise ValueError("Passwort fehlt. Den Befehl in einem Terminal ausführen.")
+    password = getpass.getpass("Komoot-Passwort: ")
+    if not password:
+        raise ValueError("Passwort fehlt.")
+    record = Komoot(KomootStore(args.token_file)).login(email, password)
+    print(f"Zugang gespeichert: {args.token_file}")
+    print(f"Verbunden als {record['display_name']}.")
+    return 0
+
+
+def cmd_komoot_pull(args) -> int:
+    after = _date(args.after) if args.after else None
+    before = _date(args.before) if args.before else None
+    client = Komoot(KomootStore(args.token_file))
+    results = pull_tours(
+        client,
+        args.out,
+        sport=args.sport,
+        kind=args.kind,
+        after=after,
+        before=before,
+        tour_ids=args.ids,
+    )
+    return _print_pull(results, args.out)
+
+
+def _print_pull(results, folder) -> int:
     written = [item for item in results if item.path]
     for item in results:
         if item.path:
@@ -171,7 +236,7 @@ def cmd_pull(args) -> int:
     if not written:
         raise ValueError("Keine GPX-Datei geschrieben.")
     noun = "GPX-Datei" if len(written) == 1 else "GPX-Dateien"
-    print(f"{len(written)} {noun} in {args.out}")
+    print(f"{len(written)} {noun} in {folder}")
     return 0
 
 

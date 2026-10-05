@@ -403,6 +403,13 @@ h2 {
   gap: 12px;
 }
 
+.chore-when {
+  margin: 4px 0 0;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .filters {
   display: flex;
   gap: 8px;

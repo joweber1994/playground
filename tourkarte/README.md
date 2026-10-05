@@ -1,6 +1,6 @@
 # Tourkarte
 
-Übersichtskarte einer gefahrenen Bikepacking-Tour fürs Fotoalbum. Auf dem iPhone wird Strava verbunden, die Etappen werden ausgewählt, und nur diese Fahrten werden als Seite gezeichnet.
+Übersichtskarte einer gefahrenen Bikepacking-Tour fürs Fotoalbum. Auf dem iPhone wird Strava oder Komoot verbunden, die Etappen werden ausgewählt, und nur diese Touren werden als Seite gezeichnet.
 
 Auf dem iPhone in Safari öffnen: <https://joweber1994.github.io/playground/tourkarte/>
 
@@ -20,7 +20,24 @@ Rollentrainer und virtuelle Fahrten bleiben aus, bis „Indoor und virtuell zeig
 
 Die Anmeldung öffnet Strava und kehrt auf diese Seite zurück. Wenn dabei Safari statt des Home-Bildschirm-Icons aufgeht, die Anmeldung dort zu Ende führen.
 
-Eine GPX-Datei vom iPhone geht auch ohne Strava, über **GPX wählen**.
+Eine GPX-Datei vom iPhone geht auch ohne Strava und ohne Komoot, über **GPX wählen**.
+
+## Komoot
+
+1. Auf der Startseite **Komoot** und **Verbinden** wählen.
+2. E-Mail und Passwort der Komoot-Anmeldung eintragen. Das Passwort wird nicht gespeichert. Auf dem Gerät bleibt der Zugang zu den eigenen Touren.
+3. Zeitraum wählen. **Aufgezeichnet** sind die gefahrenen Touren, **Geplant** die Routen aus dem Planer. **Fahrrad** lässt Wanderungen und Läufe weg.
+4. Sind Strava und Komoot verbunden, stehen beide in einer Liste, nach Tag sortiert. Jede Zeile nennt Quelle, Kilometer und Höhenmeter.
+5. Touren anhaken und **Karte zeichnen**. Für jede Komoot-Tour wird das GPX geholt.
+
+Im Terminal, mit der Anmeldung dieses Rechners:
+
+```bash
+python -m tourkarte komoot-auth --email name@example.com
+python -m tourkarte komoot-pull --after 2026-06-01 --before 2026-06-14 --out tourkarte/out
+```
+
+Unter Windows `py -3 -m tourkarte` am Anfang, wenn `python` fehlt. Das Passwort wird abgefragt und nicht mitgeschrieben. `--kind planned` holt geplante Touren, `--sport all` auch Wanderungen. Der Zugang liegt in `~/.config/tourkarte/komoot.json`. Unter Windows ist das `C:\Users\<Name>\.config\tourkarte\komoot.json`.
 
 ## Auf dem Laptop in Cursor
 
@@ -28,7 +45,7 @@ Den Ordner `playground` in Cursor öffnen. Über die Befehlspalette **Tasks: Run
 
 <http://127.0.0.1:8765/tourkarte/>
 
-Dieselbe Seite wie auf dem iPhone: Strava verbinden, Fahrten anhaken, Karte zeichnen. **SVG teilen** speichert die Datei auf dem Laptop. In Strava als **Authorization Callback Domain** für diesen Rechner `127.0.0.1` eintragen. Eine Strava-App hat eine solche Domain. Für das iPhone bleibt `joweber1994.github.io`, für den Laptop legt man eine zweite App an oder stellt die Domain um.
+Dieselbe Seite wie auf dem iPhone: Strava oder Komoot verbinden, Touren anhaken, Karte zeichnen. **SVG teilen** speichert die Datei auf dem Laptop. In Strava als **Authorization Callback Domain** für diesen Rechner `127.0.0.1` eintragen. Eine Strava-App hat eine solche Domain. Für das iPhone bleibt `joweber1994.github.io`, für den Laptop legt man eine zweite App an oder stellt die Domain um.
 
 Im Terminal von Cursor geht derselbe Start. Unter Windows, wenn `python` fehlt:
 
@@ -69,6 +86,7 @@ Der Zugang liegt in `~/.config/tourkarte/strava.json`. Unter Windows ist das `C:
 ```bash
 node tourkarte/map.test.js
 node tourkarte/strava.test.js
+node tourkarte/komoot.test.js
 python -m unittest discover -s tourkarte/tests -t .
 ```
 

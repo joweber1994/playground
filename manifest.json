@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Haushalt",
   "short_name": "Haushalt",
-  "description": "Menü für Chore Wars und Wochenessen. Beide bleiben in einer App auf dem Home-Bildschirm.",
+  "description": "Menü für Chore Wars und Wochenzettel. Beide bleiben in einer App auf dem Home-Bildschirm.",
   "lang": "de",
   "dir": "ltr",
   "start_url": "./index.html",

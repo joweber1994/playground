@@ -211,27 +211,128 @@
     return { name: name, stages: stages, waypoints: waypoints };
   }
 
+  function selectStages(tour, options) {
+    var stages = (tour && tour.stages) || [];
+    var places = options.stagePlaces || [];
+    var included = options.included || [];
+    var dropping = false;
+    for (var i = 0; i < stages.length; i += 1) {
+      if (included[i] === false) dropping = true;
+    }
+    if (!dropping) return { tour: tour, places: places, indices: null, total: stages.length };
+    var nextStages = [];
+    var nextPlaces = [];
+    var indices = [];
+    stages.forEach(function (stage, index) {
+      if (included[index] === false) return;
+      nextStages.push(stage);
+      nextPlaces.push(places[index] || { start: "", end: "" });
+      indices.push(index);
+    });
+    if (!nextStages.length) throw new Error("Keine Etappe ist in der Übersicht.");
+    return {
+      tour: { name: tour.name, stages: nextStages, waypoints: waypointsNear(tour.waypoints, nextStages) },
+      places: nextPlaces,
+      indices: indices,
+      total: stages.length
+    };
+  }
+
+  function buildStageScene(tour, index, options) {
+    options = options || {};
+    var stages = (tour && tour.stages) || [];
+    var stage = stages[index];
+    if (!stage) throw new Error("Diese Etappe gibt es nicht.");
+    var places = (options.stagePlaces || [])[index] || {};
+    var fallback = (index + 1) + ". Etappe";
+    var title = String(options.stageTitle != null ? options.stageTitle : (stage.name || fallback)).trim() || fallback;
+    var total = stages.length;
+    var route = options.colorByDay && total > 1 ? dayColor(index, total) : (options.route || ROUTE);
+    var scene = buildScene({
+      name: title,
+      stages: [stage],
+      waypoints: waypointsNear(tour.waypoints, [stage])
+    }, {
+      title: title,
+      startLabel: places.start || "",
+      endLabel: places.end || "",
+      fmt: options.fmt || options.format,
+      paper: options.paper,
+      ink: options.ink,
+      muted: options.muted,
+      route: route,
+      colorByDay: false,
+      basemap: options.basemap,
+      stagePlaces: [{ start: places.start || "", end: places.end || "" }],
+      omitSummary: true,
+      kind: "stage",
+      stageIndex: index
+    });
+    scene.stageIndex = index;
+    return scene;
+  }
+
+  function waypointsNear(waypoints, stages) {
+    var box = latLonBox(stages);
+    if (!box) return [];
+    var padLat = Math.max(0.05, (box.maxLat - box.minLat) * 0.25);
+    var padLon = Math.max(0.05, (box.maxLon - box.minLon) * 0.25);
+    return (waypoints || []).filter(function (point) {
+      if (!point || point.lat == null || point.lon == null || !point.name) return false;
+      return point.lat >= box.minLat - padLat && point.lat <= box.maxLat + padLat
+        && point.lon >= box.minLon - padLon && point.lon <= box.maxLon + padLon;
+    });
+  }
+
+  function latLonBox(stages) {
+    var minLat = Infinity;
+    var maxLat = -Infinity;
+    var minLon = Infinity;
+    var maxLon = -Infinity;
+    var count = 0;
+    (stages || []).forEach(function (stage) {
+      (stage.segments || []).forEach(function (segment) {
+        (segment || []).forEach(function (point) {
+          if (!point || !isFinite(point.lat) || !isFinite(point.lon)) return;
+          count += 1;
+          if (point.lat < minLat) minLat = point.lat;
+          if (point.lat > maxLat) maxLat = point.lat;
+          if (point.lon < minLon) minLon = point.lon;
+          if (point.lon > maxLon) maxLon = point.lon;
+        });
+      });
+    });
+    if (!count) return null;
+    return { minLat: minLat, maxLat: maxLat, minLon: minLon, maxLon: maxLon };
+  }
+
   function buildScene(tour, options) {
     options = normalizeOptions(options || {});
-    var prepared = prepare(tour);
+    var selected = selectStages(tour, options);
+    var view = selected.tour;
+    var prepared = prepare(view);
     if (!prepared.stages.length) throw new Error("In den GPX-Dateien liegt keine gefahrene Linie.");
     var page = pageMm(options, prepared.coords);
     var width = page[0] * 10;
     var height = page[1] * 10;
-    var title = (options.title || tour.name || "Bikepacking").trim() || "Bikepacking";
-    var dates = dateLine(tour);
+    var title = (options.title || view.name || "Bikepacking").trim() || "Bikepacking";
+    var dates = dateLine(view);
     var distance = prepared.distancePoints.reduce(function (sum, points) { return sum + pathDistanceM(points); }, 0);
     var gains = prepared.distancePoints.map(elevationGainM);
     var gain = gains.every(function (value) { return value == null; }) ? null : gains.reduce(function (sum, value) { return sum + (value || 0); }, 0);
-    var colors = stageColors(prepared.stages, options);
-    var facts = stageFacts(tour);
-    var summary = summaryLines(facts, options.stagePlaces, colors);
+    var colors = stageColors(prepared.stages, options, selected.indices, selected.total);
+    var facts = stageFacts(view);
+    var summary = options.omitSummary ? [] : summaryLines(facts, selected.places, colors, selected.indices);
     var legend = summary.length || !(options.colorByDay && prepared.stages.length > 1) ? [] : legendEntries(prepared.stages, colors);
     var frame = layout(width, height, title, dates, statsLine(distance, gain, prepared.stages.length), legend, summary, options);
     var stroke = clamp(Math.min(frame.map[2], frame.map[3]) * 0.0062, options.colorByDay ? 7.4 : 5.4, 12);
+    var frameStroke = Math.max(8, Math.round(Math.min(width, height) * 0.004 * 10) / 10);
     var items = [{ op: "rect", x: 0, y: 0, w: width, h: height, fill: options.paper }];
     var fitted = null;
     var tiles = [];
+    var clipId = options.kind === "stage"
+      ? "tourkarte-karte-etappe-" + (options.stageIndex == null ? "0" : options.stageIndex)
+      : "tourkarte-karte-uebersicht";
     if (options.basemap) {
       var places = [];
       prepared.stages.forEach(function (stage) {
@@ -247,13 +348,13 @@
         if (merc.tiles.length) {
           tiles = merc.tiles;
           fitted = merc;
-          items.push({ op: "tiles", tiles: tiles, clip: frame.map });
+          items.push({ op: "tiles", tiles: tiles, clip: insetRect(frame.map, frameStroke / 2), clipId: clipId });
         }
       }
     }
     if (!fitted) fitted = fit(prepared.coords, frame.map, frame.inset);
     var epsilon = fitted.mercator ? Math.max(1.2, 2.4 / fitted.pixelScale) : (fitted.scale ? Math.max(8, 2.4 / fitted.scale) : 20);
-    items.push({ op: "rect", x: frame.map[0], y: frame.map[1], w: frame.map[2], h: frame.map[3], fill: null, stroke: RULE, strokeWidth: 1.4 });
+    items.push({ op: "rect", x: frame.map[0], y: frame.map[1], w: frame.map[2], h: frame.map[3], fill: null, stroke: RULE, strokeWidth: frameStroke, crisp: true });
     var pagePaths = [];
     prepared.stages.forEach(function (stage, index) {
       var paths = [];
@@ -287,7 +388,7 @@
       var endAway = endLine[Math.max(0, endLine.length - 2)];
       marker(items, start, stroke, options.paper, options.ink, true);
       marker(items, end, stroke, options.paper, options.route, false);
-      var places = options.stagePlaces || [];
+      var places = selected.places || [];
       var firstPlace = places[0] || {};
       var lastPlace = places[places.length - 1] || {};
       var startText = options.startLabel || String(firstPlace.start || "").trim();
@@ -310,7 +411,8 @@
       title: title,
       mapRect: frame.map,
       items: items,
-      tiles: tiles
+      tiles: tiles,
+      kind: options.kind
     };
   }
 
@@ -319,7 +421,7 @@
       '<?xml version="1.0" encoding="UTF-8"?>',
       '<svg xmlns="http://www.w3.org/2000/svg" xml:lang="de" width="' + num(scene.widthMm) + 'mm" height="' + num(scene.heightMm) + 'mm" viewBox="0 0 ' + num(scene.width) + " " + num(scene.height) + '" role="img">',
       "<title>" + xml(scene.title) + "</title>",
-      "<desc>Übersichtskarte fürs Fotoalbum</desc>"
+      "<desc>" + (scene.kind === "stage" ? "Etappe fürs Fotoalbum" : "Übersichtskarte fürs Fotoalbum") + "</desc>"
     ];
     scene.items.forEach(function (item) { lines.push(svgItem(item)); });
     lines.push("</svg>");
@@ -339,7 +441,7 @@
     var stages = [];
     var distancePoints = [];
     var coords = [];
-    (tour.stages || []).forEach(function (stage) {
+    (tour.stages || []).forEach(function (stage, index) {
       var segments = [];
       var geo = [];
       var flat = [];
@@ -353,7 +455,7 @@
         coords = coords.concat(projected);
       });
       if (segments.length) {
-        stages.push({ name: stage.name, when: stage.when, segments: segments, geo: geo });
+        stages.push({ name: stage.name, when: stage.when, segments: segments, geo: geo, sourceIndex: index });
         distancePoints.push(flat);
       }
     });
@@ -744,7 +846,17 @@
     return found;
   }
 
-  function stageColors(stages, options) {
+  function stageColors(stages, options, indexMap, total) {
+    if (indexMap && indexMap.length) {
+      var count = total || indexMap.length;
+      if (!options.colorByDay || count < 2) return stages.map(function () { return options.route; });
+      return stages.map(function (stage, index) {
+        var source = stage && stage.sourceIndex != null ? stage.sourceIndex : index;
+        var slot = indexMap[source];
+        if (slot == null) slot = source;
+        return dayColor(slot, count);
+      });
+    }
     if (!options.colorByDay || stages.length < 2) return stages.map(function () { return options.route; });
     return stages.map(function (_, index) { return dayColor(index, stages.length); });
   }
@@ -826,6 +938,81 @@
     return tidyPlace(name);
   }
 
+  function searchPlacesUrl(query, viewbox) {
+    var text = String(query || "").trim();
+    if (!text) return "";
+    var url = "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&q=" + encodeURIComponent(text);
+    if (viewbox) url += "&viewbox=" + viewbox + "&bounded=0";
+    return url;
+  }
+
+  function tourViewbox(tour) {
+    var minLat = 90;
+    var maxLat = -90;
+    var minLon = 180;
+    var maxLon = -180;
+    var count = 0;
+    function add(lat, lon) {
+      var latitude = Number(lat);
+      var longitude = Number(lon);
+      if (!isFinite(latitude) || !isFinite(longitude)) return;
+      if (Math.abs(latitude) > 90 || Math.abs(longitude) > 180) return;
+      if (latitude < minLat) minLat = latitude;
+      if (latitude > maxLat) maxLat = latitude;
+      if (longitude < minLon) minLon = longitude;
+      if (longitude > maxLon) maxLon = longitude;
+      count += 1;
+    }
+    if (!tour) return "";
+    (tour.stages || []).forEach(function (stage) {
+      (stage.segments || []).forEach(function (segment) {
+        (segment || []).forEach(function (point) {
+          if (point) add(point.lat, point.lon);
+        });
+      });
+    });
+    (tour.waypoints || []).forEach(function (point) {
+      if (point) add(point.lat, point.lon);
+    });
+    if (!count) return "";
+    var padLat = Math.max(0.2, (maxLat - minLat) * 0.5);
+    var padLon = Math.max(0.2, (maxLon - minLon) * 0.5);
+    minLat = Math.max(-90, minLat - padLat);
+    maxLat = Math.min(90, maxLat + padLat);
+    minLon = Math.max(-180, minLon - padLon);
+    maxLon = Math.min(180, maxLon + padLon);
+    return [minLon, maxLat, maxLon, minLat].map(function (value) {
+      return value.toFixed(4);
+    }).join(",");
+  }
+
+  function placesFromSearch(payload) {
+    var rows = Array.isArray(payload) ? payload : [];
+    var seen = {};
+    var places = [];
+    rows.forEach(function (item) {
+      if (!item) return;
+      var lat = Number(item.lat);
+      var lon = Number(item.lon);
+      if (!isFinite(lat) || !isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return;
+      var label = String(item.display_name || "").trim();
+      var name = String(item.name || "").trim() || label.split(",")[0].trim();
+      if (!name) return;
+      var key = name + "@" + lat.toFixed(5) + "," + lon.toFixed(5);
+      if (seen[key]) return;
+      seen[key] = true;
+      places.push({ name: name, label: label || name, lat: lat, lon: lon });
+    });
+    return places;
+  }
+
+  function formatLatLon(lat, lon) {
+    var latitude = Number(lat);
+    var longitude = Number(lon);
+    if (!isFinite(latitude) || !isFinite(longitude)) return "";
+    return latitude.toFixed(4).replace(".", ",") + " · " + longitude.toFixed(4).replace(".", ",");
+  }
+
   function tidyPlace(name) {
     return String(name || "")
       .replace(/^Municipal Units? of\s+/i, "")
@@ -836,14 +1023,15 @@
       .trim();
   }
 
-  function summaryLines(facts, places, colors) {
+  function summaryLines(facts, places, colors, indices) {
     return facts.map(function (fact, index) {
       var place = places && places[index] ? places[index] : {};
       var start = tidyPlace(place.start);
       var end = tidyPlace(place.end);
+      var number = indices && indices[index] != null ? indices[index] : index;
       return {
         color: colors[index] || "#9c3412",
-        title: (index + 1) + ". Etappe",
+        title: (number + 1) + ". Etappe",
         date: fact.shortDate,
         places: [start, end].filter(Boolean).join(" – "),
         km: fact.kmLabel,
@@ -897,9 +1085,21 @@
     return items;
   }
 
+  function insetRect(rect, pad) {
+    var inset = Math.max(0, pad || 0);
+    return [rect[0] + inset, rect[1] + inset, Math.max(1, rect[2] - 2 * inset), Math.max(1, rect[3] - 2 * inset)];
+  }
+
+  function finiteIndex(value) {
+    if (value == null || value === "") return null;
+    var number = Number(value);
+    return isFinite(number) ? number : null;
+  }
+
   function svgItem(item) {
     if (item.op === "rect") {
       var extra = item.stroke ? ' stroke="' + item.stroke + '" stroke-width="' + num(item.strokeWidth || 1) + '"' : "";
+      if (item.crisp) extra += ' shape-rendering="crispEdges"';
       return '<rect x="' + num(item.x) + '" y="' + num(item.y) + '" width="' + num(item.w) + '" height="' + num(item.h) + '" fill="' + (item.fill || "none") + '"' + extra + "/>";
     }
     if (item.op === "line") {
@@ -916,12 +1116,13 @@
     }
     if (item.op === "tiles") {
       var clip = item.clip;
+      var clipId = item.clipId || "tourkarte-karte";
       var images = item.tiles.map(function (tile) {
         var href = tile.href || tile.url;
         if (!href) return "";
         return '<image href="' + xml(href) + '" x="' + num(tile.x) + '" y="' + num(tile.y) + '" width="' + num(tile.w) + '" height="' + num(tile.h) + '" preserveAspectRatio="none"/>';
       }).join("");
-      return '<clipPath id="tourkarte-karte"><rect x="' + num(clip[0]) + '" y="' + num(clip[1]) + '" width="' + num(clip[2]) + '" height="' + num(clip[3]) + '"/></clipPath><g clip-path="url(#tourkarte-karte)">' + images + "</g>";
+      return '<clipPath id="' + xml(clipId) + '"><rect x="' + num(clip[0]) + '" y="' + num(clip[1]) + '" width="' + num(clip[2]) + '" height="' + num(clip[3]) + '"/></clipPath><g clip-path="url(#' + xml(clipId) + ')">' + images + "</g>";
     }
     if (item.op === "polygon") {
       return '<polygon points="' + item.points.map(function (point) { return num(point[0]) + "," + num(point[1]); }).join(" ") + '" fill="' + (item.fill || "none") + '"/>';
@@ -1021,7 +1222,11 @@
       route: parseHex(options.route || ROUTE),
       colorByDay: Boolean(options.colorByDay),
       basemap: Boolean(options.basemap),
-      stagePlaces: Array.isArray(options.stagePlaces) ? options.stagePlaces : []
+      stagePlaces: Array.isArray(options.stagePlaces) ? options.stagePlaces : [],
+      included: Array.isArray(options.included) ? options.included : [],
+      omitSummary: Boolean(options.omitSummary),
+      kind: options.kind === "stage" ? "stage" : "overview",
+      stageIndex: finiteIndex(options.stageIndex)
     };
   }
 
@@ -1140,6 +1345,116 @@
     return text.length <= limit ? text : text.slice(0, limit - 1).trim() + "…";
   }
 
+  function fileSlug(title) {
+    var text = String(title || "tourkarte").toLowerCase();
+    text = text.replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
+    if (text.normalize) text = text.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+    text = text.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    return (text || "tourkarte").slice(0, 40);
+  }
+
+  function albumFilenames(labels, extension) {
+    var ext = String(extension || "jpg").replace(/^\./, "") || "jpg";
+    return (labels || []).map(function (label, index) {
+      var number = String(index);
+      while (number.length < 2) number = "0" + number;
+      return number + "-" + fileSlug(label) + "." + ext;
+    });
+  }
+
+  var CRC_TABLE = null;
+
+  function crc32(bytes) {
+    if (!CRC_TABLE) {
+      CRC_TABLE = new Uint32Array(256);
+      for (var n = 0; n < 256; n += 1) {
+        var crc = n;
+        for (var k = 0; k < 8; k += 1) crc = (crc & 1) ? (0xedb88320 ^ (crc >>> 1)) : (crc >>> 1);
+        CRC_TABLE[n] = crc >>> 0;
+      }
+    }
+    var sum = 0xffffffff;
+    for (var i = 0; i < bytes.length; i += 1) sum = (CRC_TABLE[(sum ^ bytes[i]) & 0xff] ^ (sum >>> 8)) >>> 0;
+    return (sum ^ 0xffffffff) >>> 0;
+  }
+
+  function utf8Bytes(text) {
+    if (typeof TextEncoder !== "undefined") return new TextEncoder().encode(text);
+    var encoded = unescape(encodeURIComponent(text));
+    var bytes = new Uint8Array(encoded.length);
+    for (var i = 0; i < encoded.length; i += 1) bytes[i] = encoded.charCodeAt(i);
+    return bytes;
+  }
+
+  function zipStored(files) {
+    var list = files || [];
+    var locals = [];
+    var central = [];
+    var offset = 0;
+    list.forEach(function (file) {
+      var name = utf8Bytes(String(file.name || "seite.jpg"));
+      var data = file.data instanceof Uint8Array ? file.data : new Uint8Array(file.data || []);
+      var crc = crc32(data);
+      var local = new Uint8Array(30 + name.length);
+      var view = new DataView(local.buffer);
+      view.setUint32(0, 0x04034b50, true);
+      view.setUint16(4, 20, true);
+      view.setUint16(6, 0x0800, true);
+      view.setUint16(8, 0, true);
+      view.setUint16(10, 0, true);
+      view.setUint16(12, 0, true);
+      view.setUint32(14, crc, true);
+      view.setUint32(18, data.length, true);
+      view.setUint32(22, data.length, true);
+      view.setUint16(26, name.length, true);
+      view.setUint16(28, 0, true);
+      local.set(name, 30);
+      locals.push(local, data);
+      var entry = new Uint8Array(46 + name.length);
+      var directory = new DataView(entry.buffer);
+      directory.setUint32(0, 0x02014b50, true);
+      directory.setUint16(4, 20, true);
+      directory.setUint16(6, 20, true);
+      directory.setUint16(8, 0x0800, true);
+      directory.setUint16(10, 0, true);
+      directory.setUint16(12, 0, true);
+      directory.setUint16(14, 0, true);
+      directory.setUint32(16, crc, true);
+      directory.setUint32(20, data.length, true);
+      directory.setUint32(24, data.length, true);
+      directory.setUint16(28, name.length, true);
+      directory.setUint16(30, 0, true);
+      directory.setUint16(32, 0, true);
+      directory.setUint16(34, 0, true);
+      directory.setUint16(36, 0, true);
+      directory.setUint32(38, 0, true);
+      directory.setUint32(42, offset, true);
+      entry.set(name, 46);
+      central.push(entry);
+      offset += local.length + data.length;
+    });
+    var centralSize = central.reduce(function (sum, part) { return sum + part.length; }, 0);
+    var end = new Uint8Array(22);
+    var tail = new DataView(end.buffer);
+    tail.setUint32(0, 0x06054b50, true);
+    tail.setUint16(4, 0, true);
+    tail.setUint16(6, 0, true);
+    tail.setUint16(8, list.length, true);
+    tail.setUint16(10, list.length, true);
+    tail.setUint32(12, centralSize, true);
+    tail.setUint32(16, offset, true);
+    tail.setUint16(20, 0, true);
+    var chunks = locals.concat(central, [end]);
+    var total = chunks.reduce(function (sum, part) { return sum + part.length; }, 0);
+    var out = new Uint8Array(total);
+    var cursor = 0;
+    chunks.forEach(function (part) {
+      out.set(part, cursor);
+      cursor += part.length;
+    });
+    return out;
+  }
+
   return {
     PAPER: PAPER,
     INK: INK,
@@ -1158,11 +1473,19 @@
     parseGpx: parseGpx,
     mergeTours: mergeTours,
     buildScene: buildScene,
+    buildStageScene: buildStageScene,
     sceneToSvg: sceneToSvg,
     stageFacts: stageFacts,
     largerPlace: largerPlace,
     tidyPlace: tidyPlace,
+    searchPlacesUrl: searchPlacesUrl,
+    tourViewbox: tourViewbox,
+    placesFromSearch: placesFromSearch,
+    formatLatLon: formatLatLon,
     parseHex: parseHex,
-    mercatorView: mercatorView
+    mercatorView: mercatorView,
+    fileSlug: fileSlug,
+    albumFilenames: albumFilenames,
+    zipStored: zipStored
   };
 });

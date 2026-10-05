@@ -34,7 +34,7 @@
   };
 
   var DEFAULT_CHORES = [
-    { id: 'trash', title: 'Müll & Altglas wegbringen', points: 10, sort: 0 },
+    { id: 'trash', title: 'Müll & Altglas wegbringen', points: 10, sort: 0, weekday: 0 },
     { id: 'dishwasher', title: 'Spülmaschine ausräumen', points: 15, sort: 1 },
     { id: 'bathroom', title: 'Bad putzen', points: 50, sort: 2 },
     { id: 'camper', title: 'Camper saugen', points: 40, sort: 3 }
@@ -53,13 +53,37 @@
     return 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
   }
 
+  var WEEKDAYS = [
+    { id: 0, label: 'Montag' },
+    { id: 1, label: 'Dienstag' },
+    { id: 2, label: 'Mittwoch' },
+    { id: 3, label: 'Donnerstag' },
+    { id: 4, label: 'Freitag' },
+    { id: 5, label: 'Samstag' },
+    { id: 6, label: 'Sonntag' }
+  ];
+
+  function weekdayOrNull(value) {
+    if (value == null || value === '') return null;
+    var day = Number(value);
+    if (!Number.isFinite(day) || Math.floor(day) !== day || day < 0 || day > 6) return null;
+    return day;
+  }
+
+  function weekdayLabel(value) {
+    var day = weekdayOrNull(value);
+    if (day == null) return '';
+    return WEEKDAYS[day].label;
+  }
+
   function copyChore(chore) {
     return {
       id: chore.id,
       title: chore.title,
       points: chore.points,
       sort: chore.sort,
-      categoryId: chore.categoryId || null
+      categoryId: chore.categoryId || null,
+      weekday: weekdayOrNull(chore.weekday)
     };
   }
 
@@ -272,7 +296,8 @@
         title: title,
         points: points,
         sort: Number.isFinite(sort) ? sort : index,
-        categoryId: resolvedCategoryId(chore, id, categories, seeded)
+        categoryId: resolvedCategoryId(chore, id, categories, seeded),
+        weekday: weekdayOrNull(chore.weekday)
       });
     });
     if (parsed.length === 0) return defaultChores();
@@ -503,6 +528,14 @@
     return next;
   }
 
+  function readWeekday(value, current) {
+    if (value === undefined) return { ok: true, value: weekdayOrNull(current) };
+    if (value == null || value === '') return { ok: true, value: null };
+    var day = weekdayOrNull(value);
+    if (day == null) return fail('Wochentag fehlt.');
+    return { ok: true, value: day };
+  }
+
   function readChoreCategory(state, input, current) {
     if (!input || !Object.prototype.hasOwnProperty.call(input, 'categoryId')) {
       return { ok: true, value: current == null ? null : current };
@@ -520,6 +553,8 @@
     var next = migrate(state);
     var category = readChoreCategory(next, input, null);
     if (!category.ok) return category;
+    var weekday = readWeekday(input && input.weekday, null);
+    if (!weekday.ok) return weekday;
     var sort = 0;
     next.chores.forEach(function (chore) {
       if (chore.categoryId === category.value && chore.sort >= sort) sort = chore.sort + 1;
@@ -529,7 +564,8 @@
       title: title.value,
       points: points.value,
       sort: sort,
-      categoryId: category.value
+      categoryId: category.value,
+      weekday: weekday.value
     });
     next.chores = orderChores(next.chores, next.categories);
     return ok(next);
@@ -545,10 +581,13 @@
     if (!chore) return fail('Aufgabe fehlt.');
     var category = readChoreCategory(next, input || {}, chore.categoryId);
     if (!category.ok) return category;
+    var weekday = readWeekday(input && Object.prototype.hasOwnProperty.call(input, 'weekday') ? input.weekday : undefined, chore.weekday);
+    if (!weekday.ok) return weekday;
     var moved = chore.categoryId !== category.value;
     chore.title = title.value;
     chore.points = points.value;
     chore.categoryId = category.value;
+    chore.weekday = weekday.value;
     if (moved) chore.sort = 1000000;
     next.totals.forEach(function (row) {
       if (row.choreId === id) row.title = title.value;
@@ -722,6 +761,8 @@
     HISTORY_LIMIT: HISTORY_LIMIT,
     TITLE_MAX: TITLE_MAX,
     NAME_MAX: NAME_MAX,
+    WEEKDAYS: WEEKDAYS,
+    weekdayLabel: weekdayLabel,
     POINTS_MIN: POINTS_MIN,
     POINTS_MAX: POINTS_MAX,
     defaultState: defaultState,

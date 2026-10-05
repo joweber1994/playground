@@ -1,21 +1,13 @@
-/* Wochenessen – Märkte, Zutaten und Vorschläge.
-   Reine Funktionen, ohne DOM. Im Browser als WochenessenMeals, unter Node als Modul. */
+/* Wochenzettel – Zutaten und Vorschläge.
+   Reine Funktionen, ohne DOM. Im Browser als WochenzettelMeals, unter Node als Modul. */
 
 (function (root, factory) {
   var api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else root.WochenessenMeals = api;
+  else root.WochenzettelMeals = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   var PROSPEKT_URL = 'https://www.prechtl.de/aktuelles/';
   var PORTIONS = 2;
-
-  var MARKETS = [
-    { id: 'raubling', name: 'Raubling' },
-    { id: 'brannenburg', name: 'Brannenburg' },
-    { id: 'bad-aibling', name: 'Bad Aibling' },
-    { id: 'bad-feilnbach', name: 'Bad Feilnbach' },
-    { id: 'oberaudorf', name: 'Oberaudorf' }
-  ];
 
   var GROUPS = [
     { id: 'fleisch', label: 'Fleisch' },
@@ -373,16 +365,8 @@
     return out;
   }
 
-  function marketById(id) {
-    for (var i = 0; i < MARKETS.length; i += 1) {
-      if (MARKETS[i].id === id) return MARKETS[i];
-    }
-    return MARKETS[0];
-  }
-
   function freshState(now) {
     return {
-      marketId: MARKETS[0].id,
       weekKey: weekKey(now || new Date()),
       offers: [],
       pantry: defaultPantry(),
@@ -400,7 +384,6 @@
     return {
       weekChanged: !!saved.weekKey && !sameWeek,
       state: {
-        marketId: marketById(saved.marketId).id,
         weekKey: blank.weekKey,
         offers: sameWeek ? knownIds(saved.offers, offerIds) : [],
         pantry: Array.isArray(saved.pantry) ? knownIds(saved.pantry, pantryIds) : blank.pantry,
@@ -444,10 +427,10 @@
     return found;
   }
 
-  function matchOfferText(text) {
+  function matchNames(text, items) {
     var words = tokens(text);
     var found = [];
-    offerIngredients().forEach(function (item) {
+    items.forEach(function (item) {
       var terms = [item.name].concat(item.aliases || []);
       var hit = words.some(function (word) {
         return terms.some(function (term) { return termHits(word, term); });
@@ -461,6 +444,14 @@
       found = found.filter(function (id) { return id !== 'salat'; });
     }
     return found;
+  }
+
+  function matchOfferText(text) {
+    return matchNames(text, offerIngredients());
+  }
+
+  function matchStockText(text) {
+    return matchNames(text, INGREDIENTS);
   }
 
   var OFFER_CATEGORIES = [
@@ -562,26 +553,356 @@
   function describeRecipe(recipe, offers, pantry) {
     var hits = [];
     var missing = [];
-    recipe.ingredients.forEach(function (item) {
+    var ingredients = [];
+    (recipe.ingredients || []).forEach(function (item) {
       var info = ingredient(item.id);
       var row = { id: item.id, name: info ? info.name : item.id, amount: item.amount };
+      ingredients.push(row);
       if (covered(item, offers, pantry)) {
         if (hasId(offers, item.id) && info && info.offer) hits.push(row);
       } else {
         missing.push(row);
       }
     });
-    return { id: recipe.id, title: recipe.title, minutes: recipe.minutes, steps: recipe.steps, hits: hits, missing: missing };
+    return {
+      id: recipe.id,
+      title: recipe.title,
+      minutes: recipe.minutes,
+      steps: Array.isArray(recipe.steps) ? recipe.steps : [],
+      ingredients: ingredients,
+      hits: hits,
+      missing: missing,
+      custom: !!recipe.custom,
+      edited: !!recipe.edited
+    };
   }
 
-  function suggest(offers, pantry) {
+  var DAYS = [
+    { id: 'mo', label: 'Montag' },
+    { id: 'di', label: 'Dienstag' },
+    { id: 'mi', label: 'Mittwoch' },
+    { id: 'do', label: 'Donnerstag' },
+    { id: 'fr', label: 'Freitag' },
+    { id: 'sa', label: 'Samstag' },
+    { id: 'so', label: 'Sonntag' }
+  ];
+
+  function cleanCustomRecipes(raw) {
+    var out = [];
+    var seen = {};
+    if (!Array.isArray(raw)) return out;
+    raw.forEach(function (recipe) {
+      if (!recipe || typeof recipe !== 'object' || !recipe.custom) return;
+      var id = String(recipe.id || '').trim();
+      if (!/^c[0-9]{1,8}$/.test(id) || seen[id]) return;
+      var title = String(recipe.title || '').trim().replace(/\s+/g, ' ');
+      if (!title || title.length > 80) return;
+      var minutes = Math.floor(Number(recipe.minutes));
+      if (!Number.isFinite(minutes) || minutes < 1 || minutes > 240) minutes = 20;
+      var steps = [];
+      (Array.isArray(recipe.steps) ? recipe.steps : []).forEach(function (step) {
+        var text = String(step || '').trim().replace(/\s+/g, ' ');
+        if (!text || text.length > 240 || steps.length >= 8) return;
+        steps.push(text);
+      });
+      var ingredients = [];
+      var seenIng = {};
+      (Array.isArray(recipe.ingredients) ? recipe.ingredients : []).forEach(function (item) {
+        if (!item || !ingredient(item.id) || seenIng[item.id] || ingredients.length >= 12) return;
+        var amount = String(item.amount || '').trim().replace(/\s+/g, ' ');
+        if (!amount || amount.length > 40) amount = '1';
+        seenIng[item.id] = true;
+        ingredients.push({ id: item.id, amount: amount });
+      });
+      if (!ingredients.length) return;
+      var rev = Math.floor(Number(recipe.rev));
+      if (!Number.isFinite(rev) || rev < 0) rev = 0;
+      seen[id] = true;
+      out.push({
+        id: id,
+        title: title,
+        minutes: minutes,
+        steps: steps,
+        ingredients: ingredients,
+        custom: true,
+        rev: rev,
+        deleted: !!recipe.deleted
+      });
+    });
+    return out;
+  }
+
+  function nextRecipeId(recipes) {
+    var n = 0;
+    cleanCustomRecipes(recipes).forEach(function (recipe) {
+      var match = /^c(\d+)$/.exec(recipe.id);
+      if (match) n = Math.max(n, Number(match[1]));
+    });
+    return 'c' + (n + 1);
+  }
+
+  function cleanEvenings(raw) {
+    var byDay = {};
+    if (!Array.isArray(raw)) return [];
+    raw.forEach(function (row) {
+      if (!row || typeof row !== 'object') return;
+      var day = String(row.day || '');
+      var known = false;
+      DAYS.forEach(function (item) { if (item.id === day) known = true; });
+      if (!known) return;
+      var recipeId = String(row.recipeId || '').trim();
+      if (recipeId.length > 40) recipeId = '';
+      var cook = String(row.cook || '').trim().replace(/\s+/g, ' ');
+      if (cook.length > 24) cook = cook.slice(0, 24);
+      var rev = Math.floor(Number(row.rev));
+      if (!Number.isFinite(rev) || rev < 0) rev = 0;
+      if (!byDay[day] || rev >= byDay[day].rev) {
+        byDay[day] = { day: day, recipeId: recipeId, cook: cook, rev: rev };
+      }
+    });
+    return DAYS.map(function (item) { return byDay[item.id]; }).filter(function (row) { return !!row; });
+  }
+
+  function foldText(value) {
+    return String(value == null ? '' : value).trim().replace(/\s+/g, ' ');
+  }
+
+  function revNum(value) {
+    var rev = Math.floor(Number(value));
+    if (!Number.isFinite(rev) || rev < 0) return 0;
+    return rev;
+  }
+
+  function cleanInventory(raw) {
+    var out = [];
+    var seenId = {};
+    var seenName = {};
+    if (!Array.isArray(raw)) return out;
+    raw.forEach(function (row) {
+      if (!row || typeof row !== 'object') return;
+      var id = String(row.id || '').trim();
+      if (!/^v[0-9]{1,8}$/.test(id) || seenId[id]) return;
+      var name = foldText(row.name);
+      if (!name || name.length > 80) return;
+      var key = name.toLowerCase();
+      if (seenName[key]) return;
+      var amount = foldText(row.amount);
+      if (amount.length > 80) amount = amount.slice(0, 80);
+      seenId[id] = true;
+      seenName[key] = true;
+      out.push({ id: id, name: name, amount: amount, rev: revNum(row.rev), deleted: !!row.deleted });
+    });
+    return out;
+  }
+
+  function nextInventoryId(rows) {
+    var n = 0;
+    cleanInventory(rows).forEach(function (row) {
+      var match = /^v(\d+)$/.exec(row.id);
+      if (match) n = Math.max(n, Number(match[1]));
+    });
+    return 'v' + (n + 1);
+  }
+
+  function addInventory(rows, name, amount, now) {
+    var list = cleanInventory(rows);
+    var clean = foldText(name);
+    if (!clean) return { ok: false, reason: 'empty', inventory: list };
+    if (clean.length > 80) return { ok: false, reason: 'long', inventory: list };
+    var qty = foldText(amount);
+    if (qty.length > 80) return { ok: false, reason: 'amount', inventory: list };
+    var key = clean.toLowerCase();
+    var existing = null;
+    var tomb = null;
+    list.forEach(function (item) {
+      if (item.name.toLowerCase() !== key) return;
+      if (item.deleted) tomb = item;
+      else existing = item;
+    });
+    var rev = revNum(now);
+    if (existing) {
+      var nextAmount = qty || existing.amount;
+      if (existing.amount === nextAmount) return { ok: true, already: true, inventory: list, id: existing.id };
+      var merged = list.map(function (item) {
+        if (item.id !== existing.id) return item;
+        return { id: item.id, name: item.name, amount: nextAmount, rev: rev || item.rev, deleted: false };
+      });
+      return { ok: true, merged: true, inventory: merged, id: existing.id };
+    }
+    if (tomb) {
+      var revived = list.map(function (item) {
+        if (item.id !== tomb.id) return item;
+        return { id: item.id, name: item.name, amount: qty || tomb.amount, rev: rev || item.rev, deleted: false };
+      });
+      return { ok: true, merged: true, inventory: revived, id: tomb.id };
+    }
+    return {
+      ok: true,
+      created: true,
+      inventory: list,
+      draft: { name: clean, amount: qty, rev: rev, deleted: false }
+    };
+  }
+
+  function coveredIds(rows) {
+    var ids = [];
+    cleanInventory(rows).forEach(function (row) {
+      if (row.deleted) return;
+      matchStockText(row.name).forEach(function (id) {
+        if (ids.indexOf(id) === -1) ids.push(id);
+      });
+    });
+    return ids;
+  }
+
+  function seedInventory(pantryIds) {
+    var rows = [];
+    (pantryIds || []).forEach(function (id) {
+      var info = ingredient(id);
+      if (!info) return;
+      rows.push({
+        id: 'v' + (rows.length + 1),
+        name: info.name,
+        amount: '',
+        rev: 1,
+        deleted: false
+      });
+    });
+    return rows;
+  }
+
+  function ensureInventory(saved, pantryIds) {
+    var set = !!(saved && saved.inventorySet === true);
+    var list = saved && Array.isArray(saved.inventory) ? saved.inventory : null;
+    if (set) return cleanInventory(list || []);
+    if (list && list.length) return cleanInventory(list);
+    return seedInventory(pantryIds);
+  }
+
+  function absorbIds(inventory, ids, now) {
+    var next = cleanInventory(inventory);
+    (ids || []).forEach(function (id) {
+      if (coveredIds(next).indexOf(id) !== -1) return;
+      var info = ingredient(id);
+      if (!info) return;
+      var result = addInventory(next, info.name, '', now);
+      if (!result.ok) return;
+      if (result.created) {
+        next = result.inventory.concat([Object.assign({ id: nextInventoryId(result.inventory) }, result.draft)]);
+      } else {
+        next = result.inventory;
+      }
+    });
+    return next;
+  }
+
+  function recipeById(id) {
+    for (var i = 0; i < RECIPES.length; i += 1) {
+      if (RECIPES[i].id === id) return RECIPES[i];
+    }
+    return null;
+  }
+
+  function cleanOverrides(raw) {
+    var out = [];
+    var seen = {};
+    if (!Array.isArray(raw)) return out;
+    raw.forEach(function (row) {
+      if (!row || typeof row !== 'object') return;
+      var id = String(row.id || '').trim();
+      var base = recipeById(id);
+      if (!base || seen[id]) return;
+      var title = foldText(row.title);
+      if (!title || title.length > 80) return;
+      var minutes = Math.floor(Number(row.minutes));
+      if (!Number.isFinite(minutes) || minutes < 1 || minutes > 240) minutes = base.minutes || 20;
+      var steps = [];
+      (Array.isArray(row.steps) ? row.steps : []).forEach(function (step) {
+        var text = foldText(step);
+        if (!text || text.length > 240 || steps.length >= 8) return;
+        steps.push(text);
+      });
+      var ingredients = [];
+      var seenIng = {};
+      (Array.isArray(row.ingredients) ? row.ingredients : []).forEach(function (item) {
+        if (!item || !ingredient(item.id) || seenIng[item.id] || ingredients.length >= 12) return;
+        var amount = foldText(item.amount);
+        if (!amount || amount.length > 40) amount = '1';
+        seenIng[item.id] = true;
+        ingredients.push({ id: item.id, amount: amount });
+      });
+      if (!ingredients.length) return;
+      seen[id] = true;
+      out.push({
+        id: id,
+        title: title,
+        minutes: minutes,
+        steps: steps,
+        ingredients: ingredients,
+        rev: revNum(row.rev),
+        deleted: !!row.deleted
+      });
+    });
+    return out;
+  }
+
+  function saveOverride(overrides, draft) {
+    var current = cleanOverrides(overrides);
+    var row = cleanOverrides([draft])[0];
+    if (!row) return { ok: false, reason: 'invalid', overrides: current };
+    row.deleted = false;
+    if (draft && draft.rev != null) row.rev = revNum(draft.rev);
+    var next = current.filter(function (item) { return item.id !== row.id; });
+    next.push(row);
+    return { ok: true, overrides: next };
+  }
+
+  function resetOverride(overrides, id, now) {
+    var current = cleanOverrides(overrides);
+    var rev = revNum(now);
+    return current.map(function (row) {
+      if (row.id !== id) return row;
+      return {
+        id: row.id,
+        title: row.title,
+        minutes: row.minutes,
+        steps: row.steps.slice(),
+        ingredients: row.ingredients.map(function (item) { return { id: item.id, amount: item.amount }; }),
+        rev: rev,
+        deleted: true
+      };
+    });
+  }
+
+  function applyOverride(recipe, overrides) {
+    var row = null;
+    cleanOverrides(overrides).forEach(function (item) {
+      if (item.id === recipe.id && !item.deleted) row = item;
+    });
+    if (!row) return recipe;
+    return {
+      id: recipe.id,
+      title: row.title,
+      minutes: row.minutes,
+      steps: row.steps.slice(),
+      ingredients: row.ingredients.map(function (item) { return { id: item.id, amount: item.amount }; }),
+      custom: false,
+      edited: true
+    };
+  }
+
+  function suggest(offers, pantry, extras, overrides) {
     var selected = offers || [];
     var home = pantry || [];
-    if (!selected.length) return [];
-    return RECIPES.map(function (recipe) {
+    var custom = cleanCustomRecipes(extras).filter(function (recipe) { return !recipe.deleted; });
+    var recipes = RECIPES.map(function (recipe) {
+      return applyOverride(recipe, overrides);
+    }).concat(custom);
+    if (!selected.length && !custom.length) return [];
+    return recipes.map(function (recipe) {
       return describeRecipe(recipe, selected, home);
     }).filter(function (recipe) {
-      return recipe.hits.length > 0;
+      return recipe.hits.length > 0 || recipe.custom;
     }).sort(function (a, b) {
       if (b.hits.length !== a.hits.length) return b.hits.length - a.hits.length;
       if (a.missing.length !== b.missing.length) return a.missing.length - b.missing.length;
@@ -590,9 +911,9 @@
   }
 
   function chosenIds(suggestions, picked) {
+    if (picked == null) return [];
     var present = {};
     suggestions.forEach(function (recipe) { present[recipe.id] = true; });
-    if (picked == null) return suggestions.slice(0, 3).map(function (recipe) { return recipe.id; });
     return picked.filter(function (id) { return present[id]; });
   }
 
@@ -688,24 +1009,37 @@
   return {
     PROSPEKT_URL: PROSPEKT_URL,
     PORTIONS: PORTIONS,
-    MARKETS: MARKETS,
     GROUPS: GROUPS,
     OFFER_CATEGORIES: OFFER_CATEGORIES,
     offerCategory: offerCategory,
     offerCategoryById: offerCategoryById,
     INGREDIENTS: INGREDIENTS,
     RECIPES: RECIPES,
+    DAYS: DAYS,
     ingredient: ingredient,
     offerIngredients: offerIngredients,
     pantryIngredients: pantryIngredients,
     defaultPantry: defaultPantry,
     weekKey: weekKey,
-    marketById: marketById,
     freshState: freshState,
     normalizeState: normalizeState,
     matchOfferText: matchOfferText,
+    matchStockText: matchStockText,
     idsFromOffers: idsFromOffers,
     suggest: suggest,
+    cleanInventory: cleanInventory,
+    addInventory: addInventory,
+    nextInventoryId: nextInventoryId,
+    coveredIds: coveredIds,
+    seedInventory: seedInventory,
+    ensureInventory: ensureInventory,
+    absorbIds: absorbIds,
+    cleanOverrides: cleanOverrides,
+    saveOverride: saveOverride,
+    resetOverride: resetOverride,
+    cleanCustomRecipes: cleanCustomRecipes,
+    nextRecipeId: nextRecipeId,
+    cleanEvenings: cleanEvenings,
     chosenIds: chosenIds,
     shoppingList: shoppingList,
     shopPlan: shopPlan

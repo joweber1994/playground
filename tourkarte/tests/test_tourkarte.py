@@ -1,4 +1,5 @@
 import io
+import json
 import os
 import tempfile
 import threading
@@ -21,6 +22,18 @@ from tourkarte.geo import (
     path_distance_m,
 )
 from tourkarte.gpx import Point, Stage, Tour, Waypoint, load_paths, read_gpx, write_gpx
+from tourkarte.komoot import (
+    Komoot,
+    KomootError,
+    KomootStore,
+    basic_auth,
+    gpx_filename as komoot_gpx_filename,
+    is_bike,
+    is_listed,
+    login_path,
+    next_path,
+    pull_tours,
+)
 from tourkarte.render import Options, build_scene, day_color, write_svg
 from tourkarte.sample import example_tour
 from tourkarte.strava import (
@@ -287,7 +300,8 @@ class StravaTest(unittest.TestCase):
             self.assertIn("2026-06-12", text)
             self.assertEqual(saved["access_token"], "neu")
             self.assertEqual(saved["client_secret"], "geheim")
-            self.assertEqual(oct(os.stat(store.path).st_mode & 0o777), oct(0o600))
+            if os.name != "nt":
+                self.assertEqual(oct(os.stat(store.path).st_mode & 0o777), oct(0o600))
             auth_headers = [
                 headers.get("Authorization")
                 for method, url, headers, _body in transport.calls
@@ -327,6 +341,7 @@ class StravaTest(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertIn("Tourkarte", body)
         self.assertIn("app.js", body)
+        self.assertIn("komoot.js", body)
 
 
 class FakeStrava:
@@ -374,6 +389,162 @@ class FakeStrava:
         if "/activities/" in url and "/streams" not in url:
             return 200, {"id": 8, "name": "Innen", "map": {}}
         return 500, {"message": url}
+
+
+GPX = """<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1"><trk><name>Alpen</name><trkseg>
+<trkpt lat="47.1" lon="11.2"><ele>500</ele></trkpt>
+<trkpt lat="47.2" lon="11.3"><ele>800</ele></trkpt>
+</trkseg></trk></gpx>
+"""
+
+
+class KomootTest(unittest.TestCase):
+    def test_login_stores_token_not_password(self):
+        transport = FakeKomoot()
+        with tempfile.TemporaryDirectory() as tmp:
+            store = KomootStore(Path(tmp) / "komoot.json")
+            record = Komoot(store, transport).login("ada@example.com", "geheim")
+            saved = json.loads(store.path.read_text(encoding="utf-8"))
+            self.assertEqual(record["user_id"], "42")
+            self.assertEqual(record["token"], "api-token")
+            self.assertEqual(record["display_name"], "Ada Ride")
+            self.assertEqual(saved["token"], "api-token")
+            self.assertNotIn("geheim", store.path.read_text(encoding="utf-8"))
+            if os.name != "nt":
+                self.assertEqual(oct(os.stat(store.path).st_mode & 0o777), oct(0o600))
+        self.assertIn("ada%40example.com", transport.calls[0][1])
+        self.assertEqual(transport.calls[0][2]["Authorization"], basic_auth("ada@example.com", "geheim"))
+
+    def test_wrong_password_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            store = KomootStore(Path(tmp) / "komoot.json")
+            with self.assertRaises(KomootError) as caught:
+                Komoot(store, FakeKomoot()).login("ada@example.com", "falsch")
+            self.assertIn("Passwort", str(caught.exception))
+            self.assertFalse(store.path.exists())
+
+    def test_pull_writes_recorded_rides_and_follows_pages(self):
+        transport = FakeKomoot()
+        with tempfile.TemporaryDirectory() as tmp:
+            store = KomootStore(Path(tmp) / "komoot.json")
+            store.save(
+                {
+                    "email": "ada@example.com",
+                    "user_id": "42",
+                    "token": "api-token",
+                    "display_name": "Ada Ride",
+                }
+            )
+            results = pull_tours(
+                Komoot(store, transport),
+                Path(tmp) / "gpx",
+                sport="bike",
+                kind="recorded",
+                after=date(2026, 6, 1),
+                before=date(2026, 6, 30),
+            )
+            written = [item for item in results if item.path]
+            self.assertEqual(len(written), 1)
+            self.assertEqual(written[0].name, "Über den Pass")
+            self.assertIn("47.1", written[0].path.read_text(encoding="utf-8"))
+            self.assertEqual(komoot_gpx_filename(9, "Über den Pass", date(2026, 6, 12)), written[0].path.name)
+            self.assertFalse(any(item.skipped for item in results))
+        self.assertTrue(any("page=1" in call[1] for call in transport.calls))
+        listed = [call for call in transport.calls if "/tours/?" in call[1]]
+        self.assertIn(basic_auth("42", "api-token"), [call[2]["Authorization"] for call in listed])
+
+    def test_filters_and_foreign_next_link(self):
+        recorded = {"type": "tour_recorded", "sport": "gravel", "date": "2026-06-12T08:00:00.000Z"}
+        planned = {"type": "tour_planned", "sport": "hike", "date": "2026-06-13T08:00:00.000Z"}
+        self.assertTrue(is_bike(recorded))
+        self.assertFalse(is_bike(planned))
+        self.assertTrue(is_listed(recorded, sport="bike", kind="recorded", after=date(2026, 6, 1), before=date(2026, 6, 30)))
+        self.assertFalse(is_listed(planned, sport="bike", kind="recorded", after=date(2026, 6, 1), before=date(2026, 6, 30)))
+        self.assertTrue(is_listed(planned, sport="all", kind="planned", after=date(2026, 6, 1), before=date(2026, 6, 30)))
+        self.assertEqual(login_path("ada@example.com"), "/v006/account/email/ada%40example.com/")
+        self.assertEqual(next_path({"_links": {"next": {"href": "https://evil.example/v007/x"}}}), "")
+
+    def test_cli_auth_does_not_print_password(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            token_file = str(Path(tmp) / "komoot.json")
+            with (
+                mock.patch("tourkarte.cli.getpass.getpass", return_value="nicht-zeigen"),
+                mock.patch("tourkarte.cli.sys.stdin.isatty", return_value=True),
+                mock.patch("tourkarte.cli.Komoot.login", return_value={"display_name": "Ada Ride"}) as login,
+                mock.patch("sys.stdout", io.StringIO()) as output,
+                mock.patch("sys.stderr", io.StringIO()),
+            ):
+                code = main(["komoot-auth", "--email", "ada@example.com", "--token-file", token_file])
+        self.assertEqual(code, 0)
+        self.assertNotIn("nicht-zeigen", output.getvalue())
+        self.assertIn("Ada Ride", output.getvalue())
+        login.assert_called_once()
+        self.assertEqual(login.call_args.args, ("ada@example.com", "nicht-zeigen"))
+
+
+class FakeKomoot:
+    def __init__(self):
+        self.calls = []
+
+    def __call__(self, method, url, headers, body):
+        self.calls.append((method, url, headers, body))
+        if "/account/email/" in url:
+            if headers.get("Authorization") != basic_auth("ada@example.com", "geheim"):
+                return 403, '{"error":"BadCredentials","message":"Unknown user or wrong credentials."}', "application/json"
+            return 200, json.dumps({
+                "username": "42",
+                "password": "api-token",
+                "user": {"displayname": "Ada Ride"},
+            }), "application/json"
+        if "/tours/?" in url:
+            if "page=1" in url:
+                return 200, json.dumps({
+                    "_embedded": {"tours": [{
+                        "id": 8,
+                        "name": "Leer",
+                        "type": "tour_recorded",
+                        "sport": "touringbicycle",
+                        "date": "2026-05-02T08:00:00.000Z",
+                        "distance": 1000,
+                    }]},
+                    "_links": {},
+                }), "application/hal+json"
+            return 200, json.dumps({
+                "_embedded": {"tours": [
+                    {
+                        "id": 9,
+                        "name": "Über den Pass",
+                        "type": "tour_recorded",
+                        "sport": "touringbicycle",
+                        "date": "2026-06-12T08:00:00.000Z",
+                        "distance": 42000,
+                        "elevation_up": 800,
+                    },
+                    {
+                        "id": 10,
+                        "name": "Plan",
+                        "type": "tour_planned",
+                        "sport": "hike",
+                        "date": "2026-06-13T08:00:00.000Z",
+                        "distance": 12000,
+                    },
+                    {
+                        "id": 3,
+                        "name": "Alt",
+                        "type": "tour_recorded",
+                        "sport": "touringbicycle",
+                        "date": "2026-05-01T08:00:00.000Z",
+                        "distance": 5000,
+                    },
+                ]},
+                "_links": {"next": {"href": "https://api.komoot.de/v007/users/42/tours/?page=1&limit=100"}},
+            }), "application/hal+json"
+        if url.endswith(".gpx"):
+            if url.endswith("/8.gpx"):
+                return 200, "<gpx></gpx>", "application/gpx+xml"
+            return 200, GPX, "application/gpx+xml"
+        return 500, '{"message":"unerwartet"}', "application/json"
 
 
 if __name__ == "__main__":

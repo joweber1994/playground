@@ -29,7 +29,8 @@ assertEqual(offers.validUntil, '2026-10-10', 'gültig bis 10.10.');
 assertEqual(offers.stores.length, 4, 'vier lesbare Ketten');
 
 var prechtl = store('prechtl');
-assert(prechtl && /allen Prechtl-Märkten/.test(prechtl.note), 'Prechtl ist in jedem Markt gleich');
+assert(prechtl && /Prospekt der Woche 41/.test(prechtl.note), 'Prechtl-Hinweis nennt den Prospekt');
+assert(!/raubling|filiale|brannenburg|aibling|feilnbach|oberaudorf/i.test(prechtl.note), 'Prechtl-Hinweis nennt keine Filiale');
 assert(hasName(prechtl.offers, /schnitzel/i), 'Prechtl hat Schnitzel');
 assert(hasName(prechtl.offers, /hähnchen/i), 'Prechtl hat Hähnchen');
 assert(hasName(prechtl.offers, /thunfisch/i), 'Prechtl hat Thunfisch');

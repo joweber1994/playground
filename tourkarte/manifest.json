@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Tourkarte",
   "short_name": "Tourkarte",
-  "description": "Gefahrene Strava-Etappen als Übersichtskarte fürs Fotoalbum.",
+  "description": "Etappen aus Strava oder Komoot als Übersichtskarte fürs Fotoalbum.",
   "lang": "de",
   "dir": "ltr",
   "start_url": "./index.html",

@@ -1,11 +1,11 @@
-/* Wochenessen – gelesene Angebote der Woche 41/2026.
+/* Wochenzettel – gelesene Angebote der Woche 41/2026.
    Erzeugt aus den öffentlichen Prospekten am 5. Oktober 2026.
    Prechtl: PDF-Text. Aldi Süd: Prospekt-Daten. Penny: Angebotsseite. Lidl: Aktionsprospekt.
    Keine Prospektseiten, nur Namen und Preise. */
 (function (root, factory) {
   var api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else root.WochenessenOffers = api;
+  else root.WochenzettelOffers = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   return {
   "weekKey": "2026-W41",
@@ -17,7 +17,7 @@
       "id": "prechtl",
       "name": "Prechtl",
       "source": "https://www.prechtl.de/aktuelles/",
-      "note": "In allen Prechtl-Märkten gleich. Aus dem Prospekt der Woche 41 gelesen.",
+      "note": "Aus dem Prospekt der Woche 41 gelesen.",
       "otherCount": 0,
       "offers": [
         {

@@ -106,7 +106,7 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
   border: 1px solid var(--line);
 }
 
-.primary:disabled { opacity: 0.35; }
+.primary:disabled, .secondary:disabled { opacity: 0.35; }
 
 .text-button {
   border: 0;
@@ -204,9 +204,87 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
 
 .ride input { width: 22px; height: 22px; margin-top: 2px; flex: none; }
 
+.ride-body { flex: 1; min-width: 0; }
+
+.ride-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .ride strong, .ride small { display: block; }
 
+.ride-top strong { min-width: 0; }
+
 .ride small { color: var(--muted); font-size: 0.86rem; margin-top: 2px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mark {
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 2px;
+}
+
+.day { margin-top: 18px; }
+
+.day h2 {
+  margin: 0;
+  padding: 0 0 6px;
+  border-bottom: 1px solid var(--line);
+  font-family: Palatino, "Iowan Old Style", Georgia, serif;
+  font-size: 1.12rem;
+  font-weight: 500;
+}
+
+.day .ride:last-child { border-bottom: 0; }
+
+.sources {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.source {
+  margin: 0;
+  padding: 16px 16px 8px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.source h2 {
+  margin: 0;
+  font-family: Palatino, "Iowan Old Style", Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+}
+
+.source p { margin: 6px 0 0; color: var(--muted); }
+
+.source .text-button { margin-top: 0; }
+
+.filter-label {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.filter-label + .chips { margin-top: 8px; }
+
+.back { margin: 0 0 10px; padding-left: 0; }
 
 .dock {
   position: sticky;
@@ -220,7 +298,18 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
 
 .dock-file { margin-top: 8px; }
 
-.list-tools { display: flex; justify-content: flex-end; }
+.list-tools {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.count {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 
 .preview {
   margin-top: 12px;
@@ -228,9 +317,16 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
   border-radius: 16px;
   overflow: hidden;
   background: var(--paper);
+  line-height: 0;
 }
 
-.preview svg { display: block; width: 100%; height: auto; }
+.preview svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
 
 .stages { margin-top: 8px; }
 
@@ -278,6 +374,22 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
   font-variant-numeric: tabular-nums;
 }
 
+@media (max-width: 560px) {
+  .stage-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.75rem;
+  }
+
+  .stage-line h3 { flex: 1 0 100%; }
+
+  .stage-line span:empty { display: none; }
+
+  .stage-line .km,
+  .stage-line .hm { text-align: left; }
+}
+
 .stage p {
   margin: 3px 0 0;
   color: var(--muted);
@@ -285,6 +397,78 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
 }
 
 .stage .dates { margin-top: 4px; }
+
+.waypoints { margin-top: 18px; }
+
+.waypoints h2 {
+  margin: 8px 0 0;
+  font-family: Palatino, "Iowan Old Style", Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.place-results {
+  max-height: 320px;
+  overflow: auto;
+  margin-top: 8px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+
+.place-hit {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  text-align: left;
+  min-height: 44px;
+}
+
+.place-hit.on,
+.place-hit:hover { background: #efe8dc; }
+
+.place-hit strong,
+.place-hit small { display: block; }
+
+.place-hit small { color: var(--muted); font-size: 0.86rem; }
+
+.place-hit .coord {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.waypoint-list {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+
+.waypoint-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.waypoint-row > span { min-width: 0; }
+
+.waypoint-row strong { display: block; font-weight: 600; }
+
+.waypoint-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.waypoint-row .text-button { flex: none; margin: 0; }
 
 .working {
   min-height: 70dvh;
@@ -299,3 +483,124 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
   line-height: 1.25;
   margin: 8px 0 18px;
 }
+
+.app { min-width: 0; }
+
+.album-nav {
+  position: sticky;
+  top: var(--safe-top);
+  z-index: 4;
+  margin: 8px 0 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.album-bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0 8px;
+}
+
+.album-home {
+  display: flex;
+  padding: 0 0 6px;
+}
+
+.album-home[hidden] { display: none; }
+
+.album-home .text-button {
+  margin: 0;
+  min-height: 36px;
+  white-space: nowrap;
+}
+
+.album-bar .text-button {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.album-bar button:disabled { opacity: 0.35; }
+
+.album-pos {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: Palatino, "Iowan Old Style", Georgia, serif;
+  font-size: 1.15rem;
+}
+
+.album-track {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.album-page {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+  overflow-y: visible;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.stage-meta {
+  margin: 10px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.stage.off { opacity: 0.55; }
+
+.stage-open { margin-top: 0; }
+
+.photos { margin-top: 8px; }
+
+.photos h2 {
+  margin: 8px 0 0;
+  font-family: Palatino, "Iowan Old Style", Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.photo-grid:empty { display: none; }
+
+.photo-grid.single { grid-template-columns: 1fr; }
+
+.photo {
+  margin: 0;
+  min-width: 0;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: var(--card);
+}
+
+.photo-grid.single .photo img { height: 220px; }
+
+.photo .text-button { margin: 2px 0 0; }

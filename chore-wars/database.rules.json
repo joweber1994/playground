@@ -6,6 +6,13 @@
         ".write": "$id.matches(/^[0-9a-f]{64}$/)",
         ".validate": "newData.hasChildren(['state', 'updatedAt']) && newData.child('updatedAt').isNumber() && newData.child('state').hasChildren()"
       }
+    },
+    "zettel": {
+      "$id": {
+        ".read": "$id.matches(/^[0-9a-f]{64}$/)",
+        ".write": "$id.matches(/^[0-9a-f]{64}$/)",
+        ".validate": "newData.hasChildren(['state', 'updatedAt']) && newData.child('updatedAt').isNumber() && newData.child('state').hasChildren()"
+      }
     }
   }
 }

@@ -1,15 +1,16 @@
-/* Chore Wars – gemeinsamer Stand über die Firebase Realtime Database.
-   Reine Entscheidungen plus eine kleine Sitzung. Im Browser als ChoreWarsSync, unter Node als Modul. */
-
+/* Wochenzettel – gemeinsamer Stand, zeilenweise.
+   Dieselbe Firebase-Adresse und dasselbe Kennwort wie Chore Wars, eigener Pfad.
+   Im Browser als WochenzettelSync, unter Node als Modul. */
 (function (root, factory) {
   var api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else root.ChoreWarsSync = api;
+  else root.WochenzettelSync = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
-  var URL_KEY = 'chore-wars-firebase-url';
-  var HOUSEHOLD_KEY = 'chore-wars-household-id';
-  var SECRET_KEY = 'chore-wars-household-secret';
-  var UPDATED_KEY = 'chore-wars-sync-at';
+  var URL_KEY = 'wochenzettel-firebase-url';
+  var HOUSEHOLD_KEY = 'wochenzettel-household-id';
+  var SECRET_KEY = 'wochenzettel-household-secret';
+  var UPDATED_KEY = 'wochenzettel-sync-at';
+  var NAME_KEY = 'wochenzettel-display-name';
   var SECRET_MIN = 8;
   var SECRET_MAX = 80;
 
@@ -40,6 +41,12 @@
 
   function ok(value) {
     return { ok: true, value: value };
+  }
+
+  function num(value) {
+    var rev = Number(value);
+    if (!Number.isFinite(rev) || rev < 0) return 0;
+    return Math.floor(rev);
   }
 
   function normalizeDatabaseUrl(value) {
@@ -89,7 +96,7 @@
   }
 
   function standUrl(databaseURL, id) {
-    return databaseURL + '/households/' + id + '.json';
+    return databaseURL + '/zettel/' + id + '.json';
   }
 
   function sameStand(left, right) {
@@ -100,13 +107,13 @@
     if (options.remoteUpdatedAt == null) return 'push';
     if (options.same) return 'same';
     if (options.untouched) return 'adopt';
-    return 'ask';
+    return 'merge';
   }
 
   function decideLive(options) {
     if (options.remoteUpdatedAt == null) return options.dirty ? 'push' : 'same';
     if (options.same) return 'same';
-    if (options.dirty) return 'push';
+    if (options.dirty) return 'merge';
     if (options.remoteUpdatedAt >= options.localUpdatedAt) return 'adopt';
     return 'push';
   }
@@ -117,6 +124,254 @@
     if (!data.state || typeof data.state !== 'object' || Array.isArray(data.state)) return { invalid: true };
     if (typeof data.updatedAt !== 'number' || !isFinite(data.updatedAt)) return { invalid: true };
     return { state: data.state, updatedAt: data.updatedAt };
+  }
+
+  function asList(value) {
+    return Array.isArray(value) ? value : [];
+  }
+
+  function unionText(left, right, limit) {
+    var out = [];
+    asList(left).concat(asList(right)).forEach(function (item) {
+      var text = String(item == null ? '' : item).trim().replace(/\s+/g, ' ');
+      if (!text || out.indexOf(text) !== -1) return;
+      if (out.length >= limit) return;
+      out.push(text);
+    });
+    return out;
+  }
+
+  function clone(value) {
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  function mergeById(left, right, idOf, combine) {
+    var map = {};
+    asList(left).forEach(function (item) {
+      var id = idOf(item);
+      if (id) map[id] = { left: item };
+    });
+    asList(right).forEach(function (item) {
+      var id = idOf(item);
+      if (!id) return;
+      if (!map[id]) map[id] = {};
+      map[id].right = item;
+    });
+    var out = [];
+    Object.keys(map).forEach(function (id) {
+      out.push(combine(map[id].left, map[id].right));
+    });
+    return out;
+  }
+
+  function mergeLine(left, right) {
+    if (!left) return right;
+    if (!right) return left;
+    var winner = num(right.rev) >= num(left.rev) ? right : left;
+    var loser = winner === right ? left : right;
+    if (winner.deleted && num(winner.rev) >= num(loser.rev)) return clone(winner);
+    var next = clone(winner);
+    next.deleted = false;
+    next.amounts = unionText(left.amounts, right.amounts, 6);
+    if (!next.addedBy && loser.addedBy) next.addedBy = loser.addedBy;
+    return next;
+  }
+
+  function flagMap(ids, log) {
+    var out = {};
+    var source = log && typeof log === 'object' ? log : {};
+    Object.keys(source).forEach(function (id) {
+      var row = source[id];
+      if (!row || typeof row !== 'object') return;
+      out[id] = { on: !!row.on, rev: num(row.rev) };
+    });
+    asList(ids).forEach(function (id) {
+      if (typeof id !== 'string' || !id || out[id]) return;
+      out[id] = { on: true, rev: 0 };
+    });
+    return out;
+  }
+
+  function mergeFlags(leftIds, leftLog, rightIds, rightLog) {
+    var left = flagMap(leftIds, leftLog);
+    var right = flagMap(rightIds, rightLog);
+    var out = {};
+    Object.keys(left).concat(Object.keys(right)).forEach(function (id) {
+      if (out[id]) return;
+      var a = left[id];
+      var b = right[id];
+      if (!a) out[id] = b;
+      else if (!b) out[id] = a;
+      else out[id] = b.rev >= a.rev ? b : a;
+    });
+    return out;
+  }
+
+  function idsOn(map) {
+    return Object.keys(map).filter(function (id) { return map[id].on; });
+  }
+
+  function metaFrom(stand) {
+    var meta = {};
+    var source = stand && stand.checkMeta && typeof stand.checkMeta === 'object' ? stand.checkMeta : {};
+    Object.keys(source).forEach(function (key) {
+      var row = source[key];
+      if (!row || typeof row !== 'object') return;
+      if (key.indexOf('plan:') !== 0 && key.indexOf('line:') !== 0) return;
+      meta[key] = { on: !!row.on, by: String(row.by || ''), rev: num(row.rev) };
+    });
+    asList(stand && stand.checked).forEach(function (key) {
+      if (typeof key !== 'string') return;
+      if (!meta[key]) meta[key] = { on: true, by: '', rev: 0 };
+    });
+    return meta;
+  }
+
+  function mergeMeta(left, right) {
+    var a = metaFrom(left);
+    var b = metaFrom(right);
+    var out = {};
+    Object.keys(a).concat(Object.keys(b)).forEach(function (key) {
+      if (out[key]) return;
+      if (!a[key]) out[key] = b[key];
+      else if (!b[key]) out[key] = a[key];
+      else out[key] = b[key].rev >= a[key].rev ? b[key] : a[key];
+    });
+    return out;
+  }
+
+  function checkedFrom(meta) {
+    return Object.keys(meta).filter(function (key) { return meta[key].on; });
+  }
+
+  function mergeMaps(left, right) {
+    var out = {};
+    var a = left && typeof left === 'object' ? left : {};
+    var b = right && typeof right === 'object' ? right : {};
+    Object.keys(a).concat(Object.keys(b)).forEach(function (key) {
+      if (out[key]) return;
+      out[key] = unionText(a[key], b[key], 12);
+      if (!out[key].length) delete out[key];
+    });
+    return out;
+  }
+
+  function mergeNamed(left, right, idOf) {
+    return mergeById(left, right, idOf, function (a, b) {
+      if (!a) return b;
+      if (!b) return a;
+      var winner = num(b.rev) >= num(a.rev) ? b : a;
+      var loser = winner === b ? a : b;
+      if (winner.deleted && num(winner.rev) >= num(loser.rev)) return clone(winner);
+      var next = clone(winner);
+      next.deleted = false;
+      if (!next.addedBy && loser.addedBy) next.addedBy = loser.addedBy;
+      return next;
+    });
+  }
+
+  function mergeEvenings(left, right) {
+    return mergeById(left, right, function (row) { return row && row.day; }, function (a, b) {
+      if (!a) return b;
+      if (!b) return a;
+      return num(b.rev) >= num(a.rev) ? b : a;
+    });
+  }
+
+  function mergeClaims(left, right) {
+    return mergeById(left, right, function (row) { return row && row.storeId; }, function (a, b) {
+      if (!a) return b;
+      if (!b) return a;
+      return num(b.rev) >= num(a.rev) ? b : a;
+    });
+  }
+
+  function weekFields(stand) {
+    return {
+      lines: asList(stand.lines),
+      checkMeta: metaFrom(stand),
+      checked: checkedFrom(metaFrom(stand)),
+      extras: stand.extras && typeof stand.extras === 'object' ? stand.extras : {},
+      extraAmounts: stand.extraAmounts && typeof stand.extraAmounts === 'object' ? stand.extraAmounts : {},
+      skipped: asList(stand.skipped),
+      skippedLog: stand.skippedLog && typeof stand.skippedLog === 'object' ? stand.skippedLog : {},
+      claims: asList(stand.claims),
+      evenings: asList(stand.evenings),
+      picked: stand.picked == null ? null : asList(stand.picked),
+      pickedRev: num(stand.pickedRev),
+      storeIds: asList(stand.storeIds),
+      storeRev: num(stand.storeRev)
+    };
+  }
+
+  function persistent(left, right) {
+    var pantry = mergeFlags(left.pantry, left.pantryLog, right.pantry, right.pantryLog);
+    var recipes = mergeNamed(left.recipes, right.recipes, function (row) { return row && row.id; });
+    var staples = mergeNamed(left.staples, right.staples, function (row) { return row && row.id; });
+    var inventory = mergeNamed(left.inventory, right.inventory, function (row) { return row && row.id; });
+    var overrides = mergeNamed(left.overrides, right.overrides, function (row) { return row && row.id; });
+    var inventorySet = !!(left.inventorySet || right.inventorySet);
+    return {
+      pantry: idsOn(pantry),
+      pantryLog: pantry,
+      recipes: recipes,
+      staples: staples,
+      inventory: inventory,
+      inventorySet: inventorySet,
+      overrides: overrides
+    };
+  }
+
+  function mergeWeek(left, right) {
+    var lines = mergeById(left.lines, right.lines, function (row) { return row && row.id; }, mergeLine);
+    var checkMeta = mergeMeta(left, right);
+    var skipped = mergeFlags(left.skipped, left.skippedLog, right.skipped, right.skippedLog);
+    var storeIds = num(right.storeRev) >= num(left.storeRev) ? asList(right.storeIds) : asList(left.storeIds);
+    var picked = num(right.pickedRev) >= num(left.pickedRev)
+      ? (right.picked == null ? null : asList(right.picked))
+      : (left.picked == null ? null : asList(left.picked));
+    return {
+      lines: lines,
+      checkMeta: checkMeta,
+      checked: checkedFrom(checkMeta),
+      extras: mergeMaps(left.extras, right.extras),
+      extraAmounts: mergeMaps(left.extraAmounts, right.extraAmounts),
+      skipped: idsOn(skipped),
+      skippedLog: skipped,
+      claims: mergeClaims(left.claims, right.claims),
+      evenings: mergeEvenings(left.evenings, right.evenings),
+      picked: picked,
+      pickedRev: Math.max(num(left.pickedRev), num(right.pickedRev)),
+      storeIds: storeIds,
+      storeRev: Math.max(num(left.storeRev), num(right.storeRev))
+    };
+  }
+
+  function mergeStands(local, remote) {
+    var left = local && typeof local === 'object' ? local : {};
+    var right = remote && typeof remote === 'object' ? remote : {};
+    var kept = persistent(left, right);
+    var weekKey = left.weekKey || right.weekKey || '';
+    var weekRev = Math.max(num(left.weekRev), num(right.weekRev));
+    var week;
+    if (left.weekKey && right.weekKey && left.weekKey !== right.weekKey) {
+      var winner = num(right.weekRev) >= num(left.weekRev) ? right : left;
+      week = weekFields(winner);
+      weekKey = winner.weekKey;
+      weekRev = num(winner.weekRev);
+    } else {
+      week = mergeWeek(left, right);
+      if (num(right.weekRev) >= num(left.weekRev) && right.weekKey) weekKey = right.weekKey;
+      else if (left.weekKey) weekKey = left.weekKey;
+    }
+    var merged = {
+      weekKey: weekKey,
+      weekRev: weekRev,
+      marketId: num(right.weekRev) >= num(left.weekRev) ? (right.marketId || left.marketId || '') : (left.marketId || right.marketId || '')
+    };
+    Object.keys(kept).forEach(function (key) { merged[key] = kept[key]; });
+    Object.keys(week).forEach(function (key) { merged[key] = week[key]; });
+    return merged;
   }
 
   function httpError(response) {
@@ -190,6 +445,24 @@
       }, delay);
     }
 
+    function takeMerged(remote) {
+      var snap = options.getSnapshot();
+      var merged;
+      try {
+        merged = options.merge(snap.state, remote.state);
+      } catch (error) {
+        status('invalid');
+        return false;
+      }
+      var updatedAt = options.now();
+      if (options.adopt({ state: merged, updatedAt: updatedAt }) === false) {
+        status('invalid');
+        return false;
+      }
+      options.setUpdatedAt(updatedAt);
+      return true;
+    }
+
     function applyRemote(data) {
       if (closed || !live) return;
       var remote = readRemote(data);
@@ -204,6 +477,11 @@
         same: !!(remote && sameStand(remote.state, snap.state)),
         dirty: dirty
       });
+      if (decision === 'merge' && remote) {
+        if (!takeMerged(remote)) return;
+        schedulePush();
+        return;
+      }
       if (decision === 'adopt' && remote) {
         if (options.adopt(remote) === false) {
           status('invalid');
@@ -278,6 +556,9 @@
           return;
         }
         if (dirty) {
+          if (remote) {
+            if (!takeMerged(remote)) return;
+          }
           arm('push');
           return;
         }
@@ -287,19 +568,10 @@
           same: !!(remote && sameStand(remote.state, snap.state)),
           untouched: !!snap.untouched
         });
-        if (decision === 'ask') {
-          status('ask');
-          return Promise.resolve(options.ask(remote)).then(function (choice) {
-            if (closed || (choice !== 'adopt' && choice !== 'push')) {
-              status('local');
-              return;
-            }
-            if (choice === 'adopt' && options.adopt(remote) === false) {
-              status('invalid');
-              return;
-            }
-            arm(choice === 'push' ? 'push' : 'same');
-          });
+        if (decision === 'merge' && remote) {
+          if (!takeMerged(remote)) return;
+          arm('push');
+          return;
         }
         if (decision === 'adopt' && options.adopt(remote) === false) {
           status('invalid');
@@ -353,6 +625,7 @@
     HOUSEHOLD_KEY: HOUSEHOLD_KEY,
     SECRET_KEY: SECRET_KEY,
     UPDATED_KEY: UPDATED_KEY,
+    NAME_KEY: NAME_KEY,
     SECRET_MIN: SECRET_MIN,
     SECRET_MAX: SECRET_MAX,
     RULES_TEXT: RULES_TEXT,
@@ -365,6 +638,7 @@
     decideInitial: decideInitial,
     decideLive: decideLive,
     readRemote: readRemote,
+    mergeStands: mergeStands,
     createSession: createSession
   };
 });

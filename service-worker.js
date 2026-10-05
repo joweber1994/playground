@@ -1,6 +1,6 @@
-/* Haushalt – offline cache for the menu and Wochenessen.
-   Only haushalt-* caches are deleted, so Chore Wars and Wochenessen keep theirs. */
-var CACHE_VERSION = 'haushalt-v4';
+/* Haushalt – offline cache for the menu and Wochenzettel.
+   Only haushalt-* caches are deleted, so Chore Wars and Wochenzettel keep theirs. */
+var CACHE_VERSION = 'haushalt-v8';
 var CACHE_PREFIX = 'haushalt-';
 
 var ASSETS = [
@@ -11,15 +11,16 @@ var ASSETS = [
   './manifest.json',
   './service-worker.js',
   './icon.svg',
-  './wochenessen/',
-  './wochenessen/index.html',
-  './wochenessen/styles.css',
-  './wochenessen/meals.js',
-  './wochenessen/offers.js',
-  './wochenessen/app.js',
-  './wochenessen/manifest.json',
-  './wochenessen/service-worker.js',
-  './wochenessen/icon.svg'
+  './wochenzettel/',
+  './wochenzettel/index.html',
+  './wochenzettel/styles.css',
+  './wochenzettel/meals.js',
+  './wochenzettel/offers.js',
+  './wochenzettel/shop.js',
+  './wochenzettel/app.js',
+  './wochenzettel/manifest.json',
+  './wochenzettel/service-worker.js',
+  './wochenzettel/icon.svg'
 ];
 
 function absoluteUrl(relativeUrl) {

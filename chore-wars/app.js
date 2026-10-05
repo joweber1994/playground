@@ -343,6 +343,12 @@
     });
 
     item.append(top, actions);
+    if (chore.weekday != null && api.weekdayLabel(chore.weekday)) {
+      var today = (new Date().getDay() + 6) % 7;
+      var when = 'jeden ' + api.weekdayLabel(chore.weekday);
+      if (today === chore.weekday) when += ' · heute';
+      item.insertBefore(element('p', 'chore-when', when), actions);
+    }
     return item;
   }
 
@@ -532,6 +538,23 @@
     return select;
   }
 
+  function weekdaySelect(selected) {
+    var select = document.createElement('select');
+    select.name = 'weekday';
+    var empty = document.createElement('option');
+    empty.value = '';
+    empty.textContent = 'Kein fester Tag';
+    select.append(empty);
+    api.WEEKDAYS.forEach(function (day) {
+      var option = document.createElement('option');
+      option.value = String(day.id);
+      option.textContent = 'jeden ' + day.label;
+      select.append(option);
+    });
+    select.value = selected == null ? '' : String(selected);
+    return select;
+  }
+
   function presetCategory() {
     if (listFilter.categoryId === 'all' || listFilter.categoryId === 'none') return '';
     return listFilter.categoryId;
@@ -557,7 +580,8 @@
         body.append(
           field('Titel', textInput('title', current ? current.title : '', api.TITLE_MAX, 'sentences')),
           field('Punkte', pointsInput(current ? current.points : 10)),
-          field('Kategorie', categorySelect(selected))
+          field('Kategorie', categorySelect(selected)),
+          field('Wochentag', weekdaySelect(current ? current.weekday : null))
         );
         if (!current) return;
         var moves = element('div', 'sheet-move');
@@ -583,7 +607,8 @@
         var title = els.sheetBody.querySelector('[name="title"]').value;
         var points = els.sheetBody.querySelector('[name="points"]').value;
         var categoryId = els.sheetBody.querySelector('[name="category"]').value;
-        var input = { title: title, points: points, categoryId: categoryId };
+        var weekday = els.sheetBody.querySelector('[name="weekday"]').value;
+        var input = { title: title, points: points, categoryId: categoryId, weekday: weekday };
         var result = current
           ? api.updateChore(state, current.id, input)
           : api.addChore(state, input);
@@ -987,11 +1012,14 @@
         url.autocorrect = 'off';
         url.spellcheck = false;
         url.placeholder = 'https://name.firebaseio.com';
-        var secret = textInput('secret', '', syncApi.SECRET_MAX, 'off');
+        var secret = textInput('secret', readStored(syncApi.SECRET_KEY), syncApi.SECRET_MAX, 'off');
         secret.autocapitalize = 'off';
         secret.autocorrect = 'off';
         secret.spellcheck = false;
         secret.placeholder = 'Mindestens 8 Zeichen, auf beiden Geräten gleich';
+        secret.addEventListener('input', function () {
+          writeStored(syncApi.SECRET_KEY, secret.value);
+        });
         body.append(details, field('Datenbank-Adresse', url), field('Gemeinsames Kennwort', secret));
         if (connected) {
           body.append(element('p', 'sheet-copy', 'Trennen lässt die Punkte auf diesem Gerät und in Firebase liegen. Zum erneuten Verbinden dasselbe Kennwort eintragen.'));
@@ -1016,6 +1044,7 @@
         if (!urlResult.ok) return urlResult.error;
         var secretResult = syncApi.readSecret(els.sheetBody.querySelector('[name="secret"]').value);
         if (!secretResult.ok) return secretResult.error;
+        writeStored(syncApi.SECRET_KEY, secretResult.value);
         var chosenUrl = urlResult.value;
         var pending = true;
         sheetState.onClose = function () { pending = false; };
@@ -1199,6 +1228,7 @@
         var titleValue = els.sheetBody.querySelector('[name="title"]').value;
         var pointsValue = els.sheetBody.querySelector('[name="points"]').value;
         var categoryValue = els.sheetBody.querySelector('[name="category"]').value;
+        var weekdayValue = els.sheetBody.querySelector('[name="weekday"]').value;
         var moved = api.moveChore(state, current.id, Number(move.getAttribute('data-sheet-move')));
         if (!moved.ok) {
           showSheetError(moved.error);
@@ -1209,6 +1239,7 @@
         els.sheetBody.querySelector('[name="title"]').value = titleValue;
         els.sheetBody.querySelector('[name="points"]').value = pointsValue;
         els.sheetBody.querySelector('[name="category"]').value = categoryValue;
+        els.sheetBody.querySelector('[name="weekday"]').value = weekdayValue;
         return;
       }
       var remove = event.target.closest('[data-sheet-delete]');

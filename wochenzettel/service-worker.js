@@ -1,6 +1,7 @@
-/* Wochenessen – offline cache. Only wochenessen-* caches are deleted. */
-var CACHE_VERSION = 'wochenessen-v4';
-var CACHE_PREFIX = 'wochenessen-';
+/* Wochenzettel – offline cache. Deletes wochenzettel-* and leftover wochenessen-* caches. */
+var CACHE_VERSION = 'wochenzettel-v6';
+var CACHE_PREFIX = 'wochenzettel-';
+var LEGACY_PREFIX = 'wochenessen-';
 
 var ASSETS = [
   './',
@@ -8,6 +9,8 @@ var ASSETS = [
   './styles.css',
   './meals.js',
   './offers.js',
+  './shop.js',
+  './sync.js',
   './app.js',
   './manifest.json',
   './service-worker.js',
@@ -131,7 +134,7 @@ self.addEventListener('activate', function (event) {
   event.waitUntil((async function () {
     var keys = await caches.keys();
     await Promise.all(keys.filter(function (key) {
-      return key.indexOf(CACHE_PREFIX) === 0 && key !== CACHE_VERSION;
+      return (key.indexOf(CACHE_PREFIX) === 0 && key !== CACHE_VERSION) || key.indexOf(LEGACY_PREFIX) === 0;
     }).map(function (key) {
       return caches.delete(key);
     }));

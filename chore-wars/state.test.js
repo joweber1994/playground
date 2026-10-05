@@ -248,4 +248,12 @@ assert(parked.ok, 'Aufgabe aus der Kategorie nehmen');
 assertEqual(parked.state.chores.filter(function (chore) { return chore.id === 'plants'; })[0].categoryId, null, 'ohne Kategorie gespeichert');
 assert(!api.moveChore(parked.state, 'plants', -1).ok, 'allein in der Kategorie kein Verschieben');
 
+assertEqual(fresh.chores.filter(function (chore) { return chore.id === 'trash'; })[0].weekday, 0, 'Müll liegt auf Montag');
+var dated = api.updateChore(fresh, 'bathroom', { title: 'Bad putzen', points: 50, categoryId: 'bath', weekday: 2 });
+assert(dated.ok, 'Wochentag lässt sich setzen');
+assertEqual(dated.state.chores.filter(function (chore) { return chore.id === 'bathroom'; })[0].weekday, 2, 'Bad liegt auf Mittwoch');
+assert(!api.updateChore(fresh, 'bathroom', { title: 'Bad putzen', points: 50, categoryId: 'bath', weekday: 9 }).ok, 'ungültiger Wochentag');
+var keptDay = api.updateChore(dated.state, 'bathroom', { title: 'Bad putzen', points: 50, categoryId: 'bath' });
+assertEqual(keptDay.state.chores.filter(function (chore) { return chore.id === 'bathroom'; })[0].weekday, 2, 'ohne Angabe bleibt der Wochentag');
+
 console.log('state.test.js: ok');
