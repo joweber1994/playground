@@ -53,7 +53,7 @@
     { id: 'karotte', name: 'Karotten', group: 'gemuese', offer: true, aliases: ['möhren', 'karotte'] },
     { id: 'kartoffeln', name: 'Kartoffeln', group: 'gemuese', offer: true, aliases: ['kartoffel', 'erdäpfel'] },
     { id: 'lauch', name: 'Lauch', group: 'gemuese', offer: true, aliases: ['porree'] },
-    { id: 'salat', name: 'Salat', group: 'gemuese', offer: true, aliases: ['kopfsalat'] },
+    { id: 'salat', name: 'Salat', group: 'gemuese', offer: true, aliases: ['kopfsalat', 'feldsalat'] },
     { id: 'gurke', name: 'Gurke', group: 'gemuese', offer: true, aliases: ['gurken'] },
     { id: 'aepfel', name: 'Äpfel', group: 'gemuese', offer: true, aliases: ['äpfel', 'apfel'] },
     { id: 'zwiebel', name: 'Zwiebeln', group: 'gemuese', offer: true, pantry: true, pantryDefault: true, aliases: ['zwiebel'] },
@@ -420,9 +420,15 @@
     if (needle.length < 4 || token.length < 4) return false;
     if (token === 'lachse' && needle === 'lachs') return false;
     if (token === 'preis' && needle === 'reis') return false;
-    if (token.indexOf(needle) === 0) return true;
+    if (token === 'leberkäse' && needle === 'käse') return false;
+    if (token.indexOf(needle) === 0) {
+      var rest = token.slice(needle.length);
+      var blocked = { 'sauce': 1, 'saucen': 1, 'saft': 1, 'schorle': 1, 'mix': 1, 'joghurt': 1, 'kuchen': 1, 'nudeln': 1, 'nudel': 1, 'suppe': 1, 'fladen': 1 };
+      if (rest && blocked[rest]) return false;
+      return true;
+    }
     if (needle.indexOf(token) === 0 && needle.length - token.length <= 2) return true;
-    var suffix = { 'käse': 1, 'milch': 1, 'wurst': 1, 'speck': 1, 'schinken': 1, 'fleisch': 1, 'brot': 1, 'sahne': 1, 'butter': 1, 'schnitzel': 1, 'joghurt': 1 };
+    var suffix = { 'käse': 1, 'milch': 1, 'wurst': 1, 'speck': 1, 'schinken': 1, 'fleisch': 1, 'brot': 1, 'sahne': 1, 'butter': 1, 'schnitzel': 1, 'joghurt': 1, 'reis': 1 };
     if (suffix[needle] && token.length > needle.length && token.lastIndexOf(needle) === token.length - needle.length) return true;
     return false;
   }
@@ -448,6 +454,12 @@
       });
       if (hit) found.push(item.id);
     });
+    if (found.indexOf('reis') !== -1 && words.indexOf('schoko') !== -1) {
+      found = found.filter(function (id) { return id !== 'reis'; });
+    }
+    if (found.indexOf('salat') !== -1 && words.indexOf('mit') !== -1) {
+      found = found.filter(function (id) { return id !== 'salat'; });
+    }
     return found;
   }
 

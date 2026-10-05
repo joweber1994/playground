@@ -190,7 +190,8 @@
       var pressed = store.id === state.storeId;
       return '<button type="button" class="store-card" data-store="' + store.id + '" aria-pressed="' + (pressed ? 'true' : 'false') + '">' +
         '<span class="store-name">' + escapeHtml(store.name) + '</span>' +
-        '<span class="store-count">' + plural(offersFor(store).length, 'Artikel', 'Artikel') + ' · ' + plural(mealCount(store), 'Gericht', 'Gerichte') + '</span>' +
+        '<span class="store-count">' + plural(offersFor(store).length, 'Artikel', 'Artikel') + '</span>' +
+        '<span class="store-count">' + plural(mealCount(store), 'Gericht', 'Gerichte') + '</span>' +
         '</button>';
     }).join('');
   }

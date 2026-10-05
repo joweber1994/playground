@@ -85,6 +85,17 @@ assert(meals.matchOfferText('schwarze Tomaten').indexOf('passata') === -1, 'fris
 assert(meals.matchOfferText('Bio-Tomaten, passiert').indexOf('passata') !== -1, 'passierte Tomaten zählen');
 assert(meals.matchOfferText('Meraner Weinkäse').indexOf('kaese') !== -1, 'Weinkäse zählt als Käse');
 assert(meals.matchOfferText('Berchtesgadener Land Bergbauernmilch').indexOf('milch') !== -1, 'Bergbauernmilch zählt');
+assert(meals.matchOfferText('ZOTT Sahnejoghurt').indexOf('joghurt') !== -1, 'Sahnejoghurt ist Joghurt');
+assert(meals.matchOfferText('ZOTT Sahnejoghurt').indexOf('sahne') === -1, 'Sahnejoghurt ist keine Sahne');
+assert(meals.matchOfferText('BARILLA Pastasauce').indexOf('nudeln') === -1, 'Pastasauce ist keine Pasta');
+assert(meals.matchOfferText('Reisnudeln').indexOf('reis') === -1, 'Reisnudeln sind kein Reis');
+assert(meals.matchOfferText('Expressreis').indexOf('reis') !== -1, 'Expressreis zählt als Reis');
+assert(meals.matchOfferText('Schoko-Reis Tafel').indexOf('reis') === -1, 'Schoko-Reis ist kein Kochreis');
+assert(meals.matchOfferText('Apfelsaft').indexOf('aepfel') === -1, 'Apfelsaft sind keine Äpfel');
+assert(meals.matchOfferText('Leberkäse').indexOf('kaese') === -1, 'Leberkäse ist kein Käse');
+assert(meals.matchOfferText('Salat mit Rinderfiletstreifen').indexOf('salat') === -1, 'fertiger Salat ist kein Kopfsalat');
+assert(meals.matchOfferText('Feldsalat').indexOf('salat') !== -1, 'Feldsalat zählt');
+assert(meals.matchOfferText('Fischthekensalat').indexOf('salat') === -1, 'Fischthekensalat ist kein Kopfsalat');
 
 var list = meals.shoppingList(ideas, null);
 assert(Array.isArray(list), 'Einkaufsliste ist eine Liste');
