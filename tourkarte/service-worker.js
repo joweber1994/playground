@@ -1,5 +1,5 @@
 /* Tourkarte – App-Hülle fürs iPhone. Strava selbst wird nicht gecacht. */
-var CACHE_VERSION = "tourkarte-v1";
+var CACHE_VERSION = "tourkarte-v2";
 var CACHE_PREFIX = "tourkarte-";
 
 var ASSETS = [
