@@ -323,10 +323,9 @@
 
   function pageMm(options, coords) {
     if (options.fmt === "auto") {
-      var xs = coords.map(function (point) { return point[0]; });
-      var ys = coords.map(function (point) { return point[1]; });
-      var spanX = Math.max(Math.max.apply(null, xs) - Math.min.apply(null, xs), 1);
-      var spanY = Math.max(Math.max.apply(null, ys) - Math.min.apply(null, ys), 1);
+      var box = bounds(coords);
+      var spanX = Math.max(box.maxX - box.minX, 1);
+      var spanY = Math.max(box.maxY - box.minY, 1);
       if (spanX / spanY >= 1.35) return FORMATS.a4;
       if (spanY / spanX >= 1.35) return FORMATS["a4-hoch"];
       return FORMATS.square;
@@ -380,12 +379,11 @@
   }
 
   function fit(coords, mapRect, inset) {
-    var xs = coords.map(function (point) { return point[0]; });
-    var ys = coords.map(function (point) { return point[1]; });
-    var centerX = (Math.min.apply(null, xs) + Math.max.apply(null, xs)) / 2;
-    var centerY = (Math.min.apply(null, ys) + Math.max.apply(null, ys)) / 2;
-    var windowX = Math.max(Math.max.apply(null, xs) - Math.min.apply(null, xs), 1500);
-    var windowY = Math.max(Math.max.apply(null, ys) - Math.min.apply(null, ys), 1500);
+    var box = bounds(coords);
+    var centerX = (box.minX + box.maxX) / 2;
+    var centerY = (box.minY + box.maxY) / 2;
+    var windowX = Math.max(box.maxX - box.minX, 1500);
+    var windowY = Math.max(box.maxY - box.minY, 1500);
     var minX = centerX - windowX / 2 - windowX * 0.1;
     var maxX = centerX + windowX / 2 + windowX * 0.1;
     var minY = centerY - windowY / 2 - windowY * 0.1;
@@ -613,7 +611,11 @@
 
   function sortStages(stages) {
     return stages.map(function (stage, index) { return [stage, index]; }).sort(function (a, b) {
-      return stageSortKey(a[0], a[1]) < stageSortKey(b[0], b[1]) ? -1 : 1;
+      var left = stageSortKey(a[0], a[1]);
+      var right = stageSortKey(b[0], b[1]);
+      if (left < right) return -1;
+      if (left > right) return 1;
+      return 0;
     }).map(function (item) { return item[0]; });
   }
 
@@ -702,6 +704,22 @@
       if (length >= target * 0.75) return length;
     }
     return 10 * magnitude;
+  }
+
+  function bounds(coords) {
+    var minX = Infinity;
+    var maxX = -Infinity;
+    var minY = Infinity;
+    var maxY = -Infinity;
+    for (var i = 0; i < coords.length; i += 1) {
+      var x = coords[i][0];
+      var y = coords[i][1];
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+    }
+    return { minX: minX, maxX: maxX, minY: minY, maxY: maxY };
   }
 
   function usable(lat, lon) {

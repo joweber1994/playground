@@ -65,4 +65,16 @@ var merged = map.mergeTours([
 assertEqual(merged.stages[0].name, "früher", "Sortierung");
 assertEqual(merged.name, "Früh", "erster Name");
 
+var many = [];
+for (var i = 0; i < 140000; i += 1) {
+  many.push({ lat: 47 + i * 0.00001, lon: 11 + (i % 200) * 0.00002, ele: 800 + (i % 40), time: null });
+}
+var longSvg = map.sceneToSvg(map.buildScene({
+  name: null,
+  stages: [{ name: "Lang", when: "2026-06-12", segments: [many] }],
+  waypoints: []
+}, { title: "Lang" }));
+assert(longSvg.indexOf("<path") !== -1, "lange Strecke bleibt zeichenbar");
+assert(longSvg.indexOf("Lang") !== -1, "Titel der langen Strecke");
+
 console.log("map.test.js ok");
