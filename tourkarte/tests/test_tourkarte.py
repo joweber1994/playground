@@ -1,7 +1,9 @@
 import io
 import os
 import tempfile
+import threading
 import unittest
+import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from unittest import mock
@@ -301,6 +303,25 @@ class StravaTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertNotIn("nicht-zeigen", output.getvalue())
         self.assertIn("localhost", output.getvalue())
+
+    def test_serve_opens_the_local_page(self):
+        from tourkarte.serve import page_url, start_server
+
+        self.assertEqual(page_url(8765), "http://127.0.0.1:8765/tourkarte/")
+        server = start_server(0)
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        port = server.server_address[1]
+        try:
+            with urllib.request.urlopen(page_url(port) + "index.html", timeout=5) as response:
+                body = response.read().decode("utf-8")
+                status = response.status
+        finally:
+            server.shutdown()
+            server.server_close()
+        self.assertEqual(status, 200)
+        self.assertIn("Tourkarte", body)
+        self.assertIn("app.js", body)
 
 
 class FakeStrava:

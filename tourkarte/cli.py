@@ -33,6 +33,10 @@ def main(argv=None) -> int:
             return cmd_auth(args)
         if args.command == "strava-pull":
             return cmd_pull(args)
+        if args.command == "serve":
+            from .serve import serve
+
+            return serve(args.port, open_browser=not args.no_browser)
     except (ValueError, StravaError, OSError) as error:
         print(f"tourkarte: {error}", file=sys.stderr)
         return 1
@@ -81,6 +85,10 @@ def build_parser() -> argparse.ArgumentParser:
     pull.add_argument("--out", default="gpx", help="Ordner für die GPX-Dateien")
     pull.add_argument("--full", action="store_true", help="alle GPS-Punkte statt der hohen Auflösung")
     pull.add_argument("--token-file", default=str(DEFAULT_TOKEN_PATH))
+
+    serve_cmd = commands.add_parser("serve", help="Tourkarte im Browser dieses Rechners öffnen")
+    serve_cmd.add_argument("--port", type=int, default=8765)
+    serve_cmd.add_argument("--no-browser", action="store_true", help="nur den Server starten")
     return parser
 
 

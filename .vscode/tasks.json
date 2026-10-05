@@ -1,0 +1,79 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Tourkarte öffnen",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "tourkarte", "serve"],
+      "windows": {
+        "command": "py",
+        "args": ["-3", "-m", "tourkarte", "serve"]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "tourkarte",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "Tourkarte:"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      }
+    },
+    {
+      "label": "Beispielkarte erzeugen",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "-m",
+        "tourkarte",
+        "render",
+        "tourkarte/examples/beispiel.gpx",
+        "-o",
+        "tourkarte/out/beispiel.svg",
+        "--title",
+        "Beispieltour",
+        "--start",
+        "Start",
+        "--ziel",
+        "Ziel"
+      ],
+      "windows": {
+        "command": "py",
+        "args": [
+          "-3",
+          "-m",
+          "tourkarte",
+          "render",
+          "tourkarte/examples/beispiel.gpx",
+          "-o",
+          "tourkarte/out/beispiel.svg",
+          "--title",
+          "Beispieltour",
+          "--start",
+          "Start",
+          "--ziel",
+          "Ziel"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ]
+}

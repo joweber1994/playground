@@ -42,6 +42,14 @@ class StravaError(Exception):
     pass
 
 
+def _owner_only(path: Path) -> None:
+    """Auf Unix nur für den Benutzer lesbar. Unter Windows bleibt die Datei beschreibbar."""
+    try:
+        os.chmod(path, 0o600)
+    except OSError:
+        return
+
+
 @dataclass
 class PullItem:
     activity_id: int
@@ -73,9 +81,9 @@ class TokenStore:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         temporary = self.path.with_suffix(".json.tmp")
         temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-        os.chmod(temporary, 0o600)
+        _owner_only(temporary)
         temporary.replace(self.path)
-        os.chmod(self.path, 0o600)
+        _owner_only(self.path)
 
 
 def authorize_url(client_id: str, redirect_uri: str = DEFAULT_REDIRECT) -> str:
