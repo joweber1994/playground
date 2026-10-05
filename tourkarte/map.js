@@ -225,9 +225,7 @@
     var gain = gains.every(function (value) { return value == null; }) ? null : gains.reduce(function (sum, value) { return sum + (value || 0); }, 0);
     var colors = stageColors(prepared.stages, options);
     var facts = stageFacts(tour);
-    var columns = facts.length > 8 ? 2 : 1;
-    var inner = width - 2 * Math.max(90, Math.round(Math.min(width, height) * 0.068));
-    var summary = summaryLines(facts, options.stagePlaces, colors, inner / columns - 40);
+    var summary = summaryLines(facts, options.stagePlaces, colors);
     var legend = summary.length || !(options.colorByDay && prepared.stages.length > 1) ? [] : legendEntries(prepared.stages, colors);
     var frame = layout(width, height, title, dates, statsLine(distance, gain, prepared.stages.length), legend, summary, options);
     var stroke = clamp(Math.min(frame.map[2], frame.map[3]) * 0.0062, options.colorByDay ? 7.4 : 5.4, 12);
@@ -294,8 +292,8 @@
       var lastPlace = places[places.length - 1] || {};
       var startText = options.startLabel || String(firstPlace.start || "").trim();
       var endText = options.endLabel || String(lastPlace.end || "").trim();
-      if (startText) endpointLabel(items, startText, start, startAway, stroke, frame.map, options);
-      if (endText) endpointLabel(items, endText, end, endAway, stroke, frame.map, options);
+      if (startText) endpointLabel(items, tidyPlace(startText), start, pagePaths[0][0], stroke, frame.map, options);
+      if (endText) endpointLabel(items, tidyPlace(endText), end, endLine, stroke, frame.map, options);
     }
     northArrow(items, frame.map, options.muted);
     if (tiles.length) {
@@ -421,16 +419,36 @@
       caption = caption.concat(legendItems(row, margin, legendTop + legendSize + rowIndex * rowH, legendSize, options.ink));
     });
     var summaryTop = legendTop + legendRows.length * rowH + (summary.length ? gap * 0.5 : 0);
-    var columnGap = 28;
+    var columnGap = 36;
     var columnWidth = (mapW - (columns - 1) * columnGap) / columns;
     summary.forEach(function (entry, index) {
       var column = Math.floor(index / summaryRows);
       var row = index - column * summaryRows;
+      var rows = summary.filter(function (_, item) { return Math.floor(item / summaryRows) === column; });
+      var kmWidth = 0;
+      var hmWidth = 0;
+      var titleWidth = 0;
+      rows.forEach(function (item) {
+        kmWidth = Math.max(kmWidth, estimate(item.km, summarySize, 0.58));
+        hmWidth = Math.max(hmWidth, estimate(item.hm, summarySize, 0.58));
+        titleWidth = Math.max(titleWidth, estimate(item.title, summarySize, 0.56));
+      });
       var x = margin + column * (columnWidth + columnGap);
       var baseline = summaryTop + summarySize + row * summaryRow;
       var square = summarySize * 0.72;
-      caption.push({ op: "rect", x: x, y: baseline - square * 0.82, w: square, h: square, fill: entry[0] });
-      caption.push(textItem(x + square + 8, baseline, entry[1], summarySize, options.ink, "sans", "regular", "start"));
+      var right = x + columnWidth;
+      var hmX = right;
+      var kmX = right - hmWidth - summarySize * 0.7;
+      var titleX = x + square + 8;
+      var dateX = titleX + titleWidth + summarySize * 0.45;
+      var placesX = dateX + estimate("30.9.", summarySize, 0.56) + summarySize * 0.4;
+      var placesMax = kmX - kmWidth - summarySize * 0.55 - placesX;
+      caption.push({ op: "rect", x: x, y: baseline - square * 0.82, w: square, h: square, fill: entry.color });
+      caption.push(textItem(titleX, baseline, entry.title, summarySize, options.ink, "sans", "regular", "start"));
+      if (entry.date) caption.push(textItem(dateX, baseline, entry.date, summarySize, options.muted, "sans", "regular", "start"));
+      if (entry.places && placesMax > summarySize) caption.push(textItem(placesX, baseline, fitSummaryText(entry.places, summarySize, placesMax), summarySize, options.ink, "sans", "regular", "start"));
+      if (entry.km) caption.push(textItem(kmX, baseline, entry.km, summarySize, options.ink, "sans", "medium", "end"));
+      if (entry.hm) caption.push(textItem(hmX, baseline, entry.hm, summarySize, options.ink, "sans", "medium", "end"));
     });
     return {
       map: mapRect,
@@ -576,8 +594,12 @@
     items.push({ op: "circle", cx: center[0], cy: center[1], r: ring, fill: paper, stroke: color, strokeWidth: Math.max(1.8, stroke * 0.42) });
   }
 
-  function endpointLabel(items, label, point, neighbor, stroke, mapRect, options) {
-    var size = Math.max(20, stroke * 2.15);
+  function endpointLabel(items, label, point, path, stroke, mapRect, options) {
+    if (!label || !path || path.length < 2) return;
+    var neighbor = path[Math.max(0, path.length - 2)];
+    if (point !== path[path.length - 1] && path[0]) neighbor = path[Math.min(1, path.length - 1)];
+    var size = Math.max(18, stroke * 1.7);
+    var width = estimate(label, size, 0.56);
     var vx = point[0] - neighbor[0];
     var vy = point[1] - neighbor[1];
     var norm = Math.hypot(vx, vy) || 1;
@@ -585,19 +607,58 @@
     var uy = vy / norm;
     var px = -uy;
     var py = ux;
-    var gap = stroke * 2.6 + size * 0.95;
-    [[ux, uy], [px, py], [-px, -py], [ux + px, uy + py], [ux - px, uy - py]].some(function (direction) {
-      var length = Math.hypot(direction[0], direction[1]) || 1;
-      var ax = point[0] + direction[0] / length * gap;
-      var ay = point[1] + direction[1] / length * gap;
-      var anchor = "middle";
-      if (Math.abs(direction[0]) > Math.abs(direction[1]) * 0.85) anchor = direction[0] > 0 ? "start" : "end";
-      else ay += direction[1] > 0 ? size * 0.2 : -size * 0.25;
-      var box = textBox(ax, ay, estimate(label, size, 0.56), size, anchor);
-      if (box[0] < mapRect[0] + 12 || box[1] < mapRect[1] + 12 || box[0] + box[2] > mapRect[0] + mapRect[2] - 12 || box[1] + box[3] > mapRect[1] + mapRect[3] - 12) return false;
-      items.push(textItem(ax, ay, label, size, options.ink, "sans", "regular", anchor, true, options.paper));
-      return true;
+    var placed = [[px, py], [-px, -py], [ux, uy], [ux + px, uy + py], [ux - px, uy - py]].some(function (direction) {
+      return placeEndpoint(items, label, point, path, stroke, mapRect, options, direction, size, width);
     });
+    if (!placed) placeEndpoint(items, label, point, path, stroke, mapRect, options, [px, py], size * 0.85, estimate(label, size * 0.85, 0.56));
+  }
+
+  function placeEndpoint(items, label, point, path, stroke, mapRect, options, direction, size, width) {
+    var length = Math.hypot(direction[0], direction[1]) || 1;
+    var dx = direction[0] / length;
+    var dy = direction[1] / length;
+    var anchor = "middle";
+    var reach = size * 0.85;
+    if (Math.abs(dx) > Math.abs(dy) * 0.55) {
+      anchor = dx > 0 ? "start" : "end";
+      reach = width * 0.08 + size * 0.35;
+    }
+    var dist = stroke * 3.4 + size + reach;
+    var ax = point[0] + dx * dist;
+    var ay = point[1] + dy * dist;
+    var box = textBox(ax, ay, width, size, anchor);
+    if (box[0] < mapRect[0] + 8 || box[1] < mapRect[1] + 8 || box[0] + box[2] > mapRect[0] + mapRect[2] - 8 || box[1] + box[3] > mapRect[1] + mapRect[3] - 8) return false;
+    if (boxHitsPath(box, path, stroke + size * 0.35)) return false;
+    items.push(textItem(ax, ay, label, size, options.ink, "sans", "regular", anchor, true, "#ffffff"));
+    return true;
+  }
+
+  function boxHitsPath(box, path, pad) {
+    var left = box[0] - pad;
+    var top = box[1] - pad;
+    var right = box[0] + box[2] + pad;
+    var bottom = box[1] + box[3] + pad;
+    for (var index = 1; index < path.length; index += 1) {
+      if (segmentHitsRect(path[index - 1], path[index], left, top, right, bottom)) return true;
+    }
+    return false;
+  }
+
+  function segmentHitsRect(a, b, left, top, right, bottom) {
+    if (pointInRect(a, left, top, right, bottom) || pointInRect(b, left, top, right, bottom)) return true;
+    return segmentsCross(a, b, [left, top], [right, top])
+      || segmentsCross(a, b, [right, top], [right, bottom])
+      || segmentsCross(a, b, [right, bottom], [left, bottom])
+      || segmentsCross(a, b, [left, bottom], [left, top]);
+  }
+
+  function pointInRect(point, left, top, right, bottom) {
+    return point[0] >= left && point[0] <= right && point[1] >= top && point[1] <= bottom;
+  }
+
+  function segmentsCross(a, b, c, d) {
+    function side(p, q, r) { return (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]); }
+    return side(a, b, c) * side(a, b, d) < 0 && side(c, d, a) * side(c, d, b) < 0;
   }
 
   function placeLabel(items, label, x, y, mapRect, options, size) {
@@ -750,23 +811,41 @@
 
   function largerPlace(address, fallback) {
     var source = address || {};
-    var name = source.city || source.town || source.municipality || "";
-    name = String(name).replace(/^(Bashkia|Komuna|Dimos)\s+/i, "").trim();
-    if (!name) name = String(fallback || "").trim();
-    return name;
+    var name = source.city || source.town || source.municipality || fallback || "";
+    return tidyPlace(name);
   }
 
-  function summaryLines(facts, places, colors, width) {
-    var size = 18;
+  function tidyPlace(name) {
+    return String(name || "")
+      .replace(/^Municipal Units? of\s+/i, "")
+      .replace(/^Municipality of\s+/i, "")
+      .replace(/\s+Municipal Units?$/i, "")
+      .replace(/\s+Municipality$/i, "")
+      .replace(/^(Bashkia|Komuna|Dimos)\s+/i, "")
+      .trim();
+  }
+
+  function summaryLines(facts, places, colors) {
     return facts.map(function (fact, index) {
       var place = places && places[index] ? places[index] : {};
-      var ends = [place.start, place.end].map(function (value) { return String(value || "").trim(); }).filter(Boolean).join(" – ");
-      var stats = [fact.kmLabel, fact.hmLabel].filter(Boolean).join(" · ");
-      var head = (index + 1) + (fact.shortDate ? "  " + fact.shortDate : "");
-      var text = [head, ends, stats].filter(Boolean).join("    ");
-      if (width && estimate(text, size, 0.56) > width) text = [head, stats].filter(Boolean).join("    ");
-      return [colors[index] || "#9c3412", text];
+      var start = tidyPlace(place.start);
+      var end = tidyPlace(place.end);
+      return {
+        color: colors[index] || "#9c3412",
+        title: (index + 1) + ". Etappe",
+        date: fact.shortDate,
+        places: [start, end].filter(Boolean).join(" – "),
+        km: fact.kmLabel,
+        hm: fact.hmLabel
+      };
     });
+  }
+
+  function fitSummaryText(text, size, width) {
+    if (estimate(text, size, 0.56) <= width) return text;
+    var kept = text;
+    while (kept.length > 1 && estimate(kept + "…", size, 0.56) > width) kept = kept.slice(0, -1);
+    return kept.trim() + "…";
   }
 
   function legendEntries(stages, colors) {
@@ -1071,6 +1150,7 @@
     sceneToSvg: sceneToSvg,
     stageFacts: stageFacts,
     largerPlace: largerPlace,
+    tidyPlace: tidyPlace,
     parseHex: parseHex,
     mercatorView: mercatorView
   };

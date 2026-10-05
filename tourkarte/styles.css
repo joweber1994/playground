@@ -258,8 +258,23 @@ input[type="text"], input[type="password"], input[type="search"], input[type="da
 
 .stage h3 {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   font-weight: 600;
+}
+
+.stage-line {
+  display: grid;
+  grid-template-columns: 7.4rem 3.4rem 1fr 5.4rem 6.6rem;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.stage-line .when { color: var(--muted); }
+
+.stage-line .km,
+.stage-line .hm {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .stage p {

@@ -107,12 +107,18 @@ for (var colorIndex = 0; colorIndex < 17; colorIndex += 1) {
 }
 assertEqual(map.largerPlace({ suburb: "Lagjja 2", city: "Shkodër", municipality: "Bashkia Shkodër" }), "Shkodër", "Stadt vor Stadtteil");
 assertEqual(map.largerPlace({ municipality: "Bashkia Tiranë" }), "Tiranë", "Gemeinde ohne Vorsilbe");
-var named = map.sceneToSvg(map.buildScene(tour, {
+var namedScene = map.buildScene(tour, {
   title: "Beispieltour",
   stagePlaces: [{ start: "Landeck", end: "Imst" }, { start: "Imst", end: "Innsbruck" }]
-}));
+});
+var named = map.sceneToSvg(namedScene);
+assert(named.indexOf("1. Etappe") !== -1, "Etappe in der Übersicht");
 assert(named.indexOf("Landeck") !== -1, "Start der Etappe");
 assert(named.indexOf("Innsbruck") !== -1, "Ziel der Etappe");
+var kmNotes = namedScene.items.filter(function (item) { return item.op === "text" && item.text === facts[0].kmLabel; });
+var hmNotes = namedScene.items.filter(function (item) { return item.op === "text" && item.text === facts[0].hmLabel; });
+assert(kmNotes.length && hmNotes.length && kmNotes[0].anchor === "end" && hmNotes[0].anchor === "end", "Kilometer und Höhenmeter rechtsbündig");
+assertEqual(map.tidyPlace("Municipal Unit of Patras"), "Patras", "Verwaltungskürzel");
 assert(named.indexOf(facts[0].kmLabel) !== -1, "Kilometer auf der Karte");
 var route = withMap.items.filter(function (item) { return item.op === "polyline"; })[0].paths[0];
 route.forEach(function (point) {

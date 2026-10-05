@@ -191,15 +191,19 @@
     ensurePlaces(facts.length);
     var rows = facts.map(function (fact, index) {
       var place = state.options.stagePlaces[index];
-      var stats = [fact.kmLabel, fact.hmLabel].filter(Boolean).join(" · ");
-      var title = (index + 1) + (fact.date ? " · " + fact.date : "");
+      var title = (index + 1) + ". Etappe";
       return [
         '<article class="stage">',
         '<span class="dot" data-stage-dot style="background:' + stageColor(index, facts.length) + '"></span>',
         "<div>",
+        '<div class="stage-line">',
         "<h3>" + esc(title) + "</h3>",
+        '<span class="when">' + esc(fact.shortDate || fact.date) + "</span>",
+        "<span></span>",
+        '<span class="km">' + esc(fact.kmLabel) + "</span>",
+        '<span class="hm">' + esc(fact.hmLabel) + "</span>",
+        "</div>",
         fact.name ? "<p>" + esc(fact.name) + "</p>" : "",
-        "<p>" + esc(stats) + "</p>",
         '<div class="dates">',
         '<label>Start<input data-stage="' + index + '" data-place="start" value="' + esc(place.start) + '" placeholder="Ort"></label>',
         '<label>Ziel<input data-stage="' + index + '" data-place="end" value="' + esc(place.end) + '" placeholder="Ort"></label>',
