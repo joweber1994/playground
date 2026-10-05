@@ -623,18 +623,23 @@
     var length = Math.hypot(direction[0], direction[1]) || 1;
     var dx = direction[0] / length;
     var dy = direction[1] / length;
+    var radius = stroke * 1.55 + 3;
+    var clearance = 7;
     var anchor = "middle";
-    var reach = size * 0.85;
-    if (Math.abs(dx) > Math.abs(dy) * 0.55) {
+    var ax = point[0];
+    var ay = point[1];
+    if (Math.abs(dx) >= Math.abs(dy)) {
       anchor = dx > 0 ? "start" : "end";
-      reach = width * 0.08 + size * 0.35;
+      ax = point[0] + (dx > 0 ? 1 : -1) * (radius + clearance);
+      ay = point[1] - size * 0.28;
+    } else if (dy < 0) {
+      ay = point[1] - radius - clearance - size * 0.15;
+    } else {
+      ay = point[1] + radius + clearance + size * 0.82;
     }
-    var dist = stroke * 3.4 + size + reach;
-    var ax = point[0] + dx * dist;
-    var ay = point[1] + dy * dist;
     var box = textBox(ax, ay, width, size, anchor);
-    if (box[0] < mapRect[0] + 8 || box[1] < mapRect[1] + 8 || box[0] + box[2] > mapRect[0] + mapRect[2] - 8 || box[1] + box[3] > mapRect[1] + mapRect[3] - 8) return false;
-    if (boxHitsPath(box, path, stroke + size * 0.35)) return false;
+    if (box[0] < mapRect[0] + 6 || box[1] < mapRect[1] + 6 || box[0] + box[2] > mapRect[0] + mapRect[2] - 6 || box[1] + box[3] > mapRect[1] + mapRect[3] - 6) return false;
+    if (boxHitsPath(box, path, 2)) return false;
     items.push(textItem(ax, ay, label, size, options.ink, "sans", "regular", anchor, true, "#ffffff"));
     return true;
   }
