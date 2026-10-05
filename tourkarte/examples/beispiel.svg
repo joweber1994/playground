@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xml:lang="de" width="210mm" height="210mm" viewBox="0 0 2100 2100" role="img">
+<title>Beispieltour</title>
+<desc>Übersichtskarte fürs Fotoalbum</desc>
+<rect x="0" y="0" width="2100" height="2100" fill="#f3efe6"/>
+<rect x="143" y="143" width="1814" height="1608.84" fill="none" stroke="#d4cdc2" stroke-width="1.4"/>
+<path d="M322.5 1211.98 L403.08 1157.85 L430.97 1145.05 L462.08 1136.64 L493.07 1136.71 L627.57 1161.8 L670.12 1160.35 L708.92 1151.13 L738.81 1135.43 L763.36 1112.84 L780.11 1086.71 L787.02 1062.37 L783.11 1045.32 L772.21 1031.32 L753.23 1019.36 L717 1007.85 L714.03 1005.37 L715.93 1002.46 L739.07 996.59 L778.77 995.42 L886.59 1013.76 L915.65 1012.8 L955.6 995.03 L1040.55 933.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#f3efe6" stroke-width="16.6"/><path d="M322.5 1211.98 L403.08 1157.85 L430.97 1145.05 L462.08 1136.64 L493.07 1136.71 L627.57 1161.8 L670.12 1160.35 L708.92 1151.13 L738.81 1135.43 L763.36 1112.84 L780.11 1086.71 L787.02 1062.37 L783.11 1045.32 L772.21 1031.32 L753.23 1019.36 L717 1007.85 L714.03 1005.37 L715.93 1002.46 L739.07 996.59 L778.77 995.42 L886.59 1013.76 L915.65 1012.8 L955.6 995.03 L1040.55 933.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#9c3412" stroke-width="7.72"/>
+<path d="M1040.55 933.5 L1128.32 889.6 L1175.73 874.38 L1208.82 868.15 L1238.42 868.68 L1270.71 874.54 L1369.99 908.58 L1399.44 909.67 L1423.29 904.22 L1445.89 892.78 L1470.65 871.46 L1493.03 841.18 L1506.3 811.36 L1506.68 802.88 L1500.82 794.03 L1465.39 776.32 L1454.35 766.83 L1451.69 754.67 L1461.18 742.35 L1486.37 734.51 L1513.91 736.09 L1608.13 768.59 L1636.33 769.83 L1671.24 753.99 L1744.27 701.96 L1777.5 682.86" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#f3efe6" stroke-width="16.6"/><path d="M1040.55 933.5 L1128.32 889.6 L1175.73 874.38 L1208.82 868.15 L1238.42 868.68 L1270.71 874.54 L1369.99 908.58 L1399.44 909.67 L1423.29 904.22 L1445.89 892.78 L1470.65 871.46 L1493.03 841.18 L1506.3 811.36 L1506.68 802.88 L1500.82 794.03 L1465.39 776.32 L1454.35 766.83 L1451.69 754.67 L1461.18 742.35 L1486.37 734.51 L1513.91 736.09 L1608.13 768.59 L1636.33 769.83 L1671.24 753.99 L1744.27 701.96 L1777.5 682.86" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke="#9c3412" stroke-width="7.72"/>
+<circle cx="754.62" cy="995.37" r="5.41" fill="#f3efe6" stroke="#1c1916" stroke-width="1.6"/>
+<text x="766.62" y="975.65" fill="#1c1916" font-family="Inter, 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif" font-size="18" text-anchor="start" xml:space="preserve" stroke="#f3efe6" stroke-width="8" paint-order="stroke fill" stroke-linejoin="round">Joch</text>
+<circle cx="1040.55" cy="933.5" r="5.41" fill="#f3efe6" stroke="#1c1916" stroke-width="1.6"/>
+<text x="1052.55" y="913.77" fill="#1c1916" font-family="Inter, 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif" font-size="18" text-anchor="start" xml:space="preserve" stroke="#f3efe6" stroke-width="8" paint-order="stroke fill" stroke-linejoin="round">Biwak</text>
+<circle cx="322.5" cy="1211.98" r="11.67" fill="#f3efe6"/>
+<circle cx="322.5" cy="1211.98" r="9.27" fill="#1c1916"/>
+<circle cx="1777.5" cy="682.86" r="14.17" fill="#f3efe6"/>
+<circle cx="1777.5" cy="682.86" r="11.97" fill="#f3efe6" stroke="#9c3412" stroke-width="3.24"/>
+<text x="290.06" y="1233.77" fill="#1c1916" font-family="Inter, 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif" font-size="20" text-anchor="end" xml:space="preserve" stroke="#f3efe6" stroke-width="8" paint-order="stroke fill" stroke-linejoin="round">Start</text>
+<text x="1811.38" y="663.39" fill="#1c1916" font-family="Inter, 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif" font-size="20" text-anchor="start" xml:space="preserve" stroke="#f3efe6" stroke-width="8" paint-order="stroke fill" stroke-linejoin="round">Ziel</text>
+<polygon points="1905,179 1898.5,195 1911.5,195" fill="#6f675c"/>
+<line x1="1905" y1="195" x2="1905" y2="213" stroke="#6f675c" stroke-width="1.4" stroke-linecap="round"/>
+<text x="1905" y="171" fill="#6f675c" font-family="Inter, 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif" font-size="16" text-anchor="middle" xml:space="preserve" font-weight="500">N</text>
+<line x1="143" y1="1765.59" x2="1957" y2="1765.59" stroke="#d4cdc2" stroke-width="1.2" stroke-linecap="round"/>
+<text x="143" y="1840.32" fill="#1c1916" font-family="'Liberation Serif', Palatino, 'Palatino Linotype', Georgia, serif" font-size="69" text-anchor="start" xml:space="preserve">Beispieltour</text>
+<text x="143" y="1903.75" fill="#6f675c" font-family="'Liberation Serif', Palatino, 'Palatino Linotype', Georgia, serif" font-size="32" text-anchor="start" xml:space="preserve" font-style="italic">12.–13. Juni 2026</text>
+<text x="143" y="1957" fill="#1c1916" font-family="Inter, 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif" font-size="28" text-anchor="start" xml:space="preserve" font-weight="500">158 km · 1.918 hm · 2 Etappen</text>
+<rect x="1551.54" y="1939.64" width="156.53" height="7.84" fill="#1c1916" stroke="#1c1916" stroke-width="1"/>
+<rect x="1708.07" y="1939.64" width="156.53" height="7.84" fill="#f3efe6" stroke="#1c1916" stroke-width="1.1"/>
+<text x="1957" y="1957" fill="#1c1916" font-family="Inter, 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif" font-size="28" text-anchor="end" xml:space="preserve" font-weight="500">25 km</text>
+</svg>
