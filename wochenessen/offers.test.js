@@ -78,4 +78,16 @@ assert(prechtlIds.indexOf('gulasch') !== -1, 'Prechtl-Gulasch zählt');
 assert(prechtlIds.indexOf('hackfleisch') === -1, 'Rinder Gulasch wird nicht zu Hackfleisch');
 assert(prechtlIds.indexOf('lachs') === -1, 'Lamm Lachse wird nicht zu Lachs');
 
+var union = aldiIds.slice();
+prechtlIds.forEach(function (id) {
+  if (union.indexOf(id) === -1) union.push(id);
+});
+var aldiMeals = meals.suggest(aldiIds, pantry);
+var prechtlMeals = meals.suggest(prechtlIds, pantry);
+var bothMeals = meals.suggest(union, pantry);
+assert(bothMeals.length > aldiMeals.length, 'Aldi und Prechtl zusammen schlagen mehr vor als Aldi allein');
+assert(bothMeals.length > prechtlMeals.length, 'Aldi und Prechtl zusammen schlagen mehr vor als Prechtl allein');
+assert(aldiIds.indexOf('fisch') === -1 && prechtlIds.indexOf('fisch') !== -1, 'Fisch gibt es bei Prechtl');
+assert(prechtlIds.indexOf('hackfleisch') === -1 && aldiIds.indexOf('hackfleisch') !== -1, 'Hackfleisch gibt es bei Aldi');
+
 console.log('offers tests ok');

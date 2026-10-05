@@ -47,6 +47,7 @@
           <p id="week-note" class="banner" hidden></p>
         </div>
         <div id="stores" class="stores"></div>
+        <p id="combo" class="hint"></p>
         <p id="unavailable" class="hint"></p>
       </section>
 
@@ -55,9 +56,13 @@
           <h2 id="offers-heading">Gelesene Angebote</h2>
           <p id="store-note" class="hint"></p>
         </div>
-        <a id="prospekt" class="prospekt" href="https://www.prechtl.de/aktuelles/" target="_blank" rel="noopener noreferrer">Prospekt öffnen</a>
+        <div id="prospekte" class="prospekte"></div>
         <div id="matched" class="chips" aria-label="Erkannte Zutaten"></div>
         <div id="offer-scroll" class="offer-scroll"></div>
+        <label id="extra-store-wrap" class="field extra-store" hidden>
+          <span class="field-label">Ergänzen bei</span>
+          <select id="extra-store"></select>
+        </label>
         <form id="offer-form" class="offer-form" autocomplete="off">
           <label class="field grow">
             <span class="sr-only">Weiteren Artikelnamen ergänzen</span>
@@ -87,18 +92,15 @@
       <section class="panel" aria-labelledby="choice-heading">
         <div class="section-head">
           <h2 id="choice-heading">Wo einkaufen?</h2>
-          <p class="hint">Die Liste gilt für den Supermarkt, den du hier wählst. Bei Prechtl ist das Angebot in jedem Markt gleich.</p>
+          <p class="hint">Mehrere Supermärkte bleiben an. Die Gerichte nutzen alle ausgewählten Angebote. Bei Prechtl ist das Angebot in jedem Markt gleich.</p>
         </div>
-        <label class="field">
-          <span class="sr-only">Supermarkt</span>
-          <select id="store-select"></select>
-        </label>
+        <div id="store-picks" class="store-picks" role="group" aria-label="Supermärkte"></div>
         <label id="market-wrap" class="field market-wrap">
           <span class="field-label">Prechtl-Markt</span>
           <select id="market"></select>
         </label>
         <h2 id="shop-heading">Einkaufsliste</h2>
-        <p class="hint">Nur das, was für die ausgewählten Gerichte noch fehlt.</p>
+        <p class="hint">Zuerst die Angebote, nach Markt getrennt. Danach, was noch fehlt.</p>
         <p id="shop-empty" class="empty">Sobald ein Gericht auf der Liste liegt, stehen hier die fehlenden Zutaten.</p>
         <ul id="shop-list" class="shop-list"></ul>
       </section>

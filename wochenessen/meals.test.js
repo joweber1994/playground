@@ -108,4 +108,32 @@ var chili = null;
 both.forEach(function (recipe) { if (recipe.id === 'chili') chili = recipe; });
 assert(chili && chili.hits.length >= 3, 'Chili sammelt mehrere Angebote');
 
+var planned = meals.shopPlan([{
+  id: 'kombi',
+  title: 'Kombi',
+  hits: [
+    { id: 'hackfleisch', name: 'Hackfleisch', amount: '300 g' },
+    { id: 'fisch', name: 'Fischfilet', amount: '2' },
+    { id: 'kaese', name: 'Käse', amount: '80 g' }
+  ],
+  missing: [{ id: 'sahne', name: 'Sahne', amount: '200 ml' }]
+}], ['kombi'], [
+  { id: 'aldi', name: 'Aldi Süd', offers: ['hackfleisch', 'kaese'] },
+  { id: 'prechtl', name: 'Prechtl', offers: ['fisch', 'kaese'] }
+]);
+function plannedItem(id) {
+  var found = null;
+  planned.offers.forEach(function (group) {
+    group.items.forEach(function (item) {
+      if (item.id === id) found = { label: group.label, item: item };
+    });
+  });
+  return found;
+}
+assertEqual(plannedItem('hackfleisch').label, 'Aldi Süd', 'Hackfleisch liegt bei Aldi');
+assertEqual(plannedItem('fisch').label, 'Prechtl', 'Fisch liegt bei Prechtl');
+assertEqual(plannedItem('kaese').label, 'Aldi Süd oder Prechtl', 'Käse gibt es in beiden Märkten');
+assertEqual(planned.missing.length, 1, 'Sahne bleibt übrig');
+assertEqual(planned.missing[0].id, 'sahne', 'die fehlende Zutat ist Sahne');
+
 console.log('meals tests ok');

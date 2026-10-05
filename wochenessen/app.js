@@ -7,24 +7,27 @@
 
   var STORAGE_KEY = 'wochenessen-v1';
   var state = meals.freshState(new Date());
-  state.storeId = catalog.stores[0].id;
+  state.storeIds = [catalog.stores[0].id];
   state.extras = {};
 
   var els = {
     weekLine: document.getElementById('week-line'),
     week: document.getElementById('week-note'),
     stores: document.getElementById('stores'),
+    combo: document.getElementById('combo'),
     unavailable: document.getElementById('unavailable'),
     storeNote: document.getElementById('store-note'),
-    prospekt: document.getElementById('prospekt'),
+    prospekte: document.getElementById('prospekte'),
     matched: document.getElementById('matched'),
     offerScroll: document.getElementById('offer-scroll'),
+    extraWrap: document.getElementById('extra-store-wrap'),
+    extraStore: document.getElementById('extra-store'),
     form: document.getElementById('offer-form'),
     text: document.getElementById('offer-text'),
     note: document.getElementById('offer-note'),
     pantry: document.getElementById('pantry'),
     ideas: document.getElementById('ideas'),
-    storeSelect: document.getElementById('store-select'),
+    storePicks: document.getElementById('store-picks'),
     marketWrap: document.getElementById('market-wrap'),
     market: document.getElementById('market'),
     shopHeading: document.getElementById('shop-heading'),
@@ -76,6 +79,23 @@
     return null;
   }
 
+  function joinNames(names) {
+    if (!names.length) return '';
+    if (names.length === 1) return names[0];
+    if (names.length === 2) return names[0] + ' und ' + names[1];
+    return names.slice(0, -1).join(', ') + ' und ' + names[names.length - 1];
+  }
+
+  function orderedIds(ids) {
+    var wanted = {};
+    (ids || []).forEach(function (id) { wanted[id] = true; });
+    return catalog.stores.filter(function (store) { return wanted[store.id]; }).map(function (store) { return store.id; });
+  }
+
+  function selectedStores() {
+    return orderedIds(state.storeIds).map(storeById);
+  }
+
   function extrasFor(storeId) {
     var list = state.extras && state.extras[storeId];
     return Array.isArray(list) ? list : [];
@@ -90,6 +110,16 @@
 
   function ingredientIds(store) {
     return meals.idsFromOffers(offersFor(store));
+  }
+
+  function unionIds(stores) {
+    var found = [];
+    (stores || []).forEach(function (store) {
+      ingredientIds(store).forEach(function (id) {
+        if (found.indexOf(id) === -1) found.push(id);
+      });
+    });
+    return found;
   }
 
   function mealCount(store) {
@@ -136,8 +166,13 @@
     var loaded = meals.normalizeState(saved, new Date());
     var next = loaded.state;
     next.extras = loaded.weekChanged ? {} : cleanExtras(saved && saved.extras);
-    var known = saved && storeById(saved.storeId);
-    next.storeId = known ? known.id : bestStoreId(next.pantry);
+    if (saved && Array.isArray(saved.storeIds)) {
+      next.storeIds = orderedIds(saved.storeIds.filter(function (id) { return storeById(id); }));
+    } else if (saved && storeById(saved.storeId)) {
+      next.storeIds = [saved.storeId];
+    } else {
+      next.storeIds = [bestStoreId(next.pantry)];
+    }
     return { state: next, weekChanged: loaded.weekChanged };
   }
 
@@ -149,12 +184,25 @@
     }
   }
 
-  function currentStore() {
-    return storeById(state.storeId) || catalog.stores[0];
+  function suggestions() {
+    return meals.suggest(unionIds(selectedStores()), state.pantry);
   }
 
-  function suggestions() {
-    return meals.suggest(ingredientIds(currentStore()), state.pantry);
+  function storeNames(stores) {
+    return stores.map(function (store) {
+      if (store.id === 'prechtl') return store.name + ' ' + meals.marketById(state.marketId).name;
+      return store.name;
+    });
+  }
+
+  function sources() {
+    return selectedStores().map(function (store) {
+      return {
+        id: store.id,
+        name: store.id === 'prechtl' ? store.name + ' ' + meals.marketById(state.marketId).name : store.name,
+        offers: ingredientIds(store)
+      };
+    });
   }
 
   function formatPrice(price) {
@@ -186,14 +234,25 @@
   }
 
   function renderStores() {
+    var selected = selectedStores();
     els.stores.innerHTML = catalog.stores.map(function (store) {
-      var pressed = store.id === state.storeId;
+      var pressed = state.storeIds.indexOf(store.id) !== -1;
       return '<button type="button" class="store-card" data-store="' + store.id + '" aria-pressed="' + (pressed ? 'true' : 'false') + '">' +
         '<span class="store-name">' + escapeHtml(store.name) + '</span>' +
         '<span class="store-count">' + plural(offersFor(store).length, 'Artikel', 'Artikel') + '</span>' +
         '<span class="store-count">' + plural(mealCount(store), 'Gericht', 'Gerichte') + '</span>' +
         '</button>';
     }).join('');
+    if (!selected.length) {
+      els.combo.textContent = 'Noch kein Supermarkt ausgewählt.';
+      return;
+    }
+    if (selected.length === 1) {
+      els.combo.textContent = selected[0].name + ' ist ausgewählt. Weitere Märkte kannst du dazunehmen.';
+      return;
+    }
+    var count = meals.suggest(unionIds(selected), state.pantry).length;
+    els.combo.textContent = joinNames(selected.map(function (store) { return store.name; })) + ' zusammen: ' + plural(count, 'Gericht', 'Gerichte') + '.';
   }
 
   function sortedIngredientIds(ids) {
@@ -221,20 +280,37 @@
     }).join('');
   }
 
-  function renderOfferList(store) {
-    var rows = offersFor(store).slice().sort(function (a, b) {
+  function combinedRows(stores) {
+    var rows = [];
+    stores.forEach(function (store) {
+      offersFor(store).forEach(function (offer) {
+        rows.push({
+          name: offer.name,
+          price: offer.price,
+          amount: offer.amount,
+          extra: offer.extra,
+          storeName: store.name
+        });
+      });
+    });
+    return rows.sort(function (a, b) {
       var leftHit = meals.matchOfferText(a.name).length ? 0 : 1;
       var rightHit = meals.matchOfferText(b.name).length ? 0 : 1;
       if (leftHit !== rightHit) return leftHit - rightHit;
       return String(a.name).localeCompare(String(b.name), 'de');
     });
+  }
+
+  function renderOfferList(stores) {
+    var rows = combinedRows(stores);
     if (!rows.length) {
-      els.offerScroll.innerHTML = '<p class="empty offer-empty">In diesem Prospekt stehen keine Lebensmittel.</p>';
+      els.offerScroll.innerHTML = '<p class="empty offer-empty">In diesen Prospekten stehen keine Lebensmittel.</p>';
       return;
     }
+    var showStore = stores.length > 1;
     els.offerScroll.innerHTML = rows.map(function (offer) {
       var hit = meals.matchOfferText(offer.name).length > 0;
-      var meta = [formatPrice(offer.price), offer.amount].filter(function (part) { return part; }).join(' · ');
+      var meta = [showStore ? offer.storeName : '', formatPrice(offer.price), offer.amount].filter(function (part) { return part; }).join(' · ');
       return '<div class="offer-row' + (hit ? ' is-hit' : '') + '">' +
         '<span class="offer-name">' + escapeHtml(offer.name) +
         (offer.extra ? ' <span class="offer-extra">ergänzt</span>' : '') + '</span>' +
@@ -244,26 +320,44 @@
   }
 
   function renderStoreDetail() {
-    var store = currentStore();
-    var note = store.note || '';
-    if (store.otherCount) {
-      note += (note ? ' ' : '') + store.otherCount + ' weitere Artikel aus Haushalt, Mode und Ähnlichem stehen nicht in der Liste.';
+    var stores = selectedStores();
+    if (!stores.length) {
+      els.storeNote.textContent = 'Wähl mindestens einen Supermarkt. Die Angebote werden zusammengezählt.';
+      els.prospekte.innerHTML = '';
+      renderMatched([]);
+      els.offerScroll.innerHTML = '<p class="empty offer-empty">Noch kein Prospekt ausgewählt.</p>';
+      return;
     }
+    var note = stores.length > 1
+      ? 'Zusammengezählt: ' + joinNames(stores.map(function (store) { return store.name; })) + '.'
+      : (stores[0].note || '');
+    stores.forEach(function (store) {
+      if (stores.length > 1 && store.note) note += ' ' + store.name + ': ' + store.note;
+      if (store.otherCount) {
+        note += (note ? ' ' : '') + (stores.length > 1 ? store.name + ': ' : '') + store.otherCount + ' weitere Artikel aus Haushalt, Mode und Ähnlichem stehen nicht in der Liste.';
+      }
+    });
     els.storeNote.textContent = note;
-    if (els.prospekt) {
-      els.prospekt.href = store.source || '#';
-      els.prospekt.textContent = 'Prospekt von ' + store.name + ' öffnen';
-    }
-    renderMatched(ingredientIds(store));
-    renderOfferList(store);
+    els.prospekte.innerHTML = stores.map(function (store) {
+      return '<a class="prospekt" href="' + escapeHtml(store.source || '#') + '" target="_blank" rel="noopener noreferrer">Prospekt von ' + escapeHtml(store.name) + ' öffnen</a>';
+    }).join('');
+    renderMatched(unionIds(stores));
+    renderOfferList(stores);
   }
 
   function renderChoice() {
-    els.storeSelect.innerHTML = catalog.stores.map(function (store) {
+    els.storePicks.innerHTML = catalog.stores.map(function (store) {
+      var pressed = state.storeIds.indexOf(store.id) !== -1;
+      return '<button type="button" class="store-pick" data-store="' + store.id + '" aria-pressed="' + (pressed ? 'true' : 'false') + '">' + escapeHtml(store.name) + '</button>';
+    }).join('');
+    els.marketWrap.hidden = state.storeIds.indexOf('prechtl') === -1;
+    var stores = selectedStores();
+    var previous = els.extraStore.value;
+    els.extraWrap.hidden = stores.length < 2;
+    els.extraStore.innerHTML = stores.map(function (store) {
       return '<option value="' + store.id + '">' + escapeHtml(store.name) + '</option>';
     }).join('');
-    els.storeSelect.value = state.storeId;
-    els.marketWrap.hidden = state.storeId !== 'prechtl';
+    if (stores.some(function (store) { return store.id === previous; })) els.extraStore.value = previous;
   }
 
   function renderPantry() {
@@ -284,13 +378,27 @@
   function renderIdeas() {
     var list = suggestions();
     var chosen = meals.chosenIds(list, state.picked);
+    if (!selectedStores().length) {
+      els.ideas.innerHTML = '<p class="empty">Wähl mindestens einen Supermarkt. Die Angebote werden zusammengezählt.</p>';
+      return;
+    }
     if (!list.length) {
       els.ideas.innerHTML = '<p class="empty">Aus diesen Angeboten lässt sich keins der Gerichte kochen.</p>';
       return;
     }
     els.ideas.innerHTML = list.map(function (recipe) {
       var on = chosen.indexOf(recipe.id) !== -1;
-      var hits = recipe.hits.map(function (item) { return escapeHtml(item.name); }).join(', ');
+      var several = selectedStores().length > 1;
+      var hits = recipe.hits.map(function (item) {
+        var label = item.name;
+        if (several) {
+          var places = selectedStores().filter(function (store) {
+            return ingredientIds(store).indexOf(item.id) !== -1;
+          }).map(function (store) { return store.name; });
+          if (places.length) label += ' (' + places.join(', ') + ')';
+        }
+        return escapeHtml(label);
+      }).join(', ');
       var missing = recipe.missing.length
         ? 'Dazu: ' + recipe.missing.map(function (item) {
           return escapeHtml(item.name + ' ' + item.amount);
@@ -310,14 +418,23 @@
     }).join('');
   }
 
+  function shopItem(item) {
+    return '<li class="shop-item"><span class="shop-name">' + escapeHtml(item.name) + '</span>' +
+      '<span class="shop-amount">' + escapeHtml(item.amounts.join(' · ')) + '</span>' +
+      '<span class="shop-meals">für ' + escapeHtml(item.meals.join(', ')) + '</span></li>';
+  }
+
   function renderShop() {
-    var store = currentStore();
-    var heading = 'Einkauf bei ' + store.name;
-    if (store.id === 'prechtl') heading += ' ' + meals.marketById(state.marketId).name;
-    els.shopHeading.textContent = heading;
+    var stores = selectedStores();
+    els.shopHeading.textContent = stores.length ? 'Einkauf bei ' + joinNames(storeNames(stores)) : 'Einkaufsliste';
     var list = suggestions();
     var chosen = meals.chosenIds(list, state.picked);
-    var items = meals.shoppingList(list, state.picked);
+    if (!stores.length) {
+      els.shop.innerHTML = '';
+      els.shopEmpty.hidden = false;
+      els.shopEmpty.textContent = 'Wähl mindestens einen Supermarkt.';
+      return;
+    }
     if (!list.length) {
       els.shop.innerHTML = '';
       els.shopEmpty.hidden = false;
@@ -330,18 +447,24 @@
       els.shopEmpty.textContent = 'Kein Gericht auf der Liste.';
       return;
     }
-    if (!items.length) {
+    var plan = meals.shopPlan(list, state.picked, sources());
+    if (!plan.offers.length && !plan.missing.length) {
       els.shop.innerHTML = '';
       els.shopEmpty.hidden = false;
       els.shopEmpty.textContent = 'Für die ausgewählten Gerichte ist alles da.';
       return;
     }
     els.shopEmpty.hidden = true;
-    els.shop.innerHTML = items.map(function (item) {
-      return '<li class="shop-item"><span class="shop-name">' + escapeHtml(item.name) + '</span>' +
-        '<span class="shop-amount">' + escapeHtml(item.amounts.join(' · ')) + '</span>' +
-        '<span class="shop-meals">für ' + escapeHtml(item.meals.join(', ')) + '</span></li>';
-    }).join('');
+    var html = '';
+    plan.offers.forEach(function (group) {
+      html += '<li class="shop-label">' + escapeHtml(group.label) + '</li>';
+      html += group.items.map(shopItem).join('');
+    });
+    if (plan.missing.length) {
+      html += '<li class="shop-label">Noch kaufen</li>';
+      html += plan.missing.map(shopItem).join('');
+    }
+    els.shop.innerHTML = html;
   }
 
   function render() {
@@ -353,16 +476,20 @@
     renderShop();
   }
 
-  function selectStore(id) {
+  function toggleStore(id) {
     var store = storeById(id);
-    if (!store || store.id === state.storeId) return;
-    state.storeId = store.id;
+    if (!store) return;
+    var next = state.storeIds.slice();
+    var at = next.indexOf(id);
+    if (at === -1) next.push(id);
+    else next.splice(at, 1);
+    state.storeIds = orderedIds(next);
     state.picked = null;
     if (els.note) els.note.textContent = '';
     save();
     render();
     if (els.offerScroll) els.offerScroll.scrollTop = 0;
-    announce(store.name + ' gewählt');
+    announce(at === -1 ? store.name + ' dazugenommen' : store.name + ' abgewählt');
   }
 
   function isLocalFile() {
@@ -434,15 +561,13 @@
     }).join('');
     els.market.value = state.marketId;
 
-    els.stores.addEventListener('click', function (event) {
+    function onStoreClick(event) {
       var button = event.target.closest('[data-store]');
       if (!button) return;
-      selectStore(button.getAttribute('data-store'));
-    });
-
-    els.storeSelect.addEventListener('change', function () {
-      selectStore(els.storeSelect.value);
-    });
+      toggleStore(button.getAttribute('data-store'));
+    }
+    els.stores.addEventListener('click', onStoreClick);
+    els.storePicks.addEventListener('click', onStoreClick);
 
     els.market.addEventListener('change', function () {
       state.marketId = meals.marketById(els.market.value).id;
@@ -477,7 +602,13 @@
         els.note.textContent = 'Der Name ist zu lang.';
         return;
       }
-      var store = currentStore();
+      var stores = selectedStores();
+      if (!stores.length) {
+        els.note.textContent = 'Wähl zuerst einen Supermarkt.';
+        return;
+      }
+      var store = stores.length === 1 ? stores[0] : storeById(els.extraStore.value);
+      if (!store) store = stores[0];
       var names = extrasFor(store.id).slice();
       var known = false;
       offersFor(store).forEach(function (offer) {
