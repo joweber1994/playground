@@ -132,22 +132,30 @@ def perpendicular_distance(point, start, end) -> float:
 
 
 def douglas_peucker(coords, epsilon: float):
-    if len(coords) < 3 or epsilon <= 0:
+    """Iterativ, damit lange Strava-Tracks den Aufrufstapel nicht sprengen."""
+    count = len(coords)
+    if count < 3 or epsilon <= 0:
         return list(coords)
-    start = coords[0]
-    end = coords[-1]
-    worst_index = 0
-    worst = -1.0
-    for index in range(1, len(coords) - 1):
-        distance = perpendicular_distance(coords[index], start, end)
-        if distance > worst:
-            worst = distance
-            worst_index = index
-    if worst > epsilon:
-        left = douglas_peucker(coords[: worst_index + 1], epsilon)
-        right = douglas_peucker(coords[worst_index:], epsilon)
-        return left[:-1] + right
-    return [start, end]
+    keep = [False] * count
+    keep[0] = True
+    keep[-1] = True
+    stack = [(0, count - 1)]
+    while stack:
+        start_index, end_index = stack.pop()
+        worst = -1.0
+        worst_index = -1
+        start = coords[start_index]
+        end = coords[end_index]
+        for index in range(start_index + 1, end_index):
+            distance = perpendicular_distance(coords[index], start, end)
+            if distance > worst:
+                worst = distance
+                worst_index = index
+        if worst > epsilon and worst_index != -1:
+            keep[worst_index] = True
+            stack.append((start_index, worst_index))
+            stack.append((worst_index, end_index))
+    return [coords[index] for index in range(count) if keep[index]]
 
 
 def format_km(meters: float) -> str:
