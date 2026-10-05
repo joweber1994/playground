@@ -2,7 +2,9 @@
 
 Übersichtskarte einer gefahrenen Bikepacking-Tour fürs Fotoalbum. Auf dem iPhone wird Strava verbunden, die Etappen werden ausgewählt, und nur diese Fahrten werden als Seite gezeichnet.
 
-Öffnen mit [`index.html`](index.html). In Safari teilen, dann **Zum Home-Bildschirm**. Das Icon heißt Tourkarte.
+Auf dem iPhone in Safari öffnen: <https://joweber1994.github.io/playground/tourkarte/>
+
+Dann teilen und **Zum Home-Bildschirm**. Das Icon heißt Tourkarte. Die Strava-Anmeldung läuft über diese Adresse. In der Strava-App als **Authorization Callback Domain** eintragen: `joweber1994.github.io`
 
 ## Strava auf dem iPhone
 

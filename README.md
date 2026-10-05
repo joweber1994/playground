@@ -8,4 +8,4 @@ Wochenessen liegt in [`wochenessen/`](wochenessen/). Die Angebote von Prechtl, A
 
 tf_modeling liegt in [`tf_modeling/`](tf_modeling/). Die App rechnet lineare Schaltungen offline auf dem Gerät. Öffnen mit `tf_modeling/index.html`.
 
-Tourkarte liegt in [`tourkarte/`](tourkarte/). Auf dem iPhone wird Strava verbunden, die Etappen der Tour werden ausgewählt und als Übersicht fürs Fotoalbum gezeichnet. Öffnen mit `tourkarte/index.html`, dann zum Home-Bildschirm hinzufügen. Die Karte prüft `node tourkarte/map.test.js`, `node tourkarte/strava.test.js` und `python3 -m unittest discover -s tourkarte/tests -t .`.
+Tourkarte liegt in [`tourkarte/`](tourkarte/). Auf dem iPhone wird Strava verbunden, die Etappen der Tour werden ausgewählt und als Übersicht fürs Fotoalbum gezeichnet. Öffnen mit <https://joweber1994.github.io/playground/tourkarte/>, dann zum Home-Bildschirm hinzufügen. Die Karte prüft `node tourkarte/map.test.js`, `node tourkarte/strava.test.js` und `python3 -m unittest discover -s tourkarte/tests -t .`.
