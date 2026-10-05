@@ -77,4 +77,16 @@ var longSvg = map.sceneToSvg(map.buildScene({
 assert(longSvg.indexOf("<path") !== -1, "lange Strecke bleibt zeichenbar");
 assert(longSvg.indexOf("Lang") !== -1, "Titel der langen Strecke");
 
+var withMap = map.buildScene(tour, { title: "Beispieltour", basemap: true });
+assert(withMap.tiles.length > 4 && withMap.tiles.length <= 48, "Hintergrundkacheln " + withMap.tiles.length);
+assert(withMap.tiles.every(function (tile) { return tile.url.indexOf("https://tile.openstreetmap.org/") === 0; }), "OpenStreetMap");
+var mapSvg = map.sceneToSvg(withMap);
+assert(mapSvg.indexOf("<image ") !== -1, "Kacheln im SVG");
+assert(mapSvg.indexOf("OpenStreetMap") !== -1, "Quellenangabe");
+var route = withMap.items.filter(function (item) { return item.op === "polyline"; })[0].paths[0];
+route.forEach(function (point) {
+  assert(point[0] >= withMap.mapRect[0] && point[0] <= withMap.mapRect[0] + withMap.mapRect[2], "Linie auf der Karte");
+  assert(point[1] >= withMap.mapRect[1] && point[1] <= withMap.mapRect[1] + withMap.mapRect[3], "Linie auf der Karte");
+});
+
 console.log("map.test.js ok");

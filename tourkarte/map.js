@@ -222,24 +222,53 @@
     var colors = stageColors(prepared.stages, options);
     var legend = options.colorByDay && prepared.stages.length > 1 ? legendEntries(prepared.stages, colors) : [];
     var frame = layout(width, height, title, dates, statsLine(distance, gain, prepared.stages.length), legend, options);
-    var fitted = fit(prepared.coords, frame.map, frame.inset);
     var stroke = clamp(Math.min(frame.map[2], frame.map[3]) * 0.0048, 5.2, 10.5);
-    var epsilon = fitted.scale ? Math.max(8, 2.4 / fitted.scale) : 20;
     var items = [{ op: "rect", x: 0, y: 0, w: width, h: height, fill: options.paper }];
+    var fitted = null;
+    var tiles = [];
+    if (options.basemap) {
+      var places = [];
+      prepared.stages.forEach(function (stage) {
+        (stage.geo || []).forEach(function (segment) {
+          segment.forEach(function (pair) { places.push(pair); });
+        });
+      });
+      prepared.waypoints.forEach(function (waypoint) {
+        if (waypoint.lat != null) places.push([waypoint.lat, waypoint.lon]);
+      });
+      if (places.length) {
+        var merc = mercatorView(places, frame.map, frame.inset);
+        if (merc.tiles.length) {
+          tiles = merc.tiles;
+          fitted = merc;
+          items.push({ op: "tiles", tiles: tiles, clip: frame.map });
+        }
+      }
+    }
+    if (!fitted) fitted = fit(prepared.coords, frame.map, frame.inset);
+    var epsilon = fitted.mercator ? Math.max(1.2, 2.4 / fitted.pixelScale) : (fitted.scale ? Math.max(8, 2.4 / fitted.scale) : 20);
     items.push({ op: "rect", x: frame.map[0], y: frame.map[1], w: frame.map[2], h: frame.map[3], fill: null, stroke: RULE, strokeWidth: 1.4 });
     var pagePaths = [];
     prepared.stages.forEach(function (stage, index) {
       var paths = [];
-      stage.segments.forEach(function (segment) {
-        var simplified = douglasPeucker(segment, epsilon);
-        if (simplified.length >= 2) paths.push(simplified.map(function (point) { return fitted.transform(point[0], point[1]); }));
+      var source = fitted.mercator ? (stage.geo || []) : stage.segments;
+      source.forEach(function (segment) {
+        var projected = fitted.mercator
+          ? segment.map(function (pair) { return mercator(pair[0], pair[1], fitted.zoom); })
+          : segment;
+        var simplified = douglasPeucker(projected, epsilon);
+        if (simplified.length >= 2) {
+          paths.push(simplified.map(function (point) {
+            return fitted.mercator ? fitted.place(point[0], point[1]) : fitted.transform(point[0], point[1]);
+          }));
+        }
       });
       if (!paths.length) return;
       pagePaths.push(paths);
-      items.push({ op: "polyline", paths: paths, stroke: colors[index], strokeWidth: stroke, halo: options.paper, haloWidth: stroke * 2.15 });
+      items.push({ op: "polyline", paths: paths, stroke: colors[index], strokeWidth: stroke, halo: tiles.length ? "#ffffff" : options.paper, haloWidth: tiles.length ? stroke * 1.2 : stroke * 2.15 });
     });
     prepared.waypoints.forEach(function (waypoint) {
-      var spot = fitted.transform(waypoint.xy[0], waypoint.xy[1]);
+      var spot = fitted.mercator ? fitted.at(waypoint.lat, waypoint.lon) : fitted.transform(waypoint.xy[0], waypoint.xy[1]);
       items.push({ op: "circle", cx: spot[0], cy: spot[1], r: Math.max(5.4, stroke * 0.7), fill: options.paper, stroke: options.ink, strokeWidth: 1.6 });
       placeLabel(items, waypoint.name, spot[0], spot[1] - stroke - 8, frame.map, options, Math.max(18, stroke * 2.1));
     });
@@ -256,6 +285,9 @@
       if (options.endLabel) endpointLabel(items, options.endLabel, end, endAway, stroke, frame.map, options);
     }
     northArrow(items, frame.map, options.muted);
+    if (tiles.length) {
+      items.push(textItem(frame.map[0] + frame.map[2] - 14, frame.map[1] + frame.map[3] - 16, "© OpenStreetMap", 18, options.ink, "sans", "regular", "end", true, "#ffffff"));
+    }
     items = items.concat(frame.caption);
     scaleBar(items, frame, fitted.scale, fitted.shown, options);
     return {
@@ -266,7 +298,8 @@
       background: options.paper,
       title: title,
       mapRect: frame.map,
-      items: items
+      items: items,
+      tiles: tiles
     };
   }
 
@@ -297,17 +330,19 @@
     var coords = [];
     (tour.stages || []).forEach(function (stage) {
       var segments = [];
+      var geo = [];
       var flat = [];
       stage.segments.forEach(function (segment) {
         var cleaned = cleanPoints(segment);
         if (cleaned.length < 2) return;
         var projected = cleaned.map(function (point) { return project(point.lat, point.lon, lat0); });
         segments.push(projected);
+        geo.push(cleaned.map(function (point) { return [point.lat, point.lon]; }));
         flat = flat.concat(cleaned);
         coords = coords.concat(projected);
       });
       if (segments.length) {
-        stages.push({ name: stage.name, when: stage.when, segments: segments });
+        stages.push({ name: stage.name, when: stage.when, segments: segments, geo: geo });
         distancePoints.push(flat);
       }
     });
@@ -315,7 +350,7 @@
     (tour.waypoints || []).forEach(function (waypoint) {
       if (!waypoint.name) return;
       var xy = project(waypoint.lat, waypoint.lon, lat0);
-      waypoints.push({ name: waypoint.name, xy: xy });
+      waypoints.push({ name: waypoint.name, xy: xy, lat: waypoint.lat, lon: waypoint.lon });
       coords.push(xy);
     });
     return { coords: coords, stages: stages, waypoints: waypoints, distancePoints: distancePoints };
@@ -376,6 +411,99 @@
       statsSize: statsSize,
       margin: margin
     };
+  }
+
+  function mercator(lat, lon, zoom) {
+    var size = 256 * Math.pow(2, zoom);
+    var x = (lon + 180) / 360 * size;
+    var sine = Math.sin(clamp(lat, -85, 85) * Math.PI / 180);
+    var y = (0.5 - Math.log((1 + sine) / (1 - sine)) / (4 * Math.PI)) * size;
+    return [x, y];
+  }
+
+  function mercatorView(places, mapRect, inset) {
+    var minLat = Infinity;
+    var maxLat = -Infinity;
+    var minLon = Infinity;
+    var maxLon = -Infinity;
+    places.forEach(function (place) {
+      if (place[0] < minLat) minLat = place[0];
+      if (place[0] > maxLat) maxLat = place[0];
+      if (place[1] < minLon) minLon = place[1];
+      if (place[1] > maxLon) maxLon = place[1];
+    });
+    var innerW = mapRect[2] - 2 * inset;
+    var innerH = mapRect[3] - 2 * inset;
+    var chosen = 2;
+    for (var zoom = 2; zoom <= 15; zoom += 1) {
+      var span = mercatorSpan(minLat, maxLat, minLon, maxLon, zoom);
+      var scale = Math.min(innerW / (span[0] * 1.22), innerH / (span[1] * 1.22));
+      var across = Math.ceil(span[0] * 1.22 / 256);
+      var down = Math.ceil(span[1] * 1.22 / 256);
+      if (zoom > 2 && (scale < 1 || across * down > 48)) break;
+      chosen = zoom;
+    }
+    var center = mercator((minLat + maxLat) / 2, (minLon + maxLon) / 2, chosen);
+    var span = mercatorSpan(minLat, maxLat, minLon, maxLon, chosen);
+    var worldW = span[0] * 1.22;
+    var worldH = span[1] * 1.22;
+    var pixelScale = Math.min(innerW / worldW, innerH / worldH);
+    var minX = center[0] - innerW / pixelScale / 2;
+    var maxX = center[0] + innerW / pixelScale / 2;
+    var minY = center[1] - innerH / pixelScale / 2;
+    var maxY = center[1] + innerH / pixelScale / 2;
+    var usedW = (maxX - minX) * pixelScale;
+    var usedH = (maxY - minY) * pixelScale;
+    var originX = mapRect[0] + inset + (innerW - usedW) / 2;
+    var originY = mapRect[1] + inset + (innerH - usedH) / 2;
+    function place(x, y) {
+      return [originX + (x - minX) * pixelScale, originY + (y - minY) * pixelScale];
+    }
+    var limit = Math.pow(2, chosen);
+    var tiles = [];
+    var x0 = Math.floor(minX / 256);
+    var x1 = Math.floor((maxX - 0.001) / 256);
+    var y0 = Math.floor(minY / 256);
+    var y1 = Math.floor((maxY - 0.001) / 256);
+    for (var tx = x0; tx <= x1; tx += 1) {
+      for (var ty = y0; ty <= y1; ty += 1) {
+        if (ty < 0 || ty >= limit) continue;
+        var wrapped = ((tx % limit) + limit) % limit;
+        var topLeft = place(tx * 256, ty * 256);
+        var bottomRight = place((tx + 1) * 256, (ty + 1) * 256);
+        tiles.push({
+          z: chosen,
+          x: wrapped,
+          y: ty,
+          url: "https://tile.openstreetmap.org/" + chosen + "/" + wrapped + "/" + ty + ".png",
+          href: "",
+          x: topLeft[0],
+          y: topLeft[1],
+          w: bottomRight[0] - topLeft[0],
+          h: bottomRight[1] - topLeft[1]
+        });
+      }
+    }
+    var metersPerPixel = 156543.03392 * Math.cos((minLat + maxLat) / 2 * Math.PI / 180) / limit;
+    return {
+      mercator: true,
+      zoom: chosen,
+      pixelScale: pixelScale,
+      scale: pixelScale / metersPerPixel,
+      shown: (maxX - minX) * metersPerPixel,
+      tiles: tiles,
+      place: place,
+      at: function (lat, lon) {
+        var point = mercator(lat, lon, chosen);
+        return place(point[0], point[1]);
+      }
+    };
+  }
+
+  function mercatorSpan(minLat, maxLat, minLon, maxLon, zoom) {
+    var nw = mercator(maxLat, minLon, zoom);
+    var se = mercator(minLat, maxLon, zoom);
+    return [Math.max(se[0] - nw[0], 1), Math.max(se[1] - nw[1], 1)];
   }
 
   function fit(coords, mapRect, inset) {
@@ -574,6 +702,15 @@
       var stroke = item.stroke ? ' stroke="' + item.stroke + '" stroke-width="' + num(item.strokeWidth || 1) + '"' : "";
       return '<circle cx="' + num(item.cx) + '" cy="' + num(item.cy) + '" r="' + num(item.r) + '" fill="' + (item.fill || "none") + '"' + stroke + "/>";
     }
+    if (item.op === "tiles") {
+      var clip = item.clip;
+      var images = item.tiles.map(function (tile) {
+        var href = tile.href || tile.url;
+        if (!href) return "";
+        return '<image href="' + xml(href) + '" x="' + num(tile.x) + '" y="' + num(tile.y) + '" width="' + num(tile.w) + '" height="' + num(tile.h) + '" preserveAspectRatio="none"/>';
+      }).join("");
+      return '<clipPath id="tourkarte-karte"><rect x="' + num(clip[0]) + '" y="' + num(clip[1]) + '" width="' + num(clip[2]) + '" height="' + num(clip[3]) + '"/></clipPath><g clip-path="url(#tourkarte-karte)">' + images + "</g>";
+    }
     if (item.op === "polygon") {
       return '<polygon points="' + item.points.map(function (point) { return num(point[0]) + "," + num(point[1]); }).join(" ") + '" fill="' + (item.fill || "none") + '"/>';
     }
@@ -670,7 +807,8 @@
       ink: parseHex(options.ink || INK),
       muted: parseHex(options.muted || MUTED),
       route: parseHex(options.route || ROUTE),
-      colorByDay: Boolean(options.colorByDay)
+      colorByDay: Boolean(options.colorByDay),
+      basemap: Boolean(options.basemap)
     };
   }
 
@@ -807,6 +945,7 @@
     mergeTours: mergeTours,
     buildScene: buildScene,
     sceneToSvg: sceneToSvg,
-    parseHex: parseHex
+    parseHex: parseHex,
+    mercatorView: mercatorView
   };
 });

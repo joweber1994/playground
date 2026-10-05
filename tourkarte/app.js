@@ -23,13 +23,16 @@
       endLabel: "",
       fmt: "square",
       route: "#9c3412",
-      colorByDay: false
+      colorByDay: false,
+      basemap: true
     },
     error: "",
     status: "",
     pendingCode: "",
     pngBlob: null,
     pngSvg: "",
+    embeddedSvg: "",
+    mapGeneration: 0,
     cancel: false
   };
 
@@ -151,6 +154,11 @@
       state.options.colorByDay = byDay.checked;
       refreshPreview();
     });
+    var basemap = document.getElementById("basemap");
+    if (basemap) basemap.addEventListener("change", function () {
+      state.options.basemap = basemap.checked;
+      refreshPreview();
+    });
     document.querySelectorAll("[data-route]").forEach(function (button) {
       button.addEventListener("click", function () {
         state.options.route = button.getAttribute("data-route");
@@ -269,7 +277,9 @@
       '<div class="swatches">' + ROUTES.map(function (color) {
         return '<button type="button" class="swatch' + (color === state.options.route ? " on" : "") + '" data-route="' + color + '" style="background:' + color + '" aria-label="Linienfarbe ' + color + '"></button>';
       }).join("") + "</div>",
+      '<label class="checkline"><input id="basemap" type="checkbox"' + (state.options.basemap ? " checked" : "") + "> Karte im Hintergrund</label>",
       stages > 1 ? '<label class="checkline"><input id="by-day" type="checkbox"' + (state.options.colorByDay ? " checked" : "") + "> Etappen farblich</label>" : "",
+      '<p id="map-status" class="status"></p>',
       '<button type="button" id="share-svg" class="primary">SVG teilen</button>',
       '<button type="button" id="share-png" class="secondary">Bild teilen</button>'
     ].join("");
@@ -583,7 +593,8 @@
       endLabel: state.options.endLabel,
       fmt: state.options.fmt,
       route: state.options.route,
-      colorByDay: state.options.colorByDay
+      colorByDay: state.options.colorByDay,
+      basemap: state.options.basemap
     });
     return { scene: scene, svg: TourkarteMap.sceneToSvg(scene) };
   }
@@ -598,22 +609,75 @@
       preview.innerHTML = '<p class="error">' + esc(error.message) + "</p>";
       return;
     }
+    state.mapGeneration += 1;
+    var generation = state.mapGeneration;
+    state.embeddedSvg = "";
+    state.pngBlob = null;
+    state.pngSvg = "";
     preview.innerHTML = drawn.svg;
-    if (state.pngSvg !== drawn.svg) {
-      state.pngBlob = null;
-      state.pngSvg = drawn.svg;
-      svgToPng(drawn.svg, drawn.scene.width, drawn.scene.height).then(function (blob) {
-        if (state.pngSvg === drawn.svg) state.pngBlob = blob;
+    var status = document.getElementById("map-status");
+    if (!drawn.scene.tiles || !drawn.scene.tiles.length) {
+      if (status) status.textContent = "";
+      rememberPicture(drawn.svg, drawn.scene, generation);
+      return;
+    }
+    if (status) status.textContent = "Hintergrundkarte wird geladen…";
+    embedTiles(drawn.scene.tiles).then(function (missing) {
+      if (generation !== state.mapGeneration) return;
+      var svg = TourkarteMap.sceneToSvg(drawn.scene);
+      var node = document.getElementById("preview");
+      if (node) node.innerHTML = svg;
+      state.embeddedSvg = svg;
+      if (status) status.textContent = missing ? "Ein Teil der Karte konnte nicht geladen werden." : "";
+      rememberPicture(svg, drawn.scene, generation);
+    });
+  }
+
+  var tileCache = {};
+
+  function embedTiles(tiles) {
+    var missing = 0;
+    return Promise.all(tiles.map(function (tile) {
+      return tileData(tile.url).then(function (href) {
+        tile.href = href;
       }).catch(function () {
-        state.pngBlob = null;
+        missing += 1;
+        tile.href = "";
+      });
+    })).then(function () { return missing; });
+  }
+
+  function tileData(url) {
+    if (!tileCache[url]) {
+      tileCache[url] = fetch(url).then(function (response) {
+        if (!response.ok) throw new Error("Kachel");
+        return response.blob();
+      }).then(function (blob) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () { resolve(reader.result); };
+          reader.onerror = function () { reject(new Error("Kachel")); };
+          reader.readAsDataURL(blob);
+        });
       });
     }
+    return tileCache[url];
+  }
+
+  function rememberPicture(svg, scene, generation) {
+    state.pngSvg = svg;
+    svgToPng(svg, scene.width, scene.height).then(function (blob) {
+      if (generation === state.mapGeneration && state.pngSvg === svg) state.pngBlob = blob;
+    }).catch(function () {
+      if (generation === state.mapGeneration) state.pngBlob = null;
+    });
   }
 
   function shareSvgFile() {
     var drawn = currentSvg();
+    var svg = state.embeddedSvg || drawn.svg;
     var name = fileSlug(state.options.title || drawn.scene.title) + ".svg";
-    shareBlob(new Blob([drawn.svg], { type: "image/svg+xml" }), name, "image/svg+xml");
+    shareBlob(new Blob([svg], { type: "image/svg+xml" }), name, "image/svg+xml");
   }
 
   function sharePngFile() {

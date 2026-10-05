@@ -14,7 +14,7 @@ Dann teilen und **Zum Home-Bildschirm**. Das Icon heißt Tourkarte. Die Strava-A
 4. **Mit Strava verbinden.** Strava fragt nach der Erlaubnis für die eigenen Aktivitäten.
 5. Zeitraum wählen, Fahrrad oder alle Sportarten, dann die Etappen der Tour anklicken.
 6. **Karte zeichnen.** GPS wird nur für die angehakten Fahrten geholt.
-7. Titel, Start, Ziel und Farbe setzen. **SVG teilen** legt die druckscharfe Datei in die Dateien oder in eine Mail. **Bild teilen** gibt ein PNG fürs Fotoalbum.
+7. Titel, Start, Ziel und Farbe setzen. **Karte im Hintergrund** legt OpenStreetMap unter die Linie, mit Küste, Orten und Wegen. **SVG teilen** legt die druckscharfe Datei in die Dateien oder in eine Mail. **Bild teilen** gibt ein PNG fürs Fotoalbum. Die Karte nennt OpenStreetMap als Quelle.
 
 Rollentrainer und virtuelle Fahrten bleiben aus, bis „Indoor und virtuell zeigen“ an ist. Eine Privatsphäre-Zone in Strava schneidet Start oder Ziel ab. Dieselbe Lücke steht dann auf der Karte.
 
