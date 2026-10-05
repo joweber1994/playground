@@ -83,6 +83,19 @@ assert(withMap.tiles.every(function (tile) { return tile.url.indexOf("https://ti
 var mapSvg = map.sceneToSvg(withMap);
 assert(mapSvg.indexOf("<image ") !== -1, "Kacheln im SVG");
 assert(mapSvg.indexOf("OpenStreetMap") !== -1, "Quellenangabe");
+
+var facts = map.stageFacts(tour);
+assertEqual(facts.length, 2, "zwei Etappen in der Zusammenfassung");
+assert(facts[0].km > 10000 && facts[1].km > 10000, "Kilometer je Etappe");
+assert(facts[0].hm > 0 && facts[1].hm > 0, "Höhenmeter je Etappe");
+assertEqual(facts[0].shortDate, "12.6.", "Datum der ersten Etappe");
+var named = map.sceneToSvg(map.buildScene(tour, {
+  title: "Beispieltour",
+  stagePlaces: [{ start: "Landeck", end: "Imst" }, { start: "Imst", end: "Innsbruck" }]
+}));
+assert(named.indexOf("Landeck") !== -1, "Start der Etappe");
+assert(named.indexOf("Innsbruck") !== -1, "Ziel der Etappe");
+assert(named.indexOf(facts[0].kmLabel) !== -1, "Kilometer auf der Karte");
 var route = withMap.items.filter(function (item) { return item.op === "polyline"; })[0].paths[0];
 route.forEach(function (point) {
   assert(point[0] >= withMap.mapRect[0] && point[0] <= withMap.mapRect[0] + withMap.mapRect[2], "Linie auf der Karte");

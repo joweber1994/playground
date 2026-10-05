@@ -152,12 +152,23 @@
     var byDay = document.getElementById("by-day");
     if (byDay) byDay.addEventListener("change", function () {
       state.options.colorByDay = byDay.checked;
+      paintStageDots();
       refreshPreview();
     });
     var basemap = document.getElementById("basemap");
     if (basemap) basemap.addEventListener("change", function () {
       state.options.basemap = basemap.checked;
       refreshPreview();
+    });
+    document.querySelectorAll("[data-stage]").forEach(function (input) {
+      input.addEventListener("input", function () {
+        var index = Number(input.getAttribute("data-stage"));
+        var key = input.getAttribute("data-place");
+        if (!state.options.stagePlaces[index]) state.options.stagePlaces[index] = { start: "", end: "" };
+        state.options.stagePlaces[index][key] = input.value;
+        clearTimeout(state.summaryTimer);
+        state.summaryTimer = setTimeout(refreshPreview, 300);
+      });
     });
     document.querySelectorAll("[data-route]").forEach(function (button) {
       button.addEventListener("click", function () {
@@ -166,7 +177,61 @@
           item.classList.toggle("on", item === button);
         });
         refreshPreview();
+        paintStageDots();
       });
+    });
+  }
+
+  function stageListHtml() {
+    var facts = state.tour ? TourkarteMap.stageFacts(state.tour) : [];
+    if (!facts.length) return "";
+    ensurePlaces(facts.length);
+    var rows = facts.map(function (fact, index) {
+      var place = state.options.stagePlaces[index];
+      var stats = [fact.kmLabel, fact.hmLabel].filter(Boolean).join(" · ");
+      var title = (index + 1) + (fact.date ? " · " + fact.date : "");
+      return [
+        '<article class="stage">',
+        '<span class="dot" data-stage-dot style="background:' + stageColor(index, facts.length) + '"></span>',
+        "<div>",
+        "<h3>" + esc(title) + "</h3>",
+        fact.name ? "<p>" + esc(fact.name) + "</p>" : "",
+        "<p>" + esc(stats) + "</p>",
+        '<div class="dates">',
+        '<label>Start<input data-stage="' + index + '" data-place="start" value="' + esc(place.start) + '" placeholder="Ort"></label>',
+        '<label>Ziel<input data-stage="' + index + '" data-place="end" value="' + esc(place.end) + '" placeholder="Ort"></label>',
+        "</div>",
+        "</div>",
+        "</article>"
+      ].join("");
+    }).join("");
+    return '<section class="stages"><h2>Etappen</h2>' + rows + "</section>";
+  }
+
+  function ensurePlaces(count) {
+    var current = state.options.stagePlaces || [];
+    var next = [];
+    for (var index = 0; index < count; index += 1) {
+      next.push({
+        start: current[index] && current[index].start || "",
+        end: current[index] && current[index].end || ""
+      });
+    }
+    state.options.stagePlaces = next;
+    return next;
+  }
+
+  function stageColor(index, count) {
+    if (state.options.colorByDay && count > 1) {
+      return TourkarteMap.DAY_COLORS[index % TourkarteMap.DAY_COLORS.length];
+    }
+    return state.options.route;
+  }
+
+  function paintStageDots() {
+    var count = document.querySelectorAll("[data-stage-dot]").length;
+    document.querySelectorAll("[data-stage-dot]").forEach(function (dot, index) {
+      dot.style.background = stageColor(index, count);
     });
   }
 
@@ -280,6 +345,7 @@
       '<label class="checkline"><input id="basemap" type="checkbox"' + (state.options.basemap ? " checked" : "") + "> Karte im Hintergrund</label>",
       stages > 1 ? '<label class="checkline"><input id="by-day" type="checkbox"' + (state.options.colorByDay ? " checked" : "") + "> Etappen farblich</label>" : "",
       '<p id="map-status" class="status"></p>',
+      stageListHtml(),
       '<button type="button" id="share-svg" class="primary">SVG teilen</button>',
       '<button type="button" id="share-png" class="secondary">Bild teilen</button>'
     ].join("");
@@ -504,6 +570,7 @@
         state.tour = { name: null, stages: stages, waypoints: [] };
         state.source = "strava";
         if (!state.options.title && stages.length === 1) state.options.title = stages[0].name;
+        state.options.stagePlaces = [];
         state.mode = "map";
         state.error = "";
         render();
@@ -559,6 +626,7 @@
       state.source = "gpx";
       state.skipped = [];
       state.options.title = state.tour.name || "";
+      state.options.stagePlaces = [];
       state.error = "";
       state.mode = "map";
       render();
@@ -578,6 +646,7 @@
       state.source = "gpx";
       state.skipped = [];
       state.options.title = state.tour.name || "Beispieltour";
+      state.options.stagePlaces = [];
       state.mode = "map";
       render();
     }).catch(function (error) {
@@ -594,7 +663,8 @@
       fmt: state.options.fmt,
       route: state.options.route,
       colorByDay: state.options.colorByDay,
-      basemap: state.options.basemap
+      basemap: state.options.basemap,
+      stagePlaces: state.options.stagePlaces
     });
     return { scene: scene, svg: TourkarteMap.sceneToSvg(scene) };
   }

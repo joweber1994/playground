@@ -220,8 +220,10 @@
     var gains = prepared.distancePoints.map(elevationGainM);
     var gain = gains.every(function (value) { return value == null; }) ? null : gains.reduce(function (sum, value) { return sum + (value || 0); }, 0);
     var colors = stageColors(prepared.stages, options);
-    var legend = options.colorByDay && prepared.stages.length > 1 ? legendEntries(prepared.stages, colors) : [];
-    var frame = layout(width, height, title, dates, statsLine(distance, gain, prepared.stages.length), legend, options);
+    var facts = stageFacts(tour);
+    var summary = summaryLines(facts, options.stagePlaces, colors, width - 2 * Math.max(90, Math.round(Math.min(width, height) * 0.068)));
+    var legend = summary.length || !(options.colorByDay && prepared.stages.length > 1) ? [] : legendEntries(prepared.stages, colors);
+    var frame = layout(width, height, title, dates, statsLine(distance, gain, prepared.stages.length), legend, summary, options);
     var stroke = clamp(Math.min(frame.map[2], frame.map[3]) * 0.0048, 5.2, 10.5);
     var items = [{ op: "rect", x: 0, y: 0, w: width, h: height, fill: options.paper }];
     var fitted = null;
@@ -281,8 +283,13 @@
       var endAway = endLine[Math.max(0, endLine.length - 2)];
       marker(items, start, stroke, options.paper, options.ink, true);
       marker(items, end, stroke, options.paper, options.route, false);
-      if (options.startLabel) endpointLabel(items, options.startLabel, start, startAway, stroke, frame.map, options);
-      if (options.endLabel) endpointLabel(items, options.endLabel, end, endAway, stroke, frame.map, options);
+      var places = options.stagePlaces || [];
+      var firstPlace = places[0] || {};
+      var lastPlace = places[places.length - 1] || {};
+      var startText = options.startLabel || String(firstPlace.start || "").trim();
+      var endText = options.endLabel || String(lastPlace.end || "").trim();
+      if (startText) endpointLabel(items, startText, start, startAway, stroke, frame.map, options);
+      if (endText) endpointLabel(items, endText, end, endAway, stroke, frame.map, options);
     }
     northArrow(items, frame.map, options.muted);
     if (tiles.length) {
@@ -369,7 +376,7 @@
     return FORMATS[options.fmt];
   }
 
-  function layout(width, height, title, dates, stats, legend, options) {
+  function layout(width, height, title, dates, stats, legend, summary, options) {
     var short = Math.min(width, height);
     var margin = Math.max(90, Math.round(short * 0.068));
     var titleSize = fitText(title, Math.max(40, Math.round(short * 0.033)), width - 2 * margin, 0.5, 28);
@@ -381,7 +388,10 @@
     var legendRows = legend.length ? wrapLegend(legend, legendSize, mapW) : [];
     var rowH = legendSize + 12;
     var legendBlock = legendRows.length * rowH + (legendRows.length ? gap * 0.45 : 0);
-    var statsBaseline = height - margin - legendBlock;
+    var summarySize = Math.max(15, Math.round(titleSize * 0.28));
+    var summaryRow = summarySize + 9;
+    var summaryBlock = summary.length ? summary.length * summaryRow + gap * 0.4 : 0;
+    var statsBaseline = height - margin - legendBlock - summaryBlock;
     var dateBaseline = null;
     var titleBaseline;
     if (dates) {
@@ -401,6 +411,13 @@
     var legendTop = statsBaseline + gap * 0.85;
     legendRows.forEach(function (row, rowIndex) {
       caption = caption.concat(legendItems(row, margin, legendTop + legendSize + rowIndex * rowH, legendSize, options.ink));
+    });
+    var summaryTop = legendTop + legendRows.length * rowH + (summary.length ? gap * 0.45 : 0);
+    summary.forEach(function (entry, index) {
+      var baseline = summaryTop + summarySize + index * summaryRow;
+      var square = summarySize * 0.62;
+      caption.push({ op: "rect", x: margin, y: baseline - square * 0.82, w: square, h: square, fill: entry[0] });
+      caption.push(textItem(margin + square + 8, baseline, entry[1], summarySize, options.ink, "sans", "regular", "start"));
     });
     return {
       map: mapRect,
@@ -647,6 +664,46 @@
     return stages.map(function (_, index) { return DAY_COLORS[index % DAY_COLORS.length]; });
   }
 
+  function stageFacts(tour) {
+    return (tour.stages || []).map(function (stage, index) {
+      var points = [];
+      (stage.segments || []).forEach(function (segment) {
+        points = points.concat(cleanPoints(segment));
+      });
+      var distance = pathDistanceM(points);
+      var gain = elevationGainM(points);
+      var when = stage.when ? String(stage.when).slice(0, 10) : "";
+      if (!when) {
+        var time = firstTime(stage);
+        if (time) when = String(time).slice(0, 10);
+      }
+      return {
+        index: index,
+        name: stage.name || ("Etappe " + (index + 1)),
+        when: when,
+        date: when ? formatActivityDate(when) : "",
+        shortDate: when ? Number(when.slice(8, 10)) + "." + Number(when.slice(5, 7)) + "." : "",
+        km: distance,
+        hm: gain,
+        kmLabel: formatKm(distance),
+        hmLabel: gain == null ? "" : formatHm(gain)
+      };
+    });
+  }
+
+  function summaryLines(facts, places, colors, width) {
+    var size = 18;
+    return facts.map(function (fact, index) {
+      var place = places && places[index] ? places[index] : {};
+      var ends = [place.start, place.end].map(function (value) { return String(value || "").trim(); }).filter(Boolean).join(" – ");
+      var stats = [fact.kmLabel, fact.hmLabel].filter(Boolean).join(" · ");
+      var head = (index + 1) + (fact.shortDate ? "  " + fact.shortDate : "");
+      var text = [head, ends, stats].filter(Boolean).join("    ");
+      if (width && estimate(text, size, 0.56) > width) text = [head, stats].filter(Boolean).join("    ");
+      return [colors[index] || "#9c3412", text];
+    });
+  }
+
   function legendEntries(stages, colors) {
     return stages.map(function (stage, index) {
       var label = stage.when ? (index + 1) + "  " + Number(String(stage.when).slice(8, 10)) + "." + Number(String(stage.when).slice(5, 7)) + "." : (index + 1) + "  " + short(stage.name, 24);
@@ -808,7 +865,8 @@
       muted: parseHex(options.muted || MUTED),
       route: parseHex(options.route || ROUTE),
       colorByDay: Boolean(options.colorByDay),
-      basemap: Boolean(options.basemap)
+      basemap: Boolean(options.basemap),
+      stagePlaces: Array.isArray(options.stagePlaces) ? options.stagePlaces : []
     };
   }
 
@@ -945,6 +1003,7 @@
     mergeTours: mergeTours,
     buildScene: buildScene,
     sceneToSvg: sceneToSvg,
+    stageFacts: stageFacts,
     parseHex: parseHex,
     mercatorView: mercatorView
   };
