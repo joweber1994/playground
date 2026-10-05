@@ -528,6 +528,75 @@
     return groups;
   }
 
+  function addShopRow(bucket, list, item, recipe) {
+    if (!bucket[item.id]) {
+      bucket[item.id] = { id: item.id, name: item.name, amounts: [], meals: [], stores: [] };
+      list.push(bucket[item.id]);
+    }
+    var row = bucket[item.id];
+    if (row.amounts.indexOf(item.amount) === -1) row.amounts.push(item.amount);
+    if (row.meals.indexOf(recipe.title) === -1) row.meals.push(recipe.title);
+    return row;
+  }
+
+  function shopPlan(suggestions, picked, sources) {
+    var wanted = {};
+    chosenIds(suggestions, picked).forEach(function (id) { wanted[id] = true; });
+    var offerBucket = {};
+    var missingBucket = {};
+    var offerList = [];
+    var missing = [];
+    (suggestions || []).forEach(function (recipe) {
+      if (!wanted[recipe.id]) return;
+      (recipe.hits || []).forEach(function (item) {
+        addShopRow(offerBucket, offerList, item, recipe);
+      });
+      (recipe.missing || []).forEach(function (item) {
+        addShopRow(missingBucket, missing, item, recipe);
+      });
+    });
+    var places = sources || [];
+    offerList.forEach(function (item) {
+      places.forEach(function (source) {
+        if ((source.offers || []).indexOf(item.id) !== -1) {
+          item.stores.push({ id: source.id, name: source.name });
+        }
+      });
+    });
+    var groups = [];
+    var byKey = {};
+    offerList.forEach(function (item) {
+      var key = item.stores.map(function (store) { return store.id; }).join('+') || 'offen';
+      if (!byKey[key]) {
+        byKey[key] = {
+          id: key,
+          label: item.stores.length ? item.stores.map(function (store) { return store.name; }).join(' oder ') : 'Im Angebot',
+          items: []
+        };
+        groups.push(byKey[key]);
+      }
+      byKey[key].items.push(item);
+    });
+    function sourceIndex(id) {
+      for (var i = 0; i < places.length; i += 1) {
+        if (places[i].id === id) return i;
+      }
+      return 99;
+    }
+    groups.sort(function (a, b) {
+      var aMulti = a.id.indexOf('+') !== -1;
+      var bMulti = b.id.indexOf('+') !== -1;
+      if (aMulti !== bMulti) return aMulti ? 1 : -1;
+      if (!aMulti) return sourceIndex(a.id) - sourceIndex(b.id);
+      return a.label.localeCompare(b.label, 'de');
+    });
+    groups.forEach(function (group) {
+      group.items.sort(function (a, b) { return a.name.localeCompare(b.name, 'de'); });
+    });
+    missing.sort(function (a, b) { return a.name.localeCompare(b.name, 'de'); });
+    return { offers: groups, missing: missing };
+  }
+
   return {
     PROSPEKT_URL: PROSPEKT_URL,
     PORTIONS: PORTIONS,
@@ -547,6 +616,7 @@
     idsFromOffers: idsFromOffers,
     suggest: suggest,
     chosenIds: chosenIds,
-    shoppingList: shoppingList
+    shoppingList: shoppingList,
+    shopPlan: shopPlan
   };
 });
