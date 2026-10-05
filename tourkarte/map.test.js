@@ -89,6 +89,13 @@ assertEqual(facts.length, 2, "zwei Etappen in der Zusammenfassung");
 assert(facts[0].km > 10000 && facts[1].km > 10000, "Kilometer je Etappe");
 assert(facts[0].hm > 0 && facts[1].hm > 0, "Höhenmeter je Etappe");
 assertEqual(facts[0].shortDate, "12.6.", "Datum der ersten Etappe");
+var seen = {};
+for (var colorIndex = 0; colorIndex < 17; colorIndex += 1) {
+  var day = map.dayColor(colorIndex, 17);
+  assert(!seen[day], "Farbe doppelt " + day);
+  seen[day] = true;
+}
+assertEqual(map.dayColor(1, 17), "#1e4d5c", "zweite Etappenfarbe");
 var named = map.sceneToSvg(map.buildScene(tour, {
   title: "Beispieltour",
   stagePlaces: [{ start: "Landeck", end: "Imst" }, { start: "Imst", end: "Innsbruck" }]

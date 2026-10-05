@@ -12,7 +12,11 @@
   var MUTED = "#6f675c";
   var RULE = "#d4cdc2";
   var ROUTE = "#9c3412";
-  var DAY_COLORS = ["#9c3412", "#1e4d5c", "#a56b12", "#3e5340", "#6e3a45", "#2f4f78", "#6a5340", "#2a6158"];
+  var DAY_COLORS = [
+    "#9c3412", "#1e4d5c", "#a56b12", "#3e5340", "#6e3a45", "#2f4f78", "#6a5340", "#2a6158",
+    "#8d4e73", "#3f6f2f", "#b85c28", "#4a3f78", "#7a7a32", "#8f3d4a", "#2f6f78", "#6e4a78",
+    "#3f5a28", "#a34a3a", "#2a4a6e", "#8a6232", "#4a6a58", "#7a3f28", "#3a5a78", "#6a3a58"
+  ];
   var SERIF = "Palatino, 'Iowan Old Style', Georgia, 'Liberation Serif', serif";
   var SANS = "-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Inter, 'Liberation Sans', Arial, sans-serif";
   var SEPARATOR = "\u2003·\u2003";
@@ -661,7 +665,37 @@
 
   function stageColors(stages, options) {
     if (!options.colorByDay || stages.length < 2) return stages.map(function () { return options.route; });
-    return stages.map(function (_, index) { return DAY_COLORS[index % DAY_COLORS.length]; });
+    return stages.map(function (_, index) { return dayColor(index, stages.length); });
+  }
+
+  function dayColor(index, total) {
+    if (total <= DAY_COLORS.length) return DAY_COLORS[index];
+    var hue = (index * 137.508) % 360;
+    var light = 30 + (index % 4) * 6;
+    var sat = 42 + (index % 3) * 8;
+    return hslToHex(hue, sat, light);
+  }
+
+  function hslToHex(hue, sat, light) {
+    var s = sat / 100;
+    var l = light / 100;
+    var c = (1 - Math.abs(2 * l - 1)) * s;
+    var h = hue / 60;
+    var x = c * (1 - Math.abs(h % 2 - 1));
+    var r = 0;
+    var g = 0;
+    var b = 0;
+    if (h < 1) { r = c; g = x; }
+    else if (h < 2) { r = x; g = c; }
+    else if (h < 3) { g = c; b = x; }
+    else if (h < 4) { g = x; b = c; }
+    else if (h < 5) { r = x; b = c; }
+    else { r = c; b = x; }
+    var m = l - c / 2;
+    return "#" + [r, g, b].map(function (channel) {
+      var value = Math.round((channel + m) * 255);
+      return (value < 16 ? "0" : "") + value.toString(16);
+    }).join("");
   }
 
   function stageFacts(tour) {
@@ -991,6 +1025,7 @@
     MUTED: MUTED,
     ROUTE: ROUTE,
     DAY_COLORS: DAY_COLORS,
+    dayColor: dayColor,
     haversineM: haversineM,
     pathDistanceM: pathDistanceM,
     elevationGainM: elevationGainM,

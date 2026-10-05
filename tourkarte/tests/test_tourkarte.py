@@ -21,7 +21,7 @@ from tourkarte.geo import (
     path_distance_m,
 )
 from tourkarte.gpx import Point, Stage, Tour, Waypoint, load_paths, read_gpx, write_gpx
-from tourkarte.render import Options, build_scene, write_svg
+from tourkarte.render import Options, build_scene, day_color, write_svg
 from tourkarte.sample import example_tour
 from tourkarte.strava import (
     TOKEN_URL,
@@ -183,6 +183,11 @@ class RenderTest(unittest.TestCase):
         self.assertIn("hm", text)
         self.assertIn('width="210mm"', text)
         self.assertIn("Joch", text)
+
+    def test_each_stage_gets_its_own_color(self):
+        colors = [day_color(index, 17) for index in range(17)]
+        self.assertEqual(len(set(colors)), 17)
+        self.assertEqual(colors[1], "#1e4d5c")
 
     def test_custom_page_size(self):
         scene = build_scene(example_tour(), Options(page_mm=(280, 280)))

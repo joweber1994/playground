@@ -223,7 +223,7 @@
 
   function stageColor(index, count) {
     if (state.options.colorByDay && count > 1) {
-      return TourkarteMap.DAY_COLORS[index % TourkarteMap.DAY_COLORS.length];
+      return TourkarteMap.dayColor(index, count);
     }
     return state.options.route;
   }

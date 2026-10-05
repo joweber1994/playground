@@ -34,6 +34,22 @@ DAY_COLORS = (
     "#2f4f78",
     "#6a5340",
     "#2a6158",
+    "#8d4e73",
+    "#3f6f2f",
+    "#b85c28",
+    "#4a3f78",
+    "#7a7a32",
+    "#8f3d4a",
+    "#2f6f78",
+    "#6e4a78",
+    "#3f5a28",
+    "#a34a3a",
+    "#2a4a6e",
+    "#8a6232",
+    "#4a6a58",
+    "#7a3f28",
+    "#3a5a78",
+    "#6a3a58",
 )
 SERIF = "'Liberation Serif', Palatino, 'Palatino Linotype', Georgia, serif"
 SANS = "Inter, 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif"
@@ -546,10 +562,43 @@ def _date_line(tour: Tour) -> str | None:
     return format_date_range(min(found), max(found))
 
 
+def day_color(index: int, total: int) -> str:
+    if total <= len(DAY_COLORS):
+        return DAY_COLORS[index]
+    hue = (index * 137.508) % 360
+    light = 30 + (index % 4) * 6
+    sat = 42 + (index % 3) * 8
+    return _hsl_hex(hue, sat, light)
+
+
+def _hsl_hex(hue: float, sat: float, light: float) -> str:
+    s = sat / 100
+    l = light / 100
+    c = (1 - abs(2 * l - 1)) * s
+    h = hue / 60
+    x = c * (1 - abs(h % 2 - 1))
+    r = g = b = 0.0
+    if h < 1:
+        r, g = c, x
+    elif h < 2:
+        r, g = x, c
+    elif h < 3:
+        g, b = c, x
+    elif h < 4:
+        g, b = x, c
+    elif h < 5:
+        r, b = x, c
+    else:
+        r, b = c, x
+    m = l - c / 2
+    return "#{:02x}{:02x}{:02x}".format(round((r + m) * 255), round((g + m) * 255), round((b + m) * 255))
+
+
 def _stage_colors(stages, options: Options) -> list[str]:
     if not options.color_by_day or len(stages) < 2:
         return [options.route for _stage in stages]
-    return [DAY_COLORS[index % len(DAY_COLORS)] for index in range(len(stages))]
+    total = len(stages)
+    return [day_color(index, total) for index in range(total)]
 
 
 def _legend(stages, colors) -> list[tuple[str, str]]:
