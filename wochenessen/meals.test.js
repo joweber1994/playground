@@ -136,4 +136,15 @@ assertEqual(plannedItem('kaese').label, 'Aldi Süd oder Prechtl', 'Käse gibt es
 assertEqual(planned.missing.length, 1, 'Sahne bleibt übrig');
 assertEqual(planned.missing[0].id, 'sahne', 'die fehlende Zutat ist Sahne');
 
+assertEqual(meals.offerCategory('Schweine Schnitzel'), 'fleisch', 'Schnitzel ist Fleisch');
+assertEqual(meals.offerCategory('Seelachsfilet'), 'fisch', 'Seelachs ist Fisch');
+assertEqual(meals.offerCategory('Lamm Lachse'), 'fleisch', 'Lamm Lachse bleibt Fleisch');
+assertEqual(meals.offerCategory('Äpfel, fein säuerlich'), 'gemuese', 'Äpfel sind Obst');
+assertEqual(meals.offerCategory('Berchtesgadener Land Bergbauernmilch'), 'kuehl', 'Milch ist Kühlregal');
+assertEqual(meals.offerCategory('De Cecco Pasta'), 'vorrat', 'Pasta ist Vorrat');
+assertEqual(meals.offerCategory('Apfelsaft'), 'getraenke', 'Apfelsaft ist ein Getränk');
+assertEqual(meals.offerCategory('Milka Schokolade'), 'suesses', 'Schokolade ist ein Snack');
+assertEqual(meals.offerCategory('HAPPY END Küchentücher'), 'sonstiges', 'Küchentücher bleiben übrig');
+assertEqual(meals.offerCategoryById('fehlt').id, 'alle', 'unbekannte Kategorie ist Alle');
+
 console.log('meals tests ok');
