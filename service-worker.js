@@ -1,17 +1,24 @@
-/* Chore Wars – offline cache. Bump CACHE_VERSION when shipped assets change. */
-var CACHE_VERSION = 'chore-wars-v10';
-var CACHE_PREFIX = 'chore-wars-';
+/* Haushalt – offline cache for the menu and Wochenessen.
+   Only haushalt-* caches are deleted, so Chore Wars and Wochenessen keep theirs. */
+var CACHE_VERSION = 'haushalt-v1';
+var CACHE_PREFIX = 'haushalt-';
 
 var ASSETS = [
   './',
   './index.html',
   './styles.css',
-  './state.js',
-  './sync.js',
   './app.js',
   './manifest.json',
   './service-worker.js',
-  './icon.svg'
+  './icon.svg',
+  './wochenessen/',
+  './wochenessen/index.html',
+  './wochenessen/styles.css',
+  './wochenessen/meals.js',
+  './wochenessen/app.js',
+  './wochenessen/manifest.json',
+  './wochenessen/service-worker.js',
+  './wochenessen/icon.svg'
 ];
 
 function absoluteUrl(relativeUrl) {

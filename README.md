@@ -1,5 +1,9 @@
 # playground
 
+Der Einstieg ist [`index.html`](index.html), das Menü Haushalt. Es verbindet Chore Wars und Wochenessen unter einem Home-Bildschirm-Icon. Die Daten bleiben getrennt. Auf dem iPhone dieses Menü zum Home-Bildschirm hinzufügen, damit beide Seiten in derselben App bleiben.
+
 Chore Wars liegt in [`chore-wars/`](chore-wars/). Die App ist ein offline-fähiger Haushalts-Tracker für zwei Spieler. In der App lassen sich Aufgaben nach Kategorie filtern und durchsuchen, anlegen, ändern, löschen und innerhalb der Kategorie sortieren, die beiden Namen ändern, die letzte Buchung rückgängig machen und wiederholen und der Stand als JSON sichern. Alles zurücksetzen leert Punkte, Verlauf und die Erledigungen. Nur die Punkte zurücksetzen lässt die Statistik stehen. Aufgaben und Namen bleiben in beiden Fällen. Über „Nur dieses Gerät“ verbinden beide Geräte denselben Stand mit einer Firebase Realtime Database; das gemeinsame Kennwort wird zum Pfad und bleibt auf den Geräten. Die passenden Regeln stehen in [`chore-wars/database.rules.json`](chore-wars/database.rules.json). Öffnen mit `chore-wars/index.html`. Die Spiellogik prüft `node chore-wars/state.test.js` und `node chore-wars/sync.test.js`.
+
+Wochenessen liegt in [`wochenessen/`](wochenessen/). Angebote aus dem Prechtl-Prospekt werden angekreuzt oder als Name eingetragen. Daraus entstehen Gerichte für zwei und eine Einkaufsliste. Der Markt und der Vorrat bleiben gespeichert, eine neue Woche leert die Angebote. Das Prospekt ist eine Bilddatei ohne Schnittstelle; „Prospekt öffnen“ zeigt die aktuelle Prechtl-Seite, die App liest sie nicht aus. Die Vorschläge prüft `node wochenessen/meals.test.js`.
 
 tf_modeling liegt in [`tf_modeling/`](tf_modeling/). Die App rechnet lineare Schaltungen offline auf dem Gerät. Öffnen mit `tf_modeling/index.html`.

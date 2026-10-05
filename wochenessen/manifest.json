@@ -1,0 +1,23 @@
+{
+  "id": "./",
+  "name": "Wochenessen",
+  "short_name": "Wochenessen",
+  "description": "Essensvorschläge für zwei aus angekreuzten Prechtl-Angeboten, plus Einkaufsliste.",
+  "lang": "de",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0c0e13",
+  "theme_color": "#0c0e13",
+  "categories": ["lifestyle", "food"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

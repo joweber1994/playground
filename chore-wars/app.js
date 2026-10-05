@@ -1138,11 +1138,15 @@
     }).catch(function (error) {
       console.error('Service Worker konnte nicht registriert werden.', error);
     });
-    var hadController = !!navigator.serviceWorker.controller;
+    var ownUrl = new URL('./service-worker.js', window.location.href).href;
+    var current = navigator.serviceWorker.controller;
+    var hadOwnController = !!(current && current.scriptURL === ownUrl);
     navigator.serviceWorker.addEventListener('controllerchange', function () {
       updateConnectivity();
-      if (!hadController) {
-        hadController = true;
+      var next = navigator.serviceWorker.controller;
+      if (!next || next.scriptURL !== ownUrl) return;
+      if (!hadOwnController) {
+        hadOwnController = true;
         return;
       }
       window.location.reload();
