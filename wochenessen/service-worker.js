@@ -1,5 +1,5 @@
 /* Wochenessen – offline cache. Only wochenessen-* caches are deleted. */
-var CACHE_VERSION = 'wochenessen-v7';
+var CACHE_VERSION = 'wochenessen-v8';
 var CACHE_PREFIX = 'wochenessen-';
 
 var ASSETS = [

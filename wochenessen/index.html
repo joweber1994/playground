@@ -38,9 +38,32 @@
       </div>
       <p id="connectivity" class="connectivity">Auf diesem Gerät</p>
       <button id="ticker-banner" class="ticker-banner" type="button" hidden></button>
+      <nav id="tabs" class="tabs" role="tablist" aria-label="Bereiche">
+        <button type="button" class="tab" id="tab-einkauf" role="tab" aria-selected="false" aria-controls="panel-einkauf" tabindex="-1">Einkauf</button>
+        <button type="button" class="tab" id="tab-angebote" role="tab" aria-selected="true" aria-controls="panel-angebote" tabindex="0">Angebote</button>
+        <button type="button" class="tab" id="tab-gerichte" role="tab" aria-selected="false" aria-controls="panel-gerichte" tabindex="-1">Gerichte</button>
+        <button type="button" class="tab" id="tab-vorrat" role="tab" aria-selected="false" aria-controls="panel-vorrat" tabindex="-1">Vorrat</button>
+      </nav>
     </header>
 
-    <main class="content">
+    <main class="content" id="content">
+      <section id="panel-einkauf" class="tab-panel" role="tabpanel" aria-labelledby="tab-einkauf" hidden>
+        <div class="section-head">
+          <h2 id="choice-heading">Wo einkaufen?</h2>
+          <p class="hint">Mehrere Supermärkte bleiben an. Die Gerichte nutzen alle ausgewählten Angebote. Bei Prechtl ist das Angebot in jedem Markt gleich.</p>
+        </div>
+        <div id="store-picks" class="store-picks" role="group" aria-label="Supermärkte"></div>
+        <label id="market-wrap" class="field market-wrap">
+          <span class="field-label">Prechtl-Markt</span>
+          <select id="market"></select>
+        </label>
+        <h2 id="shop-heading">Einkaufsliste</h2>
+        <p class="hint">Zuerst die Angebote, nach Markt getrennt. Danach, was noch fehlt.</p>
+        <p id="shop-empty" class="empty">Sobald ein Gericht auf der Liste liegt, stehen hier die fehlenden Zutaten.</p>
+        <ul id="shop-list" class="shop-list"></ul>
+      </section>
+
+      <section id="panel-angebote" class="tab-panel" role="tabpanel" aria-labelledby="tab-angebote">
       <section class="panel" aria-labelledby="ticker-heading">
         <div class="section-head">
           <h2 id="ticker-heading">Ticker</h2>
@@ -92,15 +115,9 @@
         </form>
         <p id="offer-note" class="hint" role="status"></p>
       </section>
-
-      <section class="panel" aria-labelledby="pantry-heading">
-        <div class="section-head">
-          <h2 id="pantry-heading">Zu Hause</h2>
-          <p class="hint">Was schon da ist, kommt nicht auf den Zettel. Die Menge lässt sich ändern.</p>
-        </div>
-        <div id="pantry" class="pantry"></div>
       </section>
 
+      <section id="panel-gerichte" class="tab-panel" role="tabpanel" aria-labelledby="tab-gerichte" hidden>
       <section class="panel" aria-labelledby="ideas-heading">
         <div class="section-head">
           <h2 id="ideas-heading">Vorschläge</h2>
@@ -108,21 +125,16 @@
         </div>
         <div id="ideas"></div>
       </section>
+      </section>
 
-      <section class="panel" aria-labelledby="choice-heading">
+      <section id="panel-vorrat" class="tab-panel" role="tabpanel" aria-labelledby="tab-vorrat" hidden>
+      <section class="panel" aria-labelledby="pantry-heading">
         <div class="section-head">
-          <h2 id="choice-heading">Wo einkaufen?</h2>
-          <p class="hint">Mehrere Supermärkte bleiben an. Die Gerichte nutzen alle ausgewählten Angebote. Bei Prechtl ist das Angebot in jedem Markt gleich.</p>
+          <h2 id="pantry-heading">Zu Hause</h2>
+          <p class="hint">Was schon da ist, kommt nicht auf den Zettel. Die Menge lässt sich ändern.</p>
         </div>
-        <div id="store-picks" class="store-picks" role="group" aria-label="Supermärkte"></div>
-        <label id="market-wrap" class="field market-wrap">
-          <span class="field-label">Prechtl-Markt</span>
-          <select id="market"></select>
-        </label>
-        <h2 id="shop-heading">Einkaufsliste</h2>
-        <p class="hint">Zuerst die Angebote, nach Markt getrennt. Danach, was noch fehlt.</p>
-        <p id="shop-empty" class="empty">Sobald ein Gericht auf der Liste liegt, stehen hier die fehlenden Zutaten.</p>
-        <ul id="shop-list" class="shop-list"></ul>
+        <div id="pantry" class="pantry"></div>
+      </section>
       </section>
     </main>
   </div>
