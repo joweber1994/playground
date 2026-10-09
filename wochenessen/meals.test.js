@@ -48,6 +48,34 @@ assertEqual(kept.state.offers.length, 1, 'nur bekannte Angebote bleiben');
 assertEqual(kept.state.pantry.length, 0, 'leerer Vorrat bleibt leer');
 assertEqual(kept.state.picked.length, 0, 'leere Auswahl bleibt leer');
 
+assertEqual(meals.amountOf(meals.freshState(monday), 'nudeln'), '500 g', 'Nudeln starten mit 500 g');
+var edited = meals.setPantryAmount(meals.freshState(monday), 'nudeln', '  250 g  ');
+assert(edited.ok, 'Menge lässt sich setzen');
+assertEqual(edited.state.pantryAmounts.nudeln, '250 g', 'Menge wird beschnitten');
+assertEqual(meals.amountOf(edited.state, 'nudeln'), '250 g', 'gesetzte Menge gilt');
+assert(!meals.setPantryAmount(edited.state, 'hackfleisch', '1').ok, 'Hackfleisch ist kein Vorrat');
+assert(!meals.setPantryAmount(edited.state, 'nudeln', 'x'.repeat(41)).ok, 'zu lange Menge bleibt draußen');
+assertEqual(meals.stepAmount('500 g', 1), '600 g', '500 g steigen in Hundertern');
+assertEqual(meals.stepAmount('500 g', -1), '400 g', '500 g sinken in Hundertern');
+assertEqual(meals.stepAmount('6', 1), '7', 'Stückzahl steigt um eins');
+assertEqual(meals.stepAmount('1 Flasche', -1), '0 Flasche', 'Text hinter der Zahl bleibt');
+var stepped = meals.stepPantryAmount(meals.freshState(monday), 'nudeln', 1);
+assertEqual(stepped.state.pantryAmounts.nudeln, '600 g', 'Plus ändert die Nudeln');
+var toggledOff = meals.togglePantry(meals.freshState(monday), 'nudeln');
+assert(toggledOff.ok && toggledOff.home === false, 'Nudeln lassen sich abwählen');
+assert(toggledOff.state.pantry.indexOf('nudeln') === -1, 'abgewählte Nudeln sind nicht zu Hause');
+var toggledOn = meals.togglePantry(toggledOff.state, 'milch');
+assert(toggledOn.home, 'Milch lässt sich dazunehmen');
+assertEqual(toggledOn.state.pantryAmounts.milch, '1 l', 'Milch startet mit einem Liter');
+var keptAmount = meals.normalizeState({
+  marketId: 'raubling',
+  weekKey: meals.weekKey(sunday),
+  pantry: ['nudeln'],
+  pantryAmounts: { nudeln: '250 g', hackfleisch: '9' }
+}, monday);
+assertEqual(keptAmount.state.pantryAmounts.nudeln, '250 g', 'Menge bleibt in der neuen Woche');
+assertEqual(keptAmount.state.pantryAmounts.hackfleisch, undefined, 'Mengen fremder Artikel fallen weg');
+
 assertEqual(meals.suggest([], meals.defaultPantry()).length, 0, 'ohne Angebot kein Vorschlag');
 
 var ideas = meals.suggest(['hackfleisch', 'paprika'], meals.defaultPantry());

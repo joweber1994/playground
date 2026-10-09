@@ -401,12 +401,21 @@
     meals.GROUPS.forEach(function (group) {
       var inGroup = meals.pantryIngredients().filter(function (item) { return item.group === group.id; });
       if (!inGroup.length) return;
-      html += '<h3 class="group-label">' + escapeHtml(group.label) + '</h3><div class="chips">';
+      html += '<h3 class="group-label">' + escapeHtml(group.label) + '</h3>';
       inGroup.forEach(function (item) {
         var on = state.pantry.indexOf(item.id) !== -1;
+        html += '<div class="pantry-row">';
         html += '<button type="button" class="chip" data-pantry="' + item.id + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + escapeHtml(item.name) + '</button>';
+        if (on) {
+          var amount = meals.amountOf(state, item.id);
+          html += '<div class="pantry-amount">';
+          html += '<button type="button" class="pantry-step" data-pantry-step="-1" data-pantry-id="' + item.id + '" aria-label="Menge ' + escapeHtml(item.name) + ' verringern">−</button>';
+          html += '<input data-pantry-amount="' + item.id + '" type="text" inputmode="text" enterkeyhint="done" autocomplete="off" maxlength="40" aria-label="Menge ' + escapeHtml(item.name) + '" value="' + escapeHtml(amount) + '" placeholder="Menge">';
+          html += '<button type="button" class="pantry-step" data-pantry-step="1" data-pantry-id="' + item.id + '" aria-label="Menge ' + escapeHtml(item.name) + ' erhöhen">+</button>';
+          html += '</div>';
+        }
+        html += '</div>';
       });
-      html += '</div>';
     });
     els.pantry.innerHTML = html;
   }
@@ -625,18 +634,59 @@
     });
 
     els.pantry.addEventListener('click', function (event) {
+      var step = event.target.closest('[data-pantry-step]');
+      if (step) {
+        var stepId = step.getAttribute('data-pantry-id');
+        var stepped = meals.stepPantryAmount(state, stepId, Number(step.getAttribute('data-pantry-step')));
+        if (!stepped.ok) {
+          announce(stepped.error);
+          return;
+        }
+        state = stepped.state;
+        save();
+        var field = els.pantry.querySelector('[data-pantry-amount="' + stepId + '"]');
+        if (field) field.value = meals.amountOf(state, stepId);
+        announce(meals.ingredient(stepId).name + ': ' + (meals.amountOf(state, stepId) || 'ohne Menge'));
+        return;
+      }
       var button = event.target.closest('[data-pantry]');
       if (!button) return;
       var id = button.getAttribute('data-pantry');
-      var at = state.pantry.indexOf(id);
-      if (at === -1) state.pantry.push(id);
-      else state.pantry.splice(at, 1);
+      var toggled = meals.togglePantry(state, id);
+      if (!toggled.ok) {
+        announce(toggled.error);
+        return;
+      }
+      state = toggled.state;
       save();
       renderPantry();
       renderIdeas();
       renderShop();
       var name = meals.ingredient(id).name;
-      announce(state.pantry.indexOf(id) === -1 ? name + ' ist nicht zu Hause' : name + ' ist zu Hause');
+      announce(toggled.home ? name + ' ist zu Hause' : name + ' ist nicht zu Hause');
+    });
+
+    els.pantry.addEventListener('change', function (event) {
+      var input = event.target.closest('[data-pantry-amount]');
+      if (!input) return;
+      var id = input.getAttribute('data-pantry-amount');
+      var result = meals.setPantryAmount(state, id, input.value);
+      if (!result.ok) {
+        input.value = meals.amountOf(state, id);
+        announce(result.error);
+        return;
+      }
+      state = result.state;
+      save();
+      input.value = meals.amountOf(state, id);
+      announce(meals.ingredient(id).name + ': ' + (meals.amountOf(state, id) || 'ohne Menge'));
+    });
+
+    els.pantry.addEventListener('keydown', function (event) {
+      if (event.key !== 'Enter') return;
+      if (!event.target.matches('[data-pantry-amount]')) return;
+      event.preventDefault();
+      event.target.blur();
     });
 
     els.form.addEventListener('submit', function (event) {

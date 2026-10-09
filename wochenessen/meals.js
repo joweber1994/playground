@@ -38,13 +38,13 @@
     { id: 'lachs', name: 'Lachs', group: 'fisch', offer: true, aliases: ['lachsfilet'] },
     { id: 'fisch', name: 'Fischfilet', group: 'fisch', offer: true, aliases: ['fischstäbchen', 'seelachs'] },
     { id: 'thunfisch', name: 'Thunfisch', group: 'fisch', offer: true, aliases: ['tunfisch'] },
-    { id: 'eier', name: 'Eier', group: 'kuehl', offer: true, pantry: true, pantryDefault: true, aliases: ['ei'] },
+    { id: 'eier', name: 'Eier', group: 'kuehl', offer: true, pantry: true, pantryDefault: true, pantryAmount: '6', aliases: ['ei'] },
     { id: 'kaese', name: 'Käse', group: 'kuehl', offer: true, aliases: ['gouda', 'emmentaler', 'mozzarella'] },
-    { id: 'milch', name: 'Milch', group: 'kuehl', offer: true, pantry: true, pantryDefault: false, aliases: [] },
+    { id: 'milch', name: 'Milch', group: 'kuehl', offer: true, pantry: true, pantryDefault: false, pantryAmount: '1 l', aliases: [] },
     { id: 'sahne', name: 'Sahne', group: 'kuehl', offer: true, aliases: ['schlagsahne', 'sahne'] },
     { id: 'schmand', name: 'Schmand', group: 'kuehl', offer: true, aliases: ['schmand', 'saure sahne'] },
     { id: 'joghurt', name: 'Joghurt', group: 'kuehl', offer: true, aliases: [] },
-    { id: 'butter', name: 'Butter', group: 'kuehl', offer: true, pantry: true, pantryDefault: false, aliases: [] },
+    { id: 'butter', name: 'Butter', group: 'kuehl', offer: true, pantry: true, pantryDefault: false, pantryAmount: '250 g', aliases: [] },
     { id: 'paprika', name: 'Paprika', group: 'gemuese', offer: true, aliases: [] },
     { id: 'zucchini', name: 'Zucchini', group: 'gemuese', offer: true, aliases: [] },
     { id: 'brokkoli', name: 'Brokkoli', group: 'gemuese', offer: true, aliases: ['broccoli'] },
@@ -56,22 +56,22 @@
     { id: 'salat', name: 'Salat', group: 'gemuese', offer: true, aliases: ['kopfsalat', 'feldsalat'] },
     { id: 'gurke', name: 'Gurke', group: 'gemuese', offer: true, aliases: ['gurken'] },
     { id: 'aepfel', name: 'Äpfel', group: 'gemuese', offer: true, aliases: ['äpfel', 'apfel'] },
-    { id: 'zwiebel', name: 'Zwiebeln', group: 'gemuese', offer: true, pantry: true, pantryDefault: true, aliases: ['zwiebel'] },
-    { id: 'nudeln', name: 'Nudeln', group: 'vorrat', offer: true, pantry: true, pantryDefault: true, aliases: ['pasta', 'spaghetti', 'penne'] },
-    { id: 'reis', name: 'Reis', group: 'vorrat', offer: true, pantry: true, pantryDefault: true, aliases: [] },
+    { id: 'zwiebel', name: 'Zwiebeln', group: 'gemuese', offer: true, pantry: true, pantryDefault: true, pantryAmount: '3', aliases: ['zwiebel'] },
+    { id: 'nudeln', name: 'Nudeln', group: 'vorrat', offer: true, pantry: true, pantryDefault: true, pantryAmount: '500 g', aliases: ['pasta', 'spaghetti', 'penne'] },
+    { id: 'reis', name: 'Reis', group: 'vorrat', offer: true, pantry: true, pantryDefault: true, pantryAmount: '500 g', aliases: [] },
     { id: 'spaetzle', name: 'Spätzle', group: 'vorrat', offer: true, aliases: ['spaetzle'] },
     { id: 'passata', name: 'Passierte Tomaten', group: 'vorrat', offer: true, aliases: ['passata', 'passierte', 'passiert', 'tomatensauce', 'mutti'] },
     { id: 'bohnen', name: 'Bohnen', group: 'vorrat', offer: true, aliases: ['kidneybohnen', 'bohnen'] },
-    { id: 'linsen', name: 'Linsen', group: 'vorrat', offer: true, pantry: true, pantryDefault: false, aliases: [] },
+    { id: 'linsen', name: 'Linsen', group: 'vorrat', offer: true, pantry: true, pantryDefault: false, pantryAmount: '250 g', aliases: [] },
     { id: 'mais', name: 'Mais', group: 'vorrat', offer: true, aliases: [] },
     { id: 'sauerkraut', name: 'Sauerkraut', group: 'vorrat', offer: true, aliases: [] },
-    { id: 'knoblauch', name: 'Knoblauch', group: 'gemuese', offer: false, pantry: true, pantryDefault: true, aliases: [] },
-    { id: 'oel', name: 'Öl', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, aliases: ['öl', 'olivenöl'] },
-    { id: 'salz', name: 'Salz', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, aliases: [] },
-    { id: 'pfeffer', name: 'Pfeffer', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, aliases: [] },
-    { id: 'mehl', name: 'Mehl', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, aliases: [] },
-    { id: 'bruehe', name: 'Brühe', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, aliases: ['brühe', 'gemüsebrühe'] },
-    { id: 'zucker', name: 'Zucker', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, aliases: [] }
+    { id: 'knoblauch', name: 'Knoblauch', group: 'gemuese', offer: false, pantry: true, pantryDefault: true, pantryAmount: '1', aliases: [] },
+    { id: 'oel', name: 'Öl', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, pantryAmount: '1 Flasche', aliases: ['öl', 'olivenöl'] },
+    { id: 'salz', name: 'Salz', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, pantryAmount: '1', aliases: [] },
+    { id: 'pfeffer', name: 'Pfeffer', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, pantryAmount: '1', aliases: [] },
+    { id: 'mehl', name: 'Mehl', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, pantryAmount: '1 kg', aliases: [] },
+    { id: 'bruehe', name: 'Brühe', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, pantryAmount: '1', aliases: ['brühe', 'gemüsebrühe'] },
+    { id: 'zucker', name: 'Zucker', group: 'vorrat', offer: false, pantry: true, pantryDefault: true, pantryAmount: '1', aliases: [] }
   ];
 
   function ing(id, amount) {
@@ -386,8 +386,102 @@
       weekKey: weekKey(now || new Date()),
       offers: [],
       pantry: defaultPantry(),
+      pantryAmounts: {},
       picked: null
     };
+  }
+
+  function readPantryAmount(value) {
+    if (typeof value !== 'string') return { ok: false, error: 'Menge fehlt.' };
+    var amount = value.trim().replace(/\s+/g, ' ');
+    if (amount.length > 40) return { ok: false, error: 'Menge ist zu lang.' };
+    return { ok: true, value: amount };
+  }
+
+  function cleanPantryAmounts(raw) {
+    var out = {};
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out;
+    pantryIngredients().forEach(function (item) {
+      if (!Object.prototype.hasOwnProperty.call(raw, item.id)) return;
+      if (typeof raw[item.id] !== 'string') return;
+      var read = readPantryAmount(raw[item.id]);
+      if (read.ok) out[item.id] = read.value;
+    });
+    return out;
+  }
+
+  function copyState(state) {
+    var next = {};
+    Object.keys(state || {}).forEach(function (key) {
+      next[key] = state[key];
+    });
+    return next;
+  }
+
+  function copyAmounts(map) {
+    var next = {};
+    Object.keys(map || {}).forEach(function (key) {
+      next[key] = map[key];
+    });
+    return next;
+  }
+
+  function amountOf(state, id) {
+    var map = state && state.pantryAmounts;
+    if (map && Object.prototype.hasOwnProperty.call(map, id)) return map[id];
+    var item = ingredient(id);
+    return item && item.pantryAmount ? item.pantryAmount : '';
+  }
+
+  function setPantryAmount(state, id, amount) {
+    var item = ingredient(id);
+    if (!item || !item.pantry) return { ok: false, error: 'Diesen Artikel gibt es im Vorrat nicht.' };
+    var read = readPantryAmount(amount);
+    if (!read.ok) return read;
+    var next = copyState(state);
+    next.pantryAmounts = copyAmounts(state && state.pantryAmounts);
+    next.pantryAmounts[id] = read.value;
+    return { ok: true, state: next };
+  }
+
+  function stepAmount(amount, direction) {
+    var text = String(amount || '').trim();
+    var delta = direction < 0 ? -1 : 1;
+    var match = text.match(/^(\d+(?:[.,]\d+)?)(.*)$/);
+    if (!match) return delta > 0 ? '1' : text;
+    var value = Number(match[1].replace(',', '.'));
+    var rest = match[2];
+    var step = value >= 100 ? 100 : 1;
+    var next = value + delta * step;
+    if (next < 0) next = 0;
+    var shown = String(next);
+    if (match[1].indexOf(',') !== -1) shown = shown.replace('.', ',');
+    else if (match[1].indexOf('.') === -1) shown = String(Math.round(next));
+    return (shown + rest).replace(/\s+/g, ' ').trim();
+  }
+
+  function stepPantryAmount(state, id, direction) {
+    var item = ingredient(id);
+    if (!item || !item.pantry) return { ok: false, error: 'Diesen Artikel gibt es im Vorrat nicht.' };
+    return setPantryAmount(state, id, stepAmount(amountOf(state, id), direction));
+  }
+
+  function togglePantry(state, id) {
+    var item = ingredient(id);
+    if (!item || !item.pantry) return { ok: false, error: 'Diesen Artikel gibt es im Vorrat nicht.' };
+    var next = copyState(state);
+    var pantry = Array.isArray(state && state.pantry) ? state.pantry.slice() : [];
+    var amounts = copyAmounts(state && state.pantryAmounts);
+    var at = pantry.indexOf(id);
+    if (at === -1) {
+      pantry.push(id);
+      if (!Object.prototype.hasOwnProperty.call(amounts, id)) amounts[id] = item.pantryAmount || '';
+    } else {
+      pantry.splice(at, 1);
+    }
+    next.pantry = pantry;
+    next.pantryAmounts = amounts;
+    return { ok: true, state: next, home: at === -1 };
   }
 
   function normalizeState(saved, now) {
@@ -404,6 +498,7 @@
         weekKey: blank.weekKey,
         offers: sameWeek ? knownIds(saved.offers, offerIds) : [],
         pantry: Array.isArray(saved.pantry) ? knownIds(saved.pantry, pantryIds) : blank.pantry,
+        pantryAmounts: cleanPantryAmounts(saved.pantryAmounts),
         picked: sameWeek && Array.isArray(saved.picked) ? knownIds(saved.picked, recipeIds) : null
       }
     };
@@ -699,6 +794,11 @@
     offerIngredients: offerIngredients,
     pantryIngredients: pantryIngredients,
     defaultPantry: defaultPantry,
+    amountOf: amountOf,
+    setPantryAmount: setPantryAmount,
+    stepAmount: stepAmount,
+    stepPantryAmount: stepPantryAmount,
+    togglePantry: togglePantry,
     weekKey: weekKey,
     marketById: marketById,
     freshState: freshState,
