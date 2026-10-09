@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0c0e13">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="Wochenessen liest die Angebote von Prechtl, Aldi Süd, Penny und Lidl und schlägt daraus Gerichte für zwei vor.">
+  <meta name="description" content="Wochenessen liest die Angebote von Prechtl, Aldi Süd, Penny und Lidl und schlägt daraus Gerichte für zwei vor. Ein Ticker erinnert, sobald ein gemerkter Artikel im Angebot steht.">
   <title>Wochenessen</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
@@ -37,9 +37,27 @@
         <a class="home-link" href="../index.html">Haushalt</a>
       </div>
       <p id="connectivity" class="connectivity">Auf diesem Gerät</p>
+      <button id="ticker-banner" class="ticker-banner" type="button" hidden></button>
     </header>
 
     <main class="content">
+      <section class="panel" aria-labelledby="ticker-heading">
+        <div class="section-head">
+          <h2 id="ticker-heading">Ticker</h2>
+          <p class="hint">Artikel merken, zum Beispiel Barilla Nudeln. Sobald der Name in den gelesenen Angeboten steht, erscheint die Erinnerung.</p>
+        </div>
+        <form id="ticker-form" class="offer-form" autocomplete="off">
+          <label class="field grow">
+            <span class="sr-only">Artikel für den Ticker</span>
+            <input id="ticker-text" type="text" placeholder="Barilla Nudeln" maxlength="80" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <button type="submit">Merken</button>
+        </form>
+        <p id="ticker-note" class="hint" role="status"></p>
+        <p id="ticker-empty" class="empty">Noch nichts auf dem Ticker.</p>
+        <ul id="ticker-list" class="ticker-list" hidden></ul>
+      </section>
+
       <section class="panel" aria-labelledby="week-heading">
         <div class="section-head">
           <h2 id="week-heading">Angebote dieser Woche</h2>
@@ -114,6 +132,7 @@
   </noscript>
   <script src="./meals.js"></script>
   <script src="./offers.js"></script>
+  <script src="./ticker.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

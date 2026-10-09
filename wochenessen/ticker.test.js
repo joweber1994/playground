@@ -1,5 +1,5 @@
 const ticker = require('./ticker.js');
-const offers = require('../wochenessen/offers.js');
+const offers = require('./offers.js');
 
 function assert(condition, label) {
   if (!condition) throw new Error(label);

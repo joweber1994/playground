@@ -1,5 +1,5 @@
 /* Wochenessen – offline cache. Only wochenessen-* caches are deleted. */
-var CACHE_VERSION = 'wochenessen-v6';
+var CACHE_VERSION = 'wochenessen-v7';
 var CACHE_PREFIX = 'wochenessen-';
 
 var ASSETS = [
@@ -8,6 +8,7 @@ var ASSETS = [
   './styles.css',
   './meals.js',
   './offers.js',
+  './ticker.js',
   './app.js',
   './manifest.json',
   './service-worker.js',
