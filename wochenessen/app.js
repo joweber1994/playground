@@ -11,7 +11,15 @@
   state.storeIds = [catalog.stores[0].id];
   state.categoryId = 'alle';
   state.extras = {};
+  state.tabId = 'angebote';
   var tickerState = tickerApi ? tickerApi.blank() : { items: [] };
+  var TAB_IDS = ['einkauf', 'angebote', 'gerichte', 'vorrat'];
+  var TAB_LABELS = {
+    einkauf: 'Einkauf',
+    angebote: 'Angebote',
+    gerichte: 'Gerichte',
+    vorrat: 'Vorrat'
+  };
 
   var els = {
     weekLine: document.getElementById('week-line'),
@@ -38,6 +46,8 @@
     shopEmpty: document.getElementById('shop-empty'),
     shop: document.getElementById('shop-list'),
     connectivity: document.getElementById('connectivity'),
+    content: document.getElementById('content'),
+    tabs: document.getElementById('tabs'),
     live: document.getElementById('live'),
     tickerBanner: document.getElementById('ticker-banner'),
     tickerForm: document.getElementById('ticker-form'),
@@ -184,6 +194,7 @@
       next.storeIds = [bestStoreId(next.pantry)];
     }
     next.categoryId = meals.offerCategoryById(saved && saved.categoryId).id;
+    next.tabId = knownTab(saved && saved.tabId);
     return { state: next, weekChanged: loaded.weekChanged };
   }
 
@@ -193,6 +204,44 @@
     } catch (error) {
       /* Private mode can reject storage; the page still works for this visit. */
     }
+  }
+
+  function knownTab(id) {
+    return TAB_IDS.indexOf(id) === -1 ? 'angebote' : id;
+  }
+
+  function selectTab(id, options) {
+    var quiet = options && options.quiet;
+    id = knownTab(id);
+    var changed = state.tabId !== id;
+    TAB_IDS.forEach(function (tabId) {
+      var on = tabId === id;
+      var button = document.getElementById('tab-' + tabId);
+      var panel = document.getElementById('panel-' + tabId);
+      if (button) {
+        button.setAttribute('aria-selected', on ? 'true' : 'false');
+        button.tabIndex = on ? 0 : -1;
+      }
+      if (panel) panel.hidden = !on;
+    });
+    state.tabId = id;
+    if (els.content) els.content.scrollTop = 0;
+    if (!quiet && changed) {
+      save();
+      announce(TAB_LABELS[id]);
+    }
+  }
+
+  function focusTab(id) {
+    var button = document.getElementById('tab-' + id);
+    if (button) button.focus();
+  }
+
+  function moveTab(delta) {
+    var index = TAB_IDS.indexOf(knownTab(state.tabId));
+    var next = (index + delta + TAB_IDS.length) % TAB_IDS.length;
+    selectTab(TAB_IDS[next]);
+    focusTab(TAB_IDS[next]);
   }
 
   function suggestions() {
@@ -847,8 +896,36 @@
 
     tickerState = loadTicker();
 
+    selectTab(state.tabId, { quiet: true });
+    if (els.tabs) {
+      els.tabs.addEventListener('click', function (event) {
+        var button = event.target.closest('[role="tab"]');
+        if (!button || !els.tabs.contains(button)) return;
+        selectTab(button.id.replace(/^tab-/, ''));
+      });
+      els.tabs.addEventListener('keydown', function (event) {
+        var button = event.target.closest('[role="tab"]');
+        if (!button || !els.tabs.contains(button)) return;
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          moveTab(1);
+        } else if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          moveTab(-1);
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          selectTab(TAB_IDS[0]);
+          focusTab(TAB_IDS[0]);
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          selectTab(TAB_IDS[TAB_IDS.length - 1]);
+          focusTab(TAB_IDS[TAB_IDS.length - 1]);
+        }
+      });
+    }
     if (els.tickerBanner) {
       els.tickerBanner.addEventListener('click', function () {
+        selectTab('angebote');
         var heading = document.getElementById('ticker-heading');
         if (heading) heading.scrollIntoView({ block: 'start' });
       });

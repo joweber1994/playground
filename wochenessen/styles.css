@@ -96,11 +96,10 @@ ol {
   top: 0;
   z-index: 5;
   flex: 0 0 auto;
-  padding: calc(14px + env(safe-area-inset-top)) var(--header-pad) 14px;
+  padding: calc(14px + env(safe-area-inset-top)) var(--header-pad) 0;
   background: rgba(12, 14, 19, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
 }
 
 .brand-row {
@@ -177,6 +176,40 @@ h1 {
 
 .connectivity.is-offline::before {
   background: var(--p2);
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 12px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab {
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 2px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab[aria-selected="true"] {
+  background: var(--gold);
+  color: #1a1408;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--p1);
+  outline-offset: 2px;
 }
 
 .content {
