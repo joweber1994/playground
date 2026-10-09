@@ -1,12 +1,13 @@
-/* Chore Wars – Ticker für gemerkte Artikel.
-   Reine Funktionen, ohne DOM. Im Browser als ChoreWarsTicker, unter Node als Modul. */
+/* Wochenessen – Ticker für gemerkte Artikel.
+   Reine Funktionen, ohne DOM. Im Browser als WochenessenTicker, unter Node als Modul. */
 
 (function (root, factory) {
   var api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else root.ChoreWarsTicker = api;
+  else root.WochenessenTicker = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
-  var STORAGE_KEY = 'chore-wars-ticker-v1';
+  var STORAGE_KEY = 'wochenessen-ticker-v1';
+  var LEGACY_KEY = 'chore-wars-ticker-v1';
   var QUERY_MAX = 80;
   var LIST_MAX = 20;
 
@@ -228,6 +229,7 @@
 
   return {
     STORAGE_KEY: STORAGE_KEY,
+    LEGACY_KEY: LEGACY_KEY,
     blank: blank,
     normalize: normalize,
     addItem: addItem,

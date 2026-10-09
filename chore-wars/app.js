@@ -3,7 +3,6 @@
 
   var api = window.ChoreWarsState;
   var syncApi = window.ChoreWarsSync;
-  var tickerApi = window.ChoreWarsTicker;
   if (!api) return;
 
   var CLAIM_LOCK_MS = 450;
@@ -15,7 +14,6 @@
   var session = null;
   var localUpdatedAt = 0;
   var syncStatus = 'local';
-  var tickerState = tickerApi ? tickerApi.blank() : { items: [] };
 
   var els = {
     list: document.getElementById('chore-list'),
@@ -45,13 +43,7 @@
     sheetSubmit: document.getElementById('sheet-submit'),
     sheetCancel: document.getElementById('sheet-cancel'),
     importFile: document.getElementById('import-file'),
-    app: document.querySelector('.app'),
-    tickerBanner: document.getElementById('ticker-banner'),
-    tickerForm: document.getElementById('ticker-form'),
-    tickerText: document.getElementById('ticker-text'),
-    tickerNote: document.getElementById('ticker-note'),
-    tickerEmpty: document.getElementById('ticker-empty'),
-    tickerList: document.getElementById('ticker-list')
+    app: document.querySelector('.app')
   };
 
   function element(tag, className, text) {
@@ -99,86 +91,6 @@
     renderStats();
     renderScores(false);
     announce(withSaveNote(message, saved));
-  }
-
-  function loadTicker() {
-    if (!tickerApi) return { items: [] };
-    try {
-      var raw = localStorage.getItem(tickerApi.STORAGE_KEY);
-      if (!raw) return tickerApi.blank();
-      return tickerApi.normalize(JSON.parse(raw));
-    } catch (error) {
-      return tickerApi.blank();
-    }
-  }
-
-  function saveTicker() {
-    if (!tickerApi) return false;
-    try {
-      localStorage.setItem(tickerApi.STORAGE_KEY, JSON.stringify(tickerState));
-      return true;
-    } catch (error) {
-      return false;
-    }
-  }
-
-  function hitText(hit) {
-    var parts = [];
-    if (hit.storeName) parts.push(hit.storeName);
-    parts.push(hit.name);
-    if (hit.amount) parts.push(hit.amount);
-    if (hit.price) parts.push(hit.price);
-    return parts.join(' · ');
-  }
-
-  function renderTicker() {
-    if (!els.tickerList || !tickerApi) return;
-    var catalog = window.WochenessenOffers;
-    var rows = tickerApi.reminders(tickerState, catalog && catalog.stores);
-    var ready = rows.filter(function (row) { return row.hits.length > 0; });
-    var status = '';
-    if (!catalog) {
-      status = rows.length ? 'Die Wochenangebote sind gerade nicht geladen.' : '';
-    } else if (!rows.length) {
-      status = '';
-    } else if (!ready.length) {
-      status = 'Diese Woche keiner der gemerkten Artikel im Angebot.';
-    } else if (ready.length === 1) {
-      status = ready[0].query + ' ist im Angebot.';
-    } else {
-      status = ready.map(function (row) { return row.query; }).join(', ') + ' sind im Angebot.';
-    }
-    els.tickerNote.textContent = status;
-    if (els.tickerBanner) {
-      els.tickerBanner.hidden = ready.length === 0;
-      els.tickerBanner.textContent = status;
-    }
-    els.tickerEmpty.hidden = rows.length > 0;
-    els.tickerList.hidden = rows.length === 0;
-    els.tickerList.replaceChildren();
-    rows.forEach(function (row) {
-      var card = element('li', 'ticker-card' + (row.hits.length ? ' is-hit' : ''));
-      var top = element('div', 'ticker-top');
-      top.append(element('p', 'ticker-query', row.query));
-      var remove = element('button', 'tool', 'Entfernen');
-      remove.type = 'button';
-      remove.setAttribute('data-ticker-remove', row.id);
-      remove.setAttribute('aria-label', row.query + ' vom Ticker nehmen');
-      top.append(remove);
-      card.append(top);
-      if (row.hits.length) {
-        row.hits.slice(0, 4).forEach(function (hit) {
-          card.append(element('p', 'ticker-hit', hitText(hit)));
-        });
-        if (row.hits.length > 4) {
-          var extra = row.hits.length - 4;
-          card.append(element('p', 'ticker-miss', extra === 1 ? 'und 1 weiteres' : 'und ' + extra + ' weitere'));
-        }
-      } else {
-        card.append(element('p', 'ticker-miss', catalog ? 'Diese Woche nicht im Angebot.' : 'Angebote nicht geladen.'));
-      }
-      els.tickerList.append(card);
-    });
   }
 
   function formatWhen(timestamp) {
@@ -1255,8 +1167,6 @@
       save();
       suppressPush = false;
     }
-    tickerState = loadTicker();
-    renderTicker();
     renderScoreboard();
     renderChores();
     renderScores(false);
@@ -1383,50 +1293,6 @@
         : 'Buchung wiederhergestellt.';
       commit(result.state, message);
     });
-
-    if (els.tickerBanner) {
-      els.tickerBanner.addEventListener('click', function () {
-        var heading = document.getElementById('ticker-heading');
-        if (heading) heading.scrollIntoView({ block: 'start' });
-      });
-    }
-    if (els.tickerForm && tickerApi) {
-      els.tickerForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var result = tickerApi.addItem(tickerState, els.tickerText.value);
-        if (!result.ok) {
-          els.tickerNote.textContent = result.error;
-          announce(result.error);
-          return;
-        }
-        tickerState = result.state;
-        var saved = saveTicker();
-        els.tickerText.value = '';
-        renderTicker();
-        var fresh = tickerApi.reminders(tickerState, window.WochenessenOffers && window.WochenessenOffers.stores)[0];
-        var message = result.state.items[0].query + ' steht auf dem Ticker.';
-        if (fresh && fresh.hits.length) message = fresh.query + ' ist im Angebot.';
-        announce(withSaveNote(message, saved));
-      });
-      els.tickerList.addEventListener('click', function (event) {
-        var button = event.target.closest('[data-ticker-remove]');
-        if (!button) return;
-        var id = button.getAttribute('data-ticker-remove');
-        var current = null;
-        tickerState.items.forEach(function (item) {
-          if (item.id === id) current = item;
-        });
-        var result = tickerApi.removeItem(tickerState, id);
-        if (!result.ok) {
-          announce(result.error);
-          return;
-        }
-        tickerState = result.state;
-        var saved = saveTicker();
-        renderTicker();
-        announce(withSaveNote((current ? current.query : 'Eintrag') + ' vom Ticker genommen.', saved));
-      });
-    }
 
     els.add.addEventListener('click', function () { openChoreSheet(null); });
     els.reset.addEventListener('click', openResetSheet);
