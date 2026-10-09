@@ -1,6 +1,6 @@
 /* Haushalt – offline cache for the menu and Wochenessen.
    Only haushalt-* caches are deleted, so Chore Wars and Wochenessen keep theirs. */
-var CACHE_VERSION = 'haushalt-v5';
+var CACHE_VERSION = 'haushalt-v6';
 var CACHE_PREFIX = 'haushalt-';
 
 var ASSETS = [
