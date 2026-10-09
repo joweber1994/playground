@@ -436,6 +436,56 @@ h2 {
   margin-bottom: 4px;
 }
 
+.pantry-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pantry-row .chip {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pantry-amount {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.pantry-amount input {
+  width: 9rem;
+  min-height: 40px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-elev-2);
+  color: var(--text);
+  font-size: 16px;
+}
+
+.pantry-step {
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.pantry-step:active {
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .pantry .chip[aria-pressed="true"] {
   background: var(--p1);
   color: var(--p1-ink);

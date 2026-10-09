@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0c0e13">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="Chore Wars ist ein Haushalts-Duell für zwei Spieler. Aufgaben und Namen lassen sich in der App ändern. Der Stand bleibt auf dem Gerät und kann mit einem zweiten Gerät geteilt werden.">
+  <meta name="description" content="Chore Wars ist ein Haushalts-Duell für zwei Spieler. Aufgaben und Namen lassen sich in der App ändern. Ein Ticker erinnert an gemerkte Artikel, sobald sie im Wochenangebot stehen. Der Stand bleibt auf dem Gerät und kann mit einem zweiten Gerät geteilt werden.">
   <title>Chore Wars – Haushalts-Duell</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20180%22%3E%3Crect%20width%3D%22180%22%20height%3D%22180%22%20rx%3D%2240%22%20fill%3D%22%230c0e13%22%2F%3E%3Crect%20x%3D%228%22%20y%3D%228%22%20width%3D%22164%22%20height%3D%22164%22%20rx%3D%2234%22%20fill%3D%22%23171c27%22%20stroke%3D%22%23f6c453%22%20stroke-width%3D%226%22%2F%3E%3Cpath%20d%3D%22M90%2038l46%2018v40c0%2032-20%2052-46%2062-26-10-46-30-46-62V56l46-18z%22%20fill%3D%22%23121722%22%20stroke%3D%22%232ee6c7%22%20stroke-width%3D%225%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M78%2096l8%208%2018-22%22%20fill%3D%22none%22%20stroke%3D%22%23f6c453%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
@@ -43,9 +43,27 @@
         <span id="bar-p1"></span>
         <span id="bar-p2"></span>
       </div>
+      <button id="ticker-banner" class="ticker-banner" type="button" hidden></button>
     </header>
 
     <main class="content">
+      <section class="ticker-panel" aria-labelledby="ticker-heading">
+        <div class="section-head">
+          <h2 id="ticker-heading">Ticker</h2>
+          <p id="ticker-hint" class="hint">Artikel merken, zum Beispiel Barilla Nudeln. Sobald der Name in den gelesenen Wochenangeboten steht, erscheint die Erinnerung.</p>
+        </div>
+        <form id="ticker-form" class="ticker-form" autocomplete="off">
+          <label class="search-field">
+            <span class="sr-only">Artikel für den Ticker</span>
+            <input id="ticker-text" class="search-input" type="text" placeholder="Barilla Nudeln" maxlength="80" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <button class="add ticker-submit" type="submit">Merken</button>
+        </form>
+        <p id="ticker-note" class="hint" role="status"></p>
+        <p id="ticker-empty" class="empty">Noch nichts auf dem Ticker.</p>
+        <ul id="ticker-list" class="ticker-list" hidden></ul>
+      </section>
+
       <section class="chores" aria-labelledby="chores-heading">
         <div class="section-head">
           <h2 id="chores-heading">Aufgaben</h2>
@@ -104,6 +122,8 @@
     </div>
   </div>
   <input id="import-file" class="file-input" type="file" accept="application/json,.json">
+  <script src="../wochenessen/offers.js"></script>
+  <script src="./ticker.js"></script>
   <script src="./state.js"></script>
   <script src="./sync.js"></script>
   <script src="./app.js"></script>
