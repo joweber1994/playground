@@ -39,9 +39,9 @@ assert(!sync.normalizeDatabaseUrl('https://user:pass@haus.firebaseio.com').ok, '
 var householdPath = sync.standUrl('https://haus.firebaseio.com', 'a'.repeat(64));
 var reminderPath = sync.standUrl('https://haus.firebaseio.com', 'a'.repeat(64), 'reminders');
 assertEqual(householdPath, 'https://haus.firebaseio.com/households/' + 'a'.repeat(64) + '.json', 'Chore Wars bleibt im bisherigen Pfad');
-assertEqual(reminderPath, 'https://haus.firebaseio.com/reminders/' + 'a'.repeat(64) + '.json', 'Erinnerungen haben einen eigenen Pfad');
+assertEqual(reminderPath, 'https://haus.firebaseio.com/households/' + 'a'.repeat(64) + '/reminders.json', 'Erinnerungen liegen im bestehenden Haushalt');
 assertEqual(sync.standUrl('https://haus.firebaseio.com', 'a'.repeat(64), 'anders'), householdPath, 'unbekannte Bereiche fallen auf Chore Wars zurück');
-assert(sync.RULES_TEXT.indexOf('"reminders"') !== -1, 'Regeln nennen Erinnerungen');
+assert(sync.RULES_TEXT.indexOf('"reminders"') === -1, 'die alten Regeln bleiben ohne neuen Wurzelpfad');
 assert(sync.RULES_TEXT.indexOf('"households"') !== -1, 'Regeln nennen den bisherigen Haushalt');
 
 assert(!sync.requireName('   ').ok, 'leerer Name wird abgelehnt');
@@ -69,9 +69,12 @@ assertEqual(migrated.householdId, 'ab'.repeat(32), 'alter Pfad wird übernommen'
 assertEqual(legacy.data['haushalt-firebase-url'], 'https://haus.firebaseio.com', 'neue Adresse wird gespeichert');
 sync.saveName(legacy, '  Jonas  ');
 assertEqual(sync.readConnection(legacy).name, 'Jonas', 'Name bleibt auf dem Gerät');
+sync.saveConnection(legacy, 'https://haus.firebaseio.com', 'ab'.repeat(32), 'haushalt1');
+assertEqual(sync.readConnection(legacy).secret, 'haushalt1', 'Kennwort bleibt gespeichert');
 sync.disconnect(legacy);
 assertEqual(sync.readConnection(legacy).householdId, '', 'Trennen löscht auch den alten Pfad');
 assertEqual(sync.readConnection(legacy).url, 'https://haus.firebaseio.com', 'die Adresse bleibt zum erneuten Verbinden');
+assertEqual(sync.readConnection(legacy).secret, 'haushalt1', 'das Kennwort bleibt nach dem Trennen sichtbar');
 
 assert(!sync.readSecret('kurz').ok, 'zu kurzes Kennwort');
 assert(sync.readSecret('  haushalt1  ').ok, 'Kennwort wird beschnitten');
@@ -93,6 +96,13 @@ assertEqual(sync.decideLive({ remoteUpdatedAt: 4, dirty: false, same: true, loca
 assertEqual(sync.readRemote(null), null, 'leerer Knoten');
 assert(sync.readRemote({ updatedAt: 1 }).invalid, 'Stand ohne state ist ungültig');
 assertEqual(sync.readRemote({ state: { version: 3 }, updatedAt: 7 }).updatedAt, 7, 'gültiger Fernstand');
+var withReminders = sync.readRemote({
+  state: { version: 3, marker: 'haus' },
+  updatedAt: 7,
+  reminders: { state: { items: [] }, updatedAt: 3 }
+});
+assertEqual(withReminders.state.marker, 'haus', 'Erinnerungen im Haushalt ändern den gelesenen Stand nicht');
+assertEqual(withReminders.updatedAt, 7, 'der Zeitstempel bleibt der vom Haushalt');
 
 function response(body, status) {
   return {
@@ -186,6 +196,13 @@ function runSession() {
     });
     assertEqual(adopted.length, 1, 'neuerer Fernstand wird übernommen');
     assertEqual(store.state.marker, 'fern', 'lokal steht danach der Fernstand');
+
+    FakeSource.latest.emit('put', {
+      path: '/reminders',
+      data: { state: { items: [] }, updatedAt: 9000 }
+    });
+    assertEqual(adopted.length, 1, 'Schreiben der Erinnerungen lässt den Spielstand stehen');
+    assertEqual(store.state.marker, 'fern', 'der Spielstand bleibt der übernommene');
 
     session.noteLocalEdit();
     store.state = { version: 3, marker: 'lokal-danach' };
@@ -323,6 +340,33 @@ function runRetry() {
   });
 }
 
+function runPatch() {
+  var method = '';
+  var store = { state: { version: 3, marker: 'lokal' }, updatedAt: 0, untouched: false };
+  var session = sync.createSession({
+    databaseURL: 'https://haus.firebaseio.com',
+    householdId: 'f'.repeat(64),
+    writeMethod: 'PATCH',
+    getSnapshot: function () { return store; },
+    setUpdatedAt: function (value) { store.updatedAt = value; },
+    adopt: function () { return true; },
+    ask: function () { throw new Error('patch fragt nicht'); },
+    onStatus: function () {},
+    fetch: function (url, options) {
+      if (options && options.method) method = options.method;
+      if (!options || !options.method || options.method === 'GET') return Promise.resolve(response(null, 200));
+      return Promise.resolve(response(JSON.parse(options.body), 200));
+    },
+    EventSource: FakeSource,
+    now: function () { return 80; },
+    delay: 0
+  });
+  return session.ready.then(function () { return wait(20); }).then(function () {
+    assertEqual(method, 'PATCH', 'Chore Wars schreibt mit PATCH und lässt Erinnerungen stehen');
+    session.close();
+  });
+}
+
 sync.householdId('haushalt1').then(function (id) {
   assertEqual(id, '8da4487cdfb3e7add6a7c079b2303a7645009419de8ee7788994ad1bad2f3e2a', 'Kennwort wird zum festen Haushaltspfad');
   assert(sync.isHouseholdId(id), 'der Pfad hat 64 Hex-Zeichen');
@@ -334,6 +378,8 @@ sync.householdId('haushalt1').then(function (id) {
   return runSession();
 }).then(function () {
   return runRetry();
+}).then(function () {
+  return runPatch();
 }).then(function () {
   console.log('sync tests ok');
 }).catch(function (error) {

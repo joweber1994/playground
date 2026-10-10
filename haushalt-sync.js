@@ -1,6 +1,8 @@
 /* Haushalt – gemeinsame Firebase-Verbindung für Chore Wars und Erinnerungen.
    Reine Entscheidungen plus eine kleine Sitzung. Im Browser als HaushaltSync, unter Node als Modul.
-   Chore Wars bleibt unter households/{id}, Erinnerungen unter reminders/{id}. */
+   Chore Wars bleibt unter households/{id}. Erinnerungen liegen darunter,
+   damit die schon veröffentlichten Regeln den Zugriff erlauben.
+   Chore Wars schreibt mit PATCH, damit der Erinnerungszweig stehen bleibt. */
 
 (function (root, factory) {
   var api = factory();
@@ -13,6 +15,7 @@
   var URL_KEY = 'haushalt-firebase-url';
   var HOUSEHOLD_KEY = 'haushalt-household-id';
   var NAME_KEY = 'haushalt-name';
+  var SECRET_KEY = 'haushalt-secret';
   var LEGACY_URL_KEY = 'chore-wars-firebase-url';
   var LEGACY_HOUSEHOLD_KEY = 'chore-wars-household-id';
   var UPDATED_KEY = 'chore-wars-sync-at';
@@ -33,8 +36,7 @@
 
   var RULES = {
     rules: {
-      households: { $id: documentRule() },
-      reminders: { $id: documentRule() }
+      households: { $id: documentRule() }
     }
   };
 
@@ -95,8 +97,8 @@
   }
 
   function standUrl(databaseURL, id, bucket) {
-    var name = bucket === 'reminders' ? 'reminders' : 'households';
-    return databaseURL + '/' + name + '/' + id + '.json';
+    if (bucket === 'reminders') return databaseURL + '/households/' + id + '/reminders.json';
+    return databaseURL + '/households/' + id + '.json';
   }
 
   function cleanName(value) {
@@ -142,7 +144,8 @@
     return {
       url: storageGet(storage, URL_KEY),
       householdId: storageGet(storage, HOUSEHOLD_KEY),
-      name: name.ok ? name.value : ''
+      name: name.ok ? name.value : '',
+      secret: storageGet(storage, SECRET_KEY)
     };
   }
 
@@ -153,11 +156,12 @@
     return cleaned;
   }
 
-  function saveConnection(storage, url, id) {
+  function saveConnection(storage, url, id, secret) {
     storageSet(storage, URL_KEY, url || '');
     storageSet(storage, HOUSEHOLD_KEY, id || '');
     storageSet(storage, LEGACY_URL_KEY, url || '');
     storageSet(storage, LEGACY_HOUSEHOLD_KEY, id || '');
+    if (secret != null) storageSet(storage, SECRET_KEY, String(secret));
   }
 
   function disconnect(storage) {
@@ -227,7 +231,7 @@
     function put(payload, gen) {
       status('saving');
       return options.fetch(endpoint, {
-        method: 'PUT',
+        method: options.writeMethod === 'PATCH' ? 'PATCH' : 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
         cache: 'no-store'
@@ -425,6 +429,7 @@
     URL_KEY: URL_KEY,
     HOUSEHOLD_KEY: HOUSEHOLD_KEY,
     NAME_KEY: NAME_KEY,
+    SECRET_KEY: SECRET_KEY,
     LEGACY_URL_KEY: LEGACY_URL_KEY,
     LEGACY_HOUSEHOLD_KEY: LEGACY_HOUSEHOLD_KEY,
     UPDATED_KEY: UPDATED_KEY,

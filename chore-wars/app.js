@@ -939,6 +939,7 @@
       databaseURL: link.url,
       householdId: link.householdId,
       bucket: 'households',
+      writeMethod: 'PATCH',
       getSnapshot: function () {
         return {
           state: api.serialize(state),

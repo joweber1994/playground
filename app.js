@@ -11,12 +11,15 @@
     form: document.getElementById('link-form'),
     url: document.getElementById('database-url'),
     secret: document.getElementById('secret'),
+    savedUrl: document.getElementById('saved-url'),
+    savedSecret: document.getElementById('saved-secret'),
     rules: document.getElementById('rules'),
     error: document.getElementById('sheet-error'),
     disconnect: document.getElementById('disconnect'),
     cancel: document.getElementById('sheet-cancel'),
     submit: document.getElementById('sheet-submit'),
-    panel: document.getElementById('verbindung')
+    panel: document.getElementById('verbindung'),
+    sheetPanel: document.getElementById('sheet-panel')
   };
 
   function isLocalFile() {
@@ -42,8 +45,15 @@
   }
 
   function connection() {
-    if (!syncApi) return { url: '', householdId: '', name: '' };
+    if (!syncApi) return { url: '', householdId: '', name: '', secret: '' };
     return syncApi.readConnection(window.localStorage);
+  }
+
+  function showSaved(el, value, emptyLabel) {
+    if (!el) return;
+    var text = value ? String(value) : '';
+    el.textContent = text || emptyLabel;
+    el.classList.toggle('is-empty', !text);
   }
 
   function showNote(message) {
@@ -64,7 +74,25 @@
       els.sync.classList.toggle('is-live', on);
     }
     if (els.name && document.activeElement !== els.name) els.name.value = link.name;
+    showSaved(els.savedUrl, link.url, 'Noch keine Adresse');
+    showSaved(els.savedSecret, link.secret, 'Noch kein Kennwort');
     if (els.disconnect) els.disconnect.hidden = !on;
+  }
+
+  function placeSheet() {
+    if (!els.sheet || els.sheet.hidden) return;
+    var inset = 0;
+    var viewHeight = window.innerHeight;
+    if (window.visualViewport) {
+      var view = window.visualViewport;
+      viewHeight = view.height;
+      inset = Math.max(0, window.innerHeight - view.height - view.offsetTop);
+    }
+    if (inset > 0) inset += 56;
+    els.sheet.style.paddingBottom = inset ? inset + 'px' : '';
+    if (els.sheetPanel) {
+      els.sheetPanel.style.maxHeight = inset > 0 ? Math.max(180, viewHeight - 56) + 'px' : '';
+    }
   }
 
   function saveTypedName(value) {
@@ -82,16 +110,23 @@
     if (!syncApi || !els.sheet) return;
     var link = connection();
     els.url.value = link.url;
-    els.secret.value = '';
+    els.secret.value = link.secret || '';
+    els.url.scrollTop = 0;
+    els.secret.scrollTop = 0;
     els.rules.value = syncApi.RULES_TEXT;
     showError('');
     els.disconnect.hidden = !(link.url && link.householdId);
     els.sheet.hidden = false;
-    els.url.focus();
+    placeSheet();
+    if (els.sheetPanel) els.sheetPanel.focus();
   }
 
   function closeSheet() {
-    if (els.sheet) els.sheet.hidden = true;
+    if (els.sheet) {
+      els.sheet.hidden = true;
+      els.sheet.style.paddingBottom = '';
+    }
+    if (els.sheetPanel) els.sheetPanel.style.maxHeight = '';
     if (els.submit) els.submit.disabled = false;
   }
 
@@ -119,7 +154,7 @@
     }
     els.submit.disabled = true;
     syncApi.householdId(secretResult.value).then(function (id) {
-      syncApi.saveConnection(window.localStorage, urlResult.value, id);
+      syncApi.saveConnection(window.localStorage, urlResult.value, id, secretResult.value);
       closeSheet();
       showNote('Verbunden als ' + name.value + '. Chore Wars und Erinnerungen nutzen dieselbe Verbindung.');
       renderStatus();
@@ -147,13 +182,21 @@
       els.disconnect.addEventListener('click', function () {
         syncApi.disconnect(window.localStorage);
         closeSheet();
-        showNote('Getrennt. Die Listen bleiben auf diesem Gerät und in Firebase.');
+        showNote('Getrennt. Adresse und Kennwort bleiben auf diesem Gerät.');
         renderStatus();
       });
     }
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && els.sheet && !els.sheet.hidden) closeSheet();
     });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', placeSheet);
+      window.visualViewport.addEventListener('scroll', placeSheet);
+    }
+    var link = connection();
+    if (link.url && !link.secret) {
+      showNote('Das Kennwort einmal eintragen, danach bleibt es hier stehen.');
+    }
     if (window.location.hash === '#verbindung' && els.panel) {
       els.panel.scrollIntoView({ block: 'start' });
     }
