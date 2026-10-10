@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Haushalt",
-  "short_name": "Haushalt",
-  "description": "Menü für Chore Wars, Wochenessen und Erinnerungen. Alle bleiben in einer App auf dem Home-Bildschirm.",
+  "name": "Erinnerungen",
+  "short_name": "Erinnerungen",
+  "description": "Texte mit optionalem Datum. Fällige Einträge stehen oben. Die Liste bleibt auf dem Gerät.",
   "lang": "de",
   "dir": "ltr",
   "start_url": "./index.html",

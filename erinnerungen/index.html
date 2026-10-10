@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Erinnerungen">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0c0e13">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="Erinnerungen merkt Texte mit optionalem Datum. Fällige Einträge stehen oben. Die Liste bleibt auf dem Gerät.">
+  <title>Erinnerungen</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="brand-row">
+        <div class="brand">
+          <svg class="logo" viewBox="0 0 180 180" aria-hidden="true">
+            <rect width="180" height="180" rx="40" fill="#0c0e13"/>
+            <rect x="8" y="8" width="164" height="164" rx="34" fill="#171c27" stroke="#ff8a5b" stroke-width="6"/>
+            <path d="M90 46c-20 0-32 14-32 32v18l-8 12h80l-8-12V78c0-18-12-32-32-32z" fill="#121722" stroke="#f6c453" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M78 116a12 12 0 0 0 24 0" fill="none" stroke="#2ee6c7" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <p class="eyebrow">Merkzettel</p>
+            <h1>Erinnerungen</h1>
+          </div>
+        </div>
+        <a class="home-link" href="../index.html">Haushalt</a>
+      </div>
+      <p id="connectivity" class="connectivity">Auf diesem Gerät</p>
+      <p id="due-banner" class="due-banner" hidden></p>
+    </header>
+
+    <main class="content" id="content">
+      <form id="form" class="compose" autocomplete="off">
+        <label class="field">
+          <span class="sr-only">Erinnerung</span>
+          <input id="text" type="text" maxlength="120" placeholder="Zum Beispiel Mülltonne" enterkeyhint="done" autocomplete="off" autocapitalize="sentences">
+        </label>
+        <div class="compose-row">
+          <label class="field grow">
+            <span class="field-label">Datum, optional</span>
+            <input id="date" type="date">
+          </label>
+          <button type="submit">Merken</button>
+        </div>
+      </form>
+      <p id="note" class="hint" role="status"></p>
+      <p class="hint">Fällige Einträge stehen oben. Die Liste bleibt auf diesem Gerät.</p>
+      <p id="empty" class="empty">Noch keine Erinnerung.</p>
+      <ul id="open-list" class="cards" aria-label="Offene Erinnerungen"></ul>
+      <div id="done-wrap" class="done-wrap" hidden>
+        <div class="done-head">
+          <h2>Erledigt</h2>
+          <button id="clear-done" type="button">Erledigte löschen</button>
+        </div>
+        <ul id="done-list" class="cards" aria-label="Erledigte Erinnerungen"></ul>
+      </div>
+    </main>
+  </div>
+  <p id="live" class="sr-only" aria-live="polite"></p>
+  <noscript>
+    <p class="note">Erinnerungen braucht JavaScript. Die Liste bleibt danach auf diesem Gerät.</p>
+  </noscript>
+  <script src="./reminders.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

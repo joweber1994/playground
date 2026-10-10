@@ -159,6 +159,10 @@ h1 {
   color: var(--gold);
 }
 
+.tile-reminders .tile-kicker {
+  color: var(--p2);
+}
+
 .tile-title {
   font-size: 1.25rem;
   font-weight: 800;
