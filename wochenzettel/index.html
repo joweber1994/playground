@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0c0e13">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="Wochenzettel liest die Angebote von Prechtl, Aldi Süd, Penny und Lidl, schlägt Gerichte für zwei vor und führt die Einkaufsliste im Markt.">
+  <meta name="description" content="Wochenzettel liest die Angebote von Prechtl, Aldi Süd, Penny und Lidl, schlägt Gerichte für zwei vor und führt die Einkaufsliste im Markt. Ein Ticker erinnert, sobald ein gemerkter Artikel im Angebot steht.">
   <title>Wochenzettel</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
@@ -40,6 +40,7 @@
         <p id="connectivity" class="connectivity">Auf diesem Gerät</p>
         <button id="sync-status" class="sync-status" type="button">Nur dieses Gerät</button>
       </div>
+      <button id="ticker-banner" class="ticker-banner" type="button" hidden></button>
     </header>
 
     <p id="week-note" class="banner app-banner" hidden></p>
@@ -100,6 +101,20 @@
       </section>
 
       <section id="panel-angebote" class="panel" role="tabpanel" aria-labelledby="tab-angebote" hidden>
+        <div class="section-head">
+          <h2 id="ticker-heading">Ticker</h2>
+          <p class="hint">Artikel merken, zum Beispiel Barilla Nudeln. Sobald der Name in den gelesenen Angeboten steht, erscheint die Erinnerung.</p>
+        </div>
+        <form id="ticker-form" class="offer-form" autocomplete="off">
+          <label class="field grow">
+            <span class="sr-only">Artikel für den Ticker</span>
+            <input id="ticker-text" type="text" placeholder="Barilla Nudeln" maxlength="80" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <button type="submit">Merken</button>
+        </form>
+        <p id="ticker-note" class="hint" role="status"></p>
+        <p id="ticker-empty" class="empty">Noch nichts auf dem Ticker.</p>
+        <ul id="ticker-list" class="ticker-list" hidden></ul>
         <div class="section-head">
           <h2 id="offers-heading">Diese Woche</h2>
           <p id="week-line" class="hint"></p>
@@ -166,7 +181,7 @@
       <section id="panel-vorrat" class="panel" role="tabpanel" aria-labelledby="tab-vorrat" hidden>
         <div class="section-head">
           <h2 id="inventory-heading">Vorrat</h2>
-          <p class="hint">Was schon da ist, kommt nicht auf den Zettel.</p>
+          <p class="hint">Was schon da ist, kommt nicht auf den Zettel. Die Menge lässt sich ändern.</p>
         </div>
         <button type="button" id="scan-open" class="scan-open">Scannen</button>
         <form id="inventory-form" class="shop-form" autocomplete="off">
@@ -230,6 +245,7 @@
   <noscript>
     <p class="note">Wochenzettel braucht JavaScript. Der Prospekt lässt sich auch so öffnen.</p>
   </noscript>
+  <script src="./ticker.js"></script>
   <script src="./ean.js"></script>
   <script src="./barcode.js"></script>
   <script src="./meals.js"></script>

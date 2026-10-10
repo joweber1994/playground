@@ -804,6 +804,41 @@
     return seedInventory(pantryIds);
   }
 
+  function stepAmount(amount, direction) {
+    var text = String(amount || '').trim();
+    var delta = direction < 0 ? -1 : 1;
+    var match = text.match(/^(\d+(?:[.,]\d+)?)(.*)$/);
+    if (!match) return delta > 0 ? '1' : text;
+    var value = Number(match[1].replace(',', '.'));
+    var rest = match[2];
+    var step = value >= 100 ? 100 : 1;
+    var next = value + delta * step;
+    if (next < 0) next = 0;
+    var shown = String(next);
+    if (match[1].indexOf(',') !== -1) shown = shown.replace('.', ',');
+    else if (match[1].indexOf('.') === -1) shown = String(Math.round(next));
+    return (shown + rest).replace(/\s+/g, ' ').trim();
+  }
+
+  function stepInventory(rows, id, direction, now) {
+    var list = cleanInventory(rows);
+    var found = null;
+    list.forEach(function (item) {
+      if (item.id === id && !item.deleted) found = item;
+    });
+    if (!found) return { ok: false, reason: 'missing', inventory: list };
+    var amount = found.amount;
+    var units = found.units;
+    if (/^\d/.test(amount)) amount = stepAmount(amount, direction);
+    else units = stockUnits(units + (direction < 0 ? -1 : 1));
+    var rev = revNum(now) || found.rev;
+    var next = list.map(function (item) {
+      if (item.id !== id) return item;
+      return stockRow({ id: item.id, units: units, barcode: item.barcode }, item.name, amount, rev, false);
+    });
+    return { ok: true, inventory: next, amount: amount, units: units };
+  }
+
   function absorbIds(inventory, ids, now) {
     var next = cleanInventory(inventory);
     (ids || []).forEach(function (id) {
@@ -1059,6 +1094,8 @@
     seedInventory: seedInventory,
     ensureInventory: ensureInventory,
     absorbIds: absorbIds,
+    stepAmount: stepAmount,
+    stepInventory: stepInventory,
     cleanOverrides: cleanOverrides,
     saveOverride: saveOverride,
     resetOverride: resetOverride,

@@ -7,6 +7,7 @@
   var syncApi = window.WochenzettelSync;
   var barcodeApi = window.WochenzettelBarcode;
   var eanScan = window.WochenzettelEan;
+  var tickerApi = window.WochenzettelTicker;
   if (!meals || !catalog || !shop || !barcodeApi || !eanScan || !catalog.stores || !catalog.stores.length) return;
 
   var STORAGE_KEY = 'wochenzettel-v1';
@@ -57,6 +58,7 @@
   var heldCode = '';
   var heldClearAt = 0;
   var pendingCode = '';
+  var tickerState = tickerApi ? tickerApi.blank() : { items: [] };
 
   var els = {
     weekLine: document.getElementById('week-line'),
@@ -124,6 +126,12 @@
     sheetBody: document.getElementById('sheet-body'),
     sheetError: document.getElementById('sheet-error'),
     sheetSubmit: document.getElementById('sheet-submit'),
+    tickerBanner: document.getElementById('ticker-banner'),
+    tickerForm: document.getElementById('ticker-form'),
+    tickerText: document.getElementById('ticker-text'),
+    tickerNote: document.getElementById('ticker-note'),
+    tickerEmpty: document.getElementById('ticker-empty'),
+    tickerList: document.getElementById('ticker-list'),
     connectivity: document.getElementById('connectivity'),
     live: document.getElementById('live'),
     content: document.querySelector('.content'),
@@ -240,6 +248,97 @@
   function extrasFor(storeId) {
     var list = state.extras && state.extras[storeId];
     return Array.isArray(list) ? list : [];
+  }
+
+  function loadTicker() {
+    if (!tickerApi) return { items: [] };
+    var raw = null;
+    var legacyKey = '';
+    try {
+      raw = localStorage.getItem(tickerApi.STORAGE_KEY);
+      if (!raw) {
+        var keys = tickerApi.LEGACY_KEYS || [];
+        for (var i = 0; i < keys.length; i += 1) {
+          raw = localStorage.getItem(keys[i]);
+          if (raw) {
+            legacyKey = keys[i];
+            break;
+          }
+        }
+      }
+    } catch (error) {
+      raw = null;
+    }
+    var next = tickerApi.blank();
+    if (raw) {
+      try { next = tickerApi.normalize(JSON.parse(raw)); } catch (error) { next = tickerApi.blank(); }
+    }
+    if (legacyKey) {
+      tickerState = next;
+      saveTicker();
+      try { localStorage.removeItem(legacyKey); } catch (error) { /* bleibt sonst ungelesen */ }
+    }
+    return next;
+  }
+
+  function saveTicker() {
+    if (!tickerApi) return false;
+    try {
+      localStorage.setItem(tickerApi.STORAGE_KEY, JSON.stringify(tickerState));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function hitText(hit) {
+    var parts = [];
+    if (hit.storeName) parts.push(hit.storeName);
+    parts.push(hit.name);
+    if (hit.amount) parts.push(hit.amount);
+    if (hit.price) parts.push(hit.price);
+    return parts.join(' · ');
+  }
+
+  function tickerStores() {
+    return catalog.stores.map(function (store) {
+      return { id: store.id, name: store.name, offers: offersFor(store) };
+    });
+  }
+
+  function renderTicker() {
+    if (!els.tickerList || !tickerApi) return;
+    var rows = tickerApi.reminders(tickerState, tickerStores());
+    var ready = rows.filter(function (row) { return row.hits.length > 0; });
+    var status = '';
+    if (rows.length && !ready.length) status = 'Diese Woche keiner der gemerkten Artikel im Angebot.';
+    else if (ready.length === 1) status = ready[0].query + ' ist im Angebot.';
+    else if (ready.length > 1) status = ready.map(function (row) { return row.query; }).join(', ') + ' sind im Angebot.';
+    if (els.tickerNote) els.tickerNote.textContent = status;
+    if (els.tickerBanner) {
+      els.tickerBanner.hidden = ready.length === 0;
+      els.tickerBanner.textContent = status;
+    }
+    if (els.tickerEmpty) els.tickerEmpty.hidden = rows.length > 0;
+    els.tickerList.hidden = rows.length === 0;
+    els.tickerList.innerHTML = rows.map(function (row) {
+      var hits = '';
+      if (row.hits.length) {
+        hits = row.hits.slice(0, 4).map(function (hit) {
+          return '<p class="ticker-hit">' + escapeHtml(hitText(hit)) + '</p>';
+        }).join('');
+        if (row.hits.length > 4) {
+          var extra = row.hits.length - 4;
+          hits += '<p class="ticker-miss">' + (extra === 1 ? 'und 1 weiteres' : 'und ' + extra + ' weitere') + '</p>';
+        }
+      } else {
+        hits = '<p class="ticker-miss">Diese Woche nicht im Angebot.</p>';
+      }
+      return '<li class="ticker-card' + (row.hits.length ? ' is-hit' : '') + '">' +
+        '<div class="ticker-top"><p class="ticker-query">' + escapeHtml(row.query) + '</p>' +
+        '<button type="button" class="ticker-remove" data-ticker-remove="' + escapeHtml(row.id) + '" aria-label="' + escapeHtml(row.query + ' vom Ticker nehmen') + '">Entfernen</button></div>' +
+        hits + '</li>';
+    }).join('');
   }
 
   function offersFor(store) {
@@ -760,7 +859,10 @@
       var detail = inventoryDetail(item);
       return '<li class="shop-row"><span class="shop-copy"><span class="shop-name">' + escapeHtml(item.name) + '</span>' +
         (detail ? '<span class="shop-amount">' + escapeHtml(detail) + '</span>' : '') +
-        '</span><button type="button" class="shop-remove" data-inventory-rename="' + escapeHtml(item.id) + '">Ändern</button>' +
+        '</span><div class="stock-step">' +
+        '<button type="button" class="stock-step-btn" data-inventory-step="-1" data-inventory-id="' + escapeHtml(item.id) + '" aria-label="Menge ' + escapeHtml(item.name) + ' verringern">−</button>' +
+        '<button type="button" class="stock-step-btn" data-inventory-step="1" data-inventory-id="' + escapeHtml(item.id) + '" aria-label="Menge ' + escapeHtml(item.name) + ' erhöhen">+</button>' +
+        '</div><button type="button" class="shop-remove" data-inventory-rename="' + escapeHtml(item.id) + '">Ändern</button>' +
         '<button type="button" class="shop-remove" data-inventory-remove="' + escapeHtml(item.id) + '">Entfernen</button></li>';
     }).join('');
     if (focusRename) {
@@ -1238,6 +1340,7 @@
 
   function render() {
     readEditorFields();
+    renderTicker();
     renderStores();
     renderStoreDetail();
     renderChoice();
@@ -1973,6 +2076,7 @@
       els.week.textContent = 'Neue Woche. Ergänzungen und die Einkaufsliste der letzten Woche sind geleert.';
     }
     hadSaved = !!readStorage();
+    tickerState = loadTicker();
     persist();
     selectTab('einkauf');
 
@@ -2070,6 +2174,27 @@
           renameId = renameButton.getAttribute('data-inventory-rename');
           focusRename = true;
           renderInventory();
+          return;
+        }
+        var step = event.target.closest('[data-inventory-step]');
+        if (step) {
+          var stepId = step.getAttribute('data-inventory-id');
+          var stepped = meals.stepInventory(state.inventory, stepId, Number(step.getAttribute('data-inventory-step')), Date.now());
+          if (!stepped.ok) {
+            announce('Diese Zeile fehlt.');
+            return;
+          }
+          state.inventory = stepped.inventory;
+          state.inventorySet = true;
+          publishPantry();
+          save();
+          renderInventory();
+          var steppedRow = null;
+          stepped.inventory.forEach(function (item) {
+            if (item.id === stepId) steppedRow = item;
+          });
+          var steppedDetail = steppedRow ? inventoryDetail(steppedRow) : '';
+          announce((steppedRow ? steppedRow.name : 'Vorrat') + ': ' + (steppedDetail || 'ohne Menge'));
           return;
         }
         var button = event.target.closest('[data-inventory-remove]');
@@ -2608,6 +2733,54 @@
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) closeScanner();
     });
+
+    if (els.tickerBanner) {
+      els.tickerBanner.addEventListener('click', function () {
+        selectTab('angebote');
+        var heading = document.getElementById('ticker-heading');
+        if (heading && heading.scrollIntoView) heading.scrollIntoView({ block: 'start' });
+      });
+    }
+    if (els.tickerForm && tickerApi) {
+      els.tickerForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var result = tickerApi.addItem(tickerState, els.tickerText.value);
+        if (!result.ok) {
+          if (els.tickerNote) els.tickerNote.textContent = result.error;
+          announce(result.error);
+          return;
+        }
+        tickerState = result.state;
+        var saved = saveTicker();
+        els.tickerText.value = '';
+        renderTicker();
+        var fresh = tickerApi.reminders(tickerState, tickerStores())[0];
+        var message = result.state.items[0].query + ' steht auf dem Ticker.';
+        if (fresh && fresh.hits.length) message = fresh.query + ' ist im Angebot.';
+        if (!saved) message += ' Speichern auf diesem Gerät ist fehlgeschlagen.';
+        announce(message);
+      });
+      if (els.tickerList) {
+        els.tickerList.addEventListener('click', function (event) {
+          var removeButton = event.target.closest('[data-ticker-remove]');
+          if (!removeButton) return;
+          var id = removeButton.getAttribute('data-ticker-remove');
+          var current = null;
+          tickerState.items.forEach(function (item) {
+            if (item.id === id) current = item;
+          });
+          var removed = tickerApi.removeItem(tickerState, id);
+          if (!removed.ok) {
+            announce(removed.error);
+            return;
+          }
+          tickerState = removed.state;
+          saveTicker();
+          renderTicker();
+          announce((current ? current.query : 'Eintrag') + ' vom Ticker genommen.');
+        });
+      }
+    }
 
     render();
     updateConnectivity();
