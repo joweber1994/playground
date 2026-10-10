@@ -159,10 +159,6 @@ h1 {
   color: var(--gold);
 }
 
-.tile-list .tile-kicker {
-  color: #9db7ff;
-}
-
 .tile-reminders .tile-kicker {
   color: var(--p2);
 }

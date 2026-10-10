@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="Wochenessen">
-  <rect width="180" height="180" rx="40" fill="#0c0e13"/>
-  <rect x="8" y="8" width="164" height="164" rx="34" fill="#171c27" stroke="#f6c453" stroke-width="6"/>
-  <circle cx="90" cy="96" r="46" fill="#121722" stroke="#2ee6c7" stroke-width="5"/>
-  <circle cx="90" cy="96" r="26" fill="none" stroke="#f6c453" stroke-width="6"/>
-  <path d="M62 86c12 10 44 10 56 0" fill="none" stroke="#ff8a5b" stroke-width="5" stroke-linecap="round"/>
-</svg>

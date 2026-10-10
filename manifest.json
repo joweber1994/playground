@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Haushalt",
   "short_name": "Haushalt",
-  "description": "Menü für Chore Wars, Wochenessen, Wochenzettel und Erinnerungen. Name und Firebase-Zugang gelten für Chore Wars und Erinnerungen.",
+  "description": "Menü für Chore Wars, Wochenzettel und Erinnerungen. Name und Firebase-Zugang gelten für Chore Wars und Erinnerungen.",
   "lang": "de",
   "dir": "ltr",
   "start_url": "./index.html",
