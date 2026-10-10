@@ -4,7 +4,7 @@
 (function (root, factory) {
   var api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else root.WochenessenTicker = api;
+  else root.WochenzettelTicker = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   var STORAGE_KEY = 'wochenzettel-ticker-v1';
   var LEGACY_KEYS = ['wochenessen-ticker-v1', 'chore-wars-ticker-v1'];
