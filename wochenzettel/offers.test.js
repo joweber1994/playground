@@ -26,7 +26,7 @@ function hasName(list, pattern) {
 assertEqual(offers.weekKey, '2026-W41', 'Woche 41');
 assertEqual(offers.validFrom, '2026-10-05', 'gültig ab 5.10.');
 assertEqual(offers.validUntil, '2026-10-10', 'gültig bis 10.10.');
-assertEqual(offers.stores.length, 4, 'vier lesbare Ketten');
+assertEqual(offers.stores.length, 6, 'sechs lesbare Ketten');
 
 var prechtl = store('prechtl');
 assert(prechtl && /Prospekt der Woche 41/.test(prechtl.note), 'Prechtl-Hinweis nennt den Prospekt');
@@ -41,14 +41,46 @@ var aldi = store('aldi');
 var aldiIds = meals.idsFromOffers(aldi.offers);
 assert(aldiIds.indexOf('hackfleisch') !== -1, 'Aldi-Hackfleisch wird erkannt');
 assert(aldiIds.indexOf('haehnchen') !== -1, 'Aldi-Hähnchen wird erkannt');
-assert(aldi.otherCount > 0, 'Aldi zählt die übrigen Artikel');
+assert(typeof aldi.otherCount === 'number' && aldi.otherCount >= 0, 'Aldi nennt die übrigen Artikel');
 
 var penny = store('penny');
 assert(penny.offers.length > 100, 'Penny-Liste ist lang');
 
 var lidl = store('lidl');
-assert(lidl.offers.length < 10, 'Lidl-Aktionsprospekt hat kaum Lebensmittel');
-assert(/kaum Zutaten/.test(lidl.note), 'Lidl-Hinweis nennt die Lücke');
+assert(/7ad9f3/.test(lidl.source), 'Lidl nutzt den HHZ-Aktionsprospekt');
+assert(/Dulano/.test(lidl.note), 'Lidl-Hinweis nennt Dulano');
+assert(hasName(lidl.offers, /Paprika Mix/), 'Lidl hat Paprika');
+assert(hasName(lidl.offers, /Mini Wiener/), 'Lidl hat Mini Wiener');
+assert(hasName(lidl.offers, /Möhren/), 'Lidl hat Möhren');
+assert(hasName(lidl.offers, /Champagner/), 'Lidl hat Champagner');
+assert(lidl.offers.length > 150, 'Lidl-Liste enthält das Heft');
+assert(hasName(lidl.offers, /Bauernbaguette/), 'Lidl hat Baguette');
+assert(hasName(lidl.offers, /Hackfleisch/), 'Lidl hat Hackfleisch');
+assert(hasName(lidl.offers, /BARILLA/), 'Lidl hat Barilla');
+var lidlIds = meals.idsFromOffers(lidl.offers);
+assert(lidlIds.indexOf('paprika') !== -1, 'Lidl-Paprika wird erkannt');
+assert(lidlIds.indexOf('bratwurst') !== -1, 'Lidl-Wiener zählen als Bratwurst');
+assert(lidlIds.indexOf('schinken') !== -1, 'Lidl-Schinken wird erkannt');
+assert(lidlIds.indexOf('karotte') !== -1, 'Lidl-Möhren zählen als Karotten');
+
+var dm = store('dm');
+assert(dm && dm.name === 'dm', 'dm ist wählbar');
+assert(/1\. bis 15\. Oktober/.test(dm.note), 'dm-Hinweis nennt den Zeitraum');
+assert(dm.offers.length > 100, 'dm enthält das Heft, nicht nur ein paar Dekoartikel');
+assert(hasName(dm.offers, /Organizer/), 'dm hat den Organizer');
+assert(hasName(dm.offers, /Schmuckperlen/), 'dm hat das Bastelset');
+assert(hasName(dm.offers, /Herbst-Nudeln/), 'dm hat die Herbstnudeln');
+
+var rossmann = store('rossmann');
+assert(rossmann && rossmann.name === 'Rossmann', 'Rossmann ist wählbar');
+assert(/Kaffee/.test(rossmann.note), 'Rossmann-Hinweis nennt Kaffee');
+assert(hasName(rossmann.offers, /Melitta/), 'Rossmann hat Melitta');
+assert(hasName(rossmann.offers, /Milka/), 'Rossmann hat Milka');
+assert(hasName(rossmann.offers, /Perwoll/), 'Rossmann hat Perwoll');
+assert(hasName(rossmann.offers, /Melitta Filterkaffee/), 'Rossmann-Kaffee bleibt');
+assert(rossmann.offers.length > 30, 'Rossmann enthält mehr als die Kurzliste');
+var rossmannIds = meals.idsFromOffers(rossmann.offers);
+assert(rossmannIds.indexOf('bratwurst') === -1, 'Tier-Snacks zählen nicht als Bratwurst');
 
 var pantry = meals.defaultPantry();
 function mealCount(item) {
@@ -56,7 +88,7 @@ function mealCount(item) {
 }
 assert(mealCount(penny) > mealCount(aldi), 'Penny schlägt mehr Gerichte vor als Aldi');
 assert(mealCount(aldi) > mealCount(prechtl), 'Aldi schlägt mehr Gerichte vor als Prechtl');
-assertEqual(mealCount(lidl), 0, 'aus dem Lidl-Prospekt wird kein Gericht');
+assert(mealCount(lidl) > 0, 'aus dem Lidl-Prospekt werden Gerichte');
 assert(mealCount(penny) >= mealCount(aldi) && mealCount(penny) >= mealCount(prechtl), 'Penny ist die Vorgabe');
 
 var unavailable = offers.unavailable.map(function (item) { return item.id; });

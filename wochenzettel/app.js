@@ -2,13 +2,35 @@
   'use strict';
 
   var meals = window.WochenzettelMeals;
-  var catalog = window.WochenzettelOffers;
+  var bundledCatalog = window.WochenzettelOffers;
+  var catalog = bundledCatalog;
   var shop = window.WochenzettelShop;
   var syncApi = window.WochenzettelSync;
   var barcodeApi = window.WochenzettelBarcode;
   var eanScan = window.WochenzettelEan;
   var tickerApi = window.WochenzettelTicker;
   if (!meals || !catalog || !shop || !barcodeApi || !eanScan || !catalog.stores || !catalog.stores.length) return;
+
+  var LIVE_KEY = 'wochenzettel-live-v1';
+
+  function readStoredCatalog() {
+    try {
+      var raw = localStorage.getItem(LIVE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || !Array.isArray(data.stores) || !data.stores.length) return null;
+      if ((data.extractedAt || '') < (bundledCatalog.extractedAt || '')) return null;
+      var ids = data.stores.map(function (store) { return store.id; }).join();
+      var bundledIds = bundledCatalog.stores.map(function (store) { return store.id; }).join();
+      if (ids !== bundledIds) return null;
+      return data;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  var storedCatalog = readStoredCatalog();
+  if (storedCatalog) catalog = storedCatalog;
 
   var STORAGE_KEY = 'wochenzettel-v1';
   var LEGACY_STORAGE_KEY = 'wochenessen-v1';
@@ -682,7 +704,7 @@
         '</button>';
     }).join('');
     if (!selected.length) {
-      els.combo.textContent = 'Noch kein Supermarkt ausgewählt.';
+      els.combo.textContent = 'Noch kein Markt ausgewählt.';
       return;
     }
     if (selected.length === 1) {
@@ -798,7 +820,7 @@
   function renderStoreDetail() {
     var stores = selectedStores();
     if (!stores.length) {
-      els.storeNote.textContent = 'Wähl mindestens einen Supermarkt. Die Angebote werden zusammengezählt.';
+      els.storeNote.textContent = 'Wähl mindestens einen Markt. Die Angebote werden zusammengezählt.';
       els.prospekte.innerHTML = '';
       els.categories.innerHTML = '';
       renderMatched([]);
@@ -1049,7 +1071,7 @@
     var list = suggestions();
     var chosen = meals.chosenIds(list, state.picked);
     if (!selectedStores().length && !list.some(function (recipe) { return recipe.custom; })) {
-      els.ideas.innerHTML = '<p class="empty">Wähl mindestens einen Supermarkt. Die Angebote werden zusammengezählt.</p>';
+      els.ideas.innerHTML = '<p class="empty">Wähl mindestens einen Markt. Die Angebote werden zusammengezählt.</p>';
       return;
     }
     if (!list.length) {
@@ -1231,7 +1253,7 @@
   }
 
   function emptyShopMessage(stores, list) {
-    if (!stores.length) return 'Wähl mindestens einen Supermarkt. Eigene Artikel kannst du trotzdem eintragen.';
+    if (!stores.length) return 'Wähl mindestens einen Markt. Eigene Artikel kannst du trotzdem eintragen.';
     if (!list.length) return 'Aus diesen Angeboten lässt sich keins der Gerichte kochen.';
     if (!meals.chosenIds(list, state.picked).length) return 'Kein Gericht auf der Liste.';
     return 'Für die ausgewählten Gerichte ist alles da.';
@@ -2063,6 +2085,20 @@
     });
   }
 
+  var liveStarted = false;
+
+  function startLiveRefresh() {
+    var live = window.WochenzettelLive;
+    if (!live || liveStarted || isLocalFile() || !navigator.onLine) return;
+    liveStarted = true;
+    live.refresh(catalog, window.fetch, new Date()).then(function (result) {
+      if (!result || !result.changed || !result.catalog) return;
+      catalog = result.catalog;
+      try { localStorage.setItem(LIVE_KEY, JSON.stringify(catalog)); } catch (error) {}
+      render();
+    }).catch(function () {});
+  }
+
   function init() {
     var loaded = load();
     state = loaded.state;
@@ -2258,7 +2294,7 @@
       }
       var stores = selectedStores();
       if (!stores.length) {
-        els.note.textContent = 'Wähl zuerst einen Supermarkt.';
+        els.note.textContent = 'Wähl zuerst einen Markt.';
         return;
       }
       var store = stores.length === 1 ? stores[0] : storeById(els.extraStore.value);
@@ -2785,8 +2821,10 @@
 
     render();
     updateConnectivity();
+    startLiveRefresh();
     window.addEventListener('online', function () {
       updateConnectivity();
+      startLiveRefresh();
       if (session) session.retry();
     });
     window.addEventListener('offline', updateConnectivity);

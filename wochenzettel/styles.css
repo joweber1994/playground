@@ -427,20 +427,22 @@ h2 {
 }
 
 .store-picks {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--gap);
   margin-bottom: 8px;
 }
 
 .store-pick {
+  width: 100%;
   height: var(--control-sm);
   min-height: var(--control-sm);
-  padding: 0 12px;
+  padding: 0 8px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 .store-pick[aria-pressed="true"] {

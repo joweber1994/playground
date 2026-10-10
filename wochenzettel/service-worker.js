@@ -1,5 +1,5 @@
 /* Wochenzettel – offline cache. Deletes wochenzettel-* and leftover wochenessen-* caches. */
-var CACHE_VERSION = 'wochenzettel-v10';
+var CACHE_VERSION = 'wochenzettel-v16';
 var CACHE_PREFIX = 'wochenzettel-';
 var LEGACY_PREFIX = 'wochenessen-';
 
@@ -9,6 +9,7 @@ var ASSETS = [
   './styles.css',
   './meals.js',
   './offers.js',
+  './live.js',
   './shop.js',
   './sync.js',
   './ticker.js',
@@ -152,7 +153,7 @@ self.addEventListener('fetch', function (event) {
   var url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  if (isServiceWorkerScript(request) || isManifest(request)) {
+  if (isServiceWorkerScript(request) || isManifest(request) || url.pathname.endsWith('/offers.js')) {
     event.respondWith(networkFirst(request));
     return;
   }
