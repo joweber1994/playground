@@ -1,34 +1,16 @@
-/* Haushalt – offline cache for the menu, Wochenessen and Erinnerungen.
-   Only haushalt-* caches are deleted, so the other apps keep theirs. */
-var CACHE_VERSION = 'haushalt-v9';
-var CACHE_PREFIX = 'haushalt-';
+/* Erinnerungen – offline cache. Only erinnerungen-* caches are deleted. */
+var CACHE_VERSION = 'erinnerungen-v1';
+var CACHE_PREFIX = 'erinnerungen-';
 
 var ASSETS = [
   './',
   './index.html',
   './styles.css',
+  './reminders.js',
   './app.js',
   './manifest.json',
   './service-worker.js',
-  './icon.svg',
-  './wochenessen/',
-  './wochenessen/index.html',
-  './wochenessen/styles.css',
-  './wochenessen/meals.js',
-  './wochenessen/offers.js',
-  './wochenessen/ticker.js',
-  './wochenessen/app.js',
-  './wochenessen/manifest.json',
-  './wochenessen/service-worker.js',
-  './wochenessen/icon.svg',
-  './erinnerungen/',
-  './erinnerungen/index.html',
-  './erinnerungen/styles.css',
-  './erinnerungen/reminders.js',
-  './erinnerungen/app.js',
-  './erinnerungen/manifest.json',
-  './erinnerungen/service-worker.js',
-  './erinnerungen/icon.svg'
+  './icon.svg'
 ];
 
 function absoluteUrl(relativeUrl) {

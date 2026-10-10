@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="Erinnerungen">
+  <rect width="180" height="180" rx="40" fill="#0c0e13"/>
+  <rect x="8" y="8" width="164" height="164" rx="34" fill="#171c27" stroke="#ff8a5b" stroke-width="6"/>
+  <path d="M90 46c-20 0-32 14-32 32v18l-8 12h80l-8-12V78c0-18-12-32-32-32z" fill="#121722" stroke="#f6c453" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M78 116a12 12 0 0 0 24 0" fill="none" stroke="#2ee6c7" stroke-width="6" stroke-linecap="round"/>
+</svg>
