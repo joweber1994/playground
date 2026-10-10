@@ -171,6 +171,38 @@ h1 {
   background: var(--p2);
 }
 
+.sync-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sync-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex: 0 0 auto;
+}
+
+.sync-status.is-live::before {
+  background: var(--p1);
+}
+
+.sync-status.is-wait::before {
+  background: var(--gold);
+}
+
+.sync-status.is-bad::before {
+  background: var(--p2);
+}
+
 .due-banner {
   margin-top: 12px;
   padding: 8px 10px;
@@ -331,6 +363,13 @@ h1 {
   overflow-wrap: anywhere;
 }
 
+.card-name {
+  margin-top: 2px;
+  color: var(--p2);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .card.is-done .card-text {
   color: var(--muted);
   text-decoration: line-through;
@@ -373,6 +412,45 @@ h1 {
 h2 {
   font-size: 1.05rem;
   letter-spacing: -0.03em;
+}
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.sheet-panel {
+  width: min(480px, 100%);
+  padding: 18px 16px calc(16px + env(safe-area-inset-bottom));
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+  background: #171c27;
+}
+
+.sheet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.sheet-actions button {
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font-weight: 800;
+}
+
+#sheet-take {
+  background: var(--gold);
+  border-color: transparent;
+  color: #1a1408;
 }
 
 .sr-only {

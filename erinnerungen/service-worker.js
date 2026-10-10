@@ -1,11 +1,12 @@
 /* Erinnerungen – offline cache. Only erinnerungen-* caches are deleted. */
-var CACHE_VERSION = 'erinnerungen-v1';
+var CACHE_VERSION = 'erinnerungen-v2';
 var CACHE_PREFIX = 'erinnerungen-';
 
 var ASSETS = [
   './',
   './index.html',
   './styles.css',
+  '../haushalt-sync.js',
   './reminders.js',
   './app.js',
   './manifest.json',

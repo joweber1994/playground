@@ -36,6 +36,7 @@
         <a class="home-link" href="../index.html">Haushalt</a>
       </div>
       <p id="connectivity" class="connectivity">Auf diesem Gerät</p>
+      <a id="sync-status" class="sync-status" href="../index.html#verbindung">Nur dieses Gerät</a>
       <p id="due-banner" class="due-banner" hidden></p>
     </header>
 
@@ -54,7 +55,8 @@
         </div>
       </form>
       <p id="note" class="hint" role="status"></p>
-      <p class="hint">Fällige Einträge stehen oben. Die Liste bleibt auf diesem Gerät.</p>
+      <p id="author-hint" class="hint">Trag deinen Namen im Menü Haushalt ein. Er steht dann an jedem Eintrag.</p>
+      <p class="hint">Fällige Einträge stehen oben. Dieselbe Verbindung wie Chore Wars teilt die Liste.</p>
       <p id="empty" class="empty">Noch keine Erinnerung.</p>
       <ul id="open-list" class="cards" aria-label="Offene Erinnerungen"></ul>
       <div id="done-wrap" class="done-wrap" hidden>
@@ -70,6 +72,18 @@
   <noscript>
     <p class="note">Erinnerungen braucht JavaScript. Die Liste bleibt danach auf diesem Gerät.</p>
   </noscript>
+  <div id="sheet" class="sheet" hidden>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <h2 id="sheet-title">Zwei Listen</h2>
+      <p id="sheet-copy" class="hint"></p>
+      <div class="sheet-actions">
+        <button id="sheet-keep" type="button">Liste dieses Geräts</button>
+        <button id="sheet-take" type="button">Gemeinsame Liste</button>
+        <button id="sheet-cancel" type="button">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+  <script src="../haushalt-sync.js"></script>
   <script src="./reminders.js"></script>
   <script src="./app.js"></script>
 </body>

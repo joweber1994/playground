@@ -1,6 +1,6 @@
 /* Haushalt – offline cache for the menu, Wochenessen and Erinnerungen.
    Only haushalt-* caches are deleted, so the other apps keep theirs. */
-var CACHE_VERSION = 'haushalt-v9';
+var CACHE_VERSION = 'haushalt-v10';
 var CACHE_PREFIX = 'haushalt-';
 
 var ASSETS = [
@@ -8,6 +8,7 @@ var ASSETS = [
   './index.html',
   './styles.css',
   './app.js',
+  './haushalt-sync.js',
   './manifest.json',
   './service-worker.js',
   './icon.svg',
