@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Haushalt",
-  "short_name": "Haushalt",
-  "description": "Menü für Chore Wars, Wochenessen, Wochenzettel und Erinnerungen. Name und Firebase-Zugang gelten für Chore Wars und Erinnerungen.",
+  "name": "Wochenzettel",
+  "short_name": "Wochenzettel",
+  "description": "Angebote, Gerichte für zwei und die Einkaufsliste zum Abhaken im Markt.",
   "lang": "de",
   "dir": "ltr",
   "start_url": "./index.html",
@@ -11,7 +11,7 @@
   "orientation": "any",
   "background_color": "#0c0e13",
   "theme_color": "#0c0e13",
-  "categories": ["lifestyle"],
+  "categories": ["lifestyle", "food"],
   "icons": [
     {
       "src": "icon.svg",

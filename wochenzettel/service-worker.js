@@ -1,48 +1,22 @@
-/* Haushalt – offline cache for the menu, Wochenessen, Wochenzettel and Erinnerungen.
-   Only haushalt-* caches are deleted, so the other apps keep theirs. */
-var CACHE_VERSION = 'haushalt-v12';
-var CACHE_PREFIX = 'haushalt-';
+/* Wochenzettel – offline cache. Deletes wochenzettel-* and leftover wochenessen-* caches. */
+var CACHE_VERSION = 'wochenzettel-v7';
+var CACHE_PREFIX = 'wochenzettel-';
+var LEGACY_PREFIX = 'wochenessen-';
 
 var ASSETS = [
   './',
   './index.html',
   './styles.css',
+  './meals.js',
+  './offers.js',
+  './shop.js',
+  './sync.js',
+  './ean.js',
+  './barcode.js',
   './app.js',
-  './haushalt-sync.js',
   './manifest.json',
   './service-worker.js',
-  './icon.svg',
-  './wochenessen/',
-  './wochenessen/index.html',
-  './wochenessen/styles.css',
-  './wochenessen/meals.js',
-  './wochenessen/offers.js',
-  './wochenessen/ticker.js',
-  './wochenessen/app.js',
-  './wochenessen/manifest.json',
-  './wochenessen/service-worker.js',
-  './wochenessen/icon.svg',
-  './wochenzettel/',
-  './wochenzettel/index.html',
-  './wochenzettel/styles.css',
-  './wochenzettel/meals.js',
-  './wochenzettel/offers.js',
-  './wochenzettel/shop.js',
-  './wochenzettel/sync.js',
-  './wochenzettel/ean.js',
-  './wochenzettel/barcode.js',
-  './wochenzettel/app.js',
-  './wochenzettel/manifest.json',
-  './wochenzettel/service-worker.js',
-  './wochenzettel/icon.svg',
-  './erinnerungen/',
-  './erinnerungen/index.html',
-  './erinnerungen/styles.css',
-  './erinnerungen/reminders.js',
-  './erinnerungen/app.js',
-  './erinnerungen/manifest.json',
-  './erinnerungen/service-worker.js',
-  './erinnerungen/icon.svg'
+  './icon.svg'
 ];
 
 function absoluteUrl(relativeUrl) {
@@ -162,7 +136,7 @@ self.addEventListener('activate', function (event) {
   event.waitUntil((async function () {
     var keys = await caches.keys();
     await Promise.all(keys.filter(function (key) {
-      return key.indexOf(CACHE_PREFIX) === 0 && key !== CACHE_VERSION;
+      return (key.indexOf(CACHE_PREFIX) === 0 && key !== CACHE_VERSION) || key.indexOf(LEGACY_PREFIX) === 0;
     }).map(function (key) {
       return caches.delete(key);
     }));

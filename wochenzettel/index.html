@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Wochenzettel">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0c0e13">
+  <meta name="color-scheme" content="dark">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="Wochenzettel liest die Angebote von Prechtl, Aldi Süd, Penny und Lidl, schlägt Gerichte für zwei vor und führt die Einkaufsliste im Markt.">
+  <title>Wochenzettel</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="brand-row">
+        <div class="brand">
+          <svg class="logo" viewBox="0 0 180 180" aria-hidden="true">
+            <rect width="180" height="180" rx="40" fill="#0c0e13"/>
+            <rect x="8" y="8" width="164" height="164" rx="34" fill="#171c27" stroke="#f6c453" stroke-width="6"/>
+            <circle cx="90" cy="96" r="46" fill="#121722" stroke="#2ee6c7" stroke-width="5"/>
+            <circle cx="90" cy="96" r="26" fill="none" stroke="#f6c453" stroke-width="6"/>
+            <path d="M62 86c12 10 44 10 56 0" fill="none" stroke="#ff8a5b" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <p class="eyebrow">Für zwei</p>
+            <h1>Wochenzettel</h1>
+          </div>
+        </div>
+        <a class="home-link" href="../index.html">Haushalt</a>
+      </div>
+      <div class="status-row">
+        <p id="connectivity" class="connectivity">Auf diesem Gerät</p>
+        <button id="sync-status" class="sync-status" type="button">Nur dieses Gerät</button>
+      </div>
+    </header>
+
+    <p id="week-note" class="banner app-banner" hidden></p>
+    <nav id="tabs" class="tabs" role="tablist" aria-label="Bereiche">
+      <button type="button" class="tab" id="tab-einkauf" role="tab" aria-selected="true" aria-controls="panel-einkauf" tabindex="0">Einkauf</button>
+      <button type="button" class="tab" id="tab-angebote" role="tab" aria-selected="false" aria-controls="panel-angebote" tabindex="-1">Angebote</button>
+      <button type="button" class="tab" id="tab-gerichte" role="tab" aria-selected="false" aria-controls="panel-gerichte" tabindex="-1">Gerichte</button>
+      <button type="button" class="tab" id="tab-vorrat" role="tab" aria-selected="false" aria-controls="panel-vorrat" tabindex="-1">Vorrat</button>
+    </nav>
+
+    <main class="content">
+      <section id="panel-einkauf" class="panel" role="tabpanel" aria-labelledby="tab-einkauf">
+        <div id="store-picks" class="store-picks" role="group" aria-label="Supermärkte"></div>
+        <div id="claims" class="claims"></div>
+        <label class="field name-field">
+          <span class="field-label">Dein Name, nur auf diesem Gerät</span>
+          <input id="display-name" type="text" maxlength="24" placeholder="Name" autocomplete="nickname" enterkeyhint="done" autocapitalize="words">
+        </label>
+        <h2 id="shop-heading">Einkaufsliste</h2>
+        <p class="hint">Abhaken, sobald es im Wagen liegt.</p>
+        <p id="shop-progress" class="hint"></p>
+        <div class="shop-tools">
+          <button type="button" id="undo" disabled>Rückgängig</button>
+          <button type="button" id="redo" disabled>Wiederholen</button>
+          <button type="button" id="clear-list">Liste leeren</button>
+        </div>
+        <div class="shop-tools">
+          <button type="button" id="copy-list">Liste kopieren</button>
+          <button type="button" id="finish-trip">Einkauf fertig</button>
+        </div>
+        <form id="shop-form" class="shop-form" autocomplete="off">
+          <label class="field grow">
+            <span class="sr-only">Artikel auf die Einkaufsliste</span>
+            <input id="shop-text" type="text" placeholder="Selbst eintragen" enterkeyhint="next" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <label class="field shop-qty">
+            <span class="sr-only">Menge</span>
+            <input id="shop-amount" type="text" placeholder="Menge" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <button type="submit">Dazu</button>
+        </form>
+        <p id="shop-note" class="hint" role="status"></p>
+        <p id="shop-empty" class="empty">Sobald ein Gericht auf der Liste liegt, stehen hier die fehlenden Zutaten. Eigene Artikel trägst du oben ein.</p>
+        <ul id="shop-list" class="shop-list"></ul>
+        <form id="staple-form" class="shop-form staple-form" autocomplete="off">
+          <label class="field grow">
+            <span class="sr-only">Jede Woche</span>
+            <input id="staple-text" type="text" maxlength="80" placeholder="Jede Woche: Kaffee, Klopapier…" enterkeyhint="next">
+          </label>
+          <label class="field shop-qty">
+            <span class="sr-only">Menge</span>
+            <input id="staple-amount" type="text" maxlength="80" placeholder="Menge" enterkeyhint="done">
+          </label>
+          <button type="submit">Merken</button>
+        </form>
+        <p id="staple-note" class="hint" role="status"></p>
+        <ul id="staples" class="shop-list staple-list"></ul>
+      </section>
+
+      <section id="panel-angebote" class="panel" role="tabpanel" aria-labelledby="tab-angebote" hidden>
+        <div class="section-head">
+          <h2 id="offers-heading">Diese Woche</h2>
+          <p id="week-line" class="hint"></p>
+        </div>
+        <div id="stores" class="stores"></div>
+        <p id="combo" class="hint"></p>
+        <p id="unavailable" class="hint"></p>
+        <p id="store-note" class="hint"></p>
+        <div id="prospekte" class="prospekte"></div>
+        <div id="matched" class="chips" aria-label="Erkannte Zutaten"></div>
+        <div id="offer-categories" class="chips offer-categories" role="group" aria-label="Kategorien"></div>
+        <div id="offer-scroll" class="offer-scroll"></div>
+        <label id="extra-store-wrap" class="field extra-store" hidden>
+          <span class="field-label">Ergänzen bei</span>
+          <select id="extra-store"></select>
+        </label>
+        <form id="offer-form" class="offer-form" autocomplete="off">
+          <label class="field grow">
+            <span class="sr-only">Weiteren Artikelnamen ergänzen</span>
+            <input id="offer-text" type="text" placeholder="Noch etwas aus dem Blatt" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <button type="submit">Ergänzen</button>
+        </form>
+        <p id="offer-note" class="hint" role="status"></p>
+      </section>
+
+      <section id="panel-gerichte" class="panel" role="tabpanel" aria-labelledby="tab-gerichte" hidden>
+        <div class="section-head">
+          <h2 id="ideas-heading">Gerichte</h2>
+          <p class="hint">Die meisten Angebote stehen oben. Auf der Einkaufsliste liegt ein Gericht erst, wenn du es selbst auswählst.</p>
+        </div>
+        <div id="ideas"></div>
+        <div class="section-head">
+          <h2 id="evenings-heading">Abende</h2>
+          <p class="hint">Gewählte Gerichte auf die Tage legen. Die Einkaufsliste bleibt die Summe der Woche.</p>
+        </div>
+        <div id="evenings"></div>
+        <div class="section-head">
+          <h2 id="recipe-heading">Eigenes Gericht</h2>
+          <p class="hint">Dieselben Zutaten wie die Vorschläge.</p>
+        </div>
+        <form id="recipe-form" class="recipe-form" autocomplete="off">
+          <label class="field">
+            <span class="sr-only">Name des Gerichts</span>
+            <input id="recipe-title" type="text" maxlength="80" placeholder="Name des Gerichts" enterkeyhint="next">
+          </label>
+          <div class="recipe-add">
+            <label class="field grow">
+              <span class="sr-only">Zutat</span>
+              <select id="recipe-ingredient"></select>
+            </label>
+            <label class="field recipe-qty">
+              <span class="sr-only">Menge der Zutat</span>
+              <input id="recipe-amount" type="text" maxlength="40" placeholder="Menge" enterkeyhint="done">
+            </label>
+            <button type="button" id="recipe-add">Zutat</button>
+          </div>
+          <ul id="recipe-ingredients" class="recipe-ingredients"></ul>
+          <p id="recipe-note" class="hint" role="status"></p>
+          <button type="submit">Gericht sichern</button>
+        </form>
+      </section>
+
+      <section id="panel-vorrat" class="panel" role="tabpanel" aria-labelledby="tab-vorrat" hidden>
+        <div class="section-head">
+          <h2 id="inventory-heading">Vorrat</h2>
+          <p class="hint">Was schon da ist, kommt nicht auf den Zettel.</p>
+        </div>
+        <button type="button" id="scan-open" class="scan-open">Scannen</button>
+        <form id="inventory-form" class="shop-form" autocomplete="off">
+          <label class="field grow">
+            <span class="sr-only">Was ist da</span>
+            <input id="inventory-text" type="text" maxlength="80" placeholder="Reis, Öl, Kaffee…" enterkeyhint="next" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <label class="field shop-qty">
+            <span class="sr-only">Menge</span>
+            <input id="inventory-amount" type="text" maxlength="80" placeholder="Menge" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <button type="submit">Eintragen</button>
+        </form>
+        <p id="inventory-note" class="hint" role="status"></p>
+        <p id="inventory-empty" class="empty">Noch nichts im Vorrat.</p>
+        <ul id="inventory" class="shop-list"></ul>
+      </section>
+    </main>
+  </div>
+  <div id="scanner" class="sheet scanner" hidden>
+    <button type="button" class="sheet-backdrop" data-scan-close aria-label="Schließen"></button>
+    <div class="sheet-panel scanner-panel" role="dialog" aria-modal="true" aria-labelledby="scanner-title">
+      <h2 id="scanner-title">Scannen</h2>
+      <div class="scanner-stage">
+        <video id="scanner-video" playsinline webkit-playsinline muted autoplay></video>
+        <canvas id="scanner-canvas" hidden></canvas>
+        <div class="scanner-aim" aria-hidden="true"></div>
+      </div>
+      <p id="scanner-status" class="hint" role="status">Halte den Strichcode in die Kamera.</p>
+      <form id="scanner-name-form" hidden>
+        <p id="scanner-name-hint" class="hint">Diesen Strichcode kenne ich nicht. Wie heißt der Artikel?</p>
+        <div class="scanner-name-row">
+          <label class="field grow">
+            <span class="sr-only">Name des Artikels</span>
+            <input id="scanner-name" type="text" maxlength="80" placeholder="Name" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <button type="submit">In den Vorrat</button>
+        </div>
+        <button type="button" id="scanner-name-skip" class="scanner-skip">Nicht jetzt</button>
+      </form>
+      <div class="sheet-actions">
+        <button type="button" class="sheet-cancel" data-scan-close>Schließen</button>
+      </div>
+    </div>
+  </div>
+  <div id="sheet" class="sheet" hidden>
+    <button type="button" class="sheet-backdrop" data-sheet-close aria-label="Schließen"></button>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <form id="sheet-form" novalidate>
+        <h2 id="sheet-title">Gemeinsam nutzen</h2>
+        <div id="sheet-body" class="sheet-body"></div>
+        <p id="sheet-error" class="sheet-error" role="alert" hidden></p>
+        <div class="sheet-actions">
+          <button type="button" class="sheet-cancel" id="sheet-cancel" data-sheet-close>Abbrechen</button>
+          <button type="submit" class="sheet-submit" id="sheet-submit">Verbinden</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <p id="live" class="sr-only" aria-live="polite"></p>
+  <noscript>
+    <p class="note">Wochenzettel braucht JavaScript. Der Prospekt lässt sich auch so öffnen.</p>
+  </noscript>
+  <script src="./ean.js"></script>
+  <script src="./barcode.js"></script>
+  <script src="./meals.js"></script>
+  <script src="./offers.js"></script>
+  <script src="./shop.js"></script>
+  <script src="./sync.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
