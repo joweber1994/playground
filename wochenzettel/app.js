@@ -5,7 +5,9 @@
   var catalog = window.WochenzettelOffers;
   var shop = window.WochenzettelShop;
   var syncApi = window.WochenzettelSync;
-  if (!meals || !catalog || !shop || !catalog.stores || !catalog.stores.length) return;
+  var barcodeApi = window.WochenzettelBarcode;
+  var eanScan = window.WochenzettelEan;
+  if (!meals || !catalog || !shop || !barcodeApi || !eanScan || !catalog.stores || !catalog.stores.length) return;
 
   var STORAGE_KEY = 'wochenzettel-v1';
   var LEGACY_STORAGE_KEY = 'wochenessen-v1';
@@ -42,6 +44,19 @@
   var editHistory = shop.emptyHistory();
   var clearArmed = false;
   var clearTimer = null;
+  var renameId = null;
+  var focusRename = false;
+  var scanning = false;
+  var scanPaused = false;
+  var scanBusy = false;
+  var scanStream = null;
+  var scanTimer = 0;
+  var scanDetector = null;
+  var scanAbort = null;
+  var scanGen = 0;
+  var heldCode = '';
+  var heldClearAt = 0;
+  var pendingCode = '';
 
   var els = {
     weekLine: document.getElementById('week-line'),
@@ -65,6 +80,14 @@
     inventoryNote: document.getElementById('inventory-note'),
     inventoryEmpty: document.getElementById('inventory-empty'),
     inventory: document.getElementById('inventory'),
+    scanOpen: document.getElementById('scan-open'),
+    scanner: document.getElementById('scanner'),
+    scannerVideo: document.getElementById('scanner-video'),
+    scannerCanvas: document.getElementById('scanner-canvas'),
+    scannerStatus: document.getElementById('scanner-status'),
+    scannerNameForm: document.getElementById('scanner-name-form'),
+    scannerNameHint: document.getElementById('scanner-name-hint'),
+    scannerName: document.getElementById('scanner-name'),
     ideas: document.getElementById('ideas'),
     storePicks: document.getElementById('store-picks'),
     shopHeading: document.getElementById('shop-heading'),
@@ -714,15 +737,37 @@
     if (stores.some(function (store) { return store.id === previous; })) els.extraStore.value = previous;
   }
 
+  function inventoryDetail(item) {
+    var units = item.units > 0 ? String(item.units) : '';
+    var amount = item.amount || '';
+    if (units && amount) return units + ' · ' + amount;
+    return units || amount;
+  }
+
   function renderInventory() {
     if (!els.inventory) return;
     var rows = (state.inventory || []).filter(function (item) { return !item.deleted; });
+    if (renameId && !rows.some(function (item) { return item.id === renameId; })) renameId = null;
     if (els.inventoryEmpty) els.inventoryEmpty.hidden = rows.length > 0;
     els.inventory.innerHTML = rows.map(function (item) {
+      if (item.id === renameId) {
+        return '<li class="shop-row"><form class="rename-form" data-rename-form="' + escapeHtml(item.id) + '">' +
+          '<label class="field grow"><span class="sr-only">Name</span>' +
+          '<input type="text" maxlength="80" value="' + escapeHtml(item.name) + '" enterkeyhint="done" autocomplete="off"></label>' +
+          '<button type="submit">Sichern</button>' +
+          '<button type="button" data-rename-cancel>Abbrechen</button></form></li>';
+      }
+      var detail = inventoryDetail(item);
       return '<li class="shop-row"><span class="shop-copy"><span class="shop-name">' + escapeHtml(item.name) + '</span>' +
-        (item.amount ? '<span class="shop-amount">' + escapeHtml(item.amount) + '</span>' : '') +
-        '</span><button type="button" class="shop-remove" data-inventory-remove="' + escapeHtml(item.id) + '">Entfernen</button></li>';
+        (detail ? '<span class="shop-amount">' + escapeHtml(detail) + '</span>' : '') +
+        '</span><button type="button" class="shop-remove" data-inventory-rename="' + escapeHtml(item.id) + '">Ändern</button>' +
+        '<button type="button" class="shop-remove" data-inventory-remove="' + escapeHtml(item.id) + '">Entfernen</button></li>';
     }).join('');
+    if (focusRename) {
+      focusRename = false;
+      var input = els.inventory.querySelector('[data-rename-form] input');
+      if (input) input.focus();
+    }
   }
 
   function ingredientOptions(selected) {
@@ -1638,6 +1683,282 @@
     };
   }
 
+  function cameraMessage(error) {
+    if (!window.isSecureContext) return 'Scannen braucht eine sichere Verbindung.';
+    var name = error && error.name;
+    if (name === 'NotAllowedError' || name === 'PermissionDeniedError' || name === 'SecurityError') {
+      return 'Die Kamera ist blockiert. Erlaube den Zugriff, dann geht das Scannen.';
+    }
+    if (name === 'NotFoundError' || name === 'DevicesNotFoundError') return 'Keine Kamera gefunden.';
+    if (name === 'NotReadableError' || name === 'TrackStartError' || name === 'AbortError') {
+      return 'Die Kamera ist gerade belegt.';
+    }
+    return 'Die Kamera lässt sich nicht öffnen.';
+  }
+
+  function setScanStatus(message) {
+    if (els.scannerStatus) els.scannerStatus.textContent = message;
+  }
+
+  function hideNamePrompt() {
+    pendingCode = '';
+    scanPaused = false;
+    if (els.scannerNameForm) els.scannerNameForm.hidden = true;
+    if (els.scannerName) els.scannerName.value = '';
+  }
+
+  function stopScanner() {
+    scanGen += 1;
+    scanning = false;
+    scanPaused = false;
+    scanBusy = false;
+    heldCode = '';
+    heldClearAt = 0;
+    if (scanTimer) {
+      clearTimeout(scanTimer);
+      scanTimer = 0;
+    }
+    if (scanAbort) {
+      scanAbort.abort();
+      scanAbort = null;
+    }
+    if (scanStream) {
+      scanStream.getTracks().forEach(function (track) { track.stop(); });
+      scanStream = null;
+    }
+    if (els.scannerVideo) {
+      els.scannerVideo.pause();
+      els.scannerVideo.srcObject = null;
+    }
+  }
+
+  function closeScanner() {
+    stopScanner();
+    hideNamePrompt();
+    if (els.scanner) els.scanner.hidden = true;
+  }
+
+  function scanNote(result) {
+    if (result.units > 1) return result.name + ', jetzt ' + result.units + '.';
+    return result.name + ' ist im Vorrat.';
+  }
+
+  function commitScan(code, name) {
+    var result = barcodeApi.addScanned(state.inventory, code, name, Date.now());
+    if (!result.ok) {
+      var problem = result.reason === 'long' ? 'Das ist zu lang.' : 'Trag einen Namen ein.';
+      setScanStatus(problem);
+      if (els.inventoryNote) els.inventoryNote.textContent = problem;
+      return false;
+    }
+    remember();
+    state.inventory = meals.cleanInventory(result.inventory);
+    state.inventorySet = true;
+    publishPantry();
+    save();
+    render();
+    var note = scanNote(result);
+    if (els.inventoryNote) els.inventoryNote.textContent = note;
+    setScanStatus(note);
+    announce(note);
+    return true;
+  }
+
+  function askScanName(code, offline) {
+    pendingCode = code;
+    scanPaused = true;
+    if (!els.scannerNameForm) return;
+    els.scannerNameForm.hidden = false;
+    if (els.scannerNameHint) {
+      els.scannerNameHint.textContent = offline
+        ? 'Gerade kein Netz. Wie heißt der Artikel?'
+        : 'Diesen Strichcode kenne ich nicht. Wie heißt der Artikel?';
+    }
+    if (els.scannerName) {
+      els.scannerName.value = '';
+      els.scannerName.focus();
+    }
+    announce(els.scannerNameHint ? els.scannerNameHint.textContent : '');
+    setScanStatus('');
+  }
+
+  function lookupOff(code) {
+    var url = 'https://world.openfoodfacts.org/api/v2/product/' + encodeURIComponent(code) + '.json';
+    if (scanAbort) scanAbort.abort();
+    scanAbort = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = setTimeout(function () {
+      if (scanAbort) scanAbort.abort();
+    }, 8000);
+    var options = scanAbort ? { signal: scanAbort.signal } : {};
+    return fetch(url, options).then(function (response) {
+      clearTimeout(timer);
+      if (response.status === 404) return { name: '', offline: false };
+      if (!response.ok) return { name: '', offline: true };
+      return response.json().then(function (payload) {
+        return { name: barcodeApi.productName(payload), offline: false };
+      });
+    }).catch(function () {
+      clearTimeout(timer);
+      return { name: '', offline: true };
+    });
+  }
+
+  function acceptScan(code) {
+    var known = barcodeApi.savedName(state.inventory, code);
+    if (known) {
+      commitScan(code, known);
+      return;
+    }
+    var gen = scanGen;
+    scanBusy = true;
+    setScanStatus('Wird nachgesehen…');
+    lookupOff(code).then(function (result) {
+      scanBusy = false;
+      if (gen !== scanGen || !scanning) return;
+      if (result.name) {
+        commitScan(code, result.name);
+        return;
+      }
+      askScanName(code, result.offline);
+    });
+  }
+
+  function considerScan(raw) {
+    if (!scanning || scanPaused || scanBusy) return;
+    var code = barcodeApi.canonical(raw);
+    var now = Date.now();
+    if (!code) {
+      if (heldCode && !heldClearAt) heldClearAt = now;
+      if (heldCode && heldClearAt && now - heldClearAt > 700) {
+        heldCode = '';
+        heldClearAt = 0;
+      }
+      return;
+    }
+    heldClearAt = 0;
+    if (code === heldCode) return;
+    heldCode = code;
+    acceptScan(code);
+  }
+
+  function detectorFormats(found) {
+    if (!found || !found.length) return '';
+    var format = found[0].format || '';
+    if (format && format !== 'ean_13' && format !== 'ean_8' && format !== 'upc_a') return '';
+    return found[0].rawValue || '';
+  }
+
+  function decodeFrame() {
+    var video = els.scannerVideo;
+    var canvas = els.scannerCanvas;
+    if (!video || !canvas || video.readyState < 2 || !video.videoWidth) return '';
+    var width = 360;
+    var height = Math.max(1, Math.round(video.videoHeight * (width / video.videoWidth)));
+    canvas.width = width;
+    canvas.height = height;
+    var context = canvas.getContext('2d');
+    if (!context) return '';
+    context.drawImage(video, 0, 0, width, height);
+    try {
+      return eanScan.decode(context.getImageData(0, 0, width, height)) || '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function readFrame() {
+    var video = els.scannerVideo;
+    var ready = !!(video && video.readyState >= 2 && video.videoWidth);
+    if (scanDetector && ready) {
+      return scanDetector.detect(video).then(function (found) {
+        var native = detectorFormats(found);
+        return native || decodeFrame();
+      }).catch(function () {
+        return decodeFrame();
+      });
+    }
+    if (ready) return Promise.resolve(decodeFrame());
+    try {
+      return Promise.resolve(eanScan.decode(null) || '');
+    } catch (error) {
+      return Promise.resolve('');
+    }
+  }
+
+  function scanTick() {
+    if (!scanning) return;
+    readFrame().then(function (raw) {
+      if (!scanning) return;
+      considerScan(raw);
+      scanTimer = setTimeout(scanTick, 180);
+    }).catch(function () {
+      if (!scanning) return;
+      scanTimer = setTimeout(scanTick, 180);
+    });
+  }
+
+  function beginScanLoop() {
+    if (!scanning) return;
+    if (scanTimer) clearTimeout(scanTimer);
+    scanTick();
+  }
+
+  function openCamera(constraints) {
+    return navigator.mediaDevices.getUserMedia(constraints).catch(function (error) {
+      if (!constraints || !constraints.video || constraints.video === true) throw error;
+      return navigator.mediaDevices.getUserMedia({ audio: false, video: true });
+    });
+  }
+
+  function openScanner() {
+    if (!els.scanner) return;
+    stopScanner();
+    hideNamePrompt();
+    scanning = true;
+    els.scanner.hidden = false;
+    setScanStatus('Halte den Strichcode in die Kamera.');
+    scanDetector = null;
+    if (window.BarcodeDetector) {
+      try {
+        scanDetector = new BarcodeDetector({ formats: ['ean_13', 'ean_8', 'upc_a'] });
+      } catch (error) {
+        try { scanDetector = new BarcodeDetector(); } catch (again) { scanDetector = null; }
+      }
+    }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      scanning = false;
+      setScanStatus(cameraMessage({ name: 'NotFoundError' }));
+      return;
+    }
+    openCamera({
+      audio: false,
+      video: { facingMode: { ideal: 'environment' } }
+    }).then(function (stream) {
+      if (!scanning) {
+        stream.getTracks().forEach(function (track) { track.stop(); });
+        return;
+      }
+      scanStream = stream;
+      var video = els.scannerVideo;
+      try {
+        video.srcObject = stream;
+      } catch (error) {
+        beginScanLoop();
+        return;
+      }
+      video.muted = true;
+      video.setAttribute('playsinline', '');
+      video.playsInline = true;
+      var played = video.play();
+      if (played && played.catch) played.catch(function () {});
+      beginScanLoop();
+    }).catch(function (error) {
+      scanning = false;
+      setScanStatus(cameraMessage(error));
+      announce(els.scannerStatus ? els.scannerStatus.textContent : '');
+    });
+  }
+
   function init() {
     var loaded = load();
     state = loaded.state;
@@ -1739,6 +2060,18 @@
 
     if (els.inventory) {
       els.inventory.addEventListener('click', function (event) {
+        if (event.target.closest('[data-rename-cancel]')) {
+          renameId = null;
+          renderInventory();
+          return;
+        }
+        var renameButton = event.target.closest('[data-inventory-rename]');
+        if (renameButton) {
+          renameId = renameButton.getAttribute('data-inventory-rename');
+          focusRename = true;
+          renderInventory();
+          return;
+        }
         var button = event.target.closest('[data-inventory-remove]');
         if (!button) return;
         var id = button.getAttribute('data-inventory-remove');
@@ -1759,6 +2092,30 @@
           els.inventoryNote.textContent = removed.name + ' entfernt.';
           announce(els.inventoryNote.textContent);
         }
+      });
+      els.inventory.addEventListener('submit', function (event) {
+        var form = event.target.closest('[data-rename-form]');
+        if (!form) return;
+        event.preventDefault();
+        var id = form.getAttribute('data-rename-form');
+        var input = form.querySelector('input');
+        var result = barcodeApi.renameItem(state.inventory, id, input ? input.value : '', Date.now());
+        if (!result.ok) {
+          els.inventoryNote.textContent = result.reason === 'exists'
+            ? 'Den Namen gibt es schon.'
+            : (result.reason === 'long' ? 'Das ist zu lang.' : 'Trag einen Namen ein.');
+          announce(els.inventoryNote.textContent);
+          return;
+        }
+        if (result.renamed) remember();
+        state.inventory = result.inventory;
+        state.inventorySet = true;
+        renameId = null;
+        publishPantry();
+        save();
+        render();
+        els.inventoryNote.textContent = result.same ? '' : 'Name geändert.';
+        if (!result.same) announce(els.inventoryNote.textContent);
       });
     }
 
@@ -2220,6 +2577,37 @@
         if (error && error !== 'stay') showSheetError(error);
       });
     }
+
+    if (els.scanOpen) els.scanOpen.addEventListener('click', openScanner);
+    if (els.scanner) {
+      els.scanner.addEventListener('click', function (event) {
+        if (event.target.closest('[data-scan-close]')) closeScanner();
+      });
+    }
+    if (els.scannerNameForm) {
+      els.scannerNameForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var code = pendingCode;
+        var typed = els.scannerName ? els.scannerName.value : '';
+        if (!code) return;
+        if (commitScan(code, typed)) hideNamePrompt();
+      });
+    }
+    var skipName = document.getElementById('scanner-name-skip');
+    if (skipName) {
+      skipName.addEventListener('click', function () {
+        hideNamePrompt();
+        setScanStatus('Halte den Strichcode in die Kamera.');
+      });
+    }
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape' || !els.scanner || els.scanner.hidden) return;
+      event.preventDefault();
+      closeScanner();
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) closeScanner();
+    });
 
     render();
     updateConnectivity();

@@ -673,6 +673,31 @@
     return rev;
   }
 
+  function stockUnits(value) {
+    var units = Math.floor(Number(value));
+    if (!Number.isFinite(units) || units < 0) return 0;
+    if (units > 999) return 999;
+    return units;
+  }
+
+  function stockBarcode(value) {
+    var digits = String(value == null ? '' : value).replace(/\D/g, '');
+    if (digits.length !== 8 && digits.length !== 12 && digits.length !== 13) return '';
+    return digits;
+  }
+
+  function stockRow(item, name, amount, rev, deleted) {
+    return {
+      id: item.id,
+      name: name,
+      amount: amount,
+      units: stockUnits(item.units),
+      barcode: stockBarcode(item.barcode),
+      rev: rev,
+      deleted: !!deleted
+    };
+  }
+
   function cleanInventory(raw) {
     var out = [];
     var seenId = {};
@@ -690,7 +715,7 @@
       if (amount.length > 80) amount = amount.slice(0, 80);
       seenId[id] = true;
       seenName[key] = true;
-      out.push({ id: id, name: name, amount: amount, rev: revNum(row.rev), deleted: !!row.deleted });
+      out.push(stockRow(row, name, amount, revNum(row.rev), row.deleted));
     });
     return out;
   }
@@ -725,14 +750,14 @@
       if (existing.amount === nextAmount) return { ok: true, already: true, inventory: list, id: existing.id };
       var merged = list.map(function (item) {
         if (item.id !== existing.id) return item;
-        return { id: item.id, name: item.name, amount: nextAmount, rev: rev || item.rev, deleted: false };
+        return stockRow(item, item.name, nextAmount, rev || item.rev, false);
       });
       return { ok: true, merged: true, inventory: merged, id: existing.id };
     }
     if (tomb) {
       var revived = list.map(function (item) {
         if (item.id !== tomb.id) return item;
-        return { id: item.id, name: item.name, amount: qty || tomb.amount, rev: rev || item.rev, deleted: false };
+        return stockRow(item, item.name, qty || tomb.amount, rev || item.rev, false);
       });
       return { ok: true, merged: true, inventory: revived, id: tomb.id };
     }

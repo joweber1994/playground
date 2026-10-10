@@ -168,6 +168,7 @@
           <h2 id="inventory-heading">Vorrat</h2>
           <p class="hint">Was schon da ist, kommt nicht auf den Zettel.</p>
         </div>
+        <button type="button" id="scan-open" class="scan-open">Scannen</button>
         <form id="inventory-form" class="shop-form" autocomplete="off">
           <label class="field grow">
             <span class="sr-only">Was ist da</span>
@@ -184,6 +185,32 @@
         <ul id="inventory" class="shop-list"></ul>
       </section>
     </main>
+  </div>
+  <div id="scanner" class="sheet scanner" hidden>
+    <button type="button" class="sheet-backdrop" data-scan-close aria-label="Schließen"></button>
+    <div class="sheet-panel scanner-panel" role="dialog" aria-modal="true" aria-labelledby="scanner-title">
+      <h2 id="scanner-title">Scannen</h2>
+      <div class="scanner-stage">
+        <video id="scanner-video" playsinline webkit-playsinline muted autoplay></video>
+        <canvas id="scanner-canvas" hidden></canvas>
+        <div class="scanner-aim" aria-hidden="true"></div>
+      </div>
+      <p id="scanner-status" class="hint" role="status">Halte den Strichcode in die Kamera.</p>
+      <form id="scanner-name-form" hidden>
+        <p id="scanner-name-hint" class="hint">Diesen Strichcode kenne ich nicht. Wie heißt der Artikel?</p>
+        <div class="scanner-name-row">
+          <label class="field grow">
+            <span class="sr-only">Name des Artikels</span>
+            <input id="scanner-name" type="text" maxlength="80" placeholder="Name" enterkeyhint="done" autocomplete="off" autocapitalize="off" autocorrect="off">
+          </label>
+          <button type="submit">In den Vorrat</button>
+        </div>
+        <button type="button" id="scanner-name-skip" class="scanner-skip">Nicht jetzt</button>
+      </form>
+      <div class="sheet-actions">
+        <button type="button" class="sheet-cancel" data-scan-close>Schließen</button>
+      </div>
+    </div>
   </div>
   <div id="sheet" class="sheet" hidden>
     <button type="button" class="sheet-backdrop" data-sheet-close aria-label="Schließen"></button>
@@ -203,6 +230,8 @@
   <noscript>
     <p class="note">Wochenzettel braucht JavaScript. Der Prospekt lässt sich auch so öffnen.</p>
   </noscript>
+  <script src="./ean.js"></script>
+  <script src="./barcode.js"></script>
   <script src="./meals.js"></script>
   <script src="./offers.js"></script>
   <script src="./shop.js"></script>

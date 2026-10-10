@@ -1,6 +1,6 @@
 /* Haushalt – offline cache for the menu and Wochenzettel.
    Only haushalt-* caches are deleted, so Chore Wars and Wochenzettel keep theirs. */
-var CACHE_VERSION = 'haushalt-v8';
+var CACHE_VERSION = 'haushalt-v9';
 var CACHE_PREFIX = 'haushalt-';
 
 var ASSETS = [
@@ -17,6 +17,8 @@ var ASSETS = [
   './wochenzettel/meals.js',
   './wochenzettel/offers.js',
   './wochenzettel/shop.js',
+  './wochenzettel/ean.js',
+  './wochenzettel/barcode.js',
   './wochenzettel/app.js',
   './wochenzettel/manifest.json',
   './wochenzettel/service-worker.js',

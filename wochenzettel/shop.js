@@ -597,6 +597,19 @@
     return copyIds(raw);
   }
 
+  function copyUnits(value) {
+    var units = Math.floor(Number(value));
+    if (!Number.isFinite(units) || units < 0) return 0;
+    if (units > 999) return 999;
+    return units;
+  }
+
+  function copyBarcode(value) {
+    var digits = String(value == null ? '' : value).replace(/\D/g, '');
+    if (digits.length !== 8 && digits.length !== 12 && digits.length !== 13) return '';
+    return digits;
+  }
+
   function copyInventory(raw) {
     var out = [];
     if (!Array.isArray(raw)) return out;
@@ -609,6 +622,8 @@
         id: id,
         name: name,
         amount: clip(row.amount, AMOUNT_MAX),
+        units: copyUnits(row.units),
+        barcode: copyBarcode(row.barcode),
         rev: revOf(row.rev),
         deleted: !!row.deleted
       });
