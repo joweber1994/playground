@@ -1,6 +1,6 @@
 /* Haushalt – offline cache for the menu, Wochenzettel and Erinnerungen.
    Only haushalt-* caches are deleted, so the other apps keep theirs. */
-var CACHE_VERSION = 'haushalt-v14';
+var CACHE_VERSION = 'haushalt-v15';
 var CACHE_PREFIX = 'haushalt-';
 
 var ASSETS = [
@@ -17,6 +17,7 @@ var ASSETS = [
   './wochenzettel/styles.css',
   './wochenzettel/meals.js',
   './wochenzettel/offers.js',
+  './wochenzettel/live.js',
   './wochenzettel/shop.js',
   './wochenzettel/sync.js',
   './wochenzettel/ticker.js',
@@ -168,7 +169,7 @@ self.addEventListener('fetch', function (event) {
   var url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  if (isServiceWorkerScript(request) || isManifest(request)) {
+  if (isServiceWorkerScript(request) || isManifest(request) || url.pathname.endsWith('/offers.js')) {
     event.respondWith(networkFirst(request));
     return;
   }
