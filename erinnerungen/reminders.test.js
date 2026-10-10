@@ -17,6 +17,14 @@ assert(added.ok, 'Mülltonne lässt sich merken');
 assertEqual(added.item.text, 'Mülltonne', 'Text wird beschnitten');
 assertEqual(added.item.date, TODAY, 'Datum bleibt');
 assertEqual(added.item.done, false, 'neu ist offen');
+assertEqual(added.item.name, '', 'ohne Namen bleibt das Feld leer');
+
+var named = reminders.addItem(reminders.blank(), 'Anrufen', '', { name: '  Anna  ' });
+assertEqual(named.item.name, 'Anna', 'Name wird beschnitten');
+var checked = reminders.toggleItem(named.state, named.item.id);
+assertEqual(checked.state.items[0].name, 'Anna', 'Abhaken behält den Namen');
+assert(!reminders.parseShared({ updatedAt: 1 }).ok, 'Stand ohne Liste ist unlesbar');
+assert(reminders.parseShared({ items: [{ id: 'a', text: 'Eins', date: '', name: 'Jonas' }] }).ok, 'gemeinsame Liste wird gelesen');
 assertEqual(added.state.items[0].id, 'muell', 'neue Erinnerung steht vorn');
 
 var empty = reminders.addItem(reminders.blank(), '   ', '');

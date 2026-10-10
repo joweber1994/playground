@@ -2,7 +2,7 @@
   'use strict';
 
   var api = window.ChoreWarsState;
-  var syncApi = window.ChoreWarsSync;
+  var syncApi = window.HaushaltSync || window.ChoreWarsSync;
   if (!api) return;
 
   var CLAIM_LOCK_MS = 450;
@@ -930,15 +930,15 @@
       setSyncStatus('local');
       return;
     }
-    var url = readStored(syncApi.URL_KEY);
-    var id = readStored(syncApi.HOUSEHOLD_KEY);
-    if (!url || !id) {
+    var link = syncApi.readConnection(window.localStorage);
+    if (!link.url || !link.householdId) {
       setSyncStatus('local');
       return;
     }
     session = syncApi.createSession({
-      databaseURL: url,
-      householdId: id,
+      databaseURL: link.url,
+      householdId: link.householdId,
+      bucket: 'households',
       getSnapshot: function () {
         return {
           state: api.serialize(state),
@@ -961,78 +961,20 @@
 
   function openSyncSheet() {
     if (!syncApi) return;
-    var connected = !!(readStored(syncApi.URL_KEY) && readStored(syncApi.HOUSEHOLD_KEY));
     openSheet({
       title: 'Gemeinsam nutzen',
       cancelLabel: 'Schließen',
-      submitLabel: 'Verbinden',
+      submitLabel: 'Zum Menü',
       build: function (body) {
-        body.append(element('p', 'sheet-copy', 'Beide Handys tragen dieselbe Datenbank-Adresse und dasselbe Kennwort ein. Danach gelten Punkte, Aufgaben und Namen für beide.'));
-        body.append(element('p', 'sheet-copy', 'Einmalig in Firebase eine Realtime Database anlegen, unter Rules den Text unten einfügen und veröffentlichen. Danach die angezeigte Datenbank-Adresse hier eintragen.'));
-        var details = document.createElement('details');
-        details.className = 'rules-details';
-        var summary = document.createElement('summary');
-        summary.textContent = 'Regeln zum Kopieren';
-        var rules = document.createElement('textarea');
-        rules.className = 'rules-box';
-        rules.readOnly = true;
-        rules.value = syncApi.RULES_TEXT;
-        rules.rows = 6;
-        rules.setAttribute('aria-label', 'Firebase-Regeln');
-        details.append(summary, rules);
-        var url = textInput('databaseUrl', readStored(syncApi.URL_KEY), 200, 'off');
-        url.type = 'url';
-        url.inputMode = 'url';
-        url.autocapitalize = 'off';
-        url.autocorrect = 'off';
-        url.spellcheck = false;
-        url.placeholder = 'https://name.firebaseio.com';
-        var secret = textInput('secret', '', syncApi.SECRET_MAX, 'off');
-        secret.autocapitalize = 'off';
-        secret.autocorrect = 'off';
-        secret.spellcheck = false;
-        secret.placeholder = 'Mindestens 8 Zeichen, auf beiden Geräten gleich';
-        body.append(details, field('Datenbank-Adresse', url), field('Gemeinsames Kennwort', secret));
-        if (connected) {
-          body.append(element('p', 'sheet-copy', 'Trennen lässt die Punkte auf diesem Gerät und in Firebase liegen. Zum erneuten Verbinden dasselbe Kennwort eintragen.'));
-          var disconnect = toolButton('Verbindung trennen', {}, 'sheet-choice');
-          disconnect.addEventListener('click', function () {
-            stopSession();
-            writeStored(syncApi.HOUSEHOLD_KEY, '');
-            setSyncStatus('local');
-            closeSheet();
-            announce('Nur noch dieses Gerät.');
-          });
-          body.append(disconnect);
-        }
+        body.append(element('p', 'sheet-copy', 'Adresse, Kennwort und dein Name stehen im Menü Haushalt. Dieselbe Verbindung gilt für Chore Wars und Erinnerungen. Die Punkte bleiben der Stand von Chore Wars.'));
+        var openHome = toolButton('Verbindung im Menü Haushalt', {}, 'sheet-choice');
+        openHome.addEventListener('click', function () {
+          window.location.href = '../index.html#verbindung';
+        });
+        body.append(openHome);
       },
       onSubmit: function () {
-        if (sheetState.onClose) {
-          var previous = sheetState.onClose;
-          sheetState.onClose = null;
-          previous();
-        }
-        var urlResult = syncApi.normalizeDatabaseUrl(els.sheetBody.querySelector('[name="databaseUrl"]').value);
-        if (!urlResult.ok) return urlResult.error;
-        var secretResult = syncApi.readSecret(els.sheetBody.querySelector('[name="secret"]').value);
-        if (!secretResult.ok) return secretResult.error;
-        var chosenUrl = urlResult.value;
-        var pending = true;
-        sheetState.onClose = function () { pending = false; };
-        els.sheetSubmit.disabled = true;
-        syncApi.householdId(secretResult.value).then(function (id) {
-          if (!pending) return;
-          sheetState.onClose = null;
-          writeStored(syncApi.URL_KEY, chosenUrl);
-          writeStored(syncApi.HOUSEHOLD_KEY, id);
-          closeSheet();
-          announce('Verbinden…');
-          startSession();
-        }).catch(function () {
-          if (!pending) return;
-          els.sheetSubmit.disabled = false;
-          showSheetError('Das Kennwort konnte nicht verarbeitet werden.');
-        });
+        window.location.href = '../index.html#verbindung';
         return 'stay';
       }
     });
@@ -1046,7 +988,7 @@
         body.append(element('p', 'sheet-copy', 'Die Datei enthält Aufgaben, Namen, Punkte, Verlauf und Statistik.'));
         var saveButton = toolButton('Stand sichern', {}, 'sheet-choice');
         var loadButton = toolButton('Stand laden', {}, 'sheet-choice');
-        var shareButton = toolButton('Gemeinsam nutzen', {}, 'sheet-choice');
+        var shareButton = toolButton('Verbindung im Menü', {}, 'sheet-choice');
         saveButton.addEventListener('click', exportStand);
         loadButton.addEventListener('click', function () {
           els.importFile.click();
@@ -1357,6 +1299,11 @@
     registerServiceWorker();
     renderSyncStatus();
     startSession();
+    window.addEventListener('storage', function (event) {
+      if (!syncApi) return;
+      if (event.key !== syncApi.URL_KEY && event.key !== syncApi.HOUSEHOLD_KEY && event.key !== syncApi.LEGACY_HOUSEHOLD_KEY) return;
+      startSession();
+    });
   }
 
   init();

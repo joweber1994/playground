@@ -18,6 +18,12 @@
     return String(value == null ? '' : value).replace(/\s+/g, ' ').trim();
   }
 
+  function cleanAuthor(value) {
+    var name = cleanText(value);
+    if (name.length > 24) name = name.slice(0, 24).trim();
+    return name;
+  }
+
   function pad(number) {
     return number < 10 ? '0' + number : String(number);
   }
@@ -53,7 +59,8 @@
         id: id,
         text: text,
         date: date,
-        done: item.done === true
+        done: item.done === true,
+        name: cleanAuthor(item.name)
       });
     });
     return { items: items };
@@ -87,7 +94,8 @@
       id: uniqueId(current.items, requested),
       text: clean,
       date: when,
-      done: false
+      done: false,
+      name: cleanAuthor(options && options.name)
     };
     return { ok: true, state: { items: [item].concat(current.items) }, item: item };
   }
@@ -106,7 +114,7 @@
 
   function toggleItem(state, id) {
     return updateItems(state, id, function (item) {
-      return { id: item.id, text: item.text, date: item.date, done: !item.done };
+      return { id: item.id, text: item.text, date: item.date, done: !item.done, name: item.name };
     });
   }
 
@@ -190,6 +198,13 @@
     return current.getFullYear() + '-' + pad(current.getMonth() + 1) + '-' + pad(current.getDate());
   }
 
+  function parseShared(data) {
+    if (!data || typeof data !== 'object' || Array.isArray(data) || !Array.isArray(data.items)) {
+      return { ok: false, error: 'Der gemeinsame Stand ist unlesbar.' };
+    }
+    return { ok: true, state: normalize(data) };
+  }
+
   return {
     STORAGE_KEY: STORAGE_KEY,
     TEXT_MAX: TEXT_MAX,
@@ -204,6 +219,7 @@
     whenLabel: whenLabel,
     formatDate: formatDate,
     groups: groups,
-    todayFromDate: todayFromDate
+    todayFromDate: todayFromDate,
+    parseShared: parseShared
   };
 });

@@ -1,5 +1,5 @@
 /* Chore Wars – offline cache. Bump CACHE_VERSION when shipped assets change. */
-var CACHE_VERSION = 'chore-wars-v13';
+var CACHE_VERSION = 'chore-wars-v14';
 var CACHE_PREFIX = 'chore-wars-';
 
 var ASSETS = [
@@ -7,7 +7,7 @@ var ASSETS = [
   './index.html',
   './styles.css',
   './state.js',
-  './sync.js',
+  '../haushalt-sync.js',
   './app.js',
   './manifest.json',
   './service-worker.js',

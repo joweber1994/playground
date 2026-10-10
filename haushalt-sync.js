@@ -1,26 +1,40 @@
-/* Chore Wars – gemeinsamer Stand über die Firebase Realtime Database.
-   Reine Entscheidungen plus eine kleine Sitzung. Im Browser als ChoreWarsSync, unter Node als Modul. */
+/* Haushalt – gemeinsame Firebase-Verbindung für Chore Wars und Erinnerungen.
+   Reine Entscheidungen plus eine kleine Sitzung. Im Browser als HaushaltSync, unter Node als Modul.
+   Chore Wars bleibt unter households/{id}, Erinnerungen unter reminders/{id}. */
 
 (function (root, factory) {
   var api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else root.ChoreWarsSync = api;
+  else {
+    root.HaushaltSync = api;
+    root.ChoreWarsSync = api;
+  }
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
-  var URL_KEY = 'chore-wars-firebase-url';
-  var HOUSEHOLD_KEY = 'chore-wars-household-id';
+  var URL_KEY = 'haushalt-firebase-url';
+  var HOUSEHOLD_KEY = 'haushalt-household-id';
+  var NAME_KEY = 'haushalt-name';
+  var LEGACY_URL_KEY = 'chore-wars-firebase-url';
+  var LEGACY_HOUSEHOLD_KEY = 'chore-wars-household-id';
   var UPDATED_KEY = 'chore-wars-sync-at';
+  var REMINDER_UPDATED_KEY = 'erinnerungen-sync-at';
   var SECRET_MIN = 8;
   var SECRET_MAX = 80;
+  var NAME_MAX = 24;
+  var ID_RULE = '$id.matches(/^[0-9a-f]{64}$/)';
+  var DOC_RULE = "newData.hasChildren(['state', 'updatedAt']) && newData.child('updatedAt').isNumber() && newData.child('state').hasChildren()";
+
+  function documentRule() {
+    return {
+      '.read': ID_RULE,
+      '.write': ID_RULE,
+      '.validate': DOC_RULE
+    };
+  }
 
   var RULES = {
     rules: {
-      households: {
-        $id: {
-          '.read': '$id.matches(/^[0-9a-f]{64}$/)',
-          '.write': '$id.matches(/^[0-9a-f]{64}$/)',
-          '.validate': "newData.hasChildren(['state', 'updatedAt']) && newData.child('updatedAt').isNumber() && newData.child('state').hasChildren()"
-        }
-      }
+      households: { $id: documentRule() },
+      reminders: { $id: documentRule() }
     }
   };
 
@@ -80,8 +94,75 @@
     });
   }
 
-  function standUrl(databaseURL, id) {
-    return databaseURL + '/households/' + id + '.json';
+  function standUrl(databaseURL, id, bucket) {
+    var name = bucket === 'reminders' ? 'reminders' : 'households';
+    return databaseURL + '/' + name + '/' + id + '.json';
+  }
+
+  function cleanName(value) {
+    var name = String(value == null ? '' : value).replace(/\s+/g, ' ').trim();
+    if (name.length > NAME_MAX) return fail('Der Name darf höchstens 24 Zeichen haben.');
+    return ok(name);
+  }
+
+  function requireName(value) {
+    var cleaned = cleanName(value);
+    if (!cleaned.ok) return cleaned;
+    if (!cleaned.value) return fail('Bitte einen Namen eintragen.');
+    return cleaned;
+  }
+
+  function storageGet(storage, key) {
+    if (!storage || !storage.getItem) return '';
+    var value;
+    try { value = storage.getItem(key); } catch (error) { return ''; }
+    return value == null ? '' : String(value);
+  }
+
+  function storageSet(storage, key, value) {
+    if (!storage) return;
+    try {
+      if (value) storage.setItem(key, value);
+      else storage.removeItem(key);
+    } catch (error) { /* Private mode can reject storage. */ }
+  }
+
+  function migrateConnection(storage) {
+    if (!storageGet(storage, URL_KEY) && storageGet(storage, LEGACY_URL_KEY)) {
+      storageSet(storage, URL_KEY, storageGet(storage, LEGACY_URL_KEY));
+    }
+    if (!storageGet(storage, HOUSEHOLD_KEY) && storageGet(storage, LEGACY_HOUSEHOLD_KEY)) {
+      storageSet(storage, HOUSEHOLD_KEY, storageGet(storage, LEGACY_HOUSEHOLD_KEY));
+    }
+  }
+
+  function readConnection(storage) {
+    migrateConnection(storage);
+    var name = cleanName(storageGet(storage, NAME_KEY));
+    return {
+      url: storageGet(storage, URL_KEY),
+      householdId: storageGet(storage, HOUSEHOLD_KEY),
+      name: name.ok ? name.value : ''
+    };
+  }
+
+  function saveName(storage, value) {
+    var cleaned = cleanName(value);
+    if (!cleaned.ok) return cleaned;
+    storageSet(storage, NAME_KEY, cleaned.value);
+    return cleaned;
+  }
+
+  function saveConnection(storage, url, id) {
+    storageSet(storage, URL_KEY, url || '');
+    storageSet(storage, HOUSEHOLD_KEY, id || '');
+    storageSet(storage, LEGACY_URL_KEY, url || '');
+    storageSet(storage, LEGACY_HOUSEHOLD_KEY, id || '');
+  }
+
+  function disconnect(storage) {
+    storageSet(storage, HOUSEHOLD_KEY, '');
+    storageSet(storage, LEGACY_HOUSEHOLD_KEY, '');
   }
 
   function sameStand(left, right) {
@@ -126,7 +207,7 @@
     var writeGen = 0;
     var source = null;
     var delay = options.delay == null ? 300 : options.delay;
-    var endpoint = standUrl(options.databaseURL, options.householdId);
+    var endpoint = standUrl(options.databaseURL, options.householdId, options.bucket);
 
     function status(name) {
       if (options.onStatus) options.onStatus(name);
@@ -343,12 +424,24 @@
   return {
     URL_KEY: URL_KEY,
     HOUSEHOLD_KEY: HOUSEHOLD_KEY,
+    NAME_KEY: NAME_KEY,
+    LEGACY_URL_KEY: LEGACY_URL_KEY,
+    LEGACY_HOUSEHOLD_KEY: LEGACY_HOUSEHOLD_KEY,
     UPDATED_KEY: UPDATED_KEY,
+    REMINDER_UPDATED_KEY: REMINDER_UPDATED_KEY,
     SECRET_MIN: SECRET_MIN,
     SECRET_MAX: SECRET_MAX,
+    NAME_MAX: NAME_MAX,
     RULES_TEXT: RULES_TEXT,
     normalizeDatabaseUrl: normalizeDatabaseUrl,
     readSecret: readSecret,
+    cleanName: cleanName,
+    requireName: requireName,
+    migrateConnection: migrateConnection,
+    readConnection: readConnection,
+    saveName: saveName,
+    saveConnection: saveConnection,
+    disconnect: disconnect,
     isHouseholdId: isHouseholdId,
     householdId: householdId,
     standUrl: standUrl,
