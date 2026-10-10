@@ -211,6 +211,7 @@ h1 {
 }
 
 .field input,
+.field textarea,
 .rules-box {
   width: 100%;
   min-height: 48px;
@@ -222,6 +223,46 @@ h1 {
   font-size: 16px;
 }
 
+.field textarea.wrap-field {
+  min-height: 4.6em;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  resize: none;
+}
+
+.saved-block {
+  margin-top: 4px;
+}
+
+.saved-label {
+  margin: 14px 0 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.saved-value {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-elev-2);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.saved-value.is-empty {
+  color: var(--muted);
+}
+
 .rules-box {
   min-height: 9em;
   margin-top: 8px;
@@ -230,6 +271,10 @@ h1 {
   white-space: pre;
   overflow: auto;
   resize: vertical;
+}
+
+.sheet-panel:focus {
+  outline: none;
 }
 
 .rules-details {
