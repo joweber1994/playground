@@ -1,5 +1,5 @@
 /* Wochenzettel – offline cache. Deletes wochenzettel-* and leftover wochenessen-* caches. */
-var CACHE_VERSION = 'wochenzettel-v8';
+var CACHE_VERSION = 'wochenzettel-v10';
 var CACHE_PREFIX = 'wochenzettel-';
 var LEGACY_PREFIX = 'wochenessen-';
 

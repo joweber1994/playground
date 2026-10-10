@@ -10,8 +10,17 @@
   --p1-ink: #062421;
   --p2: #ff8a5b;
   --gold: #f6c453;
-  --radius: 18px;
-  --header-pad: 16px;
+  --radius: 16px;
+  --pad: 14px;
+  --gap: 6px;
+  --control: 40px;
+  --control-sm: 36px;
+  --chip: 32px;
+  --qty: 68px;
+  --btn: 92px;
+  --side: 76px;
+  --radius-ctl: 12px;
+  --header-pad: var(--pad);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
 }
 
@@ -96,7 +105,7 @@ ol {
   top: 0;
   z-index: 5;
   flex: 0 0 auto;
-  padding: calc(14px + env(safe-area-inset-top)) var(--header-pad) 8px;
+  padding: calc(8px + env(safe-area-inset-top)) var(--header-pad) 4px;
   background: rgba(12, 14, 19, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -117,22 +126,22 @@ ol {
 }
 
 .logo {
-  width: 44px;
-  height: 44px;
+  width: 32px;
+  height: 32px;
   flex: 0 0 auto;
   display: block;
 }
 
 .eyebrow {
   color: var(--gold);
-  font-size: 0.72rem;
+  font-size: 0.66rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 h1 {
-  font-size: 1.45rem;
+  font-size: 1.2rem;
   line-height: 1.1;
   letter-spacing: -0.04em;
 }
@@ -141,13 +150,14 @@ h1 {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
-  padding: 6px 12px;
+  height: var(--chip);
+  min-height: var(--chip);
+  padding: 0 10px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bg-elev-2);
   color: var(--gold);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 800;
   text-decoration: none;
 }
@@ -157,7 +167,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 12px;
+  margin-top: 6px;
 }
 
 .connectivity {
@@ -171,13 +181,14 @@ h1 {
 
 .sync-status {
   flex: 0 0 auto;
-  min-height: 36px;
-  padding: 6px 12px;
+  height: var(--chip);
+  min-height: var(--chip);
+  padding: 0 10px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bg-elev-2);
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
 }
 
@@ -215,15 +226,18 @@ h1 {
 .ticker-banner {
   display: block;
   width: 100%;
-  margin-top: 12px;
-  padding: 8px 10px;
+  margin-top: 8px;
+  padding: 6px 10px;
   border-radius: 12px;
   background: rgba(246, 196, 83, 0.16);
   color: var(--gold);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  line-height: 1.35;
+  line-height: 1.3;
   text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #ticker-note:empty {
@@ -293,15 +307,16 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 4px;
-  padding: 0 var(--header-pad) 10px;
+  padding: 0 var(--header-pad) 8px;
   background: rgba(12, 14, 19, 0.94);
   border-bottom: 1px solid var(--line);
 }
 
 .tab {
   min-width: 0;
-  min-height: 44px;
-  padding: 8px 1px;
+  height: var(--control);
+  min-height: var(--control);
+  padding: 0 2px;
   border-radius: 999px;
   background: var(--bg-elev);
   color: var(--muted);
@@ -330,14 +345,14 @@ h1 {
   overflow: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  padding: 16px var(--header-pad) calc(24px + env(safe-area-inset-bottom));
+  padding: 10px var(--header-pad) calc(16px + env(safe-area-inset-bottom));
 }
 
 .section-head {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 12px;
+  gap: 2px;
+  margin-bottom: 8px;
 }
 
 h2 {
@@ -349,8 +364,8 @@ h2 {
 .empty,
 .note {
   color: var(--muted);
-  font-size: 0.88rem;
-  line-height: 1.4;
+  font-size: 0.82rem;
+  line-height: 1.35;
 }
 
 .field {
@@ -361,10 +376,11 @@ h2 {
 .field input {
   width: 100%;
   min-width: 0;
-  min-height: 48px;
-  padding: 10px 12px;
+  height: var(--control);
+  min-height: var(--control);
+  padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--radius-ctl);
   background: var(--bg-elev-2);
   color: var(--text);
   font-size: 16px;
@@ -380,9 +396,9 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  min-height: 72px;
-  padding: 12px;
+  gap: 2px;
+  min-height: 0;
+  padding: 10px 12px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--bg-elev);
@@ -413,13 +429,14 @@ h2 {
 .store-picks {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: var(--gap);
+  margin-bottom: 8px;
 }
 
 .store-pick {
-  min-height: 44px;
-  padding: 8px 14px;
+  height: var(--control-sm);
+  min-height: var(--control-sm);
+  padding: 0 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
   font-size: 0.92rem;
@@ -457,8 +474,9 @@ h2 {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 48px;
-  margin-top: 4px;
+  height: var(--control);
+  min-height: var(--control);
+  margin-top: 8px;
   border: 1px solid rgba(246, 196, 83, 0.55);
   border-radius: 14px;
   color: var(--gold);
@@ -492,13 +510,14 @@ h2 {
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: var(--gap);
+  margin-bottom: 6px;
 }
 
 .chip {
-  min-height: 36px;
-  padding: 6px 12px;
+  height: var(--chip);
+  min-height: var(--chip);
+  padding: 0 10px;
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
@@ -511,6 +530,13 @@ h2 {
   border-color: transparent;
   background: var(--gold);
   color: #1a1408;
+}
+
+.chip.is-static {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
 }
 
 #matched {
@@ -529,11 +555,11 @@ h2 {
 }
 
 .offer-row {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6.75rem;
   align-items: center;
-  gap: 8px;
-  padding: 8px 10px 8px 12px;
+  gap: var(--gap);
+  padding: 6px 8px 6px 10px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -546,14 +572,17 @@ h2 {
 }
 
 .offer-add {
-  flex: 0 0 auto;
-  min-height: 44px;
-  padding: 6px 10px;
+  width: 100%;
+  height: var(--control-sm);
+  min-height: var(--control-sm);
+  padding: 0 8px;
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--gold);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .offer-add[aria-pressed="true"] {
@@ -599,7 +628,7 @@ h2 {
 }
 
 #shop-heading {
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .pantry .chip[aria-pressed="true"] {
@@ -608,25 +637,30 @@ h2 {
 }
 
 .offer-form {
-  display: flex;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--btn);
+  gap: var(--gap);
+  align-items: center;
   min-width: 0;
   margin-top: 8px;
 }
 
 .offer-form .grow {
-  flex: 1 1 auto;
   min-width: 0;
 }
 
-.offer-form button {
-  flex: 0 0 auto;
-  min-height: 48px;
-  padding: 0 14px;
-  border-radius: 12px;
+.offer-form button,
+.shop-form button {
+  width: 100%;
+  height: var(--control);
+  min-height: var(--control);
+  padding: 0 8px;
+  border-radius: var(--radius-ctl);
   background: var(--gold);
   color: #1a1408;
+  font-size: 0.82rem;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 #offer-note,
@@ -636,50 +670,35 @@ h2 {
 }
 
 .shop-form {
-  display: flex;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--qty) var(--btn);
+  gap: var(--gap);
+  align-items: center;
   min-width: 0;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .shop-form .grow {
-  flex: 1 1 0;
   min-width: 0;
 }
 
 .shop-form .shop-qty {
-  flex: 0 0 84px;
-  width: 84px;
+  width: var(--qty);
 }
 
 .shop-form .shop-qty input {
   padding-left: 8px;
   padding-right: 8px;
-}
-
-.shop-form button {
-  flex: 0 0 auto;
-  min-height: 48px;
-  padding: 0 14px;
-  border-radius: 12px;
-  background: var(--gold);
-  color: #1a1408;
-  font-weight: 800;
+  text-align: center;
 }
 
 @media (max-width: 359px) {
-  .shop-form,
-  .offer-form {
-    flex-wrap: wrap;
-  }
-
-  .shop-form .grow,
-  .offer-form .grow {
-    flex: 1 1 100%;
+  .shop-form {
+    grid-template-columns: minmax(0, 1fr) var(--btn);
   }
 
   .shop-form .shop-qty {
-    flex: 1 1 0;
+    grid-column: 1 / -1;
     width: auto;
   }
 }
@@ -689,15 +708,14 @@ h2 {
 }
 
 .meal {
-  padding: 14px;
+  padding: 10px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--bg-elev);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
 .meal + .meal {
-  margin-top: 12px;
+  margin-top: 8px;
 }
 
 .meal-top {
@@ -715,9 +733,11 @@ h2 {
 .meta {
   flex: 0 0 auto;
   color: var(--gold);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 800;
+  line-height: 1.3;
   text-align: right;
+  white-space: nowrap;
 }
 
 .hits,
@@ -744,11 +764,35 @@ h2 {
   margin-top: 4px;
 }
 
+.meal-steps {
+  margin-top: 8px;
+}
+
+.meal-steps summary {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.meal-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  margin-top: 8px;
+}
+
+.meal-bar .pick {
+  flex: 1 1 auto;
+  margin-top: 0;
+}
+
 .meal-actions {
   display: flex;
+  flex: 0 0 auto;
   flex-wrap: wrap;
-  gap: 4px 12px;
-  margin-top: 8px;
+  gap: 2px 8px;
+  margin-top: 0;
 }
 
 .meal-edit {
@@ -794,24 +838,74 @@ h2 {
   flex: 1 1 auto;
 }
 
-#inventory .shop-row {
+.stock-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
+  column-gap: 8px;
+  row-gap: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg-elev);
+}
+
+.stock-card > .rename-form {
+  grid-column: 1 / -1;
+}
+
+.stock-main {
+  display: contents;
+}
+
+.stock-card .shop-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stock-qty {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.stock-actions {
+  grid-column: 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.stock-actions .shop-remove {
+  width: auto;
+  min-height: var(--chip);
+  padding: 0 6px;
 }
 
 .stock-step {
-  display: flex;
-  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: var(--control-sm) 2.2rem var(--control-sm);
   align-items: center;
+  justify-content: end;
   gap: 4px;
 }
 
 .stock-step-btn {
-  min-width: 40px;
-  min-height: 40px;
+  width: var(--control-sm);
+  height: var(--control-sm);
+  min-width: var(--control-sm);
+  min-height: var(--control-sm);
   border: 1px solid var(--line);
   border-radius: 10px;
   color: var(--text);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 800;
 }
 
@@ -825,13 +919,26 @@ h2 {
   display: none;
 }
 
+.section-head-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-head-row > div {
+  min-width: 0;
+}
+
 .scan-open {
-  width: 100%;
-  min-height: 48px;
-  margin-top: 10px;
-  border-radius: 12px;
+  flex: 0 0 auto;
+  height: var(--control-sm);
+  min-height: var(--control-sm);
+  padding: 0 12px;
+  border-radius: 999px;
   background: var(--p1);
   color: var(--p1-ink);
+  font-size: 0.82rem;
   font-weight: 800;
 }
 
@@ -869,8 +976,10 @@ h2 {
 }
 
 .scanner-name-row {
-  display: flex;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--gap);
+  align-items: center;
   margin-top: 8px;
 }
 
@@ -881,10 +990,10 @@ h2 {
 
 .scanner-name-row button,
 .rename-form button[type="submit"] {
-  flex: 0 0 auto;
-  min-height: 48px;
+  height: var(--control);
+  min-height: var(--control);
   padding: 0 12px;
-  border-radius: 12px;
+  border-radius: var(--radius-ctl);
   background: var(--gold);
   color: #1a1408;
   font-weight: 800;
@@ -912,8 +1021,9 @@ h2 {
 
 .pick {
   width: 100%;
-  min-height: 44px;
-  margin-top: 12px;
+  height: var(--control);
+  min-height: var(--control);
+  margin-top: 8px;
   border: 1px solid var(--line);
   border-radius: 12px;
   color: var(--muted);
@@ -930,7 +1040,7 @@ h2 {
 .shop-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap);
 }
 
 .shop-label {
@@ -943,20 +1053,20 @@ h2 {
 }
 
 .shop-row {
-  display: flex;
-  align-items: stretch;
-  gap: 4px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--side);
+  align-items: center;
+  gap: var(--gap);
 }
 
 .shop-item {
-  flex: 1 1 auto;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  min-height: 48px;
-  padding: 12px 14px;
+  min-height: var(--control);
+  padding: 8px 10px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--bg-elev);
@@ -1007,14 +1117,16 @@ h2 {
   min-width: 0;
 }
 
-.shop-remove {
-  flex: 0 0 auto;
-  align-self: center;
-  min-height: 44px;
-  padding: 0 8px;
+.shop-remove,
+.shop-skip {
+  justify-self: end;
+  width: var(--side);
+  min-height: var(--control-sm);
+  padding: 0;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
+  text-align: right;
 }
 
 .shop-name {
@@ -1034,28 +1146,36 @@ h2 {
 }
 
 .shop-tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: 10px;
 }
 
 .shop-tools button,
 .claim-btn,
 .recipe-add button,
 .recipe-form > button {
-  min-height: 44px;
-  padding: 0 12px;
+  height: var(--control-sm);
+  min-height: var(--control-sm);
+  padding: 0 8px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--radius-ctl);
   color: var(--text);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 800;
 }
 
 .shop-tools button {
-  flex: 1 1 0;
-  background: var(--bg-elev);
+  grid-column: span 2;
+  width: 100%;
+  background: transparent;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.shop-tools button:nth-child(n + 4) {
+  grid-column: span 3;
 }
 
 .shop-tools button:disabled {
@@ -1072,7 +1192,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 10px;
+  margin-bottom: 12px;
 }
 
 .claims:empty {
@@ -1090,8 +1210,28 @@ h2 {
   color: var(--p1-ink);
 }
 
+.list-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.list-head .hint {
+  text-align: right;
+}
+
 .name-field {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
   margin-top: 12px;
+}
+
+.name-field .field-label {
+  margin-bottom: 0;
 }
 
 .field-label {
@@ -1102,14 +1242,11 @@ h2 {
   font-weight: 800;
 }
 
-.shop-skip {
-  flex: 0 0 auto;
-  align-self: center;
-  min-height: 44px;
-  padding: 0 8px;
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 800;
+.meal-actions .shop-skip {
+  width: auto;
+  min-height: var(--control);
+  padding: 0 2px;
+  text-align: left;
 }
 
 .evening {
@@ -1133,8 +1270,9 @@ h2 {
 .name-field input,
 .staple-form input {
   width: 100%;
-  min-height: 44px;
-  padding: 0 12px;
+  height: var(--control);
+  min-height: var(--control);
+  padding: 0 10px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--bg-elev-2);
@@ -1152,8 +1290,10 @@ h2 {
 }
 
 .recipe-add {
-  display: flex;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--qty) var(--btn);
+  gap: var(--gap);
+  align-items: center;
 }
 
 .recipe-add .grow {
@@ -1162,12 +1302,14 @@ h2 {
 }
 
 .recipe-qty {
-  flex: 0 1 92px;
-  width: 92px;
+  width: var(--qty);
 }
 
 .recipe-add button,
 .recipe-form > button {
+  width: 100%;
+  height: var(--control);
+  min-height: var(--control);
   background: var(--gold);
   color: #1a1408;
 }
@@ -1191,11 +1333,49 @@ h2 {
 #ideas + .section-head,
 #evenings + .section-head,
 #recipe-form + .section-head {
-  margin-top: 22px;
+  margin-top: 16px;
+}
+
+.staple-label {
+  margin-top: 16px;
 }
 
 .staple-form {
-  margin-top: 22px;
+  margin-top: 8px;
+}
+
+.offers-head {
+  margin-top: 12px;
+}
+
+.fine-print {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.fine-print summary {
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.fine-print p {
+  margin-top: 6px;
+}
+
+.fine-print p:empty {
+  display: none;
+}
+
+.fine-print:not(:has(p:not(:empty))) {
+  display: none;
+}
+
+#shop-note:empty,
+#offer-note:empty {
+  display: none;
+  min-height: 0;
+  margin: 0;
 }
 
 #staple-note:empty,

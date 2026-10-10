@@ -497,7 +497,7 @@
       clearTimer = null;
     }
     if (els.clearList) {
-      els.clearList.textContent = 'Liste leeren';
+      els.clearList.textContent = 'Leeren';
       els.clearList.classList.remove('is-armed');
     }
   }
@@ -686,7 +686,7 @@
       return;
     }
     if (selected.length === 1) {
-      els.combo.textContent = selected[0].name + ' ist ausgewählt. Weitere Supermärkte kannst du dazunehmen.';
+      els.combo.textContent = '';
       return;
     }
     var count = meals.suggest(unionIds(selected), state.pantry, null, state.overrides).length;
@@ -850,20 +850,21 @@
     if (els.inventoryEmpty) els.inventoryEmpty.hidden = rows.length > 0;
     els.inventory.innerHTML = rows.map(function (item) {
       if (item.id === renameId) {
-        return '<li class="shop-row"><form class="rename-form" data-rename-form="' + escapeHtml(item.id) + '">' +
+        return '<li class="stock-card"><form class="rename-form" data-rename-form="' + escapeHtml(item.id) + '">' +
           '<label class="field grow"><span class="sr-only">Name</span>' +
           '<input type="text" maxlength="80" value="' + escapeHtml(item.name) + '" enterkeyhint="done" autocomplete="off"></label>' +
           '<button type="submit">Sichern</button>' +
           '<button type="button" data-rename-cancel>Abbrechen</button></form></li>';
       }
       var detail = inventoryDetail(item);
-      return '<li class="shop-row"><span class="shop-copy"><span class="shop-name">' + escapeHtml(item.name) + '</span>' +
-        (detail ? '<span class="shop-amount">' + escapeHtml(detail) + '</span>' : '') +
-        '</span><div class="stock-step">' +
+      return '<li class="stock-card"><div class="stock-main"><span class="shop-name">' + escapeHtml(item.name) + '</span>' +
+        '<div class="stock-step">' +
         '<button type="button" class="stock-step-btn" data-inventory-step="-1" data-inventory-id="' + escapeHtml(item.id) + '" aria-label="Menge ' + escapeHtml(item.name) + ' verringern">−</button>' +
+        '<span class="stock-qty">' + escapeHtml(detail || '') + '</span>' +
         '<button type="button" class="stock-step-btn" data-inventory-step="1" data-inventory-id="' + escapeHtml(item.id) + '" aria-label="Menge ' + escapeHtml(item.name) + ' erhöhen">+</button>' +
-        '</div><button type="button" class="shop-remove" data-inventory-rename="' + escapeHtml(item.id) + '">Ändern</button>' +
-        '<button type="button" class="shop-remove" data-inventory-remove="' + escapeHtml(item.id) + '">Entfernen</button></li>';
+        '</div></div><div class="stock-actions">' +
+        '<button type="button" class="shop-remove" data-inventory-rename="' + escapeHtml(item.id) + '">Ändern</button>' +
+        '<button type="button" class="shop-remove" data-inventory-remove="' + escapeHtml(item.id) + '">Entfernen</button></div></li>';
     }).join('');
     if (focusRename) {
       focusRename = false;
@@ -1086,11 +1087,11 @@
         '<p class="meta">' + recipe.minutes + ' Min · ' + plural(recipe.hits.length, 'Angebot', 'Angebote') + '</p></div>' +
         '<p class="hits">Im Angebot: ' + hits + '</p>' +
         '<p class="missing">' + missing + '</p>' +
-        (steps ? '<ol class="steps">' + steps + '</ol>' : '') +
-        actions +
+        (steps ? '<details class="meal-steps"><summary>Zubereitung</summary><ol class="steps">' + steps + '</ol></details>' : '') +
         (editing ? editFormHtml() : '') +
+        '<div class="meal-bar">' + actions +
         '<button type="button" class="pick" data-pick="' + recipe.id + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
-        (on ? 'Auf der Einkaufsliste' : 'Auf die Einkaufsliste') + '</button></article>';
+        (on ? 'Auf der Einkaufsliste' : 'Auf die Einkaufsliste') + '</button></div></article>';
     }).join('');
   }
 
@@ -1444,7 +1445,7 @@
     }
     if (!navigator.onLine) {
       node.classList.add('is-offline');
-      node.textContent = 'Offline – die Liste bleibt auf diesem Gerät';
+      node.textContent = 'Offline';
       return;
     }
     if (!('serviceWorker' in navigator) || navigator.serviceWorker.controller) {
@@ -1452,7 +1453,7 @@
       node.textContent = 'Offline-bereit';
       return;
     }
-    node.textContent = 'Wird auf diesem Gerät gespeichert…';
+    node.textContent = 'Speichert…';
   }
 
   function registerServiceWorker() {

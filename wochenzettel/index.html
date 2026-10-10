@@ -55,21 +55,9 @@
       <section id="panel-einkauf" class="panel" role="tabpanel" aria-labelledby="tab-einkauf">
         <div id="store-picks" class="store-picks" role="group" aria-label="Supermärkte"></div>
         <div id="claims" class="claims"></div>
-        <label class="field name-field">
-          <span class="field-label">Dein Name, nur auf diesem Gerät</span>
-          <input id="display-name" type="text" maxlength="24" placeholder="Name" autocomplete="nickname" enterkeyhint="done" autocapitalize="words">
-        </label>
-        <h2 id="shop-heading">Einkaufsliste</h2>
-        <p class="hint">Abhaken, sobald es im Wagen liegt.</p>
-        <p id="shop-progress" class="hint"></p>
-        <div class="shop-tools">
-          <button type="button" id="undo" disabled>Rückgängig</button>
-          <button type="button" id="redo" disabled>Wiederholen</button>
-          <button type="button" id="clear-list">Liste leeren</button>
-        </div>
-        <div class="shop-tools">
-          <button type="button" id="copy-list">Liste kopieren</button>
-          <button type="button" id="finish-trip">Einkauf fertig</button>
+        <div class="list-head">
+          <h2 id="shop-heading">Einkaufsliste</h2>
+          <p id="shop-progress" class="hint"></p>
         </div>
         <form id="shop-form" class="shop-form" autocomplete="off">
           <label class="field grow">
@@ -83,12 +71,20 @@
           <button type="submit">Dazu</button>
         </form>
         <p id="shop-note" class="hint" role="status"></p>
-        <p id="shop-empty" class="empty">Sobald ein Gericht auf der Liste liegt, stehen hier die fehlenden Zutaten. Eigene Artikel trägst du oben ein.</p>
+        <p id="shop-empty" class="empty">Noch nichts auf der Liste.</p>
         <ul id="shop-list" class="shop-list"></ul>
+        <div class="shop-tools">
+          <button type="button" id="undo" disabled>Rückgängig</button>
+          <button type="button" id="redo" disabled>Wiederholen</button>
+          <button type="button" id="clear-list">Leeren</button>
+          <button type="button" id="copy-list">Kopieren</button>
+          <button type="button" id="finish-trip">Fertig</button>
+        </div>
+        <h3 class="group-label staple-label">Jede Woche</h3>
         <form id="staple-form" class="shop-form staple-form" autocomplete="off">
           <label class="field grow">
             <span class="sr-only">Jede Woche</span>
-            <input id="staple-text" type="text" maxlength="80" placeholder="Jede Woche: Kaffee, Klopapier…" enterkeyhint="next">
+            <input id="staple-text" type="text" maxlength="80" placeholder="Kaffee, Klopapier…" enterkeyhint="next">
           </label>
           <label class="field shop-qty">
             <span class="sr-only">Menge</span>
@@ -98,12 +94,16 @@
         </form>
         <p id="staple-note" class="hint" role="status"></p>
         <ul id="staples" class="shop-list staple-list"></ul>
+        <label class="field name-field">
+          <span class="field-label">Name</span>
+          <input id="display-name" type="text" maxlength="24" placeholder="Nur auf diesem Gerät" autocomplete="nickname" enterkeyhint="done" autocapitalize="words">
+        </label>
       </section>
 
       <section id="panel-angebote" class="panel" role="tabpanel" aria-labelledby="tab-angebote" hidden>
         <div class="section-head">
           <h2 id="ticker-heading">Ticker</h2>
-          <p class="hint">Artikel merken, zum Beispiel Barilla Nudeln. Sobald der Name in den gelesenen Angeboten steht, erscheint die Erinnerung.</p>
+          <p class="hint">Erscheint oben, sobald der Artikel im Angebot steht.</p>
         </div>
         <form id="ticker-form" class="offer-form" autocomplete="off">
           <label class="field grow">
@@ -115,14 +115,17 @@
         <p id="ticker-note" class="hint" role="status"></p>
         <p id="ticker-empty" class="empty">Noch nichts auf dem Ticker.</p>
         <ul id="ticker-list" class="ticker-list" hidden></ul>
-        <div class="section-head">
+        <div class="section-head offers-head">
           <h2 id="offers-heading">Diese Woche</h2>
           <p id="week-line" class="hint"></p>
         </div>
         <div id="stores" class="stores"></div>
-        <p id="combo" class="hint"></p>
-        <p id="unavailable" class="hint"></p>
-        <p id="store-note" class="hint"></p>
+        <details class="fine-print">
+          <summary>Hinweise zum Prospekt</summary>
+          <p id="combo" class="hint"></p>
+          <p id="unavailable" class="hint"></p>
+          <p id="store-note" class="hint"></p>
+        </details>
         <div id="prospekte" class="prospekte"></div>
         <div id="matched" class="chips" aria-label="Erkannte Zutaten"></div>
         <div id="offer-categories" class="chips offer-categories" role="group" aria-label="Kategorien"></div>
@@ -144,12 +147,12 @@
       <section id="panel-gerichte" class="panel" role="tabpanel" aria-labelledby="tab-gerichte" hidden>
         <div class="section-head">
           <h2 id="ideas-heading">Gerichte</h2>
-          <p class="hint">Die meisten Angebote stehen oben. Auf der Einkaufsliste liegt ein Gericht erst, wenn du es selbst auswählst.</p>
+          <p class="hint">Ein Tipp, und die fehlenden Zutaten stehen auf dem Zettel.</p>
         </div>
         <div id="ideas"></div>
         <div class="section-head">
           <h2 id="evenings-heading">Abende</h2>
-          <p class="hint">Gewählte Gerichte auf die Tage legen. Die Einkaufsliste bleibt die Summe der Woche.</p>
+          <p class="hint">Die Einkaufsliste bleibt die Summe der Woche.</p>
         </div>
         <div id="evenings"></div>
         <div class="section-head">
@@ -179,11 +182,13 @@
       </section>
 
       <section id="panel-vorrat" class="panel" role="tabpanel" aria-labelledby="tab-vorrat" hidden>
-        <div class="section-head">
-          <h2 id="inventory-heading">Vorrat</h2>
-          <p class="hint">Was schon da ist, kommt nicht auf den Zettel. Die Menge lässt sich ändern.</p>
+        <div class="section-head section-head-row">
+          <div>
+            <h2 id="inventory-heading">Vorrat</h2>
+            <p class="hint">Schon da, also nicht auf dem Zettel.</p>
+          </div>
+          <button type="button" id="scan-open" class="scan-open">Scannen</button>
         </div>
-        <button type="button" id="scan-open" class="scan-open">Scannen</button>
         <form id="inventory-form" class="shop-form" autocomplete="off">
           <label class="field grow">
             <span class="sr-only">Was ist da</span>
