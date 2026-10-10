@@ -2,6 +2,7 @@
    Reine Entscheidungen plus eine kleine Sitzung. Im Browser als HaushaltSync, unter Node als Modul.
    Chore Wars bleibt unter households/{id}. Erinnerungen liegen darunter,
    damit die schon veröffentlichten Regeln den Zugriff erlauben.
+   Wochenzettel liegt unter zettel/{id}, mit derselben Kennwort-Regel.
    Chore Wars schreibt mit PATCH, damit der Erinnerungszweig stehen bleibt. */
 
 (function (root, factory) {
@@ -36,7 +37,8 @@
 
   var RULES = {
     rules: {
-      households: { $id: documentRule() }
+      households: { $id: documentRule() },
+      zettel: { $id: documentRule() }
     }
   };
 
