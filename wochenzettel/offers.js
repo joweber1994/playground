@@ -1,8 +1,6 @@
-/* Wochenzettel – gelesene Angebote der Woche 41/2026.
-   Erzeugt aus den öffentlichen Prospekten am 5. Oktober 2026.
-   Prechtl: PDF-Text. Aldi Süd: Prospekt-Daten. Penny: Angebotsseite. Lidl: Aktionsprospekt.
-   dm und Rossmann: lesbare Artikel aus den Prospekten derselben Woche.
-   Keine Prospektseiten, nur Namen und Preise. */
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-11.
+   node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
+   Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
   var api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
@@ -12,7 +10,7 @@
   "weekKey": "2026-W41",
   "validFrom": "2026-10-05",
   "validUntil": "2026-10-10",
-  "extractedAt": "2026-10-05",
+  "extractedAt": "2026-10-11",
   "stores": [
     {
       "id": "prechtl",
@@ -341,226 +339,437 @@
     {
       "id": "aldi",
       "name": "Aldi Süd",
-      "source": "https://prospekt.aldi-sued.de/kw41-26-op-mp/",
-      "note": "Bundesweit derselbe Prospekt. Haushaltsartikel aus dem Prospekt sind nicht in der Liste.",
-      "otherCount": 102,
+      "source": "https://www.aldi-sued.de/produkte/wochenangebote/k/1588161426582123",
+      "note": "Wochenangebote, automatisch gelesen.",
+      "otherCount": 0,
       "offers": [
         {
-          "name": "Rainforest-Alliance-Bananen, lose",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "Trauben dunkel, kernlos",
-          "price": "1.39",
-          "amount": ""
-        },
-        {
-          "name": "Mango",
-          "price": "1.11",
-          "amount": ""
-        },
-        {
-          "name": "Äpfel, fein säuerlich",
-          "price": "1.79",
-          "amount": ""
-        },
-        {
-          "name": "Salat mit Rinderfiletstreifen und Mango an Orangen-Ingwer-Dressing",
-          "price": "",
-          "amount": ""
-        },
-        {
-          "name": "Leichter Quark-Bananen-Auflauf",
-          "price": "",
-          "amount": ""
-        },
-        {
-          "name": "Bio-Champignons, braun",
-          "price": "1.49",
-          "amount": ""
-        },
-        {
-          "name": "BRESSO Frischkäsezubereitung",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "WEIHENSTEPHAN Haltbare Milch",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Schnitzel",
-          "price": "3.33",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Gemischtes Hackfleisch",
-          "price": "5.49",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Puten-Minifilets",
-          "price": "4.59",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Halbes Hähnchen",
-          "price": "3.79",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Hähnchen-Ofenschale",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Gulasch",
-          "price": "2.99",
-          "amount": ""
-        },
-        {
-          "name": "MEINE BACKWELT Kornschatz",
-          "price": "0.35",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Schokolade",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Bresaola della Valtellina g. g. A.",
-          "price": "2.29",
-          "amount": ""
-        },
-        {
-          "name": "ALMARE Fischthekensalat",
-          "price": "1.49",
-          "amount": ""
-        },
-        {
-          "name": "KING’S CROWN Champignons",
-          "price": "0.79",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Italienische Premium-Pasta",
-          "price": "2.29",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Salsiccia",
-          "price": "2.29",
-          "amount": ""
-        },
-        {
-          "name": "KINDER Pingui Karamell-Käsekuchen",
-          "price": "1.49",
-          "amount": ""
-        },
-        {
-          "name": "ZOTT Sahnejoghurt",
+          "name": "MEINE BACKWELT Vanillestange",
           "price": "0.39",
           "amount": ""
         },
         {
-          "name": "RIO D’ORO Apfelsaft",
-          "price": "5.96",
+          "name": "KING'S CROWN Champignons 1. Wahl, in Scheiben 170 g",
+          "price": "0.79",
           "amount": ""
         },
         {
-          "name": "RIO D’ORO Orangensaft",
-          "price": "5.56",
+          "name": "GOURMET FINEST CUISINE Tete de Moine 100 g",
+          "price": "3.39",
           "amount": ""
         },
         {
-          "name": "GAZI Schaf- oder Ziegenkäse",
-          "price": "1.99",
-          "amount": ""
-        },
-        {
-          "name": "ORO DI PARMA Tomaten",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "BERTOLLI Natives Olivenöl extra",
-          "price": "5.99",
-          "amount": ""
-        },
-        {
-          "name": "TANTE FANNY Flammkuchenböden",
-          "price": "2.99",
-          "amount": ""
-        },
-        {
-          "name": "BEN’S ORIGINAL Express-Reis",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Hähnchenbrustfilet",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "ASIA GREEN GARDEN Naan-Brot",
-          "price": "1.39",
-          "amount": ""
-        },
-        {
-          "name": "ASIA GREEN GARDEN Reisnudeln",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "Bio-Tomatenmark",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "Bio-Tomaten, passiert",
-          "price": "0.69",
-          "amount": ""
-        },
-        {
-          "name": "Bio-Fruchtjoghurt",
+          "name": "MILSANI Joghurt 3,5 % Fett 500 g, milder Naturjoghurt",
           "price": "0.59",
           "amount": ""
         },
         {
-          "name": "Bio-Naturjoghurt",
-          "price": "1.99",
+          "name": "WEIHENSTEPHAN H-Milch 3,5 % 1 l",
+          "price": "0.99",
           "amount": ""
         },
         {
-          "name": "Körniger Bio-Frischkäse",
-          "price": "1.45",
+          "name": "GOURMET FINEST CUISINE Bresaola della Valtellina g. g. A. 80 g",
+          "price": "2.29",
           "amount": ""
         },
         {
-          "name": "Bio-Joghurt und Knuspermüsli",
+          "name": "MEINE METZGEREI Gulasch vom Schwein 500 g",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Schnitzel vom Schwein 500 g",
+          "price": "3.33",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Halbes Hähnchen gewürzt 750 g",
+          "price": "3.79",
+          "amount": ""
+        },
+        {
+          "name": "VALENSINA Orangensaft 1 l",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "HOFBURGER Gouda jung 250 g",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "FUNNY FRISCH Chipsfrisch Ungarisch 150 g",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "LACURA Kosmetiktücher 3-lagig, 120 Stück",
+          "price": "0.79",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Isländischer Räucherlachs 300 g",
+          "price": "5.69",
+          "amount": ""
+        },
+        {
+          "name": "FARMER Erdnüsse 200 g",
+          "price": "0.59",
+          "amount": ""
+        },
+        {
+          "name": "PURINA Felix Original 48 x 85 g",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "· FAIR&GUT · Hackfleisch gemischt 800 g",
+          "price": "5.49",
+          "amount": ""
+        },
+        {
+          "name": "HEINZ Tomatenketchup 400 ml",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "MEINE BACKWELT Kornschatz Stück",
+          "price": "0.35",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Puten-Minifilet 400 g",
+          "price": "4.59",
+          "amount": ""
+        },
+        {
+          "name": "Kinder Bueno Eisbecher 455 ml",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Two-Way Dessert 140 g",
+          "price": "2.29",
+          "amount": ""
+        },
+        {
+          "name": "Bresso 150 g, Kräuter",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Bresso 150 g, Kräuter der Provence",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Bresso 150 g, Meersalz",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Bresso 150 g, Grüner Pfeffer",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Bresso 150 g, Feine Kräuter",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Bresso 150 g, Kirschtomaten",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 90 g, Noisette",
           "price": "0.95",
           "amount": ""
         },
         {
-          "name": "Frische Bio-Milch",
-          "price": "1.25",
+          "name": "MILKA Tafelschokolade 100 g, Joghurt",
+          "price": "0.95",
           "amount": ""
         },
         {
-          "name": "Bio-Reibekäse",
+          "name": "MILKA Tafelschokolade 90 g, Alpenmilch",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 90 g, Haselnuss",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 87 g, Milka & LU-Kekse",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 92 g, Oreo Sandwich",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 87 g, Milka & TUC Cracker",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 100 g, Karamell",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 90 g, Kuhflecken",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 90 g, Weiße Schokolade",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 95 g, Ganze Nuss",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 100 g, Erdbeere",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 90 g, Luflée",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 90 g, Zartbitter",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "MILKA Tafelschokolade 100 g, White Oreo",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "BARILLA Pesto 190 g, Genovese",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "BARILLA Pesto 200 g, Rosso",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "BARILLA Pesto 190 g, Calabrese",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "CORNY Müsli-Riegel 150 g, Schoko-Banane",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "CORNY Müsli-Riegel 150 g, Schoko",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "CORNY Müsli-Riegel 120 g, Schoko light",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "CORNY Müsli-Riegel 120 g, Milch Classic",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "MEINE KUCHENWELT Feine Kleinkuchen, 175 g Mandelhörnchen",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "MEINE KUCHENWELT Feine Kleinkuchen 200 g, Kokos Törtchen",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "MEINE KUCHENWELT Feine Kleinkuchen 200 g, Erdnussschnitte",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "MEINE KUCHENWELT Feine Kleinkuchen 175 g, Nussschnitten",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Dessert im Glas 60 g, Cheesecake-Rote Früchte",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Dessert im Glas 60 g, Double Chocolate",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Dessert im Glas 60 g, Himbeere",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "MILSANI Joghurt mild aus Magermilch, 0,1 % Fett, 500 g",
+          "price": "0.49",
+          "amount": ""
+        },
+        {
+          "name": "MILSANI Fettarmer Joghurt, mild, 1,5 % Fett, 500 g",
+          "price": "0.49",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Leberpasteten 125 g, Geflügel",
+          "price": "1.19",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Leberpasteten 125 g, Trüffel",
+          "price": "1.19",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Leberpasteten 125 g, Pfeffer",
+          "price": "1.19",
+          "amount": ""
+        },
+        {
+          "name": "ROMEO PREMIUM Filetsnacks 150 g, Hühnerbrustfilet",
+          "price": "1.19",
+          "amount": ""
+        },
+        {
+          "name": "BISCOTTO Jaffa Cake 300 g, Erdbeere",
           "price": "1.59",
           "amount": ""
         },
         {
-          "name": "Bio-Landbrötchen",
+          "name": "BISCOTTO Jaffa Cake 300 g, Orange",
+          "price": "1.59",
+          "amount": ""
+        },
+        {
+          "name": "BISCOTTO Jaffa Cake 300 g, Kirsche-weiße Schokolade",
+          "price": "1.59",
+          "amount": ""
+        },
+        {
+          "name": "FUNNY FRISCH Chipsfrisch 150 g, Gesalzen",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "FUNNY FRISCH Chipsfrisch 150 g, Sour Cream & Wild Onion",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "FUNNY FRISCH Chipsfrisch 150 g, Oriental",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "FUNNY FRISCH Chipsfrisch 150 g, Peperoni",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Black Angus Pastrami 120 g, Gewürzkruste",
+          "price": "2.39",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Black Angus Pastrami 120 g, Pfeffer",
+          "price": "2.39",
+          "amount": ""
+        },
+        {
+          "name": "PURINA ONE Katzen Trockenfutter 750 g, Huhn",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "ALMARE Fisch-Feinkostsalate 200 g, Sylter",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "ALMARE Fisch-Feinkostsalate 200 g, Rote Beete",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "ALMARE Fisch-Feinkostsalate 200 g, Däne (Milde)",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "ALMARE Fisch-Feinkostsalate 200 g, Büsumer",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Hähnchen Ofenschale 450 g, Hollandaise-Brokkoli",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Hähnchen Ofenschale 450 g, Paprika-Rahm",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "CUCINA Gefüllte Pfannen-Gnocchi 300 g, Käse-Schinken",
           "price": "1.29",
           "amount": ""
+        },
+        {
+          "name": "CUCINA Gefüllte Pfannen-Gnocchi 300 g, Ricotta-Spinat",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "CUCINA Gefüllte Pfannen-Gnocchi 300 g, Tomate-Mozzarella",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Ital. Salsiccia 300 g, Trüffel",
+          "price": "2.29",
+          "amount": ""
+        },
+        {
+          "name": "GOURMET FINEST CUISINE Ital. Salsiccia 300 g, Rosmarin",
+          "price": "2.29",
+          "amount": ""
+        },
+        {
+          "name": "ROMEO PREMIUM Premium Hundefilet-Snacks, Hähnchenfilet 150 g",
+          "price": "1.19",
+          "amount": ""
         }
-      ]
+      ],
+      "revision": "aldi-2026-41"
     },
     {
       "id": "penny",
