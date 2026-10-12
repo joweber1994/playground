@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-11.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-12.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -7,10 +7,10 @@
   else root.WochenzettelOffers = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   return {
-  "weekKey": "2026-W41",
-  "validFrom": "2026-10-05",
-  "validUntil": "2026-10-10",
-  "extractedAt": "2026-10-11",
+  "weekKey": "2026-W42",
+  "validFrom": "2026-10-12",
+  "validUntil": "2026-10-17",
+  "extractedAt": "2026-10-12",
   "stores": [
     {
       "id": "prechtl",
@@ -344,2280 +344,2342 @@
       "otherCount": 0,
       "offers": [
         {
-          "name": "MEINE BACKWELT Vanillestange",
-          "price": "0.39",
-          "amount": ""
-        },
-        {
-          "name": "KING'S CROWN Champignons 1. Wahl, in Scheiben 170 g",
+          "name": "GOLDÄHREN Kleiner Sandwichtoast Saaten 375 g",
           "price": "0.79",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Tete de Moine 100 g",
-          "price": "3.39",
+          "name": "GOLDÄHREN Kleiner Sandwichtoast Dinkel 375 g",
+          "price": "0.79",
           "amount": ""
         },
         {
-          "name": "MILSANI Joghurt 3,5 % Fett 500 g, milder Naturjoghurt",
-          "price": "0.59",
+          "name": "MILSANI Emmentaler am Stück 400 g",
+          "price": "2.39",
           "amount": ""
         },
         {
-          "name": "WEIHENSTEPHAN H-Milch 3,5 % 1 l",
-          "price": "0.99",
+          "name": "GOLDEN SEAFOOD Norwegische Lachsfiletportionen 500 g",
+          "price": "7.49",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Bresaola della Valtellina g. g. A. 80 g",
-          "price": "2.29",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Gulasch vom Schwein 500 g",
-          "price": "2.99",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Schnitzel vom Schwein 500 g",
-          "price": "3.33",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Halbes Hähnchen gewürzt 750 g",
-          "price": "3.79",
-          "amount": ""
-        },
-        {
-          "name": "VALENSINA Orangensaft 1 l",
-          "price": "1.49",
-          "amount": ""
-        },
-        {
-          "name": "HOFBURGER Gouda jung 250 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "FUNNY FRISCH Chipsfrisch Ungarisch 150 g",
+          "name": "Granatapfel Stück",
           "price": "0.89",
           "amount": ""
         },
         {
-          "name": "LACURA Kosmetiktücher 3-lagig, 120 Stück",
+          "name": "Bio Birnen 600 g",
+          "price": "2.29",
+          "amount": ""
+        },
+        {
+          "name": "BESTES AUS DER REGION Champignons braun",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Zespri Kiwi grün Stück",
+          "price": "0.44",
+          "amount": ""
+        },
+        {
+          "name": "Weißkohl, lose",
+          "price": "0.69",
+          "amount": "1 kg"
+        },
+        {
+          "name": "Bio-Gurke, Stück",
+          "price": "0.75",
+          "amount": ""
+        },
+        {
+          "name": "NATUR LIEBLINGE Speisekartoffeln 2,5 kg",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "KINDER Bueno 6+2 172 g",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "Avocado, Stück",
+          "price": "0.85",
+          "amount": ""
+        },
+        {
+          "name": "Bio Naturland Zitronen 500 g",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "BESTES AUS DER REGION Cherryrispentomaten 200 g",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Dinkel-Spaghetti 500 g",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Gewürzgurken 360 g",
+          "price": "2.15",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Landhähnchen Schenkelsteaks 350 g",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "NATUR LIEBLINGE Speisezwiebeln gelb 1,5 kg",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Hackfleisch vom Rind 800 g",
+          "price": "7.19",
+          "amount": ""
+        },
+        {
+          "name": "Grauer Burgunder QbA 0,75 l",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Naturjoghurt 3,8 % Fett 400 g",
           "price": "0.79",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Isländischer Räucherlachs 300 g",
-          "price": "5.69",
+          "name": "NUR NUR NATUR Bio-Apfeldirektsaft 750 ml",
+          "price": "1.59",
           "amount": ""
         },
         {
-          "name": "FARMER Erdnüsse 200 g",
-          "price": "0.59",
+          "name": "FERRERO Nutella 750 + 75 g",
+          "price": "3.99",
           "amount": ""
         },
         {
-          "name": "PURINA Felix Original 48 x 85 g",
-          "price": "11.99",
+          "name": "CHOCEUR Knusper Schoklis 250 g",
+          "price": "1.79",
           "amount": ""
         },
         {
-          "name": "· FAIR&GUT · Hackfleisch gemischt 800 g",
-          "price": "5.49",
+          "name": "Bio-Rinder-Burger 260 g",
+          "price": "3.29",
           "amount": ""
         },
         {
-          "name": "HEINZ Tomatenketchup 400 ml",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "MEINE BACKWELT Kornschatz Stück",
+          "name": "NUR NUR NATUR Bio-Sauerteig-Vollkorn-Krusti",
           "price": "0.35",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Puten-Minifilet 400 g",
-          "price": "4.59",
+          "name": "BARISSIMO Löslicher Kaffee Gold 200 g",
+          "price": "4.15",
           "amount": ""
         },
         {
-          "name": "Kinder Bueno Eisbecher 455 ml",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Two-Way Dessert 140 g",
-          "price": "2.29",
-          "amount": ""
-        },
-        {
-          "name": "Bresso 150 g, Kräuter",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "Bresso 150 g, Kräuter der Provence",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "Bresso 150 g, Meersalz",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "Bresso 150 g, Grüner Pfeffer",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "Bresso 150 g, Feine Kräuter",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "Bresso 150 g, Kirschtomaten",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 90 g, Noisette",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 100 g, Joghurt",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 90 g, Alpenmilch",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 90 g, Haselnuss",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 87 g, Milka & LU-Kekse",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 92 g, Oreo Sandwich",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 87 g, Milka & TUC Cracker",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 100 g, Karamell",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 90 g, Kuhflecken",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 90 g, Weiße Schokolade",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 95 g, Ganze Nuss",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 100 g, Erdbeere",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 90 g, Luflée",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 90 g, Zartbitter",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "MILKA Tafelschokolade 100 g, White Oreo",
-          "price": "0.95",
-          "amount": ""
-        },
-        {
-          "name": "BARILLA Pesto 190 g, Genovese",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "BARILLA Pesto 200 g, Rosso",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "BARILLA Pesto 190 g, Calabrese",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "CORNY Müsli-Riegel 150 g, Schoko-Banane",
-          "price": "1.49",
-          "amount": ""
-        },
-        {
-          "name": "CORNY Müsli-Riegel 150 g, Schoko",
-          "price": "1.49",
-          "amount": ""
-        },
-        {
-          "name": "CORNY Müsli-Riegel 120 g, Schoko light",
-          "price": "1.49",
-          "amount": ""
-        },
-        {
-          "name": "CORNY Müsli-Riegel 120 g, Milch Classic",
-          "price": "1.49",
-          "amount": ""
-        },
-        {
-          "name": "MEINE KUCHENWELT Feine Kleinkuchen, 175 g Mandelhörnchen",
+          "name": "Heidelbeeren 150g",
           "price": "1.79",
           "amount": ""
         },
         {
-          "name": "MEINE KUCHENWELT Feine Kleinkuchen 200 g, Kokos Törtchen",
-          "price": "1.79",
+          "name": "GUT DREI EICHEN Bacon 150 g",
+          "price": "1.49",
           "amount": ""
         },
         {
-          "name": "MEINE KUCHENWELT Feine Kleinkuchen 200 g, Erdnussschnitte",
-          "price": "1.79",
-          "amount": ""
-        },
-        {
-          "name": "MEINE KUCHENWELT Feine Kleinkuchen 175 g, Nussschnitten",
-          "price": "1.79",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Dessert im Glas 60 g, Cheesecake-Rote Früchte",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Dessert im Glas 60 g, Double Chocolate",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Dessert im Glas 60 g, Himbeere",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "MILSANI Joghurt mild aus Magermilch, 0,1 % Fett, 500 g",
-          "price": "0.49",
-          "amount": ""
-        },
-        {
-          "name": "MILSANI Fettarmer Joghurt, mild, 1,5 % Fett, 500 g",
-          "price": "0.49",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Leberpasteten 125 g, Geflügel",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Leberpasteten 125 g, Trüffel",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Leberpasteten 125 g, Pfeffer",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "ROMEO PREMIUM Filetsnacks 150 g, Hühnerbrustfilet",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "BISCOTTO Jaffa Cake 300 g, Erdbeere",
-          "price": "1.59",
-          "amount": ""
-        },
-        {
-          "name": "BISCOTTO Jaffa Cake 300 g, Orange",
-          "price": "1.59",
-          "amount": ""
-        },
-        {
-          "name": "BISCOTTO Jaffa Cake 300 g, Kirsche-weiße Schokolade",
-          "price": "1.59",
-          "amount": ""
-        },
-        {
-          "name": "FUNNY FRISCH Chipsfrisch 150 g, Gesalzen",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "FUNNY FRISCH Chipsfrisch 150 g, Sour Cream & Wild Onion",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "FUNNY FRISCH Chipsfrisch 150 g, Oriental",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "FUNNY FRISCH Chipsfrisch 150 g, Peperoni",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Black Angus Pastrami 120 g, Gewürzkruste",
-          "price": "2.39",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Black Angus Pastrami 120 g, Pfeffer",
-          "price": "2.39",
-          "amount": ""
-        },
-        {
-          "name": "PURINA ONE Katzen Trockenfutter 750 g, Huhn",
+          "name": "MEINE METZGEREI Schweine-Gyros 500 g",
           "price": "2.99",
           "amount": ""
         },
         {
-          "name": "ALMARE Fisch-Feinkostsalate 200 g, Sylter",
-          "price": "1.49",
+          "name": "MEINE METZGEREI Schweine-Bauchscheiben Natur 600 g",
+          "price": "4.19",
           "amount": ""
         },
         {
-          "name": "ALMARE Fisch-Feinkostsalate 200 g, Rote Beete",
-          "price": "1.49",
+          "name": "ALDI Äpfel süß-säuerlich 1kg",
+          "price": "1.59",
           "amount": ""
         },
         {
-          "name": "ALMARE Fisch-Feinkostsalate 200 g, Däne (Milde)",
-          "price": "1.49",
+          "name": "MEINE METZGEREI Puten-Rollbraten 900 g",
+          "price": "5.49",
           "amount": ""
         },
         {
-          "name": "ALMARE Fisch-Feinkostsalate 200 g, Büsumer",
-          "price": "1.49",
+          "name": "DR. OETKER Puddingpulver, Dessert-Soße Vanillegeschmack 51 g",
+          "price": "0.79",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Hähnchen Ofenschale 450 g, Hollandaise-Brokkoli",
-          "price": "3.99",
+          "name": "DR. OETKER Puddingpulver 89 g, Schokolade 2er",
+          "price": "0.79",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Hähnchen Ofenschale 450 g, Paprika-Rahm",
-          "price": "3.99",
+          "name": "COCA-COLA Cola Light 1,25 l",
+          "price": "1.69",
           "amount": ""
         },
         {
-          "name": "CUCINA Gefüllte Pfannen-Gnocchi 300 g, Käse-Schinken",
+          "name": "COCA-COLA Cola Zero 1,25 l",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "COCA-COLA Cola Koffeinfrei 1,25 l",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "COCA-COLA Mezzo Mix 1,25 l",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "COCA-COLA Fanta Orange 1,25 l",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "COCA-COLA Sprite 1,25 l",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "HERTA Finesse 100 g, Schinken",
           "price": "1.29",
           "amount": ""
         },
         {
-          "name": "CUCINA Gefüllte Pfannen-Gnocchi 300 g, Ricotta-Spinat",
+          "name": "HERTA Finesse 100 g, Hähnchenbrust im Ofen",
           "price": "1.29",
           "amount": ""
         },
         {
-          "name": "CUCINA Gefüllte Pfannen-Gnocchi 300 g, Tomate-Mozzarella",
+          "name": "HERTA Finesse 100 g, Putenbrust",
           "price": "1.29",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Ital. Salsiccia 300 g, Trüffel",
-          "price": "2.29",
+          "name": "ALMARE Stremellachs 125 g, Pfeffer",
+          "price": "2.19",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Ital. Salsiccia 300 g, Rosmarin",
-          "price": "2.29",
+          "name": "ALMARE SEAFOOD Stremellachs 125 g, Natur",
+          "price": "2.19",
           "amount": ""
         },
         {
-          "name": "ROMEO PREMIUM Premium Hundefilet-Snacks, Hähnchenfilet 150 g",
-          "price": "1.19",
+          "name": "NUR NUR NATUR Bio-Heumilch-Käsescheiben 150 g, Emmentaler",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Heumilch-Käsescheiben 150 g, Bergkäse",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "TROLLI Saures Fruchtgummi, Saure Würmer 150 g",
+          "price": "1.09",
+          "amount": ""
+        },
+        {
+          "name": "TROLLI Saures Fruchtgummi, Erdbeeren Sauer 150 g",
+          "price": "1.09",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Fruchtmus 360 g, Apfel-Aprikose",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Fruchtmus 360 g, Apfel-Banane",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Fruchtmus 360 g, Apfel-Mango",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Hähnchen-Flügel 1,1 kg, Natur",
+          "price": "4.69",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Hähnchen-Flügel 1,1 kg, Gewürzt",
+          "price": "4.69",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Tomatensauce 325 ml, Basilikum",
+          "price": "1.39",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Tomatensauce 325 ml, Arrabiata",
+          "price": "1.39",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Tomatensauce 325 ml, Gemüse Parmesan",
+          "price": "1.39",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Tempeh 200 g, Natur",
+          "price": "2.39",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Tempeh 200 g, Curry",
+          "price": "2.39",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Sauerkonserven 190 g, Karottensalat",
+          "price": "0.69",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Sauerkonserven 220 g, Rote Beete",
+          "price": "0.69",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Sauerkonserven 190 g, Selleriesalat",
+          "price": "0.69",
+          "amount": ""
+        },
+        {
+          "name": "GÜLDENHOF Hähnchenbrust 150 g, Gebacken",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "GÜLDENHOF Hähnchenbrust 150 g, Paprika",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "GÜLDENHOF Hähnchenbrust 150 g, Curry",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Bergbauern-Weichkäse 200 g, Mild",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "NUR NUR NATUR Bio-Bergbauern-Weichkäse 200 g, Würzig",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Schoko-Eier mit Spielfiguren 60 g, Paw Patrol",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "CHOCEUR Milk & Crisp 211,5 g, Milchschokolade",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "DR. OETKER Ofenfrische, Salami 390 g",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "DR. OETKER Ofenfrische, Vier-Käse 410 g",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150g, Schoko Balls",
+          "price": "0.33",
+          "amount": ""
+        },
+        {
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150g, Schoko Flakes",
+          "price": "0.33",
+          "amount": ""
+        },
+        {
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150g, Waffelwürfel",
+          "price": "0.33",
+          "amount": ""
+        },
+        {
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 113g, Mandel Crunch",
+          "price": "0.33",
+          "amount": ""
+        },
+        {
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 140g, Schoko Cookies",
+          "price": "0.33",
           "amount": ""
         }
       ],
-      "revision": "aldi-2026-41"
+      "revision": "aldi-2026-42"
     },
     {
       "id": "penny",
       "name": "Penny",
       "source": "https://www.penny.de/angebote",
-      "note": "Lebensmittel aus der Angebotsseite der Woche 41.",
+      "note": "Angebote der Woche 2026-42, automatisch gelesen.",
       "otherCount": 0,
       "offers": [
         {
-          "name": "RED BULL Energy-Drink",
-          "price": "0.99",
-          "amount": "je 250 ml"
+          "name": "PHILADELPHIA Frischkäse­zubereitung*",
+          "price": "1.11",
+          "amount": "je 195 g"
         },
         {
-          "name": "ARLA Kærgården",
-          "price": "1.29",
-          "amount": "je 200 g"
+          "name": "RITTER SPORT Bunte Vielfalt*",
+          "price": "1.11",
+          "amount": "je 100 g"
         },
         {
-          "name": "Helle, kernlose Tafeltrauben",
-          "price": "2.99",
-          "amount": "je kg"
+          "name": "RITTER SPORT Edelkakaoklasse*",
+          "price": "1.69",
+          "amount": "je 75 g"
         },
         {
-          "name": "BARILLA Pasta",
+          "name": "Cherry-Romatomaten*",
           "price": "0.88",
+          "amount": "je 250-g-Schale"
+        },
+        {
+          "name": "FERRERO Mon Chéri*",
+          "price": "2.79",
+          "amount": "je 157 g"
+        },
+        {
+          "name": "DALLMAYR Classic Kaffee*",
+          "price": "6.49",
           "amount": "je 500 g"
         },
         {
-          "name": "OATLY Haferdrink",
-          "price": "1.79",
-          "amount": "je 1 I"
+          "name": "FREIXENET Sekt*",
+          "price": "3.88",
+          "amount": "je 0,75 I"
         },
         {
-          "name": "HARIBO Fruchtgummi",
-          "price": "0.79",
-          "amount": "je 160 g"
-        },
-        {
-          "name": "Feigen",
-          "price": "1.99",
-          "amount": "je 500-g-Schale"
-        },
-        {
-          "name": "Deutsche rote Äpfel",
-          "price": "1.29",
-          "amount": "je 1-kg-Schale"
-        },
-        {
-          "name": "Zwetschgen",
-          "price": "1.49",
-          "amount": "je kg"
-        },
-        {
-          "name": "NATURGUT Bio-Gurke",
+          "name": "Mango*",
           "price": "0.89",
           "amount": "je Stück"
         },
         {
-          "name": "NATURGUT Bio Walnuss­kerne",
-          "price": "1.99",
-          "amount": "je 200 g"
+          "name": "Kiwi Gold*",
+          "price": "1.00",
+          "amount": "je 3er-Schale"
         },
         {
-          "name": "ZOTT Sahnejoghurt",
-          "price": "0.44",
-          "amount": "je 140 g"
+          "name": "NATURGUT Bio Avocado",
+          "price": "1.11",
+          "amount": "je 250-g-Netz"
         },
         {
-          "name": "DELI REFORM Margarine",
-          "price": "1.29",
-          "amount": "je 450 g"
-        },
-        {
-          "name": "FOL EPI Käsescheiben Classic",
-          "price": "1.59",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "FOL EPI Käsescheiben Duo",
-          "price": "1.59",
-          "amount": "je 120 g"
-        },
-        {
-          "name": "KIRI Portionen",
-          "price": "1.99",
-          "amount": "je 108 g"
-        },
-        {
-          "name": "KIRI Natur Schale",
-          "price": "1.99",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "INNOCENT Smoothie",
-          "price": "1.69",
-          "amount": "je 250 ml"
-        },
-        {
-          "name": "RAMA Cremefine",
-          "price": "0.99",
-          "amount": "je 250 ml"
-        },
-        {
-          "name": "BERIDA Lachsfilet",
-          "price": "5.19",
-          "amount": "je 300 g"
-        },
-        {
-          "name": "FRANK ROSIN Hot Dogs",
-          "price": "2.79",
-          "amount": "je 300 g"
-        },
-        {
-          "name": "DR. OETKER La Mia Grande",
-          "price": "3.49",
-          "amount": "je 380 g"
-        },
-        {
-          "name": "DR. OETKER La Mia Familia",
-          "price": "3.49",
-          "amount": "je 480 g"
-        },
-        {
-          "name": "BÜRGER Maultaschen",
-          "price": "1.69²",
-          "amount": "je 360 g"
-        },
-        {
-          "name": "NATURGUT Bio Reibekäse",
-          "price": "1.59",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "NATURGUT Bio Knabber-Vögelchen",
-          "price": "1.19",
-          "amount": "je 100 g"
-        },
-        {
-          "name": "NATURGUTBio Kokoswasser",
-          "price": "2.99",
-          "amount": "je 1 l"
-        },
-        {
-          "name": "NATURGUT Bio Käse am Stück",
-          "price": "1.99²",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "NATURGUT Bio Steinofen-Pizza",
-          "price": "2.49²",
-          "amount": "je 340 g"
-        },
-        {
-          "name": "NATURGUT Bio Rübenzucker",
-          "price": "1.29²",
-          "amount": "je 1.000 g"
-        },
-        {
-          "name": "NATURGUT Bio Dinkelmehl",
-          "price": "1.11²",
-          "amount": "je 1 kg"
-        },
-        {
-          "name": "NATURGUT Bio Hartweizen Couscous",
-          "price": "1.29²",
-          "amount": "je 750 g"
-        },
-        {
-          "name": "NATURGUT Bio Kokosöl",
-          "price": "4.95²",
-          "amount": "je 620 ml"
-        },
-        {
-          "name": "NATURGUT Bio Apfelmix",
-          "price": "0.99²",
-          "amount": "je 360 g"
-        },
-        {
-          "name": "STORCK Knoppers",
-          "price": "2.99",
-          "amount": "je 15 x 25 g"
-        },
-        {
-          "name": "MILKA Schokolade",
-          "price": "2.79",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "MILKA Tender",
-          "price": "1.99",
-          "amount": "je 5 x 37 g"
-        },
-        {
-          "name": "MILKA Choco Brownie",
-          "price": "1.99",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "Ferrero-Pralinen",
-          "price": "25% Rabatt",
-          "amount": "Gilt nicht für Kühl-, Tiefkühl-  und Saisonartikel"
-        },
-        {
-          "name": "MARS Twix",
-          "price": "3.59",
-          "amount": "je 5 x 50 g"
-        },
-        {
-          "name": "CHOCO’LA Caramello",
-          "price": "2.09",
-          "amount": "je 6 x 50 g"
-        },
-        {
-          "name": "CHOCO‘LA Schoko Kürbisse",
-          "price": "2.29",
-          "amount": "je 110 g"
-        },
-        {
-          "name": "DE BEUKELAER Minis",
-          "price": "1.49",
-          "amount": "je 187,5 g"
-        },
-        {
-          "name": "DE BEUKELAER Prinzen Rolle",
-          "price": "1.49",
-          "amount": "je 172 g"
-        },
-        {
-          "name": "WAWI Schoko-Reis Tafel",
-          "price": "1.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "WAWI Asian Dreams Matcha Cup",
-          "price": "2.49",
-          "amount": "je 100 g"
-        },
-        {
-          "name": "CHIO Tortillas",
-          "price": "0.99",
-          "amount": "je 110 g"
-        },
-        {
-          "name": "FUNNY-FRISCH Chipsfrisch",
-          "price": "0.99",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "FUNNY-FRISCH Spezialität",
-          "price": "1.19",
-          "amount": "je 90 g"
-        },
-        {
-          "name": "FUNNY-FRISCH Linsen Chips",
-          "price": "1.49",
-          "amount": "je 90 g"
-        },
-        {
-          "name": "Pom-Bär",
-          "price": "1.19",
-          "amount": "je 75 g"
-        },
-        {
-          "name": "Kaffeekuchen",
-          "price": "1.99²",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "Chinois",
-          "price": "1.99²",
-          "amount": "je 350 g"
-        },
-        {
-          "name": "MÜHLENHOF Frisches Hackfleisch gemischt",
-          "price": "5.99",
-          "amount": "je 800-g-Packung"
-        },
-        {
-          "name": "MÜHLENHOF Frischer bayerischer Leberkäse",
-          "price": "3.99",
-          "amount": "je 800-g-Packung"
-        },
-        {
-          "name": "MÜHLENHOF Frische Schweine-Schnitzel",
-          "price": "4.99",
-          "amount": "je 800-g-Packung"
-        },
-        {
-          "name": "Frischer Schweine-Nackenbraten",
-          "price": "4.99",
-          "amount": "je kg"
-        },
-        {
-          "name": "MÜHLENHOF Frische Hähnchen-Unterschenkel",
-          "price": "7.99",
-          "amount": "je 2.000-g-Packung"
-        },
-        {
-          "name": "Frisches Rindfleischpaket",
-          "price": "8.99",
-          "amount": "je kg"
-        },
-        {
-          "name": "WILTMANN Mini-Salami",
-          "price": "3.49",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "WINDAU Mett",
-          "price": "1.49",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "HERTA Finesse Aufschnitt",
+          "name": "Dunkle, kernlose Tafeltrauben*",
           "price": "1.39",
-          "amount": "je 100 g"
+          "amount": "je 500-g-Schale"
         },
         {
-          "name": "GLOCKEN BEUNE Salami-Chips",
-          "price": "1.49",
-          "amount": "je 80 g"
-        },
-        {
-          "name": "TULIP Schinken Eisbein",
-          "price": "3.99",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "TULIP Grillhaxe mit Schwarte",
-          "price": "3.99",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "MÜHLENHOFXXL Delikatess Hähnchen-Wiener",
-          "price": "3.99",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "BÖKLUNDER Wiener Würstchen",
-          "price": "1.99",
-          "amount": "je 475 g"
-        },
-        {
-          "name": "BUTCHER’S Chicken Burger",
-          "price": "2.99²",
-          "amount": "je 400-g-Packung"
-        },
-        {
-          "name": "BARILLA Pastasauce",
-          "price": "1.79",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "NISSIN Soba Bag",
-          "price": "0.79",
-          "amount": "je 109 g"
-        },
-        {
-          "name": "NONGSHIM Noodle Soup",
-          "price": "1.29",
-          "amount": "je 120 g"
-        },
-        {
-          "name": "KÖLLN Haferflocken",
-          "price": "2.99",
-          "amount": "je 1.250 g"
-        },
-        {
-          "name": "Teekanne-Artikel",
-          "price": "25% Rabatt",
-          "amount": ""
-        },
-        {
-          "name": "LAVAZZA Caffè Crema",
-          "price": "13.99",
-          "amount": "je 1.000 g"
-        },
-        {
-          "name": "DALLMAYR Kaffee prodomo",
-          "price": "6.49²",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "BEN’S ORIGINAL Expressreis",
-          "price": "1.49²",
-          "amount": "je 220 g"
-        },
-        {
-          "name": "ZENTIS Smile Konfitüre",
-          "price": "1.99²",
-          "amount": "je 230 g"
-        },
-        {
-          "name": "WARSTEINER Pils Premium Verum",
-          "price": "3.33",
-          "amount": "je 6 x 0,5 l"
-        },
-        {
-          "name": "VOLVIC Mineralwasser",
-          "price": "0.69²",
-          "amount": "je 1,5 l"
-        },
-        {
-          "name": "SIMPLY SUNNY Premium Nuss-Mix",
-          "price": "2.79",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "SIMPLY SUNNY Cashew­kerne",
-          "price": "2.49",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "SIMPLY SUNNY Cashewkerne",
-          "price": "2.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "SIMPLY SUNNY Edel-Nuss-Mix",
-          "price": "2.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "SIMPLY SUNNY Mandeln",
-          "price": "2.99",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "SIMPLY SUNNY Studentenfutter",
-          "price": "1.69",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "SIMPLY SUNNY Cashew-Cranberry-Mix",
+          "name": "SIMPLY SUNNY Kürbiskerne*",
           "price": "1.49",
           "amount": "je 200 g"
         },
         {
-          "name": "COMET Cola",
-          "price": "0.49",
-          "amount": "je 1,5 l"
+          "name": "Aubergine*",
+          "price": "1.00",
+          "amount": "je 2 Stück"
         },
         {
-          "name": "COMET Orange",
-          "price": "0.49",
-          "amount": "je 1,5 l"
-        },
-        {
-          "name": "COMET Zitrone",
-          "price": "0.49",
-          "amount": "je 1,5 l"
-        },
-        {
-          "name": "COMET Cola-Mix",
-          "price": "0.49",
-          "amount": "je 1,5 l"
-        },
-        {
-          "name": "COMET Cola oder Limo",
-          "price": "0.29",
-          "amount": "je 0,33 l"
-        },
-        {
-          "name": "COMET Apfelschorle",
-          "price": "0.34",
-          "amount": "je 0,5 l"
-        },
-        {
-          "name": "BRAVO Erdnuss Flips",
-          "price": "0.79",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "BRAVO Tortillas",
-          "price": "1.19",
-          "amount": "je 300 g"
-        },
-        {
-          "name": "BRAVO Tortillas Nacho Cheese",
-          "price": "1.19",
-          "amount": "je 300 g"
-        },
-        {
-          "name": "BRAVO Kesselchips",
-          "price": "1.19",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "BRAVO Erdnüsse",
-          "price": "0.69",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "BRAVO Cashews",
-          "price": "1.95",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "BRAVO Cashew-Erdnuss-Mix",
-          "price": "1.69",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "BRAVO Peanut Cracks",
-          "price": "0.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "GIOVANNI FERRARI Parmigiano Reggiano oder Grana Padano",
-          "price": "1.99",
-          "amount": "je 60 g"
-        },
-        {
-          "name": "KRAFT Käse Creme",
-          "price": "1.99",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "KRAFT Snack Würfel",
-          "price": "1.99",
+          "name": "KERRYGOLD Cheddarscheiben*",
+          "price": "1.59",
           "amount": "je 130 g"
         },
         {
-          "name": "BÄRENMARKE Haltbare Milch",
-          "price": "0.99",
-          "amount": "je 1 l"
+          "name": "KERRYGOLD Extra*",
+          "price": "2.59",
+          "amount": "je 400 g"
         },
         {
-          "name": "FOOD FOR FUTURE Hummus",
-          "price": "0.79",
+          "name": "RAMA Mit Butter*",
+          "price": "1.29",
+          "amount": "je 225 g"
+        },
+        {
+          "name": "MILRAM Käsescheiben*",
+          "price": "1.29",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "MILRAM Reibekäse Auflauf-Liebe*",
+          "price": "1.29",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "MILKANA Schmelzkäse*",
+          "price": "1.99",
+          "amount": "je 190 g"
+        },
+        {
+          "name": "MILKANA Tolle Rolle*",
+          "price": "1.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "BERGADER Der kleine Runde XL*",
+          "price": "3.33",
+          "amount": "je 330 g"
+        },
+        {
+          "name": "BERGADER Bavaria blu*",
+          "price": "3.33",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "WEIHENSTEPHAN Rahmjoghurt*",
+          "price": "0.55",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "KIDS WORLD Dessert-Ei*",
+          "price": "0.77",
+          "amount": "je 70 g"
+        },
+        {
+          "name": "NESTLÉ Knackige Mousse*",
+          "price": "1.99",
+          "amount": "je 4 x 57 g"
+        },
+        {
+          "name": "MÜLLER Reine Buttermilch*",
+          "price": "0.59",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "POPP Feinster Fleischsalat*",
+          "price": "1.29",
           "amount": "je 200 g"
         },
         {
-          "name": "MÜHLENHOF Frische Puten-Schnitzel",
+          "name": "BLOCK HOUSE Sour Cream*",
+          "price": "1.69",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "STEINHAUS Elsässer Flammkuchen*",
+          "price": "2.99",
+          "amount": "je 350 g"
+        },
+        {
+          "name": "LANGNESE Cremissimo*",
+          "price": "1.99",
+          "amount": "je 825 ml"
+        },
+        {
+          "name": "FERRERO kinder Bueno-Eis*",
+          "price": "3.99",
+          "amount": "je 455 ml"
+        },
+        {
+          "name": "FERRERO Nutella-Eis*",
+          "price": "3.99",
+          "amount": "je 470 ml"
+        },
+        {
+          "name": "RIOS Protein Eisriegel*",
+          "price": "2.99",
+          "amount": "je 5 x 70 ml"
+        },
+        {
+          "name": "LINDENHOF Käse-Snackwürfel*",
+          "price": "1.99",
+          "amount": "je 220 g"
+        },
+        {
+          "name": "LINDENHOF Edamer*",
+          "price": "2.22",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "LINDENHOF Ziegenkäse*",
+          "price": "1.99",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "LINDENHOF Frischkäse*",
+          "price": "1.59",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "LINDENHOF Käseecken*",
+          "price": "1.79",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "LINDENHOF Harzer Minis*",
+          "price": "1.29",
+          "amount": "je 115 g"
+        },
+        {
+          "name": "LINDENHOF Harzer Käse*",
+          "price": "1.99",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "FERRERO Collection*",
+          "price": "4.44",
+          "amount": "je 172 g"
+        },
+        {
+          "name": "FERRERO Rondnoir*",
+          "price": "4.44",
+          "amount": "je 138 g"
+        },
+        {
+          "name": "LINDT Lindor*",
+          "price": "7.99",
+          "amount": "je 375 g"
+        },
+        {
+          "name": "STORCK Toffifee*",
+          "price": "1.11",
+          "amount": "je 125 g"
+        },
+        {
+          "name": "TRUMPF Edle Tropfen*",
+          "price": "2.99",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "KINDER Überraschungs-Ei*",
+          "price": "0.77",
+          "amount": "je 20 g"
+        },
+        {
+          "name": "MILKA Mini Cookies*",
+          "price": "1.49",
+          "amount": "je 110 g"
+        },
+        {
+          "name": "OREO Mini*",
+          "price": "1.49",
+          "amount": "je 110 g"
+        },
+        {
+          "name": "DR. OETKER Kleine Kuchen*",
+          "price": "1.99",
+          "amount": "je 140 g"
+        },
+        {
+          "name": "CORNY Haferkraft*",
+          "price": "1.79",
+          "amount": "je 5 x 35 g"
+        },
+        {
+          "name": "MÜHLENHOF Frische Hähnchen-Schenkel*",
+          "price": "6.99",
+          "amount": "je 2.000-g-Packung"
+        },
+        {
+          "name": "Chicken Wings*",
+          "price": "4.99",
+          "amount": "je 850-g-Packung"
+        },
+        {
+          "name": "MÜHLENHOFFrisches Puten-Gulasch*",
           "price": "6.99",
           "amount": "je 800-g-Packung"
         },
         {
-          "name": "Frische Rinderrouladen",
-          "price": "11.99",
+          "name": "MÜHLENHOF Frische Schweine-Minutensteaks*",
+          "price": "4.99",
           "amount": "je 800-g-Packung"
         },
         {
-          "name": "STOCKMEYER Hähnchenbrust",
+          "name": "MÜHLENHOF Frische Schweine-Bratwurstschnecken*",
+          "price": "2.49",
+          "amount": "je 300-g-Packung"
+        },
+        {
+          "name": "MÜHLENHOF Frischer Schweine-Krustenbraten*",
+          "price": "4.99",
+          "amount": "je 1.000-g-Packung"
+        },
+        {
+          "name": "MÜHLENHOF XXL Schinkenbockwurst*",
+          "price": "5.49",
+          "amount": "je 1.000 g"
+        },
+        {
+          "name": "PICK Original ungarische Salami*",
+          "price": "1.49",
+          "amount": "je 70 g"
+        },
+        {
+          "name": "AOSTE Salami*",
+          "price": "3.99",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "AOSTE Longhetti*",
+          "price": "1.79",
+          "amount": "je 65 g"
+        },
+        {
+          "name": "AOSTE Stickado*",
+          "price": "1.79",
+          "amount": "je 70 g"
+        },
+        {
+          "name": "LUTZ Grillhaxe*",
+          "price": "4.99",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "EIFELER Fleischgericht*",
+          "price": "2.99",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "MELITTA Bella Crema*",
+          "price": "13.49",
+          "amount": "je 1.000 g"
+        },
+        {
+          "name": "BEN’S ORIGINAL XXL Sauce*",
+          "price": "2.49",
+          "amount": "je 675 g"
+        },
+        {
+          "name": "KNORR Fix Air Fryer*",
+          "price": "0.49",
+          "amount": "je 33 g"
+        },
+        {
+          "name": "MAGGI Würzmischung*",
+          "price": "1.39",
+          "amount": "je 65 g"
+        },
+        {
+          "name": "MAGGI Gemüse Brühe*",
+          "price": "2.79",
+          "amount": "je 18 I"
+        },
+        {
+          "name": "BONNE MAMAN Konfitüre*",
+          "price": "2.49",
+          "amount": "je 335 g"
+        },
+        {
+          "name": "LEKSANDS Knäckebröd*",
+          "price": "1.49",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "DALLMAYR XXL Capsa*",
+          "price": "7.99",
+          "amount": "je 218 g"
+        },
+        {
+          "name": "GARNIER Wahre Schätze*",
+          "price": "6.99",
+          "amount": "je 1.000 ml"
+        },
+        {
+          "name": "GARNIER Fructis Shampoo*",
+          "price": "6.99",
+          "amount": "je 1.000 ml"
+        },
+        {
+          "name": "DR. BEST Zahnbürsten*",
+          "price": "3.99",
+          "amount": "je 6 Stück"
+        },
+        {
+          "name": "ODOL-MED3 Zahnpasta*",
+          "price": "3.75",
+          "amount": "je 4 x 75 ml"
+        },
+        {
+          "name": "REXONA Deospray XL*",
+          "price": "2.69",
+          "amount": "je 200 ml"
+        },
+        {
+          "name": "NEUTROGENA Handcreme*",
+          "price": "2.79",
+          "amount": "je 75 ml"
+        },
+        {
+          "name": "NEUTROGENA Bodylotion*",
+          "price": "2.49",
+          "amount": "je 250 ml"
+        },
+        {
+          "name": "PRIL Airfryer Kraftspray*",
+          "price": "2.89",
+          "amount": "je 500 ml"
+        },
+        {
+          "name": "PRIL Spülmittel*",
+          "price": "2.89",
+          "amount": "je 1,2 I"
+        },
+        {
+          "name": "LENOR Colorwaschmittel*",
+          "price": "4.99",
+          "amount": "je 900 ml"
+        },
+        {
+          "name": "FINISH Ultimate Plus*",
+          "price": "12.99",
+          "amount": "je 902 g"
+        },
+        {
+          "name": "FINISH Quantum*",
+          "price": "12.99",
+          "amount": "je 925 g"
+        },
+        {
+          "name": "ROCKSTAR Energy-Drink*",
+          "price": "2.78",
+          "amount": "je 4 x 0,5 l"
+        },
+        {
+          "name": "PEPSI oder SCHWIP SCHWAP*",
+          "price": "3.99",
+          "amount": "je 6 x 0,5 I"
+        },
+        {
+          "name": "VOLVIC Tee oder Touch*",
+          "price": "1.19",
+          "amount": "je 1,5 I"
+        },
+        {
+          "name": "VALENSINA Saft*",
+          "price": "1.49",
+          "amount": "je 1 I"
+        },
+        {
+          "name": "SINALCO*",
+          "price": "0.79",
+          "amount": "je 1,25 I"
+        },
+        {
+          "name": "ROBBY BUBBLE Magic-Drink*",
+          "price": "2.49",
+          "amount": "je 0,75 I"
+        },
+        {
+          "name": "Spanien FREIXENET Mia*",
+          "price": "2.99",
+          "amount": "je 0,75 I"
+        },
+        {
+          "name": "Spanien FREIXENET Mederaño Vino de España*",
+          "price": "2.99",
+          "amount": "je 0,75 I"
+        },
+        {
+          "name": "BEMBEL WITH CARE Apfelwein*",
+          "price": "0.99",
+          "amount": "je 0,5 I"
+        },
+        {
+          "name": "GERSTACKER Nürnberger Christkindles Markt-Glühwein*",
+          "price": "2.99",
+          "amount": "je 1 I"
+        },
+        {
+          "name": "FRANGELICO Haselnuss Liqueur*",
+          "price": "11.99",
+          "amount": "je 0,7 I"
+        },
+        {
+          "name": "JAMESON Irish Whiskey*",
+          "price": "14.99",
+          "amount": "je 0,7 I"
+        },
+        {
+          "name": "Chrysanthemen*",
+          "price": "2.49",
+          "amount": "je Bund"
+        },
+        {
+          "name": "Japanische Skimmie*",
+          "price": "2.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Chrysanthemen-Kasten*",
+          "price": "3.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "MÜHLENHOF Delikatess Rohschinken*",
+          "price": "1.99",
+          "amount": "je 2 x 125 g"
+        },
+        {
+          "name": "MÜHLENHOF Delikatess Leichtschinken*",
+          "price": "1.99",
+          "amount": "je 3 x 50 g"
+        },
+        {
+          "name": "MÜHLENHOF Wiener Würstchen*",
+          "price": "2.89",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "MÜHLENHOF Delikatess Wiener Würstchen XXL*",
+          "price": "6.49",
+          "amount": "je 1 kg"
+        },
+        {
+          "name": "MÜHLENHOF Geflügelwiener*",
+          "price": "3.29",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "MÜHLENHOF Geflügel-Käsewiener*",
+          "price": "3.29",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "NATURGUT Bio Wiener Würstchen*",
+          "price": "2.89",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "MÜHLENHOF Delikatess Salami*",
+          "price": "1.59",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "SAN FABIO Prosciutto Crudo*",
+          "price": "1.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "MÜHLENHOF Streichminis*",
+          "price": "1.39",
+          "amount": "je 5 x 26 g"
+        },
+        {
+          "name": "MÜHLENHOF Pommersche Leberwurst*",
+          "price": "1.29",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "MEISTERKLASSE Zwiebelmett*",
+          "price": "1.89",
+          "amount": "je 2 x 100 g"
+        },
+        {
+          "name": "Herbstbubikopf*",
+          "price": "2.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Besenheide „Beauty Ladies“*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Silberne Strukturpflanze*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "EHRMANN Almighurt*",
+          "price": "0.35",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "BECEL Margarine*",
+          "price": "1.29",
+          "amount": "je 225 g"
+        },
+        {
+          "name": "MEGGLE Butterschmalz*",
+          "price": "3.89",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "BEST MOMENTS Schweizer Käse*",
+          "price": "3.79",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "FOOD FOR FUTURE High Protein Drink*",
+          "price": "1.59",
+          "amount": "je 500 ml"
+        },
+        {
+          "name": "DANONE YoPro*",
+          "price": "1.11",
+          "amount": "je 270 g"
+        },
+        {
+          "name": "CHOCOMEL Schokoladenmilch*",
+          "price": "1.59",
+          "amount": "je 1 l"
+        },
+        {
+          "name": "COLUMBUS Eier*",
+          "price": "2.49",
+          "amount": "je 12 Stück"
+        },
+        {
+          "name": "COPPENRATH & WIESE Meistertorte*",
+          "price": "5.99",
+          "amount": "je 800 g"
+        },
+        {
+          "name": "MÜHLENHOF Frisches Hähnchen-Geschnetzeltes*",
+          "price": "6.99",
+          "amount": "je 800-g-Packung"
+        },
+        {
+          "name": "MÜHLENHOF XXL Delikatess bayerischer Leberkäse*",
+          "price": "2.99",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "RÜGENWALDER MÜHLE Pommersche Leberwurst*",
           "price": "1.49",
           "amount": "je 125 g"
         },
         {
-          "name": "HANDL Tyrolini",
-          "price": "1.99",
-          "amount": "je 80 g"
-        },
-        {
-          "name": "Feldsalat",
-          "price": "0.99",
-          "amount": "je 150-g-Schale"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Chorizo",
-          "price": "2.22",
-          "amount": "je 220 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Serrano-Schinken",
-          "price": "2.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "¡QUE VIVAESPAÑA! Datteln im Speckmantel",
-          "price": "2.99",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Spanischer Dip",
-          "price": "1.59",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Patatas bravas",
+          "name": "RÜGENWALDER MÜHLE Feine Teewurst*",
           "price": "1.49",
-          "amount": "je 500 g"
+          "amount": "je 125 g"
         },
         {
-          "name": "¡QUE VIVA ESPAÑA! Churros",
-          "price": "2.49",
-          "amount": "je 225 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Fertiggericht",
-          "price": "2.99",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Ganze Doraden",
-          "price": "3.99",
-          "amount": "je 515 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Eintopf",
-          "price": "2.99",
-          "amount": "je 800 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Mikrowellengericht",
-          "price": "1.99",
-          "amount": "je 280 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Pastel de Nata",
-          "price": "0.49",
+          "name": "Blaue Feigen*",
+          "price": "0.29",
           "amount": "je Stück"
         },
         {
-          "name": "¡QUE VIVA ESPAÑA! Chapelas Cacao",
-          "price": "0.99",
-          "amount": "je 135 g"
+          "name": "Speisekartoffeln „Drillinge“*",
+          "price": "1.69",
+          "amount": "je 1-kg-Schale"
         },
         {
-          "name": "¡QUE VIVA ESPAÑA! Pan Tostado",
-          "price": "1.49",
+          "name": "TASTE OF ASIA Ramen*",
+          "price": "2.79",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "TASTE OF ASIA Gyoza*",
+          "price": "1.99",
           "amount": "je 150 g"
         },
         {
-          "name": "¡QUE VIVA ESPAÑA! Magdalenas",
+          "name": "TASTE OF ASIA Sashimi Style Lachs*",
           "price": "2.99",
-          "amount": "je 615 g"
+          "amount": "je 80 g"
         },
         {
-          "name": "¡QUE VIVA ESPAÑA! Mais",
-          "price": "1.29",
-          "amount": "je 140 g"
+          "name": "TASTE OF ASIA Bratnudeln*",
+          "price": "2.29",
+          "amount": "je 600 g"
         },
         {
-          "name": "¡QUE VIVA ESPAÑA! Spritz",
-          "price": "0.99",
-          "amount": "je 275 ml"
+          "name": "TASTE OF ASIA Knusper-Ente auf Gemüsebett*",
+          "price": "8.99",
+          "amount": "je 550 g"
         },
         {
-          "name": "HAPPY END Küchentücher",
-          "price": "2.99",
-          "amount": "je 3 x 100 Blatt"
-        },
-        {
-          "name": "MÖVENPICK Kaffee",
-          "price": "6.49",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "EBLY Sonnenweizen",
+          "name": "TASTE OF ASIA Eiscreme*",
           "price": "1.79",
-          "amount": "je 500 g"
+          "amount": "je 290 ml"
         },
         {
-          "name": "MAGGI 5 Minuten Terrine XL",
-          "price": "1.19",
-          "amount": "je 76 g"
+          "name": "TASTE OF ASIA Glas­nudeln*",
+          "price": "1.39",
+          "amount": "je 250 g"
         },
         {
-          "name": "HEINZ Tomato Ketchup",
+          "name": "TASTE OF ASIA Jasmin Reis*",
+          "price": "7.99",
+          "amount": "je 4.500 g"
+        },
+        {
+          "name": "TASTE OF ASIA Bechergericht*",
+          "price": "0.89",
+          "amount": "je 55 g"
+        },
+        {
+          "name": "TASTE OF ASIA Fertiggericht*",
           "price": "1.99",
-          "amount": "je 570 ml"
-        },
-        {
-          "name": "HEINZ Mayonnaise",
-          "price": "1.99",
-          "amount": "je 565 ml"
-        },
-        {
-          "name": "SAUPIQUET Thunfisch-Filtets",
-          "price": "2.49",
-          "amount": "je 160 g"
-        },
-        {
-          "name": "ESZET Schnitten",
-          "price": "1.29",
-          "amount": "je 75 g"
-        },
-        {
-          "name": "MILKA Haselnusscreme",
-          "price": "4.49",
-          "amount": "je 777 g"
-        },
-        {
-          "name": "HIMSTEDT Frucht in Blütenhonig",
-          "price": "4.49",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "JACOBS Kaffeekapseln",
-          "price": "7.49",
-          "amount": "je 208 g"
-        },
-        {
-          "name": "DOUCEUR Adventskalender",
-          "price": "14.99",
           "amount": "je 280 g"
         },
         {
-          "name": "PRINGLES Adventskalender",
-          "price": "29.99",
-          "amount": "je 1.085 g"
+          "name": "YUM YUM Chicken*",
+          "price": "2.22",
+          "amount": "je 5 x 60 g"
         },
         {
-          "name": "MIKADO Sticks",
-          "price": "1.29",
-          "amount": "je 75 g"
+          "name": "TASTE OF ASIA Udon Bowl*",
+          "price": "1.99",
+          "amount": "je 252 g"
         },
         {
-          "name": "STORCK Werther’s Original",
-          "price": "1.49",
+          "name": "TASTE OF ASIA Soja-Sauce*",
+          "price": "2.99",
+          "amount": "je 1.000 ml"
+        },
+        {
+          "name": "TASTE OF ASIA Öl*",
+          "price": "2.29",
+          "amount": "je 250 ml"
+        },
+        {
+          "name": "TASTE OF ASIA Krabbenchips*",
+          "price": "1.19",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "TASTE OF ASIA Snack-Mix*",
+          "price": "1.69",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "DOUCEUR Feine Kugeln*",
+          "price": "1.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "DOUCEUR Schoko Kugeln*",
+          "price": "1.79",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "DOUCEUR Blätter­krokantkugeln*",
+          "price": "1.99",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "DOUCEUR Schokokugeln*",
+          "price": "1.79",
           "amount": "je 180 g"
         },
         {
-          "name": "FISHERMAN’S FRIEND Mentholpastillen",
-          "price": "2.49",
-          "amount": "je 3 x 30 g"
+          "name": "DOUCEUR Schokoladen-Kränze*",
+          "price": "1.79",
+          "amount": "je 200 g"
         },
         {
-          "name": "COCA-COLA Friendspack",
-          "price": "5.99",
-          "amount": "je 10 x 0,33 l"
-        },
-        {
-          "name": "LE FILOU Bubbly",
-          "price": "2.99",
-          "amount": "je 0,75 l"
-        },
-        {
-          "name": "LE FILOU Vin de France",
-          "price": "2.99",
-          "amount": "je 0,75 l"
-        },
-        {
-          "name": "LILLET Blanc Weinaperitif",
-          "price": "10.99",
-          "amount": "je 0,75 l"
-        },
-        {
-          "name": "BECK’S Pils",
-          "price": "0.79",
-          "amount": "je 0,5 l"
-        },
-        {
-          "name": "Ferrero-Kühlartikel",
-          "price": "20% Rabatt",
-          "amount": "Gilt nicht für Eis und Tiefkühlartikel"
-        },
-        {
-          "name": "RAMA Culinesse",
+          "name": "DOUCEUR Dominosteine*",
           "price": "1.59",
-          "amount": "je 450 ml"
+          "amount": "je 175 g"
         },
         {
-          "name": "KRÜGER Family Cappuccino",
-          "price": "2.79",
-          "amount": "je 500 g"
+          "name": "DOUCEUR Runde Lebkuchen*",
+          "price": "1.89",
+          "amount": "je 200 g"
         },
         {
-          "name": "PEPSI oder SCHWIP SCHWAP",
-          "price": "0.69",
+          "name": "DOUCEUR Zimtsterne*",
+          "price": "2.69",
+          "amount": "je 175 g"
+        },
+        {
+          "name": "DOUCEUR Fruchtgummi*",
+          "price": "0.99",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "DOUCEUR Stollen*",
+          "price": "1.79",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "DOUCEUR Christstollen*",
+          "price": "3.49",
+          "amount": "je 750 g"
+        },
+        {
+          "name": "DOUCEUR Eierlikör Fässchen*",
+          "price": "1.59",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "JACOBS Instantkaffee*",
+          "price": "6.99",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "SONNEN BASSERMANN Eintopf*",
+          "price": "1.79",
+          "amount": "je 800 g"
+        },
+        {
+          "name": "MIRÁCOLI Pasta-Klassiker*",
+          "price": "2.99",
+          "amount": "je 610,4 g"
+        },
+        {
+          "name": "MIRÁCOLI Pastasauce*",
+          "price": "2.49",
+          "amount": "je 675 g"
+        },
+        {
+          "name": "SAMYANG Buldak Spicy Ramen Cup*",
+          "price": "1.79",
+          "amount": "je 80 g"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Mini-Gugelhupf*",
+          "price": "1.19",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "DR. OETKER Vitalis Müsli*",
+          "price": "5.99",
+          "amount": "je 1.125 g"
+        },
+        {
+          "name": "CHIVERS Konfitüre*",
+          "price": "2.99",
+          "amount": "je 320 g"
+        },
+        {
+          "name": "OVOMALTINE Crunchy Cream*",
+          "price": "3.49",
+          "amount": "je 380 g"
+        },
+        {
+          "name": "MEßMER Bridgerton-Tee*",
+          "price": "1.49",
+          "amount": "je 37,5 g"
+        },
+        {
+          "name": "KRÜGER Heißgetränk*",
+          "price": "1.99",
+          "amount": "je 160 g"
+        },
+        {
+          "name": "NESTLÉ Nesquik*",
+          "price": "1.99",
+          "amount": "je 350 g"
+        },
+        {
+          "name": "DALLMAYR Kaffeepads*",
+          "price": "2.22",
+          "amount": "je 124 g"
+        },
+        {
+          "name": "MILKA Adventskalender*",
+          "price": "6.99",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "BARON Schokoladenadventskalender*",
+          "price": "3.99",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "MERCI Finest Selection*",
+          "price": "5.99",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "TOBLERONE*",
+          "price": "1.49",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "BAILEYS Irish Cream Cakes*",
+          "price": "1.99",
+          "amount": "je 5 x 39 g"
+        },
+        {
+          "name": "FUNNY-FRISCH Protein-Chips*",
+          "price": "1.79",
+          "amount": "je 90 g"
+        },
+        {
+          "name": "DRESDNER ESSENZ Badesalz*",
+          "price": "0.89",
+          "amount": "je 60 g"
+        },
+        {
+          "name": "DRESDNER ESSENZ Dusche*",
+          "price": "1.99",
+          "amount": "je 200 ml"
+        },
+        {
+          "name": "ANGINETTEN Halstabletten*",
+          "price": "3.99",
+          "amount": "je 63,84 g"
+        },
+        {
+          "name": "ANGINETTEN Hals & Husten Sirup*",
+          "price": "4.79",
+          "amount": "je 100 ml"
+        },
+        {
+          "name": "PURINA Gourmet Perle*",
+          "price": "9.99",
+          "amount": "je 24 x 85 g"
+        },
+        {
+          "name": "PURINA Gourmet Gold*",
+          "price": "9.99",
+          "amount": "je 24 x 85 g"
+        },
+        {
+          "name": "PEPSI oder SCHWIP SCHWAP*",
+          "price": "1.19",
+          "amount": "je 1,75 l"
+        },
+        {
+          "name": "PFANNER IceTea*",
+          "price": "1.29",
+          "amount": "je 2 l"
+        },
+        {
+          "name": "JACK DANIEL’S Alkoholhaltiges Mischgetränk*",
+          "price": "1.99",
           "amount": "je 0,33 l"
         },
         {
-          "name": "JACK DANIEL’S Tennessee Whiskey",
-          "price": "15.99",
-          "amount": "je 0,7 l"
+          "name": "GUINNESS Draught*",
+          "price": "1.11",
+          "amount": "je 0,44 l"
+        },
+        {
+          "name": "MILPRIMA Haltbare fettarme Milch*",
+          "price": "8.50",
+          "amount": "je 12 x 1 l"
+        },
+        {
+          "name": "ORIGINAL WAGNER Steinofenpizza Salami*",
+          "price": "3.49",
+          "amount": "je 2 x 320 g"
+        },
+        {
+          "name": "ORIGINAL WAGNER Steinofenpizza Diavolo*",
+          "price": "3.49",
+          "amount": "je 2 x 350 g"
+        },
+        {
+          "name": "TASTE OF ASIA Kokosmilch*",
+          "price": "0.99",
+          "amount": "je 400 ml"
+        },
+        {
+          "name": "NESTLÉ Choclait Chips*",
+          "price": "1.99",
+          "amount": "je 115 g"
+        },
+        {
+          "name": "NESTLÉ Choco Crossies*",
+          "price": "1.99",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "GEROLSTEINER Mineralwasser*",
+          "price": "0.89",
+          "amount": "je 1,5 l"
+        },
+        {
+          "name": "CATSAN Hygienestreu*",
+          "price": "9.99",
+          "amount": "je 18 l"
+        },
+        {
+          "name": "ROWENTA 2-in-1-Akku-Handstaubsauger X-PERT 5.80RH5A21E0*",
+          "price": "99.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "SWIFFER Staubmagnet-Ersatztücher*",
+          "price": "12.99",
+          "amount": "je 18er-Mega-Pack"
+        },
+        {
+          "name": "SWIFFER Feuchte Bodentücher*",
+          "price": "3.99",
+          "amount": "je 10er-Box"
+        },
+        {
+          "name": "SWIFFER Feuchte Bodentücher*",
+          "price": "12.99",
+          "amount": "je 48er-Mega-Pack"
+        },
+        {
+          "name": "DIRT DEVIL Bodenwischmopp*",
+          "price": "17.99",
+          "amount": "je Set"
+        },
+        {
+          "name": "DIRT DEVIL Bodenwischer-Komplett-Set*",
+          "price": "17.99",
+          "amount": "je Set"
+        },
+        {
+          "name": "DIRT DEVIL Fegen, kehren, wischen*",
+          "price": "2.99",
+          "amount": "je Stück/Set"
+        },
+        {
+          "name": "Kochgeschirr*",
+          "price": "9.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "KESPER Brotkorb*",
+          "price": "3.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "KESPER Frühstücksbrettchen*",
+          "price": "3.99",
+          "amount": "je 2er-Packung"
+        },
+        {
+          "name": "KESPER Schneid-und-Servierbrett mit Einbrand*",
+          "price": "4.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "KESPER Tranchierbrett oder Profi-Schneidebrett*",
+          "price": "7.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "KESPER Brotbox*",
+          "price": "14.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Praktische Haushaltshelfer*",
+          "price": "1.00",
+          "amount": "je Stück/Packung/Set"
+        },
+        {
+          "name": "JACK & JONES Herren-Hoodie*",
+          "price": "17.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "JACK & JONES Herren-Sweathose*",
+          "price": "17.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "UNCLE SAM Herren-Sweatbekleidung*",
+          "price": "4.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Deko-Artikel aus Mangoholz*",
+          "price": "12.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Wichtel mit Flexbein*",
+          "price": "9.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "LED-Deko-Stern*",
+          "price": "7.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "576er-LED-Clusterlichtergirlande*",
+          "price": "14.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "40er-LED-3D- Weihnachtsstern*",
+          "price": "9.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "LED-Deko-Figur*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "LED-Glitzertannenbaum*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Deko-Artikel aus Mangoholz*",
+          "price": "2.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "LED-Fensterlichterkette*",
+          "price": "9.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "LED-Fensterbild*",
+          "price": "3.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Premium-Geschenktaschen*",
+          "price": "2.99",
+          "amount": "je 2er-, 3er- oder 5er-Packung"
+        },
+        {
+          "name": "Premium-Geschenkpapier*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Textiles Geschenkband*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "LEGO City 60510 Adventskalender*",
+          "price": "19.99",
+          "amount": "je Stück"
         }
-      ]
+      ],
+      "revision": "penny-2026-42"
     },
     {
       "id": "lidl",
       "name": "Lidl",
-      "source": "https://www.lidl.de/l/prospekte/aktionsprospekt-05-10-2026-10-10-2026-7ad9f3/view/flyer/page/1?lf=HHZ",
-      "note": "Aktionsprospekt 5. bis 10. Oktober. Lebensmittel aus dem ganzen Heft. Ein Teil gilt erst ab Donnerstag, 8.10., die letzte Seite ab Freitag, 9.10. Lidl-Plus-Preise sind markiert. Mit Lidl Plus noch einmal 10 % auf Dulano. Haushalt, Mode, Pflanzen und Tierfutter stehen nicht in der Liste.",
-      "otherCount": 148,
+      "source": "https://www.lidl.de/l/prospekte/aktionsprospekt-12-10-2026-17-10-2026-a1d941/ar/0?_ab=1&lf=HHZ",
+      "note": "Aktionsprospekt 12.10.–17.10.2026, automatisch gelesen.",
+      "otherCount": 0,
       "offers": [
         {
-          "name": "Bananen, lose",
-          "price": "0.99",
-          "amount": "je 1 kg, Klasse I, mit Lidl Plus"
+          "name": "STRENESSE Herren Kaschmirpullover »Jogi Löw - Kollektion«",
+          "price": "49.99",
+          "amount": ""
         },
         {
-          "name": "Mandarinen oder Satsumas",
-          "price": "1.99",
-          "amount": "je 1,5 kg, Klasse I, mit Lidl Plus"
-        },
-        {
-          "name": "Kiwi Gold, lose",
-          "price": "0.55",
-          "amount": "je Stück, Klasse I, mit Lidl Plus"
-        },
-        {
-          "name": "Himbeeren",
-          "price": "1.79",
-          "amount": "je 125 g, mit Lidl Plus, sonst 1.99"
-        },
-        {
-          "name": "Deutsche Rote Zwiebeln",
-          "price": "0.99",
-          "amount": "je 1 kg, Klasse I"
-        },
-        {
-          "name": "Paprika Mix",
-          "price": "2.29",
-          "amount": "je 1 kg, Klasse I"
-        },
-        {
-          "name": "Zucchini",
-          "price": "1.19",
-          "amount": "Klasse I, Aktion"
-        },
-        {
-          "name": "Deutsche Möhren",
-          "price": "1.11",
-          "amount": "je 2 kg, Klasse I"
-        },
-        {
-          "name": "DULANO Rohwurst",
-          "price": "1.59",
-          "amount": "je 200 g, verschiedene Sorten, ab 8.10."
-        },
-        {
-          "name": "DULANO Delikatess Mini Wiener",
-          "price": "2.39",
-          "amount": "12 Stück, je 2 x 160 g, ab 8.10."
-        },
-        {
-          "name": "DULANO Delikatess Wiener Würstchen",
-          "price": "6.49",
-          "amount": "20 Stück, je 1 kg, ab 8.10."
-        },
-        {
-          "name": "DULANO Leberwurst",
-          "price": "1.29",
-          "amount": "je 250 g, ab 8.10."
-        },
-        {
-          "name": "Frische Schinken-Zwiebel-Mettwurst",
-          "price": "1.89",
-          "amount": "je 200 g, ab 8.10."
-        },
-        {
-          "name": "DULANO Delikatess Kochschinken oder Geflügelbrust",
-          "price": "2.65",
-          "amount": "je 200 g, ab 8.10."
-        },
-        {
-          "name": "DULANO Rindersaftschinken",
-          "price": "2.39",
-          "amount": "je 100 g, ab 8.10."
-        },
-        {
-          "name": "DULANO Delikatess Schinkenwürfel",
-          "price": "1.99",
-          "amount": "2er-Pack, je 250 g, ab 8.10."
-        },
-        {
-          "name": "Bauernbaguette",
-          "price": "0.59",
-          "amount": "je 300 g, mit Lidl Plus, sonst 0.79"
-        },
-        {
-          "name": "Schinken-Käse-Croissant",
-          "price": "1.58",
-          "amount": "3 Stück, mit Lidl Plus, sonst 2.37"
-        },
-        {
-          "name": "Brioche-Croissant mit Cremefüllung",
-          "price": "0.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Pizza Snack Salami",
-          "price": "0.75",
-          "amount": "je Stück, sonst 0.99"
-        },
-        {
-          "name": "Walnuss-Honig-Brot",
-          "price": "1.99",
-          "amount": "je 380 g"
-        },
-        {
-          "name": "Döner Croissant",
+          "name": "MAX & MILA'S WORLD Haustierbett, S",
           "price": "7.99",
-          "amount": "2 Portionen, je 763 g"
+          "amount": "Ma&szlig;e: L 60 x B 50 x H 20 cm Farbe: braun, grau"
         },
         {
-          "name": "FISCHERSTOLZ Norwegische Lachsfilet-Portionen",
-          "price": "15.99",
-          "amount": "je 1 kg, 8 x 125 g"
-        },
-        {
-          "name": "DELUXE Lamm-Filets",
-          "price": "14.97",
-          "amount": "ca. 499 g, in Gewürzmarinade"
-        },
-        {
-          "name": "METZGERFRISCH Frisches Schweine-Hackfleisch",
-          "price": "3.69",
-          "amount": "je 1 kg"
-        },
-        {
-          "name": "WEINGUT SPREITZER Riesling Ader VDP",
-          "price": "5.99",
-          "amount": "je 0,75 l, trocken, mit Lidl Plus, sonst 6.99"
-        },
-        {
-          "name": "METZGERFRISCH Frische Hähnchen-Unterkeulen",
-          "price": "4.39",
-          "amount": "je 1 kg, mit Lidl Plus, sonst 5.59"
-        },
-        {
-          "name": "METZGERFRISCH Frische Hähnchen-Brustfilets",
-          "price": "5.19",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "FOL EPI Käsescheiben",
-          "price": "1.49",
-          "amount": "verschiedene Sorten, sonst 2.69"
-        },
-        {
-          "name": "BARILLA Pasta",
-          "price": "1.69",
-          "amount": "je 1 kg"
-        },
-        {
-          "name": "KATJES Fruchtgummi",
-          "price": "0.66",
-          "amount": "je 210 oder 195 g, mit Lidl Plus, sonst 0.79"
-        },
-        {
-          "name": "PRINGLES",
-          "price": "1.49",
-          "amount": "je 185 g, mit Lidl Plus, sonst 2.79"
-        },
-        {
-          "name": "RED BULL Energy Drink",
-          "price": "0.79",
-          "amount": "je 0,25 l, zzgl. Pfand, mit Lidl Plus, sonst 0.85"
-        },
-        {
-          "name": "BAILEY'S",
-          "price": "9.99",
-          "amount": "je 0,7 l, verschiedene Sorten, sonst 13.99"
-        },
-        {
-          "name": "GUSTAVO GUSTO Steinofenpizza",
-          "price": "3.49",
-          "amount": "je 433 oder 480 g, mit Lidl Plus, sonst 3.69"
-        },
-        {
-          "name": "GAZI Schafkäse oder Ziegenkäse",
-          "price": "4.99",
-          "amount": "750 g, Abtropfgewicht 400 g, sonst 8.49"
-        },
-        {
-          "name": "BRUNCH Brotaufstrich",
-          "price": "1.29",
-          "amount": "je 185 g, mit Lidl Plus, sonst 1.89"
-        },
-        {
-          "name": "MILKA Schokolade oder Favourites",
-          "price": "2.99",
-          "amount": "je 250 oder 140 g, sonst 4.39"
-        },
-        {
-          "name": "MILKA Extra LOTUS Biscoff",
-          "price": "2.22",
-          "amount": "je 190 g, sonst 3.49"
-        },
-        {
-          "name": "SONDEY Cookies",
-          "price": "1.19",
-          "amount": "je 225 g, mit Lidl Plus, sonst 1.49"
-        },
-        {
-          "name": "Mixed Minis",
-          "price": "3.99",
-          "amount": "20 Stück, je 400 g, sonst 4.99"
-        },
-        {
-          "name": "DALLMAYR Classic Kaffee",
+          "name": "MAX & MILA'S WORLD Ausziehleine mit Rückzugmechanismus",
           "price": "6.99",
-          "amount": "je 500 g, sonst 8.99"
+          "amount": ""
         },
         {
-          "name": "CHANTRÉ Weinbrand",
-          "price": "6.49",
-          "amount": "36 % vol, je 0,7 l, mit Lidl Plus, sonst 8.99"
-        },
-        {
-          "name": "JULES MUMM Sekt",
+          "name": "MAX & MILA'S WORLD Futter- und Trinknapf / Fütterungsmatte / Schleckmatte",
           "price": "3.99",
-          "amount": "je 0,75 l, sonst 5.49"
+          "amount": ""
         },
         {
-          "name": "LILLET Blanc oder Rosé",
-          "price": "10.99",
-          "amount": "je 0,75 l, sonst 16.49"
-        },
-        {
-          "name": "HAVANA CLUB Original",
-          "price": "10.99",
-          "amount": "37,5 % vol, je 0,7 l, mit Lidl Plus, sonst 15.49"
-        },
-        {
-          "name": "ARLA Kaergarden Butter",
-          "price": "1.39",
-          "amount": "je 250 g, sonst 2.99"
-        },
-        {
-          "name": "APPEL Zarte Filets vom Hering",
-          "price": "1.11",
-          "amount": "je 200 g, sonst 1.99"
-        },
-        {
-          "name": "FUNNY-FRISCH Erdnuss Flippies",
-          "price": "1.29",
-          "amount": "je 150 oder 175 g"
-        },
-        {
-          "name": "KINDER Joy",
-          "price": "1.19",
-          "amount": "je 20 g, sonst 1.49"
-        },
-        {
-          "name": "KINDER Happy Hippo",
-          "price": "1.99",
-          "amount": "5 Stück, je 103,5 g"
-        },
-        {
-          "name": "KINDER Schokolade oder YOGURETTE",
-          "price": "1.29",
-          "amount": "je 100 g"
-        },
-        {
-          "name": "NESTLÉ Cerealien",
-          "price": "2.49",
-          "amount": "verschiedene Sorten, sonst 3.79"
-        },
-        {
-          "name": "MULINO BIANCO Gebäck",
-          "price": "2.22",
-          "amount": "je 200 oder 250 g, sonst 3.69"
-        },
-        {
-          "name": "SEGAFREDO ZANETTI Intermezzo oder Caffè Crema",
-          "price": "13.49",
-          "amount": "ganze Bohnen, je 1 kg, sonst 19.99"
-        },
-        {
-          "name": "JOHNNIE WALKER Black Label",
-          "price": "19.99",
-          "amount": "40 % vol, je 0,7 l, sonst 26.99"
-        },
-        {
-          "name": "CHEF SELECT Chilli-Cheese Nuggets oder Mozzarella Sticks",
-          "price": "4.99",
-          "amount": "je 750 g, tiefgefroren"
-        },
-        {
-          "name": "MILRAM Frühlingsquark",
-          "price": "1.99",
-          "amount": "je 379 g, sonst 2.99"
-        },
-        {
-          "name": "NESTLÉ Joghurt",
-          "price": "3.99",
-          "amount": "6er-Pack, je 6 x 120 g"
-        },
-        {
-          "name": "KINDER Pingui",
-          "price": "1.59",
-          "amount": "4er-Pack, je 4 x 30 g"
-        },
-        {
-          "name": "PICK UP!",
+          "name": "MAX & MILA'S WORLD Futternapf",
           "price": "3.49",
-          "amount": "11 x 28 g"
+          "amount": ""
         },
         {
-          "name": "KUCHENZAUBER Croissant XXL",
-          "price": "1.79",
-          "amount": "je 325 g"
+          "name": "MAX & MILA'S WORLD Katzen-Kratzbaum",
+          "price": "19.99",
+          "amount": "Ma&szlig;e: B 70 x H 115 x T 50 cm (gesamt) Farbe: natur"
         },
         {
-          "name": "SURIG Essig-Essenz",
-          "price": "0.99",
-          "amount": "je 450 g"
+          "name": "HAMMER Kraftstation »FERRUM TX4«",
+          "price": "799.00",
+          "amount": ""
         },
         {
-          "name": "ABSOLUT Vodka",
-          "price": "24.99",
-          "amount": "40 % vol, je 1,75 l"
+          "name": "CHRISTOPEIT Holz Wasser Rudergerät »WP 5000«",
+          "price": "649.00",
+          "amount": ""
         },
         {
-          "name": "ZOTT Protein Pudding",
-          "price": "0.99",
-          "amount": "je 200 g, sonst 1.49"
+          "name": "CRIVIT Herren Funktionsshirt",
+          "price": "4.99",
+          "amount": ""
         },
         {
-          "name": "ZOTT Zottarella Minis",
-          "price": "1.79",
-          "amount": "je 125 g, sonst 2.29"
+          "name": "CRIVIT Damen Funktionshirt",
+          "price": "4.99",
+          "amount": ""
         },
         {
-          "name": "KINDER Milchschnitte",
-          "price": "1.69",
-          "amount": "5er-Pack, je 5 x 28 g"
-        },
-        {
-          "name": "OREO oder MILKA Crunchies",
-          "price": "1.49",
-          "amount": "je 110 g, sonst 1.99"
-        },
-        {
-          "name": "REESE'S Sharing Bag",
-          "price": "1.79",
-          "amount": "je 90 g, sonst 1.99"
-        },
-        {
-          "name": "RAPSO Rapsöl",
-          "price": "3.79",
-          "amount": "je 0,75 l"
-        },
-        {
-          "name": "JOHNNIE WALKER Gold Label Reserve",
-          "price": "35.99",
-          "amount": "40 % vol, je 0,7 l, sonst 42.99"
-        },
-        {
-          "name": "ASBACH Uralt Weinbrand",
-          "price": "9.99",
-          "amount": "36 % vol, je 0,7 l, sonst 13.99"
-        },
-        {
-          "name": "FUZE TEA",
-          "price": "1.19",
-          "amount": "je 1,25 l, zzgl. Pfand, sonst 1.69"
-        },
-        {
-          "name": "BIOLAND Fettarmer Joghurt",
-          "price": "1.15",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "BIOLAND Speisequark",
-          "price": "0.99",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "MILBONA Schlagsahne",
-          "price": "0.89",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "BIOLAND Creme zum Kochen",
-          "price": "0.99",
-          "amount": "je 250 ml"
-        },
-        {
-          "name": "MILBONA Skyr Natur",
-          "price": "1.29",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "MILBONA Skyr",
-          "price": "1.49",
-          "amount": "verschiedene Sorten, je 500 g"
-        },
-        {
-          "name": "MILBONA Food in a Bottle",
-          "price": "1.99",
-          "amount": "je 500 ml, zzgl. Pfand"
-        },
-        {
-          "name": "MILBONA Laktosefreier Joghurt",
-          "price": "0.89",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "MILBONA Joghurt",
-          "price": "0.89",
-          "amount": "3,5 % Fett, je 500 g"
-        },
-        {
-          "name": "MILBONA Kaffeegetränk Latte Macchiato",
-          "price": "0.99",
-          "amount": "je 330 ml, zzgl. Pfand"
-        },
-        {
-          "name": "MILBONA Fettarmer Kefir",
-          "price": "0.79",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "MILBONA Saure Sahne",
-          "price": "0.59",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "MILBONA High Protein Kaffeegetränk",
-          "price": "1.15",
-          "amount": "je 330 ml, zzgl. Pfand"
-        },
-        {
-          "name": "MILBONA Reine Buttermilch",
-          "price": "0.59",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "MILBONA Butterschmalz",
-          "price": "5.49",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "SANSIBAR DELUXE MSC Steinbeisser Filetportionen",
-          "price": "7.99",
-          "amount": "je 450 g, tiefgefroren"
-        },
-        {
-          "name": "DELUXE Pilzmischung oder Pfifferlinge",
-          "price": "2.19",
-          "amount": "je 250 oder 350 g, mit Lidl Plus, sonst 2.49"
-        },
-        {
-          "name": "SANSIBAR DELUXE MSC Schwarzer Heilbutt",
-          "price": "5.99",
-          "amount": "je 396 g, tiefgefroren"
-        },
-        {
-          "name": "DELUXE ASC Isländischer Räucherlachs",
-          "price": "2.59",
-          "amount": "je 100 g"
-        },
-        {
-          "name": "DELUXE Lachs in Blätterteig",
+          "name": "CRIVIT Herren Funktionsshorts",
           "price": "6.99",
-          "amount": "je 700 g, tiefgefroren"
+          "amount": ""
         },
         {
-          "name": "DELUXE Pasta",
-          "price": "1.99",
-          "amount": "je 500 g"
+          "name": "CRIVIT Damen Funktionstights",
+          "price": "6.99",
+          "amount": ""
         },
         {
-          "name": "DELUXE Macarons",
-          "price": "3.49",
-          "amount": "12 Stück"
+          "name": "Christopeit Sport Laufband »TM 750S«, 16 Trainingsprogramme, 900 Watt, mit",
+          "price": "399.00",
+          "amount": ""
         },
         {
-          "name": "DELUXE Dessert im Glas",
-          "price": "1.79",
-          "amount": "je 110 g, enthält Alkohol"
+          "name": "MAX & MILA'S WORLD Hundebett / Katzenhöhle",
+          "price": "12.99",
+          "amount": ""
         },
         {
-          "name": "DELUXE Käsespätzle",
-          "price": "2.99",
-          "amount": "je 350 g"
-        },
-        {
-          "name": "DELUXE Softe Honigkugeln",
-          "price": "4.49",
-          "amount": "je 235 g"
-        },
-        {
-          "name": "DELUXE Schokoladenküchlein",
-          "price": "1.99",
-          "amount": "je 2 x 90 g"
-        },
-        {
-          "name": "DELUXE Krusten-Schinkenbraten",
-          "price": "1.99",
-          "amount": "je 120 g"
-        },
-        {
-          "name": "DELUXE Italienische Wurstspezialität",
-          "price": "2.59",
-          "amount": "je 100 g, mit Lidl Plus, sonst 2.99"
-        },
-        {
-          "name": "DELUXE Gourmet Salami",
-          "price": "4.99",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "DELUXE Bresaola della Valtellina",
-          "price": "2.99",
-          "amount": "je 80 g"
-        },
-        {
-          "name": "CHEF SELECT Deutsche Junge Ente",
-          "price": "11.99",
-          "amount": "je 2,4 kg, tiefgefroren"
-        },
-        {
-          "name": "CHEF SELECT Schweinefilet",
-          "price": "9.00",
-          "amount": "ca. 750 g, mit Bauchspeck, 1 kg = 11.99"
-        },
-        {
-          "name": "CHEF SELECT Hackbraten",
-          "price": "2.49",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "KANIA Hirsch-Gulasch oder Wildschwein-Gulasch",
-          "price": "4.49",
-          "amount": "je 400 g, mit Lidl Plus, sonst 4.99"
-        },
-        {
-          "name": "HENGSTENBERG Mildessa",
-          "price": "1.49",
-          "amount": "je 400 g, sonst 2.29"
-        },
-        {
-          "name": "MILBONA Gouda jung",
-          "price": "4.79",
-          "amount": "je 700 g"
-        },
-        {
-          "name": "MILBONA 4-Käse-Mix XXL",
-          "price": "2.99",
-          "amount": "gerieben, je 400 g"
-        },
-        {
-          "name": "AOSTE Salami",
-          "price": "2.79",
-          "amount": "je 150 oder 170 g, sonst 3.99"
-        },
-        {
-          "name": "CHEF SELECT Flammkuchen Elsässer Art",
-          "price": "2.39",
-          "amount": "je 350 g"
-        },
-        {
-          "name": "DIE SONNENWINZER Federweißer oder Roter Federweißer",
-          "price": "2.49",
-          "amount": "je 1 l"
-        },
-        {
-          "name": "HIGHLAND PARK Single Malt Scotch Whisky 12 Jahre",
-          "price": "33.33",
-          "amount": "40 % vol, je 0,7 l, nur online, sonst 52.99"
-        },
-        {
-          "name": "CHEF SELECT Pfannkuchen",
-          "price": "1.99",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "BELBAKE Kuchen Backmischung",
-          "price": "1.99",
-          "amount": "verschiedene Sorten"
-        },
-        {
-          "name": "CONFISERIE FIRENZE Hefeteigschnecken",
-          "price": "2.39",
-          "amount": "je 420 g, mit Lidl Plus, sonst 2.79"
-        },
-        {
-          "name": "LAITERIE DE LA MONTAGNE Savaron",
-          "price": "3.79",
-          "amount": "je 300 g"
-        },
-        {
-          "name": "DELUXE Gourmet Weichkäse",
-          "price": "2.79",
-          "amount": "je 195 g"
-        },
-        {
-          "name": "DULANO SELECTION Herbstgenuss",
-          "price": "3.49",
-          "amount": "je 280 g"
-        },
-        {
-          "name": "MILBONA Herbstkäse",
-          "price": "3.99",
-          "amount": "je 200 oder 300 g"
-        },
-        {
-          "name": "MILBONA Maasdamer",
-          "price": "1.59",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "CHEF SELECT Herbstlasagne",
-          "price": "4.49",
-          "amount": "je 800 g"
-        },
-        {
-          "name": "CHEF SELECT Gefüllte Knusperrollen XXL",
-          "price": "3.99",
-          "amount": "je 1 kg"
-        },
-        {
-          "name": "CHEF SELECT Gnocchi",
-          "price": "1.79",
-          "amount": "je 450 g"
-        },
-        {
-          "name": "CHEF SELECT Ravioli",
-          "price": "1.99",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "ALESTO Cashewkerne XXL",
-          "price": "2.99",
-          "amount": "geröstet und gesalzen, je 250 g"
-        },
-        {
-          "name": "FRESHONA Kastanien",
-          "price": "5.99",
-          "amount": "geschält, je 420 g"
-        },
-        {
-          "name": "Funny Mushrooms",
-          "price": "4.99",
-          "amount": "je 600 g, sonst 6.99"
-        },
-        {
-          "name": "CHEF SELECT Back Kit",
-          "price": "2.99",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "SONDEY Gebäck",
-          "price": "1.99",
-          "amount": "je 100 oder 125 g"
-        },
-        {
-          "name": "ALLINI Prosecco DOC frizzante",
-          "price": "2.79",
-          "amount": "je 0,75 l, sonst 3.49"
-        },
-        {
-          "name": "Riesling QbA feinherb",
-          "price": "1.99",
-          "amount": "je 0,75 l, Mosel, sonst 2.79"
-        },
-        {
-          "name": "Spätlese Prädikatswein süß",
-          "price": "1.99",
-          "amount": "je 0,75 l, sonst 2.69"
-        },
-        {
-          "name": "GIULIO PASOTTI Lugana DOC",
-          "price": "5.49",
-          "amount": "je 0,75 l, sonst 6.49"
-        },
-        {
-          "name": "JUNGE WINZER Spätburgunder oder Grauburgunder",
-          "price": "4.79",
-          "amount": "je 0,75 l, Baden, sonst 5.99"
-        },
-        {
-          "name": "Spätburgunder Baden QbA trocken",
-          "price": "1.99",
-          "amount": "je 0,75 l, sonst 2.49"
-        },
-        {
-          "name": "Bordeaux Supérieur AOP",
-          "price": "2.49",
-          "amount": "je 0,75 l, sonst 3.39"
-        },
-        {
-          "name": "MAESTRO DE PIGO Primitivo Merlot Puglia",
-          "price": "2.69",
-          "amount": "je 0,75 l, sonst 3.69"
-        },
-        {
-          "name": "CORTE ALLE MURA Chianti Riserva",
-          "price": "3.99",
-          "amount": "je 0,75 l, sonst 4.99"
-        },
-        {
-          "name": "Dornfelder-Spätburgunder QbA halbtrocken",
-          "price": "2.19",
-          "amount": "je 0,75 l, sonst 2.49"
-        },
-        {
-          "name": "Badische Weine",
-          "price": "2.79",
-          "amount": "je 0,75 l"
-        },
-        {
-          "name": "MONALIE Côtes de Provence Rosé",
-          "price": "5.99",
-          "amount": "je 0,75 l, sonst 7.99"
-        },
-        {
-          "name": "Spätburgunder Weißherbst Baden",
-          "price": "1.79",
-          "amount": "je 0,75 l, sonst 2.29"
-        },
-        {
-          "name": "RHEINHESSEN WINE LOVERS Traumprinz",
-          "price": "3.99",
-          "amount": "je 0,75 l, sonst 4.99"
-        },
-        {
-          "name": "Tokaji Amethyst Szamorodni süß",
-          "price": "5.99",
-          "amount": "je 0,5 l, nur online, sonst 6.99"
-        },
-        {
-          "name": "CAMILLE MEYER Gewürztraminer Alsace",
+          "name": "MAX & MILA'S WORLD Tierhaarbürste mit Dampf",
           "price": "7.99",
-          "amount": "je 0,75 l, nur online, sonst 8.99"
+          "amount": ""
         },
         {
-          "name": "HEIDSIECK & CO Monopole Blue Top brut, Champagner",
-          "price": "25.99",
-          "amount": "je 0,75 l, nur online, sonst 33.99"
+          "name": "MAX & MILA'S WORLD Futternapf / Doppelfutternapf",
+          "price": "5.99",
+          "amount": ""
         },
         {
-          "name": "Weinkenner by Pfaffl Gemischter Satz oder Grüner Veltliner",
-          "price": "6.49",
-          "amount": "je 0,75 l, nur online, sonst 7.99"
+          "name": "MAX & MILA'S WORLD Katzentoilette / Transportbox",
+          "price": "12.99",
+          "amount": ""
         },
         {
-          "name": "Deutscher Premium Glühwein Rot 10 Liter Bag-in-Box",
-          "price": "26.99",
-          "amount": "je 10 l, nur online, sonst 29.99"
+          "name": "MAX & MILA'S WORLD Katzen-Kratzbaum",
+          "price": "29.99",
+          "amount": "Ma&szlig;e: B 68 x H 84 x T 40 cm (gesamt) Farbe: grau/natur"
         },
         {
-          "name": "Weinpaket Mezquiriz Rosado Navarra",
-          "price": "23.94",
-          "amount": "6 x 0,75 l, nur online, sonst 29.94"
+          "name": "JOLLYPAW BY TRIXIE Transportbox »Aluminium M«",
+          "price": "149.00",
+          "amount": ""
         },
         {
-          "name": "POGGIO MARU Primitivo Salento",
-          "price": "6.79",
-          "amount": "je 0,75 l, nur online, sonst 8.49"
-        },
-        {
-          "name": "CHÂTEAU D'ARSAC Margaux",
-          "price": "19.99",
-          "amount": "je 0,75 l, nur online, sonst 29.99"
-        },
-        {
-          "name": "THE MACALLAN Highland Single Malt 12 Jahre",
+          "name": "PARKSIDE Langstiel-Heckenschere »PEHSL 800 A1«",
           "price": "79.99",
-          "amount": "40 % vol, je 0,7 l, nur online, sonst 92.99"
+          "amount": "Hubzahl: 1.700 H&uuml;be/min Schnittl&auml;nge: 50 cm"
         },
         {
-          "name": "BARON OTARD Cognac VSOP",
-          "price": "34.99",
-          "amount": "40 % vol, je 0,7 l, nur online, sonst 44.99"
+          "name": "PARKSIDE Benzin-Laubsauger/-bläser »PBLSB 26 A1«",
+          "price": "99.99",
+          "amount": ""
         },
         {
-          "name": "MALFY Gin",
-          "price": "21.99",
-          "amount": "verschiedene Sorten, je 0,7 l, nur online, sonst 29.99"
+          "name": "PARKSIDE Sägebock",
+          "price": "49.99",
+          "amount": ""
         },
         {
-          "name": "PERNOD Pastis",
-          "price": "14.99",
-          "amount": "40 % vol, je 0,7 l, nur online, sonst 16.99"
+          "name": "PARKSIDE Hauswasserwerk »PEHWW 1000 A1«",
+          "price": "99.99",
+          "amount": ""
         },
         {
-          "name": "DE GEELE KÖM Der goldene Kümmel",
-          "price": "9.49",
-          "amount": "32 % vol, je 0,7 l, nur online, sonst 10.99"
+          "name": "PARKSIDE Gartengerätehaus XL",
+          "price": "189.00",
+          "amount": ""
         },
         {
-          "name": "VILLA MASSA Limoncello",
-          "price": "14.99",
-          "amount": "30 % vol, je 0,7 l, nur online, sonst 16.99"
+          "name": "PARKSIDE Gartengerätehaus S",
+          "price": "289.00",
+          "amount": ""
         },
         {
-          "name": "ÄHRE Weizenmehl Type 405 XXL",
-          "price": "1.29",
-          "amount": "je 2 kg, ab 8.10., sonst 1.89"
+          "name": "KARIBU Gartenhaus Hybrido 19 mm",
+          "price": "999.00",
+          "amount": ""
         },
         {
-          "name": "MILBONA Speisequark 40 %",
-          "price": "1.58",
-          "amount": "je 500 g, ab 8.10."
+          "name": "LIVARNO HOME Musselin-Bettwäsche, 135 x 200 cm",
+          "price": "19.99",
+          "amount": ""
         },
         {
-          "name": "SANELLA",
-          "price": "1.89",
-          "amount": "je 600 g, ab 8.10."
+          "name": "LIVARNO HOME Musselin-Bettwäsche, 155 x 220 cm",
+          "price": "24.99",
+          "amount": ""
         },
         {
-          "name": "MILBONA Haltbare Schlagsahne XXL",
-          "price": "1.79",
-          "amount": "je 500 g, ab 8.10."
+          "name": "LIVARNO HOME Musselin-Bettwäsche, 200 x 220 cm",
+          "price": "29.99",
+          "amount": ""
         },
         {
-          "name": "DIAMANT Zucker XXL",
-          "price": "1.69",
-          "amount": "je 2 kg, ab 8.10., sonst 1.89"
+          "name": "Hn8 Schlafsysteme Topper »Surf 100«, 7-Zonen Gelschaum-Kern, Cool-Effect Bezug",
+          "price": "109.00",
+          "amount": ""
         },
         {
-          "name": "ALESTO Mandeln XXL",
-          "price": "5.49",
-          "amount": "naturbelassen, je 500 g, ab 8.10."
+          "name": "JUSKYS Polsterbett »Nizza« mit Bettkasten und Beleuchtung",
+          "price": "239.00",
+          "amount": ""
         },
         {
-          "name": "ALESTO Haselnusskerne XXL",
-          "price": "7.49",
-          "amount": "naturbelassen, je 500 g, ab 8.10."
+          "name": "BRECKLE Matratze »Flex Air«, 7-Zonen Taschenfederkern",
+          "price": "179.00",
+          "amount": ""
         },
         {
-          "name": "Äpfel rot",
-          "price": "2.79",
-          "amount": "je 2 kg, Klasse I"
+          "name": "STRENESSE BLUE Damen Sherpafleece Weste",
+          "price": "17.99",
+          "amount": ""
         },
         {
-          "name": "BIOLAND Steinofenbrötchen",
-          "price": "0.49",
-          "amount": "je Stück"
+          "name": "STRENESSE BLUE Damen Leder-Micro-Boot",
+          "price": "24.99",
+          "amount": ""
         },
         {
-          "name": "PRIMADONNA Natives Olivenöl Extra",
-          "price": "5.99",
-          "amount": "je 750 ml"
+          "name": "STRENESSE BLUE Damen/Herren Tennissocken, 3 Stück",
+          "price": "7.99",
+          "amount": ""
         },
         {
-          "name": "MILBONA Käse Aufschnitt",
-          "price": "1.89",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "FAVORINA Dominosteine",
-          "price": "2.99",
-          "amount": "je 250 g, ab 8.10."
-        },
-        {
-          "name": "FAVORINA Schoko-Lebkuchen",
-          "price": "3.69",
-          "amount": "je 500 g, ab 8.10."
-        },
-        {
-          "name": "FAVORINA Gewürz-Spekulatius",
-          "price": "1.69",
-          "amount": "je 600 g, ab 8.10."
-        },
-        {
-          "name": "FAVORINA Mandel Florentiner",
-          "price": "2.99",
-          "amount": "je 125 g, ab 8.10."
-        },
-        {
-          "name": "FAVORINA Mini-Nussecken",
-          "price": "2.69",
-          "amount": "je 200 g, ab 8.10."
-        },
-        {
-          "name": "FAVORINA Marzipan Butterstollen Konfekt",
-          "price": "2.99",
-          "amount": "je 300 g, ab 8.10."
-        },
-        {
-          "name": "Auberginen, lose",
-          "price": "1.85",
-          "amount": "je 1 kg, Klasse I, ab 8.10."
-        },
-        {
-          "name": "Bio Feldsalat",
-          "price": "1.29",
-          "amount": "je 100 g, ab 8.10., mit Lidl Plus, sonst 1.49"
-        },
-        {
-          "name": "Helle, kernlose Trauben",
-          "price": "1.25",
-          "amount": "je 500 g, Klasse I, ab 8.10."
-        },
-        {
-          "name": "Bio Zitronen",
-          "price": "1.39",
-          "amount": "je 500 g, Klasse I, ab 8.10."
-        },
-        {
-          "name": "METZGERFRISCH Hähnchen-Hackfleisch",
-          "price": "4.99",
-          "amount": "je 800 g, ab 8.10."
-        },
-        {
-          "name": "FISCHERSTOLZ MSC Knusper-Backfisch",
-          "price": "4.99",
-          "amount": "je 560 g, ab 8.10."
-        },
-        {
-          "name": "METZGERFRISCH Frisches Schweine-Geschnetzeltes",
-          "price": "4.49",
-          "amount": "je 800 g, ab 8.10."
-        },
-        {
-          "name": "METZGERFRISCH Cordon Bleu-Schnitte",
-          "price": "6.99",
-          "amount": "vom Schwein, je 1 kg, ab 8.10."
-        },
-        {
-          "name": "METZGERFRISCH Gyros",
-          "price": "4.49",
-          "amount": "je 800 g, ab 8.10."
-        },
-        {
-          "name": "DELUXE Frisches Kalbs-Kotelett",
-          "price": "5.59",
-          "amount": "ca. 243 g, ab 8.10."
-        },
-        {
-          "name": "METZGERFRISCH Frisches T-Bone Steak",
-          "price": "9.79",
-          "amount": "ca. 445 g, ab 8.10."
-        },
-        {
-          "name": "DELUXE US Beef-Steak",
-          "price": "5.39",
-          "amount": "ca. 245 g, ab 8.10."
-        },
-        {
-          "name": "DR. OETKER La Mia Pinsa",
-          "price": "1.79",
-          "amount": "tiefgefroren, mit Lidl Plus, sonst 1.99, ab 8.10."
-        },
-        {
-          "name": "IGLO Fischstäbchen oder Filegro XXL",
-          "price": "3.99",
-          "amount": "je 840 oder 480 g, ab 8.10."
-        },
-        {
-          "name": "MILBONA Haltbare Vollmilch",
-          "price": "10.90",
-          "amount": "12 x 1 l, 3,5 % Fett, ab 8.10."
-        },
-        {
-          "name": "BLOCK HOUSE American Burger",
-          "price": "6.99",
-          "amount": "4er-Pack, je 500 g, ab 8.10., sonst 10.99"
-        },
-        {
-          "name": "RÜGENWALDER MÜHLE Schinken Spicker",
-          "price": "1.11",
-          "amount": "je 80 g, ab 8.10., mit Lidl Plus, sonst 1.59"
-        },
-        {
-          "name": "SCHWIP SCHWAP oder 7UP",
-          "price": "0.88",
-          "amount": "je 1,25 l, zzgl. Pfand, ab 8.10., sonst 1.49"
-        },
-        {
-          "name": "KERRYGOLD extra XXL",
-          "price": "2.89",
-          "amount": "je 400 g, ab 8.10."
-        },
-        {
-          "name": "KERRYGOLD Irischer Käse XXL",
-          "price": "2.69",
-          "amount": "je 230 g, ab 8.10."
-        },
-        {
-          "name": "COCA-COLA oder FANTA",
-          "price": "8.49",
-          "amount": "18 x 0,33 l, zzgl. Pfand, ab 8.10."
-        },
-        {
-          "name": "TUC Bake Rolls",
-          "price": "1.49",
-          "amount": "je 150 g, ab 8.10., sonst 2.19"
-        },
-        {
-          "name": "NUTELLA",
-          "price": "7.49",
-          "amount": "je 1 kg, ab 8.10."
-        },
-        {
-          "name": "FUNNY-FRISCH Spezialitäten",
-          "price": "1.19",
-          "amount": "je 90, 96 oder 120 g, ab 8.10., sonst 1.99"
-        },
-        {
-          "name": "LAVAZZA Caffè",
-          "price": "14.99",
-          "amount": "ganze Bohnen, je 1 kg, ab 8.10., sonst 23.49"
-        },
-        {
-          "name": "INNOCENT Smoothie",
-          "price": "1.49",
-          "amount": "je 0,25 l, zzgl. Pfand, ab 8.10., sonst 2.49"
-        },
-        {
-          "name": "TILLMAN'S Toasty",
-          "price": "2.79",
-          "amount": "je 280 g, ab 8.10., sonst 3.99"
-        },
-        {
-          "name": "DOVGAN Tortenstücke",
-          "price": "2.29",
-          "amount": "tiefgefroren, ab 8.10., sonst 2.99"
-        },
-        {
-          "name": "NADLER Sahneheringsfilets",
-          "price": "2.79",
-          "amount": "je 500 g, ab 8.10., sonst 4.69"
-        },
-        {
-          "name": "ORO DI PARMA Tomaten oder Tomatenmark",
-          "price": "1.29",
-          "amount": "je 425 ml oder 200 g, ab 8.10., sonst 1.99"
-        },
-        {
-          "name": "KINDER Schoko-Bons",
-          "price": "3.99",
-          "amount": "je 225 g, ab 8.10."
-        },
-        {
-          "name": "KINDER Tronky",
-          "price": "2.19",
-          "amount": "5er-Pack, je 90 g, ab 8.10."
-        },
-        {
-          "name": "WESTLAND Old Amsterdam XXL",
-          "price": "3.69",
-          "amount": "je 205 g, ab 8.10., sonst 5.99"
-        },
-        {
-          "name": "Double Cheeseburger",
+          "name": "STRENESSE BLUE Damen Langarmshirt",
           "price": "9.99",
-          "amount": "6er-Pack, je 1,05 kg, ab 9.10."
+          "amount": ""
         },
         {
-          "name": "HERTA Finesse",
-          "price": "1.29",
-          "amount": "je 100 g, ab 9.10., sonst 2.59"
+          "name": "STRENESSE BLUE Damen Scuba Hose",
+          "price": "17.99",
+          "amount": ""
         },
         {
-          "name": "HOHES C Vitamin Shots",
-          "price": "1.69",
-          "amount": "je 0,33 l, zzgl. Pfand, ab 9.10., sonst 2.69"
+          "name": "STRENESSE BLUE Herren Boxer, 2 Stück",
+          "price": "7.99",
+          "amount": ""
         },
         {
-          "name": "MIONETTO Prosecco DOC brut",
+          "name": "STRENESSE BLUE Herren Sweathoodie »Jogi Löw - Kollektion«, mit Piqué-Struktur",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "STRENESSE BLUE Herren Sweatpants »Jogi Löw - Kollektion«",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "Halloween Lichterkette, mit Timerfunktion",
           "price": "5.99",
-          "amount": "je 0,75 l, ab 9.10., sonst 9.99"
+          "amount": ""
         },
         {
-          "name": "TASSIMO Kapseln",
-          "price": "11.97",
-          "amount": "3 Packungen, einzeln 4.44, ab 9.10."
+          "name": "Halloween Dekoration »LED-Spinnennetz«, mit 80 LEDs",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Kürbis-Schnitzset",
+          "price": "7.99",
+          "amount": "Merkmal: ideal f&uuml;r Halloween"
+        },
+        {
+          "name": "Halloween-Gartendeko",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Halloween Gartenspieße",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Kinder Pyjama",
+          "price": "4.44",
+          "amount": "Farbe: grau; lila; orange; schwarz Merkmal: Glow-in-the-Dark-Effekt"
+        },
+        {
+          "name": "Halloween LED-Dekoration",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Mikrofaser-Satin-Wendebettwäsche, 135 x 200 cm",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Mikrofaser-Satin-Wendebettwäsche, 155 x 220 cm",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Mikrofaser-Satin-Wendebettwäsche, 200 x 220 cm",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Jersey-Spannbettlaken, 90-100 x 200 cm",
+          "price": "2.69",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Jersey-Spannbettlaken, 140-160 x 200 cm",
+          "price": "4.39",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Jersey-Spannbettlaken, 180-200 x 200 cm",
+          "price": "5.39",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Visko-Nackenstützkissen, 60 x 36 x 12/10 cm",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "TRONIC USB-Steckdosen-Adapter",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Plissee Rollo für Fenster, 60 x 130 cm, Montage ohne Bohren",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO HOME Komfortschaummatratze »Waves«, Wellenschnitt",
+          "price": "59.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Kopfkissen »Brilliance«, 80 x 80 cm",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Kopfkissen »Brilliance«, 40 x 80 cm",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Bettdecke »Brilliance«, 155 x 220 cm",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Bettdecke »Brilliance«, 135 x 200 cm",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Bettdecke »Brilliance«, 200 x 220 cm",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Thermo Funktionsshirt",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Thermo-Softshelljacke",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Thermo-Softshelljacke",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Thermo Funktionsshirt",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Thermo Funktionshose",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Thermo Funktionstights",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Messer / Taschenmesser",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Trekkingstiefel",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Trekkingstiefel",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Pancake-Pfanne",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Aluguss-Topf, Ø 28",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Aluguss-Pfanne, Ø 32 cm",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Küchenmaschine »SKM 350 G1«",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Küchenwaage",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "ISI Sahnespender »Creative Whip Essential«",
+          "price": "29.99",
+          "amount": "Merkmal: sp&uuml;lmaschinenfest"
+        },
+        {
+          "name": "NINJA Kabelloser Mixer »BC151EUNV«, mit USB-C-Ladefunktion",
+          "price": "44.99",
+          "amount": "Leistung: 14,4 Watt Nutzvolumen: 532 ml"
+        },
+        {
+          "name": "Ninja Kaltentsafter NeverClog »JC151EU«, mit Anti-Verstopfungs-Filter",
+          "price": "99.99",
+          "amount": ""
+        },
+        {
+          "name": "NINJA Doppelzonen-Heißluftfritteuse »DZ300EU«, 7,6 l",
+          "price": "119.00",
+          "amount": ""
+        },
+        {
+          "name": "NINJA Heißluftfritteuse »SL300EU«, 7,6 l, Double Stack 2-Ebenen",
+          "price": "119.00",
+          "amount": ""
+        },
+        {
+          "name": "Ninja Foodi PossibleCooker (6 l), 8-in-1",
+          "price": "99.99",
+          "amount": "Leistung: 1400 Watt"
+        },
+        {
+          "name": "NINJA Heißluftfritteuse »DG551EU«, 1760 Watt",
+          "price": "179.00",
+          "amount": ""
+        },
+        {
+          "name": "KRUPS Kaffeevollautomat Sensation »EA910A« mit Milchdüse",
+          "price": "333.00",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Edelstahl-Besteck-Set, 20-teilig",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "KENWOOD Küchenmaschine »KMIX KMX754«",
+          "price": "269.00",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Kühlschrank mit Gefrierfach SKGK 113 A1",
+          "price": "179.00",
+          "amount": "K&uuml;hlen + Gefrieren: ja Ma&szlig;e: L 55,3 x B 57,4 x H 84,5 cm"
+        },
+        {
+          "name": "TEFAL Jamie Oliver Gas Pizzaofen",
+          "price": "249.00",
+          "amount": "Ma&szlig;e: 58,3 x 45 x 30 cm"
+        },
+        {
+          "name": "SILVERCREST Gefrierschrank SGF 88 A1",
+          "price": "179.00",
+          "amount": "Ma&szlig;e: L 55,3 x B 57,4 x H 84,5 cm"
+        },
+        {
+          "name": "MASTERPRO Heißluftfritteuse »BGMP-9457«, 6 l",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "RUSSELL HOBBS Kaffeemaschine Honeycomb »27011-56«",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "TEFAL Standmixer »Perfectmix Essential BL771A«, mit Glasbehälter",
+          "price": "69.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Backofen Digital Mobil »SBMD 2250 A1«",
+          "price": "89.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST KITCHEN TOOLS Wasserkocher Edelstahl »SWKP 2400 A1«",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST KITCHEN TOOLS Doppelschlitz-Toaster mit polierter Edelstahlfront",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "PHILIPS Dampfbügelstation »GC7920/20«, 2400 W, mit abnehmbarem 1,5 l",
+          "price": "149.00",
+          "amount": ""
+        },
+        {
+          "name": "EUFY Saug- und Wischroboter »Omni S1 Pro«",
+          "price": "799.00",
+          "amount": ""
+        },
+        {
+          "name": "ROWENTA Clean It Compact Fleckenreiniger »IN3010«, mit Doppeltank-System",
+          "price": "99.99",
+          "amount": ""
+        },
+        {
+          "name": "ROWENTA Compact Power Cyclonic Classic+ Bodenstaubsauger beutellos, Staubsauger",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Akku-Staubsauger »SHSS 18 D3«",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "VILEDA Wischmopp-Set »Easy Wring & Clean«",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Benzin-Kettensäge »PBKS 53 C4«",
+          "price": "89.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Elektro-Kettensäge »PEKS 1600 C3«",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Verlängerungskabel, 10 m",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Steckdosenleiste",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Pflanzenschutz-Schafwollfilzmatte 2m x 58cm",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Thermo-Topfschutz",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Pflanzenschutz-Vlieshaube, L (3 Stück), XL (2 Stück), XXL (1Stück)",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Laubbläser »PALB 20 A1«, ohne Akku und Ladegerät",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Spaltbeil - 1,0 kg / Fäustel - 1,5 kg",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "SCHICKER MINERAL Marmor Ziersplitt",
+          "price": "15.99",
+          "amount": ""
+        },
+        {
+          "name": "SCHICKER MINERAL Schiefer Ziersplitt",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "SCHICKER MINERAL Granit Pflastersteine",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "SCHICKER MINERAL Deutsche Saunasteine",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "SCHICKER MINERAL Diabas Fugensand",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "SCHICKER MINERAL Urgesteinsmehl »Diabas«",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "SCHICKER MINERAL Rasensand Plus »Diabas«, 25 kg",
+          "price": "15.99",
+          "amount": ""
+        },
+        {
+          "name": "RAUCH ORANGE Drehtürenschrank Alabama mit Spiegel",
+          "price": "184.00",
+          "amount": ""
+        },
+        {
+          "name": "HOME DELUXE Schminktisch »CANDICE«",
+          "price": "99.99",
+          "amount": ""
+        },
+        {
+          "name": "HOMCOM Schlafsessel",
+          "price": "179.00",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Polsterbank mit Teddybezug und Metallbeinen",
+          "price": "59.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Samtdecke, 200 x 220 cm",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "FJÖDUR 3-Kammer-Kopfkissen mit 90% Daunen",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "FJÖDUR Ganzjahresbettdecke Daunen",
+          "price": "109.00",
+          "amount": ""
+        },
+        {
+          "name": "Hn8 Schlafsysteme 7-Zonen Taschenfederkernmatratze »XXL Gelstar T-1000«,",
+          "price": "189.00",
+          "amount": ""
+        },
+        {
+          "name": "f.a.n. Mehrzonen-Komfortschaumkern-Matratze",
+          "price": "129.00",
+          "amount": ""
+        },
+        {
+          "name": "LICHTBLICK Thermo-Rollo Klemmfix, ohne Bohren, ab 45 x 150 cm",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "LICHTBLICK Duo Rollo Klemmfix, ohne Bohren, ab 45 x 150 cm",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "Lichtblick Plissee Klemmfix, ohne Bohren, verspannt, ab 45 x 130 cm",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby Strickjacke",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby Latzhose",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby Schlafoverall",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Umstandsleggings, 2 Stück",
+          "price": "9.99",
+          "amount": "Farbe: grau, schwarz Merkmal: extrahoch geschnitten"
+        },
+        {
+          "name": "SIMBA Disney Einschlafhilfe Plüschtier",
+          "price": "22.49",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby-Sweatanzug",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby Fleece-Overall",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby Bodys, 3 Stück",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby Wickelbody, 3 Stück",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby Mädchen Strumpfhose Vollfrottee Thermo, 2 Stück",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "JOIE Kindersitz i-Trillo FX – mit Iso-Fix, 100-150 cm, 4-12 Jahre",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "SAFETY 1ST Türschutzgitter »Quick Close+« mit 4-Punkt-Druckverschluss",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "CEPA LEBREL Gran Reserva Rioja DOCa trocken, Rotwein 2015",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "ARESTEL Cava brut nature, Schaumwein",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "4 + 2 Weinpaket BONOT PÉRE & FILS Bourgogne Chardonnay AOP trocken, Weißwein",
+          "price": "39.96",
+          "amount": "elegant & frisch Frankreich, Burgund Chardonnay, trocken"
+        },
+        {
+          "name": "Rheinhessen Wine Lovers Traumpaar Weissburgunder/Grauburgunder trocken,",
+          "price": "4.99",
+          "amount": "fruchtig & kr&auml;ftig Deutschland, Rheinhessen Cuv&eacute;e, trocken"
+        },
+        {
+          "name": "TAITTINGER Brut Reserve, Champagner",
+          "price": "42.99",
+          "amount": "saftig & mineralisch Frankreich, Champagne Cuv&eacute;e, brut"
+        },
+        {
+          "name": "SANSIBAR DELUXE Primitivo di Manduria Reserva DOC trocken, Rotwein 2021",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "PATA NEGRA Tempranillo Rioja Crianza DOCa trocken, Rotwein 2020",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "PATA NEGRA Sauvignon Blanc/Verdejo Rueda DOC trocken, Weißwein 2024",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "BAUER Haselnuss Spirituose 33% Vol",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "GLENALBA Blended Scotch Whisky 21 Jahre Port Cask Finish 41,4% Vol",
+          "price": "44.99",
+          "amount": ""
+        },
+        {
+          "name": "GLENALBA Blended Scotch Whisky 30 Jahre PX Cask Finish 41,4% Vol",
+          "price": "59.99",
+          "amount": ""
+        },
+        {
+          "name": "THE ARRAN Single Malt Scotch Whisky 10 Jahre mit Geschenkbox 46% Vol",
+          "price": "35.99",
+          "amount": "elegant & exotisch Single Malt Scotch Whisky Schottland, Isle of Arran"
+        },
+        {
+          "name": "QUEEN MARGOT Blended Scotch Whisky 8 Jahre 40% Vol",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "ARMILAR Tawny Port 10 Jahre 20% Vol",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "DIMPLE Golden Selection Blended Scotch Whisky 40% Vol",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "SUNTORY Toki Suntory Whisky Japanischer Blended Whisky 43% Vol",
+          "price": "23.99",
+          "amount": ""
+        },
+        {
+          "name": "ROKU GIN The Japanese Craft Gin 43% Vol",
+          "price": "21.99",
+          "amount": ""
+        },
+        {
+          "name": "Kinder Matsch- und -Buddeljacke",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "Kinder Matsch- und -Buddelhose",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Buch Shappulus (von Mark Keller & Elmar Schäfer)",
+          "price": "9.99",
+          "amount": "Anzahl Seiten: 160 Seiten Altersempfehlung: 8+"
         }
-      ]
+      ],
+      "revision": "aktionsprospekt-12-10-2026-17-10-2026-a1d941"
     },
     {
       "id": "dm",
