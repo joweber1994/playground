@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-12.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-13.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W42",
   "validFrom": "2026-10-12",
   "validUntil": "2026-10-17",
-  "extractedAt": "2026-10-12",
+  "extractedAt": "2026-10-13",
   "stores": [
     {
       "id": "prechtl",
@@ -354,8 +354,18 @@
           "amount": ""
         },
         {
+          "name": "FERRERO Kinder Bueno 6er-Pack 129 g",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
           "name": "MILSANI Emmentaler am Stück 400 g",
           "price": "2.39",
+          "amount": ""
+        },
+        {
+          "name": "FERRERO Milchschnitte 280 g",
+          "price": "1.99",
           "amount": ""
         },
         {
@@ -371,6 +381,11 @@
         {
           "name": "Bio Birnen 600 g",
           "price": "2.29",
+          "amount": ""
+        },
+        {
+          "name": "BESTES AUS DER REGION Champignons weiß 400 g",
+          "price": "1.99",
           "amount": ""
         },
         {
@@ -434,8 +449,13 @@
           "amount": ""
         },
         {
+          "name": "KOKETT Küchenrollen 3-lagig, 4 x 64 Blatt",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
           "name": "NATUR LIEBLINGE Speisezwiebeln gelb 1,5 kg",
-          "price": "1.29",
+          "price": "1.12",
           "amount": ""
         },
         {
@@ -524,33 +544,13 @@
           "amount": ""
         },
         {
-          "name": "COCA-COLA Cola Light 1,25 l",
-          "price": "1.69",
+          "name": "BERGADER Bergbauern Käse 150 g, mild-nussig",
+          "price": "1.49",
           "amount": ""
         },
         {
-          "name": "COCA-COLA Cola Zero 1,25 l",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Cola Koffeinfrei 1,25 l",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Mezzo Mix 1,25 l",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Fanta Orange 1,25 l",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Sprite 1,25 l",
-          "price": "1.69",
+          "name": "BERGADER Bergbauern Käse 150 g, würzig-nussig",
+          "price": "1.49",
           "amount": ""
         },
         {
@@ -579,6 +579,16 @@
           "amount": ""
         },
         {
+          "name": "BISCOTTO Schoko Butterkeks 125 g, Vollmilch",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
+          "name": "BISCOTTO Schoko Butterkeks 125 g, Zartbitter",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
           "name": "NUR NUR NATUR Bio-Heumilch-Käsescheiben 150 g, Emmentaler",
           "price": "1.99",
           "amount": ""
@@ -590,12 +600,12 @@
         },
         {
           "name": "TROLLI Saures Fruchtgummi, Saure Würmer 150 g",
-          "price": "1.09",
+          "price": "0.69",
           "amount": ""
         },
         {
           "name": "TROLLI Saures Fruchtgummi, Erdbeeren Sauer 150 g",
-          "price": "1.09",
+          "price": "0.69",
           "amount": ""
         },
         {
@@ -699,6 +709,31 @@
           "amount": ""
         },
         {
+          "name": "PHILADELPHIA Frischkäse 195 g, Original",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
+          "name": "PHILADELPHIA Frischkäse 195 g, Kräuter",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
+          "name": "PHILADELPHIA Frischkäse 195 g, Balance",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
+          "name": "PHILADELPHIA Frischkäse 150 g, Milka",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
+          "name": "PHILADELPHIA Frischkäse 175 g, Schnittlauch",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
           "name": "DR. OETKER Ofenfrische, Salami 390 g",
           "price": "1.79",
           "amount": ""
@@ -709,27 +744,42 @@
           "amount": ""
         },
         {
-          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150g, Schoko Balls",
+          "name": "MÖVENPICK Eisschale 850 ml, Bourbon Vanille",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "MÖVENPICK Eisschale 850 ml, Maple Walnuts",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "MÖVENPICK Eisschale 850 ml, Chocolate Chips",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150 g, Schoko Balls",
           "price": "0.33",
           "amount": ""
         },
         {
-          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150g, Schoko Flakes",
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150 g, Schoko Flakes",
           "price": "0.33",
           "amount": ""
         },
         {
-          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150g, Waffelwürfel",
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 150 g, Waffelwürfel",
           "price": "0.33",
           "amount": ""
         },
         {
-          "name": "MULLER MÜLLER, Joghurt mit der Ecke 113g, Mandel Crunch",
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 113 g, Mandel Crunch",
           "price": "0.33",
           "amount": ""
         },
         {
-          "name": "MULLER MÜLLER, Joghurt mit der Ecke 140g, Schoko Cookies",
+          "name": "MULLER MÜLLER, Joghurt mit der Ecke 140 g, Schoko Cookies",
           "price": "0.33",
           "amount": ""
         }
