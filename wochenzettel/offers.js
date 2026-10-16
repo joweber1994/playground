@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-13.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-16.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W42",
   "validFrom": "2026-10-12",
   "validUntil": "2026-10-17",
-  "extractedAt": "2026-10-13",
+  "extractedAt": "2026-10-16",
   "stores": [
     {
       "id": "prechtl",
@@ -1054,7 +1054,7 @@
           "amount": "je 850-g-Packung"
         },
         {
-          "name": "MÜHLENHOFFrisches Puten-Gulasch*",
+          "name": "MÜHLENHOF Frisches Puten-Gulasch*",
           "price": "6.99",
           "amount": "je 800-g-Packung"
         },
@@ -1089,14 +1089,14 @@
           "amount": "je 250 g"
         },
         {
-          "name": "AOSTE Longhetti*",
-          "price": "1.79",
-          "amount": "je 65 g"
-        },
-        {
           "name": "AOSTE Stickado*",
           "price": "1.79",
           "amount": "je 70 g"
+        },
+        {
+          "name": "AOSTE Longhetti*",
+          "price": "1.79",
+          "amount": "je 65 g"
         },
         {
           "name": "LUTZ Grillhaxe*",
@@ -1282,6 +1282,71 @@
           "name": "Chrysanthemen-Kasten*",
           "price": "3.99",
           "amount": "je Stück"
+        },
+        {
+          "name": "PENNY READY Salatdressing*",
+          "price": "0.79",
+          "amount": "je 250 ml"
+        },
+        {
+          "name": "PENNY READY Gnocchi*",
+          "price": "1.49",
+          "amount": "je 600 g"
+        },
+        {
+          "name": "FOOD FOR FUTURE Hummus*",
+          "price": "0.79",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "PENNY READY Brotaufstrich*",
+          "price": "1.19",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "PENNY READY Reibekuchen*",
+          "price": "1.49",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "PENNY READY Eierspätzle*",
+          "price": "1.69",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "PENNY READY Schupfnudeln*",
+          "price": "1.69",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "PENNY READY Salatschale Orzo oder Hähnchen-Kartoffel*",
+          "price": "2.79",
+          "amount": "je 350 g"
+        },
+        {
+          "name": "PENNY READY Salatschale Nudel-Hähnchen oder Kebab Art*",
+          "price": "2.79",
+          "amount": "je 350 g"
+        },
+        {
+          "name": "PENNY READY Salatbox*",
+          "price": "2.29",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "PENNY READY Sandwich*",
+          "price": "1.79",
+          "amount": "je 185 g"
+        },
+        {
+          "name": "PENNY READY Wraps*",
+          "price": "1.79",
+          "amount": "je 185 g"
+        },
+        {
+          "name": "MÜHLENHOF Delikatess Fleischsalat*",
+          "price": "1.49",
+          "amount": "je 400 g"
         },
         {
           "name": "MÜHLENHOF Delikatess Rohschinken*",
@@ -2734,469 +2799,214 @@
     {
       "id": "dm",
       "name": "dm",
-      "source": "https://www.meinprospekt.de/contentViewer/dynamic/5fda2d89-77ec-4538-8adb-957a4fcd58ca",
-      "note": "Aktuelle Angebote, 1. bis 15. Oktober. Lebensmittel, Haushalt, Pflege und Deko aus dem Heft.",
+      "source": "https://www.meinprospekt.de/contentViewer/dynamic/55c42fd4-fbda-4b69-8f35-8294fd5b8894",
+      "note": "Aktuelle Angebote 16.10.–31.10.2026, automatisch gelesen.",
       "otherCount": 0,
       "offers": [
         {
-          "name": "KoRo Nussmischung, gerösteter Snack-Mix mit Kichererbsen",
-          "price": "4.95",
-          "amount": "0,16 kg"
-        },
-        {
-          "name": "dmBio Mungobohnenkeimlinge",
-          "price": "2.25",
-          "amount": "0,18 kg"
-        },
-        {
-          "name": "dmBio Veggie-Mischung zum Anbraten",
-          "price": "3.95",
-          "amount": "0,15 kg"
-        },
-        {
-          "name": "dmBio Creme, Semifreddo Art",
-          "price": "1.25",
-          "amount": "Limone, 0,09 kg"
-        },
-        {
-          "name": "dmBio Kokos, geraspelt",
-          "price": "1.85",
-          "amount": "0,2 kg"
-        },
-        {
-          "name": "Teekanne Kräutertee, Innere Ruhe (18 Beutel)",
-          "price": "2.95",
-          "amount": "0,036 kg"
-        },
-        {
-          "name": "Voelkel Eisen Shot",
-          "price": "1.95",
-          "amount": "0,095 l"
-        },
-        {
-          "name": "dmBio Trockenpilze",
-          "price": "3.95",
-          "amount": "0,03 kg"
-        },
-        {
-          "name": "dmBio Miso-Paste",
-          "price": "4.95",
-          "amount": "0,15 kg"
-        },
-        {
-          "name": "dmBio Gebrannte Mandeln",
-          "price": "2.85",
-          "amount": "0,125 kg"
-        },
-        {
-          "name": "dmBio Pistaziencreme",
-          "price": "7.75",
-          "amount": "0,35 kg"
-        },
-        {
-          "name": "Sportness Proteinpulver, Protein Shake Vegan",
-          "price": "1.25",
-          "amount": "Mango Passionfruit, 0,028 kg"
-        },
-        {
-          "name": "Bauck Mühle Fertigmischung Veggie-Falafel, glutenfrei",
-          "price": "2.25",
-          "amount": "0,16 kg"
-        },
-        {
-          "name": "dmBio Zitronenschale gerieben 2 x 5 g",
-          "price": "0.95",
-          "amount": "0,01 kg"
-        },
-        {
-          "name": "dmBio Früchtetee Almgenuss (20 Beutel)",
-          "price": "1.75",
-          "amount": "0,04 kg"
-        },
-        {
-          "name": "dmBio Winterpunsch",
-          "price": "2.25",
-          "amount": "Apfel-Orange-Zitrone, 0,75 l"
-        },
-        {
-          "name": "dmBio bunte Herbst-Nudeln",
-          "price": "1.95",
-          "amount": "0,34 kg"
-        },
-        {
-          "name": "dmBio Bratapfelgewürz",
-          "price": "2.45",
-          "amount": "0,07 kg"
-        },
-        {
-          "name": "dmBio Feine Nougat Cashews",
-          "price": "2.95",
-          "amount": "0,09 kg"
-        },
-        {
-          "name": "Sportness Protein Cream Crunchy Hazelnut",
-          "price": "4.45",
-          "amount": "0,2 kg"
-        },
-        {
-          "name": "Mivolis Molke-Riegel mit Bourbon Vanille Geschmack",
-          "price": "0.45",
-          "amount": "0,035 kg"
-        },
-        {
-          "name": "dmBio Maronen Falafel",
-          "price": "1.65",
-          "amount": "0,16 kg"
-        },
-        {
-          "name": "dmBio Streudekor, gehackte Himbeeren",
-          "price": "2.45",
-          "amount": "0,015 kg"
-        },
-        {
-          "name": "Yogi Kräutertee Frauen Balance, 17 Beutel",
-          "price": "3.25",
-          "amount": "0,0306 kg"
-        },
-        {
-          "name": "dmBio Winter Fruchtpunsch, Holunder",
-          "price": "2.25",
-          "amount": "0,75 l"
-        },
-        {
-          "name": "dmBio Nudeln, Winter",
-          "price": "0.95",
-          "amount": "0,25 kg"
-        },
-        {
-          "name": "dmBio Gewürzmischung, Backgewürz mit Zimt",
-          "price": "0.85",
-          "amount": "0,015 kg"
-        },
-        {
-          "name": "dmBio Gebrannte Nussmischung",
-          "price": "2.95",
-          "amount": "0,125 kg"
-        },
-        {
-          "name": "dmBio Mandel Tonka Creme",
-          "price": "4.85",
-          "amount": "0,25 kg"
-        },
-        {
-          "name": "Barebells Proteinriegel Strawberry Sundae",
-          "price": "2.65",
-          "amount": "0,055 kg"
-        },
-        {
-          "name": "Geroma Bastelset Schmuckperlen in Stiefelbox",
-          "price": "4.95",
-          "amount": ""
-        },
-        {
-          "name": "Dekorieren & Einrichten Kerze 80/50 aus 100 % Bienenwachs, Rustik",
-          "price": "4.55",
-          "amount": ""
-        },
-        {
-          "name": "ebelin Silikon- Badebürste",
-          "price": "3.95",
-          "amount": ""
-        },
-        {
-          "name": "Fascino Strumpfhose mit Laufmaschen-Stopp & Komfortbund honey Gr. 50/52, 30 DEN",
-          "price": "4.45",
-          "amount": ""
-        },
-        {
-          "name": "Dekorieren & Einrichten Streudeko Spinnen, schwarz",
-          "price": "1.95",
-          "amount": "6 Stück"
-        },
-        {
-          "name": "Profissimo Papierdeko Herbst 2tlg",
-          "price": "2.95",
-          "amount": ""
-        },
-        {
-          "name": "Jean&Len Organizer aus Metall, beige (22,5x20x10,5 cm)",
-          "price": "14.95",
-          "amount": ""
-        },
-        {
-          "name": "Profissimo Duftlichter Pumpkin Spice Latte",
-          "price": "1.95",
-          "amount": "18 Stück"
-        },
-        {
-          "name": "Dekorieren & Einrichten LED Metallstern warmweiß, weiß, (30 cm)",
-          "price": "6.95",
-          "amount": ""
-        },
-        {
-          "name": "Profissimo Servietten \"Pferde\" (25x25 cm)",
-          "price": "1.45",
-          "amount": "20 Stück"
-        },
-        {
-          "name": "Dekorieren & Einrichten Drahttannenbaum beschneit, grün (23 cm)",
-          "price": "3.95",
-          "amount": ""
-        },
-        {
-          "name": "ebelin Massagetool 2in1",
-          "price": "8.95",
-          "amount": ""
-        },
-        {
-          "name": "ebelin Armreif braun",
-          "price": "5.45",
-          "amount": ""
-        },
-        {
-          "name": "Dekorieren & Einrichten Tablett mit Griffen \"Palmen\", mehrfarbig (35x25x4,5 cm)",
-          "price": "14.95",
-          "amount": ""
-        },
-        {
-          "name": "Jofrika Aqua Make up, Geister weiß",
-          "price": "4.95",
-          "amount": ""
-        },
-        {
-          "name": "nur die Leggings Elegant mit Hosen-Look schwarz Gr. 36/38",
-          "price": "24.95",
-          "amount": ""
-        },
-        {
-          "name": "Profissimo Maxi Duftlichter",
-          "price": "3.45",
-          "amount": "Apfel-Zimt, 12 Stück"
-        },
-        {
-          "name": "tesa Dekohaken Powerstrips® transparent Set 5tlg",
-          "price": "4.25",
-          "amount": ""
-        },
-        {
-          "name": "BOLTZE Metallkerzenhalter mit Glaseinsatz, mint (7,5 cm)",
-          "price": "3.45",
-          "amount": ""
-        },
-        {
-          "name": "BOLTZE Filzaufsteller Katze, rot-braun (21 cm)",
-          "price": "2.95",
-          "amount": ""
-        },
-        {
-          "name": "Dekorieren & Einrichten LED Metallstern warmweiß, schwarz (30 cm)",
-          "price": "6.95",
-          "amount": ""
-        },
-        {
-          "name": "ebelin Creolen, Silber-Optik",
-          "price": "5.95",
-          "amount": "wasserfest, 2 Stück"
-        },
-        {
-          "name": "BOLTZE Servietten Lebkuchenmann (33x33 cm)",
-          "price": "1.95",
-          "amount": "20 Stück"
-        },
-        {
-          "name": "Dekorieren & Einrichten Filzkorb mit Henkel, lila",
-          "price": "3.45",
-          "amount": ""
-        },
-        {
-          "name": "Fascino Strumpfhose Laufmaschen-Stopp schwarz Gr. 38/40",
-          "price": "4.45",
-          "amount": ""
-        },
-        {
-          "name": "Profissimo Stabkerze Rille",
-          "price": "0.85",
-          "amount": "champagner / light powder"
-        },
-        {
-          "name": "share Radierbarer Gelschreiber Set + Mine",
-          "price": "5.95",
-          "amount": "2 Stück"
-        },
-        {
-          "name": "BOLTZE Polybaum geeist, creme-gold (17 cm)",
-          "price": "4.95",
-          "amount": ""
-        },
-        {
-          "name": "BOLTZE Stoffelch mit Ausziehbeinen bis 110 cm, Junge, braun",
-          "price": "24.95",
-          "amount": ""
-        },
-        {
-          "name": "dm home Tischlampe aus Metall, beige, dimmbar (20 cm)",
+          "name": "dm home Ablageschale aus Glas, klar (24x8 cm)",
           "price": "12.95",
           "amount": ""
         },
         {
-          "name": "Schwarzkopf GLISS Sprühkur Bonding Micro Repair",
-          "price": "5.95",
-          "amount": "0,15 l"
-        },
-        {
-          "name": "Schwarzkopf GLOSS SUPREME Glossing Platin Blond",
-          "price": "9.95",
-          "amount": "0,145 l"
-        },
-        {
-          "name": "Alpecin Shampoo Grey Attack Coffein & Color",
-          "price": "9.95",
-          "amount": "0,2 l"
-        },
-        {
-          "name": "ebelin Haarklammer mit Blumen-Applikationen",
-          "price": "3.95",
+          "name": "dm home Aufbewahrungsdose mit Deckel aus Dolomit, beige (14x11,5 cm)",
+          "price": "7.95",
           "amount": ""
         },
         {
-          "name": "Balea Locken Revitalizing Spray",
-          "price": "2.45",
-          "amount": "0,15 l"
-        },
-        {
-          "name": "LANGHAARMÄDCHEN Spitzenserum Lovely Long",
-          "price": "3.95",
-          "amount": "0,1 l"
-        },
-        {
-          "name": "POP Hair Haarwachs Aqua Wax",
-          "price": "4.95",
-          "amount": "Cola Crush, 0,15 l"
-        },
-        {
-          "name": "Schwarzkopf GLOSS SUPREME Glossing Transparent",
-          "price": "9.95",
-          "amount": "0,145 l"
-        },
-        {
-          "name": "DEJAN GARZ Kopfhaut-Massagebürste Scalp Brush Pink",
-          "price": "11.95",
+          "name": "dm home Blumentopf mit Untersetzer aus Steingut, burgunder (13x15 cm)",
+          "price": "7.95",
           "amount": ""
         },
         {
-          "name": "Balea Leave-In Pflege feuchtigkeitsspendend beauty essentials",
-          "price": "1.95",
-          "amount": "0,125 l"
-        },
-        {
-          "name": "Balea MEN Haargel Water",
-          "price": "1.95",
-          "amount": "0,1 l"
-        },
-        {
-          "name": "GUHL Shampoo Locken Pflege & Styling",
-          "price": "4.95",
-          "amount": "0,25 l"
-        },
-        {
-          "name": "ebelin Haarklammern mit Cut-Out, beige/rosa",
-          "price": "2.95",
-          "amount": "2 Stück"
-        },
-        {
-          "name": "Schwarzkopf GLOSS SUPREME Glossing Karamell",
-          "price": "9.95",
-          "amount": "0,145 l"
-        },
-        {
-          "name": "schauma Leave-In Spray Volume & Collagen",
-          "price": "2.95",
-          "amount": "0,2 l"
-        },
-        {
-          "name": "ebelin Haarklammer Blumen, aubergine",
-          "price": "2.75",
+          "name": "dm home Spiegel mit Holzrahmen, organisch (40x30x2 cm)",
+          "price": "12.95",
           "amount": ""
         },
         {
-          "name": "Schwarzkopf GLOSS SUPREME Glossing",
-          "price": "9.95",
-          "amount": "Schokobraun, 0,145 l"
+          "name": "dm home Vase aus Glas geriffelt, transparent (14,5x14,5x19,5 cm)",
+          "price": "14.95",
+          "amount": ""
         },
         {
-          "name": "GUHL Haarkur, Conditioner & Lockencreme Pflege & Styling 3in1",
-          "price": "4.95",
-          "amount": "0,2 l"
+          "name": "dm home Ablageschale aus Glas, klar (17,5x6,5 cm)",
+          "price": "8.95",
+          "amount": ""
         },
         {
-          "name": "syoss Leave-In Serum Intense Keratin",
+          "name": "dm home Kosmetiktücher Box aus Keramik, dunkelbraun (15x15x13 cm)",
+          "price": "7.95",
+          "amount": ""
+        },
+        {
+          "name": "dm home Aufbewahrungsdose mit Deckel aus Dolomit, beige (10x15 cm)",
+          "price": "7.95",
+          "amount": ""
+        },
+        {
+          "name": "dm home Windlicht aus Holz/Glas, (12x20 cm)",
           "price": "6.95",
-          "amount": "0,1 l"
+          "amount": ""
         },
         {
-          "name": "Schwarzkopf taft Refresh Spray Good Hair Juicy Lemon",
+          "name": "KoRo Nussmischung, Roasted Snack Mix mit Paprika-Kichererbsen",
           "price": "4.95",
-          "amount": "0,15 l"
+          "amount": ""
         },
         {
-          "name": "GUHL Styling Spray Locken Pflege & Styling 2in1",
+          "name": "dmBio Knuspermüsli, Kerne & Saaten Granola",
+          "price": "5.95",
+          "amount": ""
+        },
+        {
+          "name": "Sportness Proteinpulver, Protein Shake Vegan, Mango Passionfruit Geschmack",
+          "price": "1.25",
+          "amount": ""
+        },
+        {
+          "name": "dmBio Tomatensauce Klassik",
+          "price": "1.75",
+          "amount": ""
+        },
+        {
+          "name": "Voelkel Eisen Shot",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
+          "name": "Teekanne Kräutertee, Waldbaden (18 Beutel)",
+          "price": "2.95",
+          "amount": ""
+        },
+        {
+          "name": "BESH Wiener im Glas",
           "price": "4.95",
-          "amount": "0,15 l"
+          "amount": ""
         },
         {
-          "name": "Plantur Conditioner DMG Clinical",
-          "price": "9.95",
-          "amount": "0,15 l"
+          "name": "dmBio Agavensirup, Pumpkin Spice",
+          "price": "2.95",
+          "amount": ""
         },
         {
-          "name": "Schwarzkopf taft Refresh Spray Good Hair Fresh Bloom",
-          "price": "4.95",
-          "amount": "0,15 l"
+          "name": "dmBio Mungobohnenkeimlinge",
+          "price": "2.25",
+          "amount": ""
         },
         {
-          "name": "Balea PROFESSIONAL Leave-In Glow&Shine Finishing Spray",
-          "price": "2.45",
-          "amount": "0,15 l"
+          "name": "dmBio Gebrannte Mandeln",
+          "price": "2.85",
+          "amount": ""
         },
         {
-          "name": "ebelin Haarclips inspiriert von Disney's Winnie the Pooh",
-          "price": "2.45",
-          "amount": "4 Stück"
-        },
-        {
-          "name": "ebelin Haarklammer love, rosa",
+          "name": "dmBio Müsli Crunchy, Apfelstrudel",
           "price": "3.45",
           "amount": ""
         },
         {
-          "name": "Balea Haarspray pure softness",
-          "price": "1.15",
-          "amount": "0,3 l"
+          "name": "maxi NUTRITION Proteinwaffelriegel, Peanut Spread",
+          "price": "1.85",
+          "amount": ""
         },
         {
-          "name": "PANTENE PRO-V Conditioner Glowtox",
+          "name": "BIOVEGAN Meine vegane Jägersauce",
+          "price": "1.25",
+          "amount": ""
+        },
+        {
+          "name": "dmBio Winterpunsch, Apfel-Orange-Zitrone",
+          "price": "2.25",
+          "amount": ""
+        },
+        {
+          "name": "pukka Gewürztee Original Chai mit Zimt, Kardamom und Ingwer (20 Beutel)",
           "price": "3.95",
-          "amount": "0,2 l"
+          "amount": ""
         },
         {
-          "name": "ebelin Haarklammer Blume, weiß-braun",
+          "name": "dmBio Veganes No-Chicken Curry",
           "price": "2.75",
           "amount": ""
         },
         {
-          "name": "ebelin Haarreif gepolstert, braun",
-          "price": "4.65",
+          "name": "Mivolis Birkenzucker",
+          "price": "3.65",
           "amount": ""
         },
         {
-          "name": "ALANA Schlafanzug mit Drachen-Motiv, blau, Gr. 98/104",
-          "price": "14.90",
+          "name": "dmBio Kürbispüree",
+          "price": "1.95",
           "amount": ""
         },
         {
-          "name": "babylove Baby Pants Biene Maja Gr. 4 maxi (9-15 kg)",
+          "name": "dmBio Feine Nougat Cashews",
+          "price": "2.95",
+          "amount": ""
+        },
+        {
+          "name": "dmBio Brot, Das Pure Hafer mit Karotten & Walnüssen",
+          "price": "2.15",
+          "amount": ""
+        },
+        {
+          "name": "Mivolis Molke-Riegel mit Bourbon Vanille Geschmack",
+          "price": "0.45",
+          "amount": ""
+        },
+        {
+          "name": "dmBio Tomatensauce Ziegenfrischkäse",
+          "price": "2.25",
+          "amount": ""
+        },
+        {
+          "name": "dmBio Winter Fruchtpunsch, Holunder",
+          "price": "2.25",
+          "amount": ""
+        },
+        {
+          "name": "Cupper Kräutertee, Simply Relax mit Kamille, Zitrone & Honig (20 Beutel)",
+          "price": "2.95",
+          "amount": ""
+        },
+        {
+          "name": "Bauck Mühle Fertigmischung, Veggie Falafel Burger, glutenfrei",
+          "price": "2.25",
+          "amount": ""
+        },
+        {
+          "name": "Mivolis Süßstoff flüssig",
+          "price": "1.35",
+          "amount": ""
+        },
+        {
+          "name": "dmBio Getrocknete Pilze",
+          "price": "3.95",
+          "amount": ""
+        },
+        {
+          "name": "dmBio Mandeln, gehobelt",
+          "price": "2.25",
+          "amount": ""
+        },
+        {
+          "name": "dmBio Backmischung Proteinbrot",
+          "price": "2.95",
+          "amount": ""
+        },
+        {
+          "name": "Barebells Proteinriegel Strawberry Sundae",
+          "price": "2.65",
+          "amount": ""
+        },
+        {
+          "name": "CRAZE Kinder Badezusatz Badebombe Bluey",
           "price": "4.95",
-          "amount": "20 Stück"
+          "amount": ""
+        },
+        {
+          "name": "ALANA Lätzchen mit Tier-Applikation, grün",
+          "price": "5.90",
+          "amount": ""
         },
         {
           "name": "keine Marke Achtsamkeits-Journal",
@@ -3204,19 +3014,24 @@
           "amount": ""
         },
         {
-          "name": "NUK Trinklernbecher First Choice Magic lila, ab 8. Monat, 230 ml",
-          "price": "9.95",
+          "name": "Freche Freunde Kindersnack Mini Knupser-Mäuse Käse & Tomate ab 1 Jahr",
+          "price": "1.15",
+          "amount": ""
+        },
+        {
+          "name": "PHILIPS AVENT Schnuller ultra soft, forest friends Silikon, creme/mint, 0-6",
+          "price": "7.95",
+          "amount": ""
+        },
+        {
+          "name": "PUSBLU Regenhose mit Futter & Träger, blau, Gr. 122/128",
+          "price": "19.90",
           "amount": ""
         },
         {
           "name": "LILLYDOO Wundschutzcreme",
           "price": "3.95",
-          "amount": "0,075 l"
-        },
-        {
-          "name": "PURE & FUN Eistee Paw Patrol Pfirsich ab 3 Jahren",
-          "price": "1.45",
-          "amount": "0,33 l"
+          "amount": ""
         },
         {
           "name": "ALANA Lätzchen mit Mäuse-Applikation, rosa",
@@ -3226,97 +3041,37 @@
         {
           "name": "babylove Waschpads bunt",
           "price": "3.95",
-          "amount": "4 Stück"
-        },
-        {
-          "name": "fehn Schmusetuch Elefant",
-          "price": "5.90",
           "amount": ""
         },
         {
-          "name": "ALANA Schlafanzug mit Leo-Muster, lila, Gr. 62/68",
-          "price": "11.90",
+          "name": "Kneipp Naturkind Kinder Badezusatz Badekristalle Winterspaß",
+          "price": "0.95",
           "amount": ""
         },
         {
-          "name": "babylove Baby Pants Biene Maja Gr. 5 junior (12-17 kg)",
-          "price": "4.95",
-          "amount": "18 Stück"
+          "name": "fehn Activity-Elefant",
+          "price": "7.90",
+          "amount": ""
         },
         {
           "name": "Mivolis Arzneitee, Erkältungs Tee für Kinder (12 Beutel)",
           "price": "1.15",
-          "amount": "0,018 kg"
-        },
-        {
-          "name": "NUK Trinkflasche First Choice Push-Pull",
-          "price": "8.45",
-          "amount": "braun, 450 ml, fürs Kind"
-        },
-        {
-          "name": "babylove Sicherheits-Wattestäbchen",
-          "price": "0.75",
-          "amount": "72 Stück"
-        },
-        {
-          "name": "PURE & FUN Saft und Wasser Bluey",
-          "price": "1.45",
-          "amount": "Apfel-Heidelbeere, 0,33 l"
-        },
-        {
-          "name": "ALANA Lätzchen mit Tier-Applikation, grün",
-          "price": "5.90",
           "amount": ""
         },
         {
-          "name": "babylove Windelbeutel hygienisch mit Himbeerdurft",
-          "price": "1.45",
-          "amount": "100 Stück"
-        },
-        {
-          "name": "ALANA Püppchen mit Holzring & Herz-Muster, beige",
-          "price": "5.90",
+          "name": "Freche Freunde Kindersnack Brezel Chips Paprika-Style ab 3 Jahren",
+          "price": "1.85",
           "amount": ""
         },
         {
-          "name": "ALANA Unterhemden mit Dino-Muster, blau + grün, Gr. 122/128",
-          "price": "8.90",
+          "name": "babylove Schnuller Naturlatex, symmetrisch, beige/lila, Gr. 2, 5-18 Monate",
+          "price": "2.75",
           "amount": ""
         },
         {
-          "name": "Bübchen Shampoo und Duschgel 2in1 Pokémon",
-          "price": "1.75",
-          "amount": "fürs Kind, 0,23 l"
-        },
-        {
-          "name": "Mivolis Arzneitee, Husten & Bronchial Tee für Kinder (12 Beutel)",
-          "price": "1.15",
-          "amount": "0,018 kg"
-        },
-        {
-          "name": "NUK Trinkhalmbecher First Choice Disney blau, ab 8. Monat, 230 ml",
-          "price": "10.45",
+          "name": "PUSBLU Gummistiefel mit Kunstfellfutter, blau, Gr. 22/23",
+          "price": "17.90",
           "amount": ""
-        },
-        {
-          "name": "LILLYDOO Pflegecreme",
-          "price": "3.95",
-          "amount": "0,075 l"
-        },
-        {
-          "name": "Mikk-Line Schuhe mit Merinowolle, gold, Gr. 74/80",
-          "price": "10.90",
-          "amount": ""
-        },
-        {
-          "name": "babylove Trinkhalmbecher Edelstahl/Silikon apricot, 300 ml",
-          "price": "8.95",
-          "amount": ""
-        },
-        {
-          "name": "BALI CURLS Lockencreme Dream Curl",
-          "price": "6.95",
-          "amount": "fürs Kind und Teenager, 0,17 l"
         },
         {
           "name": "Penaten Kuscheltier Biene Maja",
@@ -3324,171 +3079,377 @@
           "amount": ""
         },
         {
-          "name": "ALANA Schlafanzug mit Dino-Muster, grün, Gr. 74/80",
-          "price": "11.90",
+          "name": "ALANA Lätzchen mit Fuchs-Applikation, rot",
+          "price": "5.90",
           "amount": ""
         },
         {
-          "name": "Bübchen Shampoo und Duschgel Blubberbagger",
-          "price": "1.75",
-          "amount": "fürs Kind, 0,23 l"
+          "name": "babylove Windelbeutel hygienisch mit Himbeerdurft",
+          "price": "1.45",
+          "amount": ""
         },
         {
-          "name": "fehn Spieltier Affe",
+          "name": "SauBär Schaumbad Ultra Sensitiv",
+          "price": "0.95",
+          "amount": ""
+        },
+        {
+          "name": "fehn Softbilderbuch Affe",
           "price": "6.90",
           "amount": ""
         },
         {
-          "name": "Ivy&Lane Creamy Vibes Körperspray Bodymist",
-          "price": "5.75",
-          "amount": "0,2 l"
-        },
-        {
-          "name": "Impulse Deospray True Love Rose & Coconut",
-          "price": "1.35",
-          "amount": "0,075 l"
-        },
-        {
-          "name": "ebelin Kosmetikbänder-Set Wild Desert 3tlg",
-          "price": "3.95",
+          "name": "Mivolis Arzneitee, Husten & Bronchial Tee für Kinder (12 Beutel)",
+          "price": "1.15",
           "amount": ""
         },
         {
-          "name": "Fascino Socken mit Leo-Muster & Glitzer-Bund beige & schwarz Gr. 39-42",
-          "price": "2.65",
-          "amount": ""
-        },
-        {
-          "name": "S-QUiTO free Insektenschutzspray Lemongrass Comfort",
-          "price": "5.25",
-          "amount": "0,1 l"
-        },
-        {
-          "name": "FELCE AZZURRA Duschgel Original",
-          "price": "2.25",
-          "amount": "0,25 l"
-        },
-        {
-          "name": "WELEDA Nachtcreme Youth Power",
-          "price": "22.95",
-          "amount": "Granatapfel, 0,04 l"
-        },
-        {
-          "name": "Balea Cremeseife blush harmony",
-          "price": "0.65",
-          "amount": "0,5 l"
-        },
-        {
-          "name": "Balea Handmaske Sweet Berry bedruckt (1 Paar)",
-          "price": "2.95",
-          "amount": "2 Stück"
-        },
-        {
-          "name": "bruno banani Bubble Babe Körperspray Body Mist",
-          "price": "6.95",
-          "amount": "0,25 l"
-        },
-        {
-          "name": "Balea MEN Bart Shampoo",
-          "price": "2.95",
-          "amount": "0,25 l"
-        },
-        {
-          "name": "Compeed Blasenpflaster Medium",
-          "price": "4.95",
-          "amount": "4 Stück"
-        },
-        {
-          "name": "Fascino Crew Socken mit Teddy-Motiv beige Gr. 39-42",
-          "price": "3.65",
-          "amount": ""
-        },
-        {
-          "name": "S-QUiTO free Insektenstich Roll-on, Soforthilfe Kräuterfluid",
-          "price": "2.75",
-          "amount": "0,015 l"
-        },
-        {
-          "name": "WELEDA Duschcreme Amber divine",
-          "price": "5.95",
-          "amount": "0,2 l"
-        },
-        {
-          "name": "NIVEA Nachtcreme Cellular Epigenetics",
-          "price": "19.95",
-          "amount": "0,05 l"
-        },
-        {
-          "name": "Balea Flüssigseife, milde Seife selfcare moments",
-          "price": "0.95",
-          "amount": "0,3 l"
-        },
-        {
-          "name": "Balea Handcreme Ginseng & Green Mandarin",
-          "price": "1.95",
-          "amount": "0,075 l"
-        },
-        {
-          "name": "MUSTANG Wild Blossom Soft Moon Eau de Parfum",
-          "price": "9.95",
-          "amount": "0,03 l"
-        },
-        {
-          "name": "SEINZ. Duschgel cherry night 4in1",
-          "price": "2.45",
-          "amount": "0,3 l"
-        },
-        {
-          "name": "Balea Fußcreme selfcare moments",
+          "name": "MOGLi Kindersnack Pizza Bällchen mit Dinkel ab 3 Jahren",
           "price": "1.25",
-          "amount": "0,1 l"
-        },
-        {
-          "name": "Fascino Socken mit Leo-Muster & Glitzer-Bund beige & schwarz Gr. 35-38",
-          "price": "2.65",
           "amount": ""
         },
         {
-          "name": "nevernot Intimpflegetücher Quickies",
-          "price": "2.95",
-          "amount": "12 Stück"
+          "name": "fehn Waschhandschuh Elefant",
+          "price": "4.90",
+          "amount": ""
         },
         {
-          "name": "BALI SKIN Duschgel Warm Tonka & Oud",
+          "name": "PUSBLU Regenjacke mit Fleece-Futter & Punkte-Muster, blau, Gr. 122/128",
+          "price": "29.90",
+          "amount": ""
+        },
+        {
+          "name": "babylove Schwimmwindeln Disney Gr. Large (10-14 kg)",
+          "price": "3.75",
+          "amount": ""
+        },
+        {
+          "name": "fehn Rasselring Affe",
+          "price": "4.90",
+          "amount": ""
+        },
+        {
+          "name": "Mabyen Hafer Cracker Sesam & Amaranth Mama",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
+          "name": "nanoo kids Kinder Badezusatz Seifenblasenbad Paw Patrol",
           "price": "3.95",
-          "amount": "0,25 l"
+          "amount": ""
         },
         {
-          "name": "lavera NATURKOSMETIK Nachtcreme straffend",
-          "price": "17.55",
-          "amount": "0,05 l"
+          "name": "Penaten Baby-Sonnenhut \"hello sunshine\" Gr. 48 (ca. 12-24 Monate)",
+          "price": "2.95",
+          "amount": ""
         },
         {
-          "name": "Rexona Antitranspirant Deocreme Maximum Protection Stress Control",
+          "name": "NUK Trinkhalmbecher First Choice Disney blau, ab 8. Monat, 230 ml",
+          "price": "10.45",
+          "amount": ""
+        },
+        {
+          "name": "Zewa Toilettenpapier Ultra Senses Mandelblüte 4-lagig (8x135 Blatt)",
+          "price": "4.65",
+          "amount": ""
+        },
+        {
+          "name": "Poliboy Orangenöl Kraftreiniger",
+          "price": "6.95",
+          "amount": ""
+        },
+        {
+          "name": "share Buntstifte Set 12tlg.",
+          "price": "7.95",
+          "amount": ""
+        },
+        {
+          "name": "Denkmit Colorwaschmittel Touch of Brazil",
+          "price": "4.65",
+          "amount": ""
+        },
+        {
+          "name": "Profissimo Mückenabwehr-Stecker Nachfüller",
+          "price": "3.45",
+          "amount": ""
+        },
+        {
+          "name": "Sanft&Sicher Toilettenpapier Design Edition (10x180 Blatt)",
+          "price": "4.45",
+          "amount": ""
+        },
+        {
+          "name": "Perwoll Weichspüler renew7 Amber Glow 39WL",
+          "price": "3.95",
+          "amount": ""
+        },
+        {
+          "name": "Dr. Beckmann Fleckenentferner Teppich Bürste",
+          "price": "3.95",
+          "amount": ""
+        },
+        {
+          "name": "Nexa Lotte Mottenpapier",
+          "price": "3.95",
+          "amount": ""
+        },
+        {
+          "name": "Tempo Feuchtes Toilettenpapier sanft & frisch (2x42 St)",
+          "price": "3.35",
+          "amount": ""
+        },
+        {
+          "name": "Febreze Mülleimererfrischer Starterkit Zitrusfrische",
+          "price": "4.95",
+          "amount": ""
+        },
+        {
+          "name": "BOLTZE Metallaufsteller geschwungener Baum, schwarz (21,5 cm)",
+          "price": "2.95",
+          "amount": ""
+        },
+        {
+          "name": "Profissimo Stumpenkerze glatte Stumpe 100/70 Chili",
+          "price": "1.45",
+          "amount": ""
+        },
+        {
+          "name": "Punch Spülschwamm Zitrone",
+          "price": "3.95",
+          "amount": ""
+        },
+        {
+          "name": "Sanft&Sicher Toilettenpapier Saison 3lagig (8x180 Blatt)",
+          "price": "2.95",
+          "amount": ""
+        },
+        {
+          "name": "Kuschelweich Weichspüler Glücksmoment 32WL",
+          "price": "1.65",
+          "amount": ""
+        },
+        {
+          "name": "Denkmit Feuchte Allzwecktücher Almond Blossom",
+          "price": "1.45",
+          "amount": ""
+        },
+        {
+          "name": "Profissimo Bastelpapier (DIN A4)",
+          "price": "3.45",
+          "amount": ""
+        },
+        {
+          "name": "Tempo Feuchtes Toilettenpapier Blue Lagoon",
+          "price": "1.75",
+          "amount": ""
+        },
+        {
+          "name": "Profissimo Anti-Rutschmatte zum Zuschneiden",
+          "price": "2.95",
+          "amount": ""
+        },
+        {
+          "name": "Punch Spülschwamm Apfel",
+          "price": "3.95",
+          "amount": ""
+        },
+        {
+          "name": "Profissimo Stumpenkerze glatt 140/80 Chili",
+          "price": "2.25",
+          "amount": ""
+        },
+        {
+          "name": "Denkmit Badreiniger",
+          "price": "0.85",
+          "amount": ""
+        },
+        {
+          "name": "Soft&Sicher Taschentücher Design 4-lagig (42x10 St)",
+          "price": "3.85",
+          "amount": ""
+        },
+        {
+          "name": "Kuschelweich Weichspüler Sommerwind 32WL",
+          "price": "1.65",
+          "amount": ""
+        },
+        {
+          "name": "Profissimo Multifunktionsöffner 5in1",
+          "price": "3.95",
+          "amount": ""
+        },
+        {
+          "name": "Punch Allzweckschwamm Orange",
+          "price": "3.95",
+          "amount": ""
+        },
+        {
+          "name": "Tempo Taschentücher (44+4 Pck. x10 St)",
+          "price": "4.95",
+          "amount": ""
+        },
+        {
+          "name": "Profissimo Keksausstecher mit Silikonrand, Tiere",
+          "price": "5.25",
+          "amount": ""
+        },
+        {
+          "name": "Denkmit Spülmittel Frühlingsfrische",
+          "price": "0.85",
+          "amount": ""
+        },
+        {
+          "name": "alverde NATURKOSMETIK Lidschatten Palette 60 Lavender Glow",
+          "price": "4.45",
+          "amount": ""
+        },
+        {
+          "name": "SHIRIN BEAUTY Lip Scrub Strawberry",
           "price": "5.95",
-          "amount": "0,06 l"
-        },
-        {
-          "name": "ebelin Armband Wild Desert",
-          "price": "3.95",
           "amount": ""
         },
         {
-          "name": "Betty Barclay Caramelised Vanilla Körperspray Bodymist",
-          "price": "6.75",
-          "amount": "0,25 l"
+          "name": "REAL TECHNIQUES Pinsel-Set Everyday Essentials",
+          "price": "21.95",
+          "amount": ""
         },
         {
-          "name": "NØ cosmetics Peeling Cleanser AHA / PHA",
-          "price": "2.95",
-          "amount": "0,04 l"
+          "name": "CATRICE Nagelöl Dual Delightl",
+          "price": "3.75",
+          "amount": ""
         },
         {
-          "name": "WELEDA Handcreme Amber Divine",
-          "price": "5.45",
-          "amount": "0,05 l"
+          "name": "essence Abdeckstift CC Coverstick 10 Green",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
+          "name": "alverde NATURKOSMETIK Lidschatten Palette 30 Timeless Nude",
+          "price": "4.45",
+          "amount": ""
+        },
+        {
+          "name": "alverde NATURKOSMETIK Nagelserum Roll-On Hydrating",
+          "price": "3.45",
+          "amount": ""
+        },
+        {
+          "name": "CATRICE Blush Velvet Pudding Blurring 060 Rose Soufflé",
+          "price": "4.45",
+          "amount": ""
+        },
+        {
+          "name": "essence Make-Up Schwamm & Case Care Bears 01 Kindness Always Wins",
+          "price": "4.25",
+          "amount": ""
+        },
+        {
+          "name": "CATRICE Lidschatten Soft Blend Stick Waterproof 030 Velvet Pink",
+          "price": "4.45",
+          "amount": ""
+        },
+        {
+          "name": "alverde NATURKOSMETIK Lippenpeeling Smooth & Soft",
+          "price": "2.45",
+          "amount": ""
+        },
+        {
+          "name": "ebelin Geschenkset \"Reh\" Make-up Eier 3tlg",
+          "price": "3.45",
+          "amount": ""
+        },
+        {
+          "name": "SHIRIN BEAUTY Nagelöl glazed strawberry butter cream",
+          "price": "5.95",
+          "amount": ""
+        },
+        {
+          "name": "essence Abdeckstift CC Coverstick 30 Pink",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
+          "name": "CATRICE Lidschatten Palette The Cool Rose",
+          "price": "5.95",
+          "amount": ""
+        },
+        {
+          "name": "essence Nagelöl Nail Repair Oil",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
+          "name": "NYX PROFESSIONAL MAKEUP Blush Buttermelt 05.50 Butta Cherry Pop",
+          "price": "8.95",
+          "amount": ""
+        },
+        {
+          "name": "essence Make-Up Schwamm & Case Care Bears 02 Be Kind To All",
+          "price": "4.25",
+          "amount": ""
+        },
+        {
+          "name": "alverde NATURKOSMETIK Lidschatten Palette 10 Smokey Eyes",
+          "price": "4.45",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Lippenöl The Tinted Glow Lip Oil 010 Poppy Red",
+          "price": "8.95",
+          "amount": ""
+        },
+        {
+          "name": "e.l.f. Cosmetics Make-up-Schwämmchen Sponge Pickle",
+          "price": "4.95",
+          "amount": ""
+        },
+        {
+          "name": "essence Nagelhautentferner Cuticle Remover",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
+          "name": "essence Abdeckstift CC Coverstick 20 Purple",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
+          "name": "CATRICE Lidschatten Soft Blend Stick Waterproof 020 Bronzy Glow",
+          "price": "4.45",
+          "amount": ""
+        },
+        {
+          "name": "essence Nagelöl Nail Care Oil",
+          "price": "1.95",
+          "amount": ""
+        },
+        {
+          "name": "SHIRIN BEAUTY Lippenöl Strawberry",
+          "price": "5.95",
+          "amount": ""
+        },
+        {
+          "name": "SHEGLAM Primer Melt Touch Ultra Hydrating",
+          "price": "6.95",
+          "amount": ""
+        },
+        {
+          "name": "MANHATTAN Cosmetics Lidschatten Volume Up Shimmer Shock, 003 Frozen Bubblegum",
+          "price": "6.95",
+          "amount": ""
+        },
+        {
+          "name": "L'ORÉAL PARiS Lipliner Blurfiller Blurring Lip Contour 535 Brown Caramel",
+          "price": "10.95",
+          "amount": ""
+        },
+        {
+          "name": "MAYBELLINE NEW YORK Settingspray Grippy Mist Feuchtigkeitsspendendes",
+          "price": "9.95",
+          "amount": ""
         }
-      ]
+      ],
+      "revision": "55c42fd4-fbda-4b69-8f35-8294fd5b8894"
     },
     {
       "id": "rossmann",
