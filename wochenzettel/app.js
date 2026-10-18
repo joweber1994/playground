@@ -6,6 +6,7 @@
   var catalog = bundledCatalog;
   var shop = window.WochenzettelShop;
   var syncApi = window.WochenzettelSync;
+  var linkApi = window.HaushaltSync;
   var barcodeApi = window.WochenzettelBarcode;
   var eanScan = window.WochenzettelEan;
   var tickerApi = window.WochenzettelTicker;
@@ -143,11 +144,6 @@
     stapleNote: document.getElementById('staple-note'),
     staples: document.getElementById('staples'),
     sync: document.getElementById('sync-status'),
-    sheet: document.getElementById('sheet'),
-    sheetForm: document.getElementById('sheet-form'),
-    sheetBody: document.getElementById('sheet-body'),
-    sheetError: document.getElementById('sheet-error'),
-    sheetSubmit: document.getElementById('sheet-submit'),
     tickerBanner: document.getElementById('ticker-banner'),
     tickerForm: document.getElementById('ticker-form'),
     tickerText: document.getElementById('ticker-text'),
@@ -1641,20 +1637,6 @@
     return true;
   }
 
-  var sheetState = { onSubmit: null };
-
-  function showSheetError(message) {
-    if (!els.sheetError) return;
-    els.sheetError.hidden = false;
-    els.sheetError.textContent = message;
-  }
-
-  function closeSheet() {
-    if (!els.sheet) return;
-    els.sheet.hidden = true;
-    sheetState.onSubmit = null;
-  }
-
   function renderSyncStatus() {
     if (!els.sync) return;
     var labels = {
@@ -1703,21 +1685,20 @@
 
   function startSession() {
     stopSession();
-    if (!syncApi) {
+    if (!syncApi || !linkApi) {
       setSyncStatus('local');
       return;
     }
-    var url = readStored(syncApi.URL_KEY);
-    var id = readStored(syncApi.HOUSEHOLD_KEY);
-    if (!url || !id) {
+    var link = linkApi.readConnection(window.localStorage);
+    if (!link.url || !link.householdId) {
       setSyncStatus('local');
       return;
     }
     var storedUpdatedAt = Number(readStored(syncApi.UPDATED_KEY));
     if (isFinite(storedUpdatedAt)) localUpdatedAt = storedUpdatedAt;
     session = syncApi.createSession({
-      databaseURL: url,
-      householdId: id,
+      databaseURL: link.url,
+      householdId: link.householdId,
       getSnapshot: function () {
         return {
           state: exportStand(),
@@ -1736,77 +1717,6 @@
       EventSource: window.EventSource,
       now: function () { return Date.now(); }
     });
-  }
-
-  function openSyncSheet() {
-    if (!syncApi || !els.sheet) return;
-    var connected = !!(readStored(syncApi.URL_KEY) && readStored(syncApi.HOUSEHOLD_KEY));
-    els.sheetBody.textContent = '';
-    var intro = document.createElement('p');
-    intro.className = 'sheet-copy';
-    intro.textContent = 'Beide Handys tragen dieselbe Datenbank-Adresse und dasselbe Kennwort ein. Zeilen, Mengen und Haken werden zusammengeführt, nicht überschrieben.';
-    var rulesHint = document.createElement('p');
-    rulesHint.className = 'sheet-copy';
-    rulesHint.textContent = 'In Firebase unter Rules den Text unten veröffentlichen. Chore Wars und der Wochenzettel teilen sich die Adresse, liegen aber in getrennten Pfaden.';
-    var rules = document.createElement('textarea');
-    rules.className = 'rules-box';
-    rules.readOnly = true;
-    rules.value = syncApi.RULES_TEXT;
-    rules.setAttribute('aria-label', 'Firebase-Regeln');
-    var url = document.createElement('input');
-    url.name = 'databaseUrl';
-    url.type = 'url';
-    url.value = readStored(syncApi.URL_KEY);
-    url.placeholder = 'https://name.firebaseio.com';
-    url.autocomplete = 'off';
-    var secret = document.createElement('input');
-    secret.name = 'secret';
-    secret.type = 'text';
-    secret.maxLength = syncApi.SECRET_MAX;
-    secret.placeholder = 'Mindestens 8 Zeichen, auf beiden Geräten gleich';
-    secret.autocomplete = 'off';
-    secret.value = readStored(syncApi.SECRET_KEY);
-    secret.addEventListener('input', function () {
-      writeStored(syncApi.SECRET_KEY, secret.value);
-    });
-    els.sheetBody.append(intro, rulesHint, rules, url, secret);
-    if (connected) {
-      var disconnect = document.createElement('button');
-      disconnect.type = 'button';
-      disconnect.className = 'sheet-choice';
-      disconnect.textContent = 'Verbindung trennen';
-      disconnect.addEventListener('click', function () {
-        stopSession();
-        writeStored(syncApi.HOUSEHOLD_KEY, '');
-        setSyncStatus('local');
-        closeSheet();
-        announce('Nur noch dieses Gerät.');
-      });
-      els.sheetBody.append(disconnect);
-    }
-    els.sheetError.hidden = true;
-    els.sheet.hidden = false;
-    url.focus();
-    sheetState.onSubmit = function () {
-      var urlResult = syncApi.normalizeDatabaseUrl(url.value);
-      if (!urlResult.ok) return urlResult.error;
-      var secretResult = syncApi.readSecret(secret.value);
-      if (!secretResult.ok) return secretResult.error;
-      writeStored(syncApi.SECRET_KEY, secretResult.value);
-      els.sheetSubmit.disabled = true;
-      syncApi.householdId(secretResult.value).then(function (household) {
-        writeStored(syncApi.URL_KEY, urlResult.value);
-        writeStored(syncApi.HOUSEHOLD_KEY, household);
-        els.sheetSubmit.disabled = false;
-        closeSheet();
-        announce('Verbinden…');
-        startSession();
-      }).catch(function () {
-        els.sheetSubmit.disabled = false;
-        showSheetError('Das Kennwort konnte nicht verarbeitet werden.');
-      });
-      return 'stay';
-    };
   }
 
   function cameraMessage(error) {
@@ -2727,18 +2637,11 @@
     if (els.clearList) els.clearList.addEventListener('click', clearShoppingList);
     syncHistoryButtons();
 
-    if (els.sync) els.sync.addEventListener('click', openSyncSheet);
-    if (els.sheet) {
-      els.sheet.addEventListener('click', function (event) {
-        if (event.target.closest('[data-sheet-close]')) closeSheet();
-      });
-      els.sheetForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        if (!sheetState.onSubmit) return;
-        var error = sheetState.onSubmit();
-        if (error && error !== 'stay') showSheetError(error);
-      });
-    }
+    window.addEventListener('storage', function (event) {
+      if (!linkApi) return;
+      if (event.key !== linkApi.URL_KEY && event.key !== linkApi.HOUSEHOLD_KEY && event.key !== linkApi.LEGACY_URL_KEY && event.key !== linkApi.LEGACY_HOUSEHOLD_KEY) return;
+      startSession();
+    });
 
     if (els.scanOpen) els.scanOpen.addEventListener('click', openScanner);
     if (els.scanner) {

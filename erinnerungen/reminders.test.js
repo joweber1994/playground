@@ -23,8 +23,21 @@ var named = reminders.addItem(reminders.blank(), 'Anrufen', '', { name: '  Anna 
 assertEqual(named.item.name, 'Anna', 'Name wird beschnitten');
 var checked = reminders.toggleItem(named.state, named.item.id);
 assertEqual(checked.state.items[0].name, 'Anna', 'Abhaken behält den Namen');
-assert(!reminders.parseShared({ updatedAt: 1 }).ok, 'Stand ohne Liste ist unlesbar');
+assertEqual(reminders.blank().version, 1, 'leere Liste behält eine Markierung');
+assert(reminders.parseShared({ version: 1 }).ok, 'Liste ohne Einträge ist leer');
+assertEqual(reminders.parseShared({ version: 1 }).state.items.length, 0, 'fehlende Einträge sind eine leere Liste');
 assert(reminders.parseShared({ items: [{ id: 'a', text: 'Eins', date: '', name: 'Jonas' }] }).ok, 'gemeinsame Liste wird gelesen');
+var mapped = reminders.parseShared({
+  items: {
+    '1': { id: 'b', text: 'Zwei', date: '' },
+    '0': { id: 'a', text: 'Eins', date: '' }
+  }
+});
+assert(mapped.ok, 'Firebase-Objektliste wird gelesen');
+assertEqual(mapped.state.items.map(function (item) { return item.text; }).join(','), 'Eins,Zwei', 'numerische Schlüssel bleiben in Reihenfolge');
+assert(!reminders.parseShared({ version: 3, chores: [], players: [] }).ok, 'Chore-Wars-Stand ist keine Erinnerungsliste');
+assert(!reminders.parseShared(null).ok, 'fehlender Stand ist unlesbar');
+assert(!reminders.parseShared({ items: { name: 'Brot' } }).ok, 'fremde Objektliste bleibt unlesbar');
 assertEqual(added.state.items[0].id, 'muell', 'neue Erinnerung steht vorn');
 
 var empty = reminders.addItem(reminders.blank(), '   ', '');

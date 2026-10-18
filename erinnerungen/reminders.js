@@ -9,9 +9,10 @@
   var STORAGE_KEY = 'erinnerungen-v1';
   var TEXT_MAX = 120;
   var LIST_MAX = 80;
+  var VERSION = 1;
 
   function blank() {
-    return { items: [] };
+    return { version: VERSION, items: [] };
   }
 
   function cleanText(value) {
@@ -63,7 +64,7 @@
         name: cleanAuthor(item.name)
       });
     });
-    return { items: items };
+    return { version: VERSION, items: items };
   }
 
   function uniqueId(items, id) {
@@ -97,7 +98,7 @@
       done: false,
       name: cleanAuthor(options && options.name)
     };
-    return { ok: true, state: { items: [item].concat(current.items) }, item: item };
+    return { ok: true, state: normalize({ items: [item].concat(current.items) }), item: item };
   }
 
   function updateItems(state, id, change) {
@@ -109,7 +110,7 @@
       return change(item);
     });
     if (!hit) return { ok: false, error: 'Die Erinnerung fehlt.', state: current };
-    return { ok: true, state: { items: items } };
+    return { ok: true, state: normalize({ items: items }) };
   }
 
   function toggleItem(state, id) {
@@ -122,12 +123,12 @@
     var current = normalize(state);
     var items = current.items.filter(function (item) { return item.id !== id; });
     if (items.length === current.items.length) return { ok: false, error: 'Die Erinnerung fehlt.', state: current };
-    return { ok: true, state: { items: items } };
+    return { ok: true, state: normalize({ items: items }) };
   }
 
   function clearDone(state) {
     var current = normalize(state);
-    return { items: current.items.filter(function (item) { return !item.done; }) };
+    return normalize({ items: current.items.filter(function (item) { return !item.done; }) });
   }
 
   function shiftIso(iso, days) {
@@ -198,11 +199,33 @@
     return current.getFullYear() + '-' + pad(current.getMonth() + 1) + '-' + pad(current.getDate());
   }
 
+  function itemsFrom(value) {
+    if (value == null) return [];
+    if (Array.isArray(value)) return value;
+    if (typeof value !== 'object') return null;
+    var keys = Object.keys(value);
+    if (!keys.length) return [];
+    var numeric = true;
+    keys.forEach(function (key) {
+      if (!/^\d+$/.test(key)) numeric = false;
+    });
+    if (!numeric) return null;
+    keys.sort(function (a, b) { return Number(a) - Number(b); });
+    var out = [];
+    keys.forEach(function (key) { out.push(value[key]); });
+    return out;
+  }
+
   function parseShared(data) {
-    if (!data || typeof data !== 'object' || Array.isArray(data) || !Array.isArray(data.items)) {
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
       return { ok: false, error: 'Der gemeinsame Stand ist unlesbar.' };
     }
-    return { ok: true, state: normalize(data) };
+    if (Array.isArray(data.chores) || Array.isArray(data.players)) {
+      return { ok: false, error: 'Der gemeinsame Stand ist unlesbar.' };
+    }
+    var items = itemsFrom(data.items);
+    if (!items) return { ok: false, error: 'Der gemeinsame Stand ist unlesbar.' };
+    return { ok: true, state: normalize({ items: items }) };
   }
 
   return {

@@ -1,9 +1,9 @@
-/* Haushalt – gemeinsame Firebase-Verbindung für Chore Wars und Erinnerungen.
+/* Haushalt – gemeinsame Firebase-Verbindung für Chore Wars, Wochenzettel und Erinnerungen.
    Reine Entscheidungen plus eine kleine Sitzung. Im Browser als HaushaltSync, unter Node als Modul.
-   Chore Wars bleibt unter households/{id}. Erinnerungen liegen darunter,
+   Adresse und Kennwort stehen nur im Menü Haushalt.
+   Chore Wars bleibt unter households/{id}. Erinnerungen und Wochenzettel liegen darunter,
    damit die schon veröffentlichten Regeln den Zugriff erlauben.
-   Wochenzettel liegt unter zettel/{id}, mit derselben Kennwort-Regel.
-   Chore Wars schreibt mit PATCH, damit der Erinnerungszweig stehen bleibt. */
+   Chore Wars schreibt mit PATCH, damit die anderen Zweige stehen bleiben. */
 
 (function (root, factory) {
   var api = factory();
@@ -19,6 +19,9 @@
   var SECRET_KEY = 'haushalt-secret';
   var LEGACY_URL_KEY = 'chore-wars-firebase-url';
   var LEGACY_HOUSEHOLD_KEY = 'chore-wars-household-id';
+  var ZETTEL_URL_KEY = 'wochenzettel-firebase-url';
+  var ZETTEL_HOUSEHOLD_KEY = 'wochenzettel-household-id';
+  var ZETTEL_SECRET_KEY = 'wochenzettel-household-secret';
   var UPDATED_KEY = 'chore-wars-sync-at';
   var REMINDER_UPDATED_KEY = 'erinnerungen-sync-at';
   var SECRET_MIN = 8;
@@ -37,8 +40,7 @@
 
   var RULES = {
     rules: {
-      households: { $id: documentRule() },
-      zettel: { $id: documentRule() }
+      households: { $id: documentRule() }
     }
   };
 
@@ -100,6 +102,7 @@
 
   function standUrl(databaseURL, id, bucket) {
     if (bucket === 'reminders') return databaseURL + '/households/' + id + '/reminders.json';
+    if (bucket === 'zettel') return databaseURL + '/households/' + id + '/zettel.json';
     return databaseURL + '/households/' + id + '.json';
   }
 
@@ -137,6 +140,15 @@
     }
     if (!storageGet(storage, HOUSEHOLD_KEY) && storageGet(storage, LEGACY_HOUSEHOLD_KEY)) {
       storageSet(storage, HOUSEHOLD_KEY, storageGet(storage, LEGACY_HOUSEHOLD_KEY));
+    }
+    if (!storageGet(storage, URL_KEY) && storageGet(storage, ZETTEL_URL_KEY)) {
+      storageSet(storage, URL_KEY, storageGet(storage, ZETTEL_URL_KEY));
+    }
+    if (!storageGet(storage, HOUSEHOLD_KEY) && storageGet(storage, ZETTEL_HOUSEHOLD_KEY)) {
+      storageSet(storage, HOUSEHOLD_KEY, storageGet(storage, ZETTEL_HOUSEHOLD_KEY));
+    }
+    if (!storageGet(storage, SECRET_KEY) && storageGet(storage, ZETTEL_SECRET_KEY)) {
+      storageSet(storage, SECRET_KEY, storageGet(storage, ZETTEL_SECRET_KEY));
     }
   }
 
@@ -193,7 +205,11 @@
   function readRemote(data) {
     if (data == null) return null;
     if (typeof data !== 'object' || Array.isArray(data)) return { invalid: true };
-    if (!data.state || typeof data.state !== 'object' || Array.isArray(data.state)) return { invalid: true };
+    var hasState = data.state && typeof data.state === 'object' && !Array.isArray(data.state);
+    if (!hasState) {
+      if (typeof data.updatedAt === 'number' && isFinite(data.updatedAt)) return null;
+      return { invalid: true };
+    }
     if (typeof data.updatedAt !== 'number' || !isFinite(data.updatedAt)) return { invalid: true };
     return { state: data.state, updatedAt: data.updatedAt };
   }
@@ -353,6 +369,10 @@
         if (closed) return;
         var remote = readRemote(data);
         if (remote && remote.invalid) {
+          if (options.getSnapshot().untouched) {
+            arm('push');
+            return;
+          }
           status('invalid');
           return;
         }
@@ -381,6 +401,10 @@
           });
         }
         if (decision === 'adopt' && options.adopt(remote) === false) {
+          if (options.getSnapshot().untouched) {
+            arm('push');
+            return;
+          }
           status('invalid');
           return;
         }
