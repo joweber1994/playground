@@ -367,10 +367,26 @@ h1 {
 }
 
 .link-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  min-height: 48px;
   margin-top: 16px;
+  padding: 0 16px;
+  border-radius: 12px;
   background: var(--gold);
   color: #1a1408;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.link-submit:active {
+  transform: translateY(1px);
+}
+
+.link-submit:disabled {
+  opacity: 0.55;
 }
 
 .sheet-error {
