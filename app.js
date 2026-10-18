@@ -156,7 +156,7 @@
     syncApi.householdId(secretResult.value).then(function (id) {
       syncApi.saveConnection(window.localStorage, urlResult.value, id, secretResult.value);
       closeSheet();
-      showNote('Verbunden als ' + name.value + '. Chore Wars und Erinnerungen nutzen dieselbe Verbindung.');
+      showNote('Verbunden als ' + name.value + '. Chore Wars, Wochenzettel und Erinnerungen nutzen dieselbe Verbindung.');
       renderStatus();
     }).catch(function () {
       els.submit.disabled = false;

@@ -967,7 +967,7 @@
       cancelLabel: 'Schließen',
       submitLabel: 'Zum Menü',
       build: function (body) {
-        body.append(element('p', 'sheet-copy', 'Adresse, Kennwort und dein Name stehen im Menü Haushalt. Dieselbe Verbindung gilt für Chore Wars und Erinnerungen. Die Punkte bleiben der Stand von Chore Wars.'));
+        body.append(element('p', 'sheet-copy', 'Adresse, Kennwort und dein Name stehen im Menü Haushalt. Dieselbe Verbindung gilt für Chore Wars, Wochenzettel und Erinnerungen. Die Punkte bleiben der Stand von Chore Wars.'));
         var openHome = toolButton('Verbindung im Menü Haushalt', {}, 'sheet-choice');
         openHome.addEventListener('click', function () {
           window.location.href = '../index.html#verbindung';

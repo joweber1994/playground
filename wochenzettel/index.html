@@ -38,7 +38,7 @@
       </div>
       <div class="status-row">
         <p id="connectivity" class="connectivity">Auf diesem Gerät</p>
-        <button id="sync-status" class="sync-status" type="button">Nur dieses Gerät</button>
+        <a id="sync-status" class="sync-status" href="../index.html#verbindung">Nur dieses Gerät</a>
       </div>
       <button id="ticker-banner" class="ticker-banner" type="button" hidden></button>
     </header>
@@ -232,20 +232,6 @@
       </div>
     </div>
   </div>
-  <div id="sheet" class="sheet" hidden>
-    <button type="button" class="sheet-backdrop" data-sheet-close aria-label="Schließen"></button>
-    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-      <form id="sheet-form" novalidate>
-        <h2 id="sheet-title">Gemeinsam nutzen</h2>
-        <div id="sheet-body" class="sheet-body"></div>
-        <p id="sheet-error" class="sheet-error" role="alert" hidden></p>
-        <div class="sheet-actions">
-          <button type="button" class="sheet-cancel" id="sheet-cancel" data-sheet-close>Abbrechen</button>
-          <button type="submit" class="sheet-submit" id="sheet-submit">Verbinden</button>
-        </div>
-      </form>
-    </div>
-  </div>
   <p id="live" class="sr-only" aria-live="polite"></p>
   <noscript>
     <p class="note">Wochenzettel braucht JavaScript. Der Prospekt lässt sich auch so öffnen.</p>
@@ -257,6 +243,7 @@
   <script src="./offers.js"></script>
   <script src="./live.js"></script>
   <script src="./shop.js"></script>
+  <script src="../haushalt-sync.js"></script>
   <script src="./sync.js"></script>
   <script src="./app.js"></script>
 </body>

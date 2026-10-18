@@ -1,6 +1,5 @@
-const fs = require('fs');
-const path = require('path');
 const sync = require('./sync.js');
+const haushalt = require('../haushalt-sync.js');
 
 function assert(condition, label) {
   if (!condition) throw new Error(label);
@@ -12,10 +11,11 @@ function assertEqual(actual, expected, label) {
   }
 }
 
-var rulesFile = fs.readFileSync(path.join(__dirname, '..', 'chore-wars', 'database.rules.json'), 'utf8');
-assertEqual(rulesFile, sync.RULES_TEXT, 'Regeln im Modul und in der Datei');
-assert(sync.SECRET_KEY && sync.SECRET_KEY !== sync.URL_KEY && sync.SECRET_KEY !== sync.HOUSEHOLD_KEY, 'Kennwort liegt getrennt vom Haushaltspfad');
-assert(sync.standUrl('https://haus.firebaseio.com', 'ab'.repeat(32)).indexOf('geheimnis') === -1, 'der Firebase-Pfad enthält das Kennwort nicht');
+var zettelId = 'ab'.repeat(32);
+assertEqual(sync.standUrl('https://haus.firebaseio.com', zettelId), haushalt.standUrl('https://haus.firebaseio.com', zettelId, 'zettel'), 'Wochenzettel nutzt den Haushaltspfad');
+assert(sync.standUrl('https://haus.firebaseio.com', zettelId).indexOf('/households/') !== -1, 'der Zettel liegt unter dem Haushalt');
+assert(sync.standUrl('https://haus.firebaseio.com', zettelId).indexOf('.firebaseio.com/zettel/') === -1, 'kein eigener Wurzelpfad');
+assert(sync.standUrl('https://haus.firebaseio.com', zettelId).indexOf('geheimnis') === -1, 'der Firebase-Pfad enthält das Kennwort nicht');
 
 assertEqual(sync.decideInitial({ remoteUpdatedAt: 5, same: false, untouched: false }), 'merge', 'zwei gefüllte Zettel werden zusammengeführt');
 assertEqual(sync.decideInitial({ remoteUpdatedAt: 5, same: false, untouched: true }), 'adopt', 'frisches Gerät übernimmt');

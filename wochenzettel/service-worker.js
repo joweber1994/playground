@@ -1,5 +1,5 @@
 /* Wochenzettel – offline cache. Deletes wochenzettel-* and leftover wochenessen-* caches. */
-var CACHE_VERSION = 'wochenzettel-v16';
+var CACHE_VERSION = 'wochenzettel-v17';
 var CACHE_PREFIX = 'wochenzettel-';
 var LEGACY_PREFIX = 'wochenessen-';
 
@@ -11,6 +11,7 @@ var ASSETS = [
   './offers.js',
   './live.js',
   './shop.js',
+  '../haushalt-sync.js',
   './sync.js',
   './ticker.js',
   './ean.js',

@@ -1,46 +1,18 @@
 /* Wochenzettel – gemeinsamer Stand, zeilenweise.
-   Dieselbe Firebase-Adresse und dasselbe Kennwort wie Chore Wars, eigener Pfad.
+   Dieselbe Firebase-Adresse und dasselbe Kennwort wie der restliche Haushalt.
+   Der Zettel liegt unter households/{id}/zettel, damit die schon veröffentlichten Regeln gelten.
    Im Browser als WochenzettelSync, unter Node als Modul. */
 (function (root, factory) {
-  var api = factory();
+  var api = factory(root);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.WochenzettelSync = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
-  var URL_KEY = 'wochenzettel-firebase-url';
-  var HOUSEHOLD_KEY = 'wochenzettel-household-id';
-  var SECRET_KEY = 'wochenzettel-household-secret';
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
   var UPDATED_KEY = 'wochenzettel-sync-at';
   var NAME_KEY = 'wochenzettel-display-name';
-  var SECRET_MIN = 8;
-  var SECRET_MAX = 80;
 
-  var RULES = {
-    rules: {
-      households: {
-        $id: {
-          '.read': '$id.matches(/^[0-9a-f]{64}$/)',
-          '.write': '$id.matches(/^[0-9a-f]{64}$/)',
-          '.validate': "newData.hasChildren(['state', 'updatedAt']) && newData.child('updatedAt').isNumber() && newData.child('state').hasChildren()"
-        }
-      },
-      zettel: {
-        $id: {
-          '.read': '$id.matches(/^[0-9a-f]{64}$/)',
-          '.write': '$id.matches(/^[0-9a-f]{64}$/)',
-          '.validate': "newData.hasChildren(['state', 'updatedAt']) && newData.child('updatedAt').isNumber() && newData.child('state').hasChildren()"
-        }
-      }
-    }
-  };
-
-  var RULES_TEXT = JSON.stringify(RULES, null, 2) + '\n';
-
-  function fail(message) {
-    return { ok: false, error: message };
-  }
-
-  function ok(value) {
-    return { ok: true, value: value };
+  function sharedSync() {
+    if (root && root.HaushaltSync) return root.HaushaltSync;
+    return require('../haushalt-sync.js');
   }
 
   function num(value) {
@@ -49,54 +21,8 @@
     return Math.floor(rev);
   }
 
-  function normalizeDatabaseUrl(value) {
-    var raw = String(value == null ? '' : value).trim();
-    if (!raw) return fail('Die Datenbank-Adresse fehlt.');
-    raw = raw.replace(/\.json$/i, '').replace(/\/+$/, '');
-    var url;
-    try {
-      url = new URL(raw);
-    } catch (error) {
-      return fail('Die Adresse ist ungültig.');
-    }
-    if (url.protocol !== 'https:') return fail('Die Adresse muss mit https:// beginnen.');
-    var host = url.hostname.toLowerCase();
-    var firebaseHost = host.endsWith('.firebaseio.com') || host.endsWith('.firebasedatabase.app');
-    if (!firebaseHost) return fail('Das muss die Adresse der Firebase Realtime Database sein.');
-    if (url.username || url.password) return fail('Die Adresse darf kein Kennwort enthalten.');
-    if (url.search || url.hash) return fail('Die Adresse darf keine Parameter enthalten.');
-    if (url.pathname && url.pathname !== '/') return fail('Nur die Basis-Adresse eintragen, ohne Pfad.');
-    return ok(url.origin);
-  }
-
-  function readSecret(value) {
-    var secret = String(value == null ? '' : value).trim();
-    if (secret.length < SECRET_MIN) return fail('Das Kennwort braucht mindestens 8 Zeichen.');
-    if (secret.length > SECRET_MAX) return fail('Das Kennwort darf höchstens 80 Zeichen haben.');
-    return ok(secret);
-  }
-
-  function isHouseholdId(id) {
-    return typeof id === 'string' && /^[0-9a-f]{64}$/.test(id);
-  }
-
-  function householdId(secret) {
-    var accepted = readSecret(secret);
-    if (!accepted.ok) return Promise.reject(new Error(accepted.error));
-    var bytes = new TextEncoder().encode(accepted.value);
-    return crypto.subtle.digest('SHA-256', bytes).then(function (digest) {
-      var view = new Uint8Array(digest);
-      var hex = '';
-      for (var i = 0; i < view.length; i += 1) {
-        var part = view[i].toString(16);
-        hex += part.length === 1 ? '0' + part : part;
-      }
-      return hex;
-    });
-  }
-
   function standUrl(databaseURL, id) {
-    return databaseURL + '/zettel/' + id + '.json';
+    return sharedSync().standUrl(databaseURL, id, 'zettel');
   }
 
   function sameStand(left, right) {
@@ -119,11 +45,7 @@
   }
 
   function readRemote(data) {
-    if (data == null) return null;
-    if (typeof data !== 'object' || Array.isArray(data)) return { invalid: true };
-    if (!data.state || typeof data.state !== 'object' || Array.isArray(data.state)) return { invalid: true };
-    if (typeof data.updatedAt !== 'number' || !isFinite(data.updatedAt)) return { invalid: true };
-    return { state: data.state, updatedAt: data.updatedAt };
+    return sharedSync().readRemote(data);
   }
 
   function asList(value) {
@@ -540,7 +462,7 @@
       if (closed || connecting) return Promise.resolve();
       connecting = true;
       status('connecting');
-      if (!isHouseholdId(options.householdId) || !normalizeDatabaseUrl(options.databaseURL).ok) {
+      if (!sharedSync().isHouseholdId(options.householdId) || !sharedSync().normalizeDatabaseUrl(options.databaseURL).ok) {
         connecting = false;
         status('error');
         return Promise.resolve();
@@ -552,6 +474,10 @@
         if (closed) return;
         var remote = readRemote(data);
         if (remote && remote.invalid) {
+          if (options.getSnapshot().untouched) {
+            arm('push');
+            return;
+          }
           status('invalid');
           return;
         }
@@ -574,6 +500,10 @@
           return;
         }
         if (decision === 'adopt' && options.adopt(remote) === false) {
+          if (options.getSnapshot().untouched) {
+            arm('push');
+            return;
+          }
           status('invalid');
           return;
         }
@@ -621,18 +551,8 @@
   }
 
   return {
-    URL_KEY: URL_KEY,
-    HOUSEHOLD_KEY: HOUSEHOLD_KEY,
-    SECRET_KEY: SECRET_KEY,
     UPDATED_KEY: UPDATED_KEY,
     NAME_KEY: NAME_KEY,
-    SECRET_MIN: SECRET_MIN,
-    SECRET_MAX: SECRET_MAX,
-    RULES_TEXT: RULES_TEXT,
-    normalizeDatabaseUrl: normalizeDatabaseUrl,
-    readSecret: readSecret,
-    isHouseholdId: isHouseholdId,
-    householdId: householdId,
     standUrl: standUrl,
     sameStand: sameStand,
     decideInitial: decideInitial,

@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0c0e13">
   <meta name="color-scheme" content="dark">
   <meta name="format-detection" content="telephone=no">
-  <meta name="description" content="Haushalt bündelt Chore Wars, Wochenzettel und Erinnerungen. Name und Firebase-Zugang gelten für Chore Wars und Erinnerungen.">
+  <meta name="description" content="Haushalt bündelt Chore Wars, Wochenzettel und Erinnerungen. Name und Firebase-Zugang gelten für alle drei.">
   <title>Haushalt</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/svg+xml" href="./icon.svg">
@@ -33,7 +33,7 @@
           <h1>Haushalt</h1>
         </div>
       </div>
-      <p class="lead">Chore Wars und Erinnerungen teilen sich Name und Firebase-Zugang. Wochenzettel bleibt auf dem Gerät.</p>
+      <p class="lead">Chore Wars, Wochenzettel und Erinnerungen teilen sich den Firebase-Zugang. Der Name steht an neuen Erinnerungen.</p>
     </header>
     <main class="content">
       <nav class="tiles" aria-label="Haushalts-Apps">
@@ -50,12 +50,12 @@
         <a class="tile tile-reminders" href="erinnerungen/index.html">
           <span class="tile-kicker">Merkzettel</span>
           <span class="tile-title">Erinnerungen</span>
-          <span class="tile-text">Texte mit optionalem Datum, unter deinem Namen. Dieselbe Verbindung wie Chore Wars.</span>
+          <span class="tile-text">Texte mit optionalem Datum, unter deinem Namen. Dieselbe Verbindung wie die anderen.</span>
         </a>
       </nav>
       <section class="link-panel" id="verbindung" aria-labelledby="link-heading">
         <h2 id="link-heading">Gemeinsam</h2>
-        <p class="hint">Dein Name steht an neuen Erinnerungen. Adresse und Kennwort bleiben auf diesem Gerät sichtbar und gelten für Chore Wars und Erinnerungen.</p>
+        <p class="hint">Dein Name steht an neuen Erinnerungen. Adresse und Kennwort bleiben auf diesem Gerät sichtbar und gelten für Chore Wars, Wochenzettel und Erinnerungen.</p>
         <label class="field">
           <span>Dein Name</span>
           <input id="person-name" type="text" maxlength="24" autocomplete="nickname" autocapitalize="words" enterkeyhint="done" placeholder="Zum Beispiel Anna">
@@ -82,7 +82,7 @@
         <h2 id="sheet-title">Gemeinsam nutzen</h2>
         <div class="sheet-body">
           <p class="hint">Beide Handys tragen dieselbe Datenbank-Adresse und dasselbe Kennwort ein. Beides bleibt auf diesem Gerät sichtbar. Der Name bleibt auf dem jeweiligen Gerät.</p>
-          <p class="hint">Erinnerungen liegen im selben Haushalt wie Chore Wars und nutzen dieselben Regeln.</p>
+          <p class="hint">Wochenzettel und Erinnerungen liegen im selben Haushalt wie Chore Wars. Dieselben Regeln gelten für alle drei.</p>
           <details class="rules-details">
             <summary>Regeln zum Kopieren</summary>
             <textarea id="rules" class="rules-box" readonly rows="8" aria-label="Firebase-Regeln"></textarea>

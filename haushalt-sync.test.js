@@ -38,10 +38,13 @@ assert(!sync.normalizeDatabaseUrl('https://user:pass@haus.firebaseio.com').ok, '
 
 var householdPath = sync.standUrl('https://haus.firebaseio.com', 'a'.repeat(64));
 var reminderPath = sync.standUrl('https://haus.firebaseio.com', 'a'.repeat(64), 'reminders');
+var zettelPath = sync.standUrl('https://haus.firebaseio.com', 'a'.repeat(64), 'zettel');
 assertEqual(householdPath, 'https://haus.firebaseio.com/households/' + 'a'.repeat(64) + '.json', 'Chore Wars bleibt im bisherigen Pfad');
 assertEqual(reminderPath, 'https://haus.firebaseio.com/households/' + 'a'.repeat(64) + '/reminders.json', 'Erinnerungen liegen im bestehenden Haushalt');
+assertEqual(zettelPath, 'https://haus.firebaseio.com/households/' + 'a'.repeat(64) + '/zettel.json', 'Wochenzettel liegt im bestehenden Haushalt');
 assertEqual(sync.standUrl('https://haus.firebaseio.com', 'a'.repeat(64), 'anders'), householdPath, 'unbekannte Bereiche fallen auf Chore Wars zurück');
 assert(sync.RULES_TEXT.indexOf('"reminders"') === -1, 'die alten Regeln bleiben ohne neuen Wurzelpfad');
+assert(sync.RULES_TEXT.indexOf('"zettel"') === -1, 'Wochenzettel braucht keinen neuen Wurzelpfad');
 assert(sync.RULES_TEXT.indexOf('"households"') !== -1, 'Regeln nennen den bisherigen Haushalt');
 
 assert(!sync.requireName('   ').ok, 'leerer Name wird abgelehnt');
@@ -76,6 +79,25 @@ assertEqual(sync.readConnection(legacy).householdId, '', 'Trennen löscht auch d
 assertEqual(sync.readConnection(legacy).url, 'https://haus.firebaseio.com', 'die Adresse bleibt zum erneuten Verbinden');
 assertEqual(sync.readConnection(legacy).secret, 'haushalt1', 'das Kennwort bleibt nach dem Trennen sichtbar');
 
+var fromZettel = memoryStorage({
+  'wochenzettel-firebase-url': 'https://haus.firebaseio.com',
+  'wochenzettel-household-id': 'cd'.repeat(32),
+  'wochenzettel-household-secret': 'zettelgeheim'
+});
+var taken = sync.readConnection(fromZettel);
+assertEqual(taken.url, 'https://haus.firebaseio.com', 'Wochenzettel-Adresse wird zur gemeinsamen');
+assertEqual(taken.householdId, 'cd'.repeat(32), 'Wochenzettel-Pfad wird übernommen');
+assertEqual(taken.secret, 'zettelgeheim', 'Wochenzettel-Kennwort wird übernommen');
+var kept = memoryStorage({
+  'haushalt-firebase-url': 'https://haus.firebaseio.com',
+  'haushalt-household-id': 'ab'.repeat(32),
+  'haushalt-secret': 'haushalt1',
+  'wochenzettel-firebase-url': 'https://anders.firebaseio.com',
+  'wochenzettel-household-secret': 'anderes'
+});
+assertEqual(sync.readConnection(kept).url, 'https://haus.firebaseio.com', 'eine schon stehende Adresse bleibt');
+assertEqual(sync.readConnection(kept).secret, 'haushalt1', 'ein schon stehendes Kennwort bleibt');
+
 assert(!sync.readSecret('kurz').ok, 'zu kurzes Kennwort');
 assert(sync.readSecret('  haushalt1  ').ok, 'Kennwort wird beschnitten');
 assertEqual(sync.readSecret('  haushalt1  ').value, 'haushalt1', 'beschnittenes Kennwort');
@@ -94,7 +116,8 @@ assertEqual(sync.decideLive({ remoteUpdatedAt: 3, dirty: false, same: false, loc
 assertEqual(sync.decideLive({ remoteUpdatedAt: 4, dirty: false, same: true, localUpdatedAt: 4 }), 'same', 'Echo der eigenen Sendung');
 
 assertEqual(sync.readRemote(null), null, 'leerer Knoten');
-assert(sync.readRemote({ updatedAt: 1 }).invalid, 'Stand ohne state ist ungültig');
+assertEqual(sync.readRemote({ updatedAt: 1 }), null, 'nur ein Zeitstempel ist ein leerer Stand');
+assert(sync.readRemote({ marker: true }).invalid, 'fremder Knoten bleibt unlesbar');
 assertEqual(sync.readRemote({ state: { version: 3 }, updatedAt: 7 }).updatedAt, 7, 'gültiger Fernstand');
 var withReminders = sync.readRemote({
   state: { version: 3, marker: 'haus' },
@@ -340,6 +363,39 @@ function runRetry() {
   });
 }
 
+function runRepair() {
+  var puts = [];
+  var statuses = [];
+  var store = { state: { version: 1, items: [] }, updatedAt: 0, untouched: true };
+  var session = sync.createSession({
+    databaseURL: 'https://haus.firebaseio.com',
+    householdId: 'a'.repeat(64),
+    bucket: 'reminders',
+    getSnapshot: function () { return store; },
+    setUpdatedAt: function (value) { store.updatedAt = value; },
+    adopt: function () { return false; },
+    ask: function () { throw new Error('leeres Gerät fragt nicht'); },
+    onStatus: function (name) { statuses.push(name); },
+    fetch: function (url, options) {
+      if (!options || !options.method || options.method === 'GET') {
+        return Promise.resolve(response({ state: { version: 3, chores: [], players: [] }, updatedAt: 4 }, 200));
+      }
+      puts.push({ url: url, body: JSON.parse(options.body) });
+      return Promise.resolve(response(JSON.parse(options.body), 200));
+    },
+    EventSource: FakeSource,
+    now: function () { return 90; },
+    delay: 0
+  });
+  return session.ready.then(function () { return wait(20); }).then(function () {
+    assertEqual(puts.length, 1, 'unlesbarer Fernstand wird vom leeren Gerät ersetzt');
+    assertEqual(puts[0].url, sync.standUrl('https://haus.firebaseio.com', 'a'.repeat(64), 'reminders'), 'die Reparatur schreibt in den Erinnerungspfad');
+    assertEqual(puts[0].body.state.version, 1, 'der lokale Stand geht raus');
+    assertEqual(statuses[statuses.length - 1], 'live', 'danach ist die Liste verbunden');
+    session.close();
+  });
+}
+
 function runPatch() {
   var method = '';
   var store = { state: { version: 3, marker: 'lokal' }, updatedAt: 0, untouched: false };
@@ -380,6 +436,8 @@ sync.householdId('haushalt1').then(function (id) {
   return runRetry();
 }).then(function () {
   return runPatch();
+}).then(function () {
+  return runRepair();
 }).then(function () {
   console.log('sync tests ok');
 }).catch(function (error) {
