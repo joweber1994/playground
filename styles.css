@@ -361,8 +361,16 @@ h1 {
 }
 
 .sheet-body {
+  flex: 1 1 auto;
   overflow: auto;
   margin-top: 8px;
+}
+
+.link-submit {
+  width: 100%;
+  margin-top: 16px;
+  background: var(--gold);
+  color: #1a1408;
 }
 
 .sheet-error {
@@ -374,7 +382,7 @@ h1 {
 
 .sheet-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 8px;
   margin-top: 16px;
 }

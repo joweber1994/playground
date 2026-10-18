@@ -11,8 +11,6 @@
     form: document.getElementById('link-form'),
     url: document.getElementById('database-url'),
     secret: document.getElementById('secret'),
-    savedUrl: document.getElementById('saved-url'),
-    savedSecret: document.getElementById('saved-secret'),
     rules: document.getElementById('rules'),
     error: document.getElementById('sheet-error'),
     disconnect: document.getElementById('disconnect'),
@@ -49,13 +47,6 @@
     return syncApi.readConnection(window.localStorage);
   }
 
-  function showSaved(el, value, emptyLabel) {
-    if (!el) return;
-    var text = value ? String(value) : '';
-    el.textContent = text || emptyLabel;
-    el.classList.toggle('is-empty', !text);
-  }
-
   function showNote(message) {
     if (els.note) els.note.textContent = message || '';
   }
@@ -74,9 +65,12 @@
       els.sync.classList.toggle('is-live', on);
     }
     if (els.name && document.activeElement !== els.name) els.name.value = link.name;
-    showSaved(els.savedUrl, link.url, 'Noch keine Adresse');
-    showSaved(els.savedSecret, link.secret, 'Noch kein Kennwort');
     if (els.disconnect) els.disconnect.hidden = !on;
+  }
+
+  function showCredentials(link) {
+    if (els.url && document.activeElement !== els.url) els.url.value = link.url || syncApi.DATABASE_URL;
+    if (els.secret && document.activeElement !== els.secret) els.secret.value = link.secret || '';
   }
 
   function placeSheet() {
@@ -109,11 +103,7 @@
   function openSheet() {
     if (!syncApi || !els.sheet) return;
     var link = connection();
-    els.url.textContent = syncApi.DATABASE_URL;
-    els.secret.value = link.secret || '';
-    els.secret.scrollTop = 0;
     els.rules.value = syncApi.RULES_TEXT;
-    showError('');
     els.disconnect.hidden = !(link.url && link.householdId);
     els.sheet.hidden = false;
     placeSheet();
@@ -135,27 +125,31 @@
     showError('');
     var name = syncApi.requireName(els.name.value);
     if (!name.ok) {
-      showNote(name.error);
-      closeSheet();
+      showError(name.error);
       els.name.focus();
       return;
     }
     syncApi.saveName(window.localStorage, name.value);
-    var urlResult = syncApi.normalizeDatabaseUrl(syncApi.DATABASE_URL);
+    var urlResult = syncApi.normalizeDatabaseUrl(els.url.value);
     if (!urlResult.ok) {
       showError(urlResult.error);
+      els.url.focus();
       return;
     }
     var secretResult = syncApi.readSecret(els.secret.value);
     if (!secretResult.ok) {
       showError(secretResult.error);
+      els.secret.focus();
       return;
     }
     els.submit.disabled = true;
     syncApi.householdId(secretResult.value).then(function (id) {
       syncApi.saveConnection(window.localStorage, urlResult.value, id, secretResult.value);
+      els.url.value = urlResult.value;
+      els.secret.value = secretResult.value;
+      els.submit.disabled = false;
       closeSheet();
-      showNote('Verbunden als ' + name.value + '. Chore Wars, Wochenzettel und Erinnerungen nutzen dieselbe Verbindung.');
+      showNote('Eingetragen. Chore Wars, Wochenzettel und Erinnerungen nutzen dieselbe Verbindung.');
       renderStatus();
     }).catch(function () {
       els.submit.disabled = false;
@@ -166,6 +160,7 @@
   function init() {
     if (!syncApi) return;
     renderStatus();
+    showCredentials(connection());
     if (els.name) {
       els.name.addEventListener('change', function () { saveTypedName(els.name.value); });
     }
