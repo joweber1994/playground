@@ -55,18 +55,24 @@
       </nav>
       <section class="link-panel" id="verbindung" aria-labelledby="link-heading">
         <h2 id="link-heading">Gemeinsam</h2>
-        <p class="hint">Dein Name steht an neuen Erinnerungen. Adresse und Kennwort bleiben auf diesem Gerät sichtbar und gelten für Chore Wars, Wochenzettel und Erinnerungen.</p>
-        <label class="field">
-          <span>Dein Name</span>
-          <input id="person-name" type="text" maxlength="24" autocomplete="nickname" autocapitalize="words" enterkeyhint="done" placeholder="Zum Beispiel Anna">
-        </label>
-        <div class="saved-block">
-          <p class="saved-label">Datenbank-Adresse</p>
-          <p id="saved-url" class="saved-value is-empty">Noch keine Adresse</p>
-          <p class="saved-label">Gemeinsames Kennwort</p>
-          <p id="saved-secret" class="saved-value is-empty">Noch kein Kennwort</p>
-        </div>
-        <p id="link-note" class="hint" role="status"></p>
+        <p class="hint">Dein Name steht an neuen Erinnerungen. Adresse und Kennwort hier eintragen. Beides bleibt auf diesem Gerät sichtbar und gilt für Chore Wars, Wochenzettel und Erinnerungen.</p>
+        <form id="link-form" novalidate>
+          <label class="field">
+            <span>Dein Name</span>
+            <input id="person-name" type="text" maxlength="24" autocomplete="nickname" autocapitalize="words" enterkeyhint="done" placeholder="Zum Beispiel Anna">
+          </label>
+          <label class="field">
+            <span>Datenbank-Adresse</span>
+            <textarea id="database-url" class="wrap-field" name="database-url" rows="3" maxlength="200" inputmode="url" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="https://name.firebaseio.com"></textarea>
+          </label>
+          <label class="field">
+            <span>Gemeinsames Kennwort</span>
+            <textarea id="secret" class="wrap-field" name="shared-secret" rows="2" maxlength="80" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Mindestens 8 Zeichen, auf beiden Geräten gleich"></textarea>
+          </label>
+          <p id="link-note" class="hint" role="status"></p>
+          <p id="sheet-error" class="sheet-error" role="alert" hidden></p>
+          <button id="sheet-submit" class="link-submit" type="submit">Eintragen</button>
+        </form>
         <button id="sync-status" class="sync-status" type="button">Nur dieses Gerät</button>
       </section>
       <p class="note">Auf dem iPhone: Teilen, dann „Zum Home-Bildschirm“. Dieses Menü als Icon wählen, dann bleiben die Seiten in derselben App.</p>
@@ -78,29 +84,19 @@
   <div id="sheet" class="sheet" hidden>
     <button type="button" class="sheet-backdrop" data-sheet-close aria-label="Schließen"></button>
       <div id="sheet-panel" class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title" tabindex="-1">
-      <form id="link-form" novalidate>
         <h2 id="sheet-title">Gemeinsam nutzen</h2>
         <div class="sheet-body">
-          <p class="hint">Beide Handys tragen dasselbe Kennwort ein. Die Datenbank-Adresse steht fest und bleibt auf diesem Gerät sichtbar. Der Name bleibt auf dem jeweiligen Gerät.</p>
+          <p class="hint">Beide Handys tragen dieselbe Adresse und dasselbe Kennwort ein. Der Name bleibt auf dem jeweiligen Gerät.</p>
           <p class="hint">Wochenzettel und Erinnerungen liegen im selben Haushalt wie Chore Wars. Dieselben Regeln gelten für alle drei.</p>
           <details class="rules-details">
             <summary>Regeln zum Kopieren</summary>
             <textarea id="rules" class="rules-box" readonly rows="8" aria-label="Firebase-Regeln"></textarea>
           </details>
-          <p class="saved-label">Datenbank-Adresse</p>
-          <p id="database-url" class="saved-value"></p>
-          <label class="field">
-            <span>Gemeinsames Kennwort</span>
-            <textarea id="secret" class="wrap-field" name="shared-secret" rows="2" maxlength="80" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Mindestens 8 Zeichen, auf beiden Geräten gleich"></textarea>
-          </label>
           <button id="disconnect" class="text-button" type="button" hidden>Verbindung trennen</button>
         </div>
-        <p id="sheet-error" class="sheet-error" role="alert" hidden></p>
         <div class="sheet-actions">
           <button id="sheet-cancel" class="sheet-cancel" type="button">Schließen</button>
-          <button id="sheet-submit" class="sheet-submit" type="submit">Verbinden</button>
         </div>
-      </form>
     </div>
   </div>
   <script src="./haushalt-sync.js"></script>

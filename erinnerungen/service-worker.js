@@ -1,5 +1,5 @@
 /* Erinnerungen – offline cache. Only erinnerungen-* caches are deleted. */
-var CACHE_VERSION = 'erinnerungen-v5';
+var CACHE_VERSION = 'erinnerungen-v6';
 var CACHE_PREFIX = 'erinnerungen-';
 
 var ASSETS = [

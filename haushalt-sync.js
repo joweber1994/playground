@@ -151,10 +151,12 @@
     if (!storageGet(storage, SECRET_KEY) && storageGet(storage, ZETTEL_SECRET_KEY)) {
       storageSet(storage, SECRET_KEY, storageGet(storage, ZETTEL_SECRET_KEY));
     }
-    var projectUrl = normalizeDatabaseUrl(DATABASE_URL);
-    if (projectUrl.ok && storageGet(storage, URL_KEY) !== projectUrl.value) {
-      storageSet(storage, URL_KEY, projectUrl.value);
-      storageSet(storage, LEGACY_URL_KEY, projectUrl.value);
+    if (!storageGet(storage, URL_KEY)) {
+      var projectUrl = normalizeDatabaseUrl(DATABASE_URL);
+      if (projectUrl.ok) {
+        storageSet(storage, URL_KEY, projectUrl.value);
+        storageSet(storage, LEGACY_URL_KEY, projectUrl.value);
+      }
     }
   }
 
