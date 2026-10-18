@@ -13,6 +13,7 @@
     root.ChoreWarsSync = api;
   }
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  var DATABASE_URL = 'https://chore-wars-f5565-default-rtdb.europe-west1.firebasedatabase.app';
   var URL_KEY = 'haushalt-firebase-url';
   var HOUSEHOLD_KEY = 'haushalt-household-id';
   var NAME_KEY = 'haushalt-name';
@@ -149,6 +150,11 @@
     }
     if (!storageGet(storage, SECRET_KEY) && storageGet(storage, ZETTEL_SECRET_KEY)) {
       storageSet(storage, SECRET_KEY, storageGet(storage, ZETTEL_SECRET_KEY));
+    }
+    var projectUrl = normalizeDatabaseUrl(DATABASE_URL);
+    if (projectUrl.ok && storageGet(storage, URL_KEY) !== projectUrl.value) {
+      storageSet(storage, URL_KEY, projectUrl.value);
+      storageSet(storage, LEGACY_URL_KEY, projectUrl.value);
     }
   }
 
@@ -452,6 +458,7 @@
   }
 
   return {
+    DATABASE_URL: DATABASE_URL,
     URL_KEY: URL_KEY,
     HOUSEHOLD_KEY: HOUSEHOLD_KEY,
     NAME_KEY: NAME_KEY,

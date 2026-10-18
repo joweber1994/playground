@@ -81,16 +81,14 @@
       <form id="link-form" novalidate>
         <h2 id="sheet-title">Gemeinsam nutzen</h2>
         <div class="sheet-body">
-          <p class="hint">Beide Handys tragen dieselbe Datenbank-Adresse und dasselbe Kennwort ein. Beides bleibt auf diesem Gerät sichtbar. Der Name bleibt auf dem jeweiligen Gerät.</p>
+          <p class="hint">Beide Handys tragen dasselbe Kennwort ein. Die Datenbank-Adresse steht fest und bleibt auf diesem Gerät sichtbar. Der Name bleibt auf dem jeweiligen Gerät.</p>
           <p class="hint">Wochenzettel und Erinnerungen liegen im selben Haushalt wie Chore Wars. Dieselben Regeln gelten für alle drei.</p>
           <details class="rules-details">
             <summary>Regeln zum Kopieren</summary>
             <textarea id="rules" class="rules-box" readonly rows="8" aria-label="Firebase-Regeln"></textarea>
           </details>
-          <label class="field">
-            <span>Datenbank-Adresse</span>
-            <textarea id="database-url" class="wrap-field" name="database-url" rows="3" maxlength="200" inputmode="url" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="https://name.firebaseio.com"></textarea>
-          </label>
+          <p class="saved-label">Datenbank-Adresse</p>
+          <p id="database-url" class="saved-value"></p>
           <label class="field">
             <span>Gemeinsames Kennwort</span>
             <textarea id="secret" class="wrap-field" name="shared-secret" rows="2" maxlength="80" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Mindestens 8 Zeichen, auf beiden Geräten gleich"></textarea>
