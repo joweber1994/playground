@@ -62,21 +62,27 @@ function memoryStorage(initial) {
   };
 }
 
+var fresh = memoryStorage({});
+assertEqual(sync.readConnection(fresh).url, sync.DATABASE_URL, 'ohne gespeicherte Adresse gilt die Projekt-Datenbank');
+assertEqual(fresh.data['haushalt-firebase-url'], sync.DATABASE_URL, 'die Projekt-Adresse wird auch ohne Altlast gespeichert');
+
 var legacy = memoryStorage({
   'chore-wars-firebase-url': 'https://haus.firebaseio.com',
   'chore-wars-household-id': 'ab'.repeat(32)
 });
 var migrated = sync.readConnection(legacy);
-assertEqual(migrated.url, 'https://haus.firebaseio.com', 'alte Adresse wird übernommen');
+assertEqual(sync.DATABASE_URL, 'https://chore-wars-f5565-default-rtdb.europe-west1.firebasedatabase.app', 'die Projekt-Adresse ist die Haushalts-Datenbank');
+assertEqual(sync.normalizeDatabaseUrl(sync.DATABASE_URL).value, sync.DATABASE_URL, 'die Projekt-Adresse ist eine gültige Basis');
+assertEqual(migrated.url, sync.DATABASE_URL, 'gespeichert wird die Projekt-Adresse');
 assertEqual(migrated.householdId, 'ab'.repeat(32), 'alter Pfad wird übernommen');
-assertEqual(legacy.data['haushalt-firebase-url'], 'https://haus.firebaseio.com', 'neue Adresse wird gespeichert');
+assertEqual(legacy.data['haushalt-firebase-url'], sync.DATABASE_URL, 'die Projekt-Adresse wird gespeichert');
 sync.saveName(legacy, '  Jonas  ');
 assertEqual(sync.readConnection(legacy).name, 'Jonas', 'Name bleibt auf dem Gerät');
 sync.saveConnection(legacy, 'https://haus.firebaseio.com', 'ab'.repeat(32), 'haushalt1');
 assertEqual(sync.readConnection(legacy).secret, 'haushalt1', 'Kennwort bleibt gespeichert');
 sync.disconnect(legacy);
 assertEqual(sync.readConnection(legacy).householdId, '', 'Trennen löscht auch den alten Pfad');
-assertEqual(sync.readConnection(legacy).url, 'https://haus.firebaseio.com', 'die Adresse bleibt zum erneuten Verbinden');
+assertEqual(sync.readConnection(legacy).url, sync.DATABASE_URL, 'die Adresse bleibt die Projekt-Datenbank');
 assertEqual(sync.readConnection(legacy).secret, 'haushalt1', 'das Kennwort bleibt nach dem Trennen sichtbar');
 
 var fromZettel = memoryStorage({
@@ -85,7 +91,7 @@ var fromZettel = memoryStorage({
   'wochenzettel-household-secret': 'zettelgeheim'
 });
 var taken = sync.readConnection(fromZettel);
-assertEqual(taken.url, 'https://haus.firebaseio.com', 'Wochenzettel-Adresse wird zur gemeinsamen');
+assertEqual(taken.url, sync.DATABASE_URL, 'eine alte Wochenzettel-Adresse wird zur Projekt-Datenbank');
 assertEqual(taken.householdId, 'cd'.repeat(32), 'Wochenzettel-Pfad wird übernommen');
 assertEqual(taken.secret, 'zettelgeheim', 'Wochenzettel-Kennwort wird übernommen');
 var kept = memoryStorage({
@@ -95,7 +101,7 @@ var kept = memoryStorage({
   'wochenzettel-firebase-url': 'https://anders.firebaseio.com',
   'wochenzettel-household-secret': 'anderes'
 });
-assertEqual(sync.readConnection(kept).url, 'https://haus.firebaseio.com', 'eine schon stehende Adresse bleibt');
+assertEqual(sync.readConnection(kept).url, sync.DATABASE_URL, 'eine andere gespeicherte Adresse wird ersetzt');
 assertEqual(sync.readConnection(kept).secret, 'haushalt1', 'ein schon stehendes Kennwort bleibt');
 
 assert(!sync.readSecret('kurz').ok, 'zu kurzes Kennwort');
