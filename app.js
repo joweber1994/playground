@@ -109,9 +109,8 @@
   function openSheet() {
     if (!syncApi || !els.sheet) return;
     var link = connection();
-    els.url.value = link.url;
+    els.url.textContent = syncApi.DATABASE_URL;
     els.secret.value = link.secret || '';
-    els.url.scrollTop = 0;
     els.secret.scrollTop = 0;
     els.rules.value = syncApi.RULES_TEXT;
     showError('');
@@ -142,7 +141,7 @@
       return;
     }
     syncApi.saveName(window.localStorage, name.value);
-    var urlResult = syncApi.normalizeDatabaseUrl(els.url.value);
+    var urlResult = syncApi.normalizeDatabaseUrl(syncApi.DATABASE_URL);
     if (!urlResult.ok) {
       showError(urlResult.error);
       return;
