@@ -13,6 +13,8 @@
   if (!meals || !catalog || !shop || !barcodeApi || !eanScan || !catalog.stores || !catalog.stores.length) return;
 
   var LIVE_KEY = 'wochenzettel-live-v1';
+  var WEEK_NOTE_MS = 8000;
+  var weekNoteTimer = 0;
 
   function readStoredCatalog() {
     try {
@@ -236,6 +238,22 @@
     var parts = dateParts(iso);
     if (!parts) return null;
     return new Date(Number(parts.year), parts.month - 1, parts.day, 23, 59, 59);
+  }
+
+  function showWeekNote(text) {
+    if (!els.week) return;
+    window.clearTimeout(weekNoteTimer);
+    els.week.classList.remove('is-leaving');
+    els.week.textContent = text;
+    els.week.hidden = false;
+    weekNoteTimer = window.setTimeout(function () {
+      if (!els.week || els.week.hidden) return;
+      els.week.classList.add('is-leaving');
+      weekNoteTimer = window.setTimeout(function () {
+        els.week.hidden = true;
+        els.week.classList.remove('is-leaving');
+      }, 400);
+    }, WEEK_NOTE_MS);
   }
 
   function storeById(id) {
@@ -2016,11 +2034,9 @@
     renderUnavailable();
     var until = endOfDay(catalog.validUntil);
     if (until && new Date() > until) {
-      els.week.hidden = false;
-      els.week.textContent = 'Diese Woche ist vorbei. Angezeigt wird der letzte gelesene Stand vom ' + deDate(catalog.extractedAt) + '.';
+      showWeekNote('Diese Woche ist vorbei. Angezeigt wird der letzte gelesene Stand vom ' + deDate(catalog.extractedAt) + '.');
     } else if (loaded.weekChanged) {
-      els.week.hidden = false;
-      els.week.textContent = 'Neue Woche. Ergänzungen und die Einkaufsliste der letzten Woche sind geleert.';
+      showWeekNote('Neue Woche. Ergänzungen und die Einkaufsliste der letzten Woche sind geleert.');
     }
     hadSaved = !!readStorage();
     tickerState = loadTicker();
