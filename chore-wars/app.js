@@ -342,7 +342,23 @@
       actions.append(button);
     });
 
-    item.append(top, actions);
+    var lastChore = state.chores.length <= 1;
+    var tools = element('div', 'chore-tools');
+    tools.append(
+      toolButton('Bearbeiten', {
+        'data-edit': chore.id,
+        'aria-label': chore.title + ' bearbeiten'
+      }),
+      toolButton('Löschen', {
+        'data-delete': chore.id,
+        'aria-label': lastChore
+          ? chore.title + ' lässt sich nicht löschen, weil es die letzte Aufgabe ist'
+          : chore.title + ' löschen',
+        disabled: lastChore
+      }, 'tool tool-danger')
+    );
+
+    item.append(top, actions, tools);
     return item;
   }
 
@@ -573,9 +589,13 @@
             disabled: !canMove(current, 1)
           })
         );
+        var lastChore = state.chores.length <= 1;
         var remove = toolButton('Löschen', {
           'data-sheet-delete': current.id,
-          'aria-label': current.title + ' löschen'
+          'aria-label': lastChore
+            ? current.title + ' lässt sich nicht löschen, weil es die letzte Aufgabe ist'
+            : current.title + ' löschen',
+          disabled: lastChore
         }, 'sheet-choice tool-danger');
         body.append(moves, remove);
       },
@@ -1155,7 +1175,7 @@
         return;
       }
       var remove = event.target.closest('[data-sheet-delete]');
-      if (remove) {
+      if (remove && !remove.disabled) {
         var chore = choreById(remove.getAttribute('data-sheet-delete'));
         if (chore) openDeleteSheet(chore);
         return;
@@ -1190,6 +1210,12 @@
       if (claimButton && !claimButton.disabled) {
         var card = claimButton.closest('[data-chore]');
         if (card) claim(card, claimButton);
+        return;
+      }
+      var remove = event.target.closest('button[data-delete]');
+      if (remove && !remove.disabled) {
+        var doomed = choreById(remove.getAttribute('data-delete'));
+        if (doomed) openDeleteSheet(doomed);
         return;
       }
       var edit = event.target.closest('button[data-edit]');
