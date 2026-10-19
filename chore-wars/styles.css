@@ -559,10 +559,14 @@ h2 {
 }
 
 .chore-tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   margin-top: 10px;
+}
+
+.chore-tools .tool {
+  min-height: 44px;
 }
 
 .tool,
