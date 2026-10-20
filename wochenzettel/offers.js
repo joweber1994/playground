@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-19.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-20.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -8,9 +8,9 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   return {
   "weekKey": "2026-W43",
-  "validFrom": "2026-10-12",
-  "validUntil": "2026-10-17",
-  "extractedAt": "2026-10-19",
+  "validFrom": "2026-10-19",
+  "validUntil": "2026-10-24",
+  "extractedAt": "2026-10-20",
   "stores": [
     {
       "id": "prechtl",
@@ -1479,6 +1479,11 @@
           "amount": "je 125-g-Schale"
         },
         {
+          "name": "Kaki*",
+          "price": "0.49",
+          "amount": "je Stück"
+        },
+        {
           "name": "MIKE MITCHELL’S Taquitos*",
           "price": "2.99",
           "amount": "je 320 g"
@@ -1974,708 +1979,73 @@
     {
       "id": "lidl",
       "name": "Lidl",
-      "source": "https://www.lidl.de/l/prospekte/aktionsprospekt-12-10-2026-17-10-2026-a1d941/ar/0?_ab=1&lf=HHZ",
-      "note": "Aktionsprospekt 12.10.–17.10.2026, automatisch gelesen.",
+      "source": "https://www.lidl.de/l/prospekte/aktionsprospekt-19-10-2026-24-10-2026-5aac13/ar/0?_ab=1&lf=HHZ",
+      "note": "Aktionsprospekt 19.10.–24.10.2026, automatisch gelesen.",
       "otherCount": 0,
       "offers": [
         {
-          "name": "STRENESSE Herren Kaschmirpullover »Jogi Löw - Kollektion«",
-          "price": "49.99",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Haustierbett, S",
-          "price": "7.99",
-          "amount": "Ma&szlig;e: L 60 x B 50 x H 20 cm Farbe: braun, grau"
-        },
-        {
-          "name": "MAX & MILA'S WORLD Ausziehleine mit Rückzugmechanismus",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Futter- und Trinknapf / Fütterungsmatte / Schleckmatte",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Futternapf",
-          "price": "3.49",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Katzen-Kratzbaum",
-          "price": "19.99",
-          "amount": "Ma&szlig;e: B 70 x H 115 x T 50 cm (gesamt) Farbe: natur"
-        },
-        {
-          "name": "HAMMER Kraftstation »FERRUM TX4«",
-          "price": "799.00",
-          "amount": ""
-        },
-        {
-          "name": "CHRISTOPEIT Holz Wasser Rudergerät »WP 5000«",
-          "price": "649.00",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Herren Funktionsshirt",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Funktionshirt",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Herren Funktionsshorts",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Funktionstights",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "Christopeit Sport Laufband »TM 750S«, 16 Trainingsprogramme, 900 Watt, mit",
-          "price": "399.00",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Hundebett / Katzenhöhle",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Tierhaarbürste mit Dampf",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Futternapf / Doppelfutternapf",
-          "price": "5.99",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Katzentoilette / Transportbox",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "MAX & MILA'S WORLD Katzen-Kratzbaum",
-          "price": "29.99",
-          "amount": "Ma&szlig;e: B 68 x H 84 x T 40 cm (gesamt) Farbe: grau/natur"
-        },
-        {
-          "name": "JOLLYPAW BY TRIXIE Transportbox »Aluminium M«",
-          "price": "149.00",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Langstiel-Heckenschere »PEHSL 800 A1«",
-          "price": "79.99",
-          "amount": "Hubzahl: 1.700 H&uuml;be/min Schnittl&auml;nge: 50 cm"
-        },
-        {
-          "name": "PARKSIDE Benzin-Laubsauger/-bläser »PBLSB 26 A1«",
-          "price": "99.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Sägebock",
-          "price": "49.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Hauswasserwerk »PEHWW 1000 A1«",
-          "price": "99.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Gartengerätehaus XL",
-          "price": "189.00",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Gartengerätehaus S",
-          "price": "289.00",
-          "amount": ""
-        },
-        {
-          "name": "KARIBU Gartenhaus Hybrido 19 mm",
-          "price": "999.00",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO HOME Musselin-Bettwäsche, 135 x 200 cm",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO HOME Musselin-Bettwäsche, 155 x 220 cm",
+          "name": "CRIVIT Herren Skihose",
           "price": "24.99",
           "amount": ""
         },
         {
-          "name": "LIVARNO HOME Musselin-Bettwäsche, 200 x 220 cm",
+          "name": "CRIVIT Herren Skijacke",
           "price": "29.99",
           "amount": ""
         },
         {
-          "name": "Hn8 Schlafsysteme Topper »Surf 100«, 7-Zonen Gelschaum-Kern, Cool-Effect Bezug",
+          "name": "CRIVIT Ski- und Snowboardbrille »Schönwetter/Allwetter/Schlechtwetter«",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Skijacke",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Skihose",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Premium Kinder Wollwalk-Jacke",
+          "price": "29.99",
+          "amount": "Farbe: beige, lila, navy Merkmal: mit zertifizierter Merinowolle"
+        },
+        {
+          "name": "LUPILU Kinder-Thermo-Langarmshirt, 2 Stück",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Kinder Stiefel",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Windeleimer",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "Ingenuity Babywippe »Morrison«",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "JOIE Autokindersitz »Fortifi R129«",
           "price": "109.00",
           "amount": ""
         },
         {
-          "name": "JUSKYS Polsterbett »Nizza« mit Bettkasten und Beleuchtung",
-          "price": "239.00",
-          "amount": ""
-        },
-        {
-          "name": "BRECKLE Matratze »Flex Air«, 7-Zonen Taschenfederkern",
-          "price": "179.00",
-          "amount": ""
-        },
-        {
-          "name": "STRENESSE BLUE Damen Sherpafleece Weste",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "STRENESSE BLUE Damen Leder-Micro-Boot",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "STRENESSE BLUE Damen/Herren Tennissocken, 3 Stück",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "STRENESSE BLUE Damen Langarmshirt",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "STRENESSE BLUE Damen Scuba Hose",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "STRENESSE BLUE Herren Boxer, 2 Stück",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "STRENESSE BLUE Herren Sweathoodie »Jogi Löw - Kollektion«, mit Piqué-Struktur",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "STRENESSE BLUE Herren Sweatpants »Jogi Löw - Kollektion«",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "Halloween Lichterkette, mit Timerfunktion",
-          "price": "5.99",
-          "amount": ""
-        },
-        {
-          "name": "Halloween Dekoration »LED-Spinnennetz«, mit 80 LEDs",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "Kürbis-Schnitzset",
-          "price": "7.99",
-          "amount": "Merkmal: ideal f&uuml;r Halloween"
-        },
-        {
-          "name": "Halloween-Gartendeko",
-          "price": "5.99",
-          "amount": ""
-        },
-        {
-          "name": "Halloween Gartenspieße",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "Kinder Pyjama",
-          "price": "4.44",
-          "amount": "Farbe: grau; lila; orange; schwarz Merkmal: Glow-in-the-Dark-Effekt"
-        },
-        {
-          "name": "Halloween LED-Dekoration",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Mikrofaser-Satin-Wendebettwäsche, 135 x 200 cm",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Mikrofaser-Satin-Wendebettwäsche, 155 x 220 cm",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Mikrofaser-Satin-Wendebettwäsche, 200 x 220 cm",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Jersey-Spannbettlaken, 90-100 x 200 cm",
-          "price": "2.69",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Jersey-Spannbettlaken, 140-160 x 200 cm",
-          "price": "4.39",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Jersey-Spannbettlaken, 180-200 x 200 cm",
-          "price": "5.39",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Visko-Nackenstützkissen, 60 x 36 x 12/10 cm",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "TRONIC USB-Steckdosen-Adapter",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Plissee Rollo für Fenster, 60 x 130 cm, Montage ohne Bohren",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO HOME Komfortschaummatratze »Waves«, Wellenschnitt",
-          "price": "59.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Kopfkissen »Brilliance«, 80 x 80 cm",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Kopfkissen »Brilliance«, 40 x 80 cm",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Bettdecke »Brilliance«, 155 x 220 cm",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Bettdecke »Brilliance«, 135 x 200 cm",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Bettdecke »Brilliance«, 200 x 220 cm",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Herren Thermo Funktionsshirt",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Thermo-Softshelljacke",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Herren Thermo-Softshelljacke",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Thermo Funktionsshirt",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Herren Thermo Funktionshose",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Thermo Funktionstights",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Messer / Taschenmesser",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Trekkingstiefel",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Herren Trekkingstiefel",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Pancake-Pfanne",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Aluguss-Topf, Ø 28",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Aluguss-Pfanne, Ø 32 cm",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Küchenmaschine »SKM 350 G1«",
+          "name": "REER Wickeltisch-Wärmestrahler »EasyHeat Flex«",
           "price": "49.99",
           "amount": ""
         },
         {
-          "name": "SILVERCREST Küchenwaage",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "ISI Sahnespender »Creative Whip Essential«",
-          "price": "29.99",
-          "amount": "Merkmal: sp&uuml;lmaschinenfest"
-        },
-        {
-          "name": "NINJA Kabelloser Mixer »BC151EUNV«, mit USB-C-Ladefunktion",
-          "price": "44.99",
-          "amount": "Leistung: 14,4 Watt Nutzvolumen: 532 ml"
-        },
-        {
-          "name": "Ninja Kaltentsafter NeverClog »JC151EU«, mit Anti-Verstopfungs-Filter",
-          "price": "99.99",
-          "amount": ""
-        },
-        {
-          "name": "NINJA Doppelzonen-Heißluftfritteuse »DZ300EU«, 7,6 l",
-          "price": "119.00",
-          "amount": ""
-        },
-        {
-          "name": "NINJA Heißluftfritteuse »SL300EU«, 7,6 l, Double Stack 2-Ebenen",
-          "price": "119.00",
-          "amount": ""
-        },
-        {
-          "name": "Ninja Foodi PossibleCooker (6 l), 8-in-1",
-          "price": "99.99",
-          "amount": "Leistung: 1400 Watt"
-        },
-        {
-          "name": "NINJA Heißluftfritteuse »DG551EU«, 1760 Watt",
-          "price": "179.00",
-          "amount": ""
-        },
-        {
-          "name": "KRUPS Kaffeevollautomat Sensation »EA910A« mit Milchdüse",
-          "price": "333.00",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Edelstahl-Besteck-Set, 20-teilig",
+          "name": "BEBECONFORT Töpfchen",
           "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "KENWOOD Küchenmaschine »KMIX KMX754«",
-          "price": "269.00",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Kühlschrank mit Gefrierfach SKGK 113 A1",
-          "price": "179.00",
-          "amount": "K&uuml;hlen + Gefrieren: ja Ma&szlig;e: L 55,3 x B 57,4 x H 84,5 cm"
-        },
-        {
-          "name": "TEFAL Jamie Oliver Gas Pizzaofen",
-          "price": "249.00",
-          "amount": "Ma&szlig;e: 58,3 x 45 x 30 cm"
-        },
-        {
-          "name": "SILVERCREST Gefrierschrank SGF 88 A1",
-          "price": "179.00",
-          "amount": "Ma&szlig;e: L 55,3 x B 57,4 x H 84,5 cm"
-        },
-        {
-          "name": "MASTERPRO Heißluftfritteuse »BGMP-9457«, 6 l",
-          "price": "49.99",
-          "amount": ""
-        },
-        {
-          "name": "RUSSELL HOBBS Kaffeemaschine Honeycomb »27011-56«",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "TEFAL Standmixer »Perfectmix Essential BL771A«, mit Glasbehälter",
-          "price": "69.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Backofen Digital Mobil »SBMD 2250 A1«",
-          "price": "89.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST KITCHEN TOOLS Wasserkocher Edelstahl »SWKP 2400 A1«",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST KITCHEN TOOLS Doppelschlitz-Toaster mit polierter Edelstahlfront",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "PHILIPS Dampfbügelstation »GC7920/20«, 2400 W, mit abnehmbarem 1,5 l",
-          "price": "149.00",
-          "amount": ""
-        },
-        {
-          "name": "EUFY Saug- und Wischroboter »Omni S1 Pro«",
-          "price": "799.00",
-          "amount": ""
-        },
-        {
-          "name": "ROWENTA Clean It Compact Fleckenreiniger »IN3010«, mit Doppeltank-System",
-          "price": "99.99",
-          "amount": ""
-        },
-        {
-          "name": "ROWENTA Compact Power Cyclonic Classic+ Bodenstaubsauger beutellos, Staubsauger",
-          "price": "79.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Akku-Staubsauger »SHSS 18 D3«",
-          "price": "49.99",
-          "amount": ""
-        },
-        {
-          "name": "VILEDA Wischmopp-Set »Easy Wring & Clean«",
-          "price": "29.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Benzin-Kettensäge »PBKS 53 C4«",
-          "price": "89.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Elektro-Kettensäge »PEKS 1600 C3«",
-          "price": "49.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Verlängerungskabel, 10 m",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Steckdosenleiste",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Pflanzenschutz-Schafwollfilzmatte 2m x 58cm",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Thermo-Topfschutz",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Pflanzenschutz-Vlieshaube, L (3 Stück), XL (2 Stück), XXL (1Stück)",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE 20 V Akku-Laubbläser »PALB 20 A1«, ohne Akku und Ladegerät",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Spaltbeil - 1,0 kg / Fäustel - 1,5 kg",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "SCHICKER MINERAL Marmor Ziersplitt",
-          "price": "15.99",
-          "amount": ""
-        },
-        {
-          "name": "SCHICKER MINERAL Schiefer Ziersplitt",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "SCHICKER MINERAL Granit Pflastersteine",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "SCHICKER MINERAL Deutsche Saunasteine",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "SCHICKER MINERAL Diabas Fugensand",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "SCHICKER MINERAL Urgesteinsmehl »Diabas«",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "SCHICKER MINERAL Rasensand Plus »Diabas«, 25 kg",
-          "price": "15.99",
-          "amount": ""
-        },
-        {
-          "name": "RAUCH ORANGE Drehtürenschrank Alabama mit Spiegel",
-          "price": "184.00",
-          "amount": ""
-        },
-        {
-          "name": "HOME DELUXE Schminktisch »CANDICE«",
-          "price": "99.99",
-          "amount": ""
-        },
-        {
-          "name": "HOMCOM Schlafsessel",
-          "price": "179.00",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Polsterbank mit Teddybezug und Metallbeinen",
-          "price": "59.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Samtdecke, 200 x 220 cm",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "FJÖDUR 3-Kammer-Kopfkissen mit 90% Daunen",
-          "price": "34.99",
-          "amount": ""
-        },
-        {
-          "name": "FJÖDUR Ganzjahresbettdecke Daunen",
-          "price": "109.00",
-          "amount": ""
-        },
-        {
-          "name": "Hn8 Schlafsysteme 7-Zonen Taschenfederkernmatratze »XXL Gelstar T-1000«,",
-          "price": "189.00",
-          "amount": ""
-        },
-        {
-          "name": "f.a.n. Mehrzonen-Komfortschaumkern-Matratze",
-          "price": "129.00",
-          "amount": ""
-        },
-        {
-          "name": "LICHTBLICK Thermo-Rollo Klemmfix, ohne Bohren, ab 45 x 150 cm",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "LICHTBLICK Duo Rollo Klemmfix, ohne Bohren, ab 45 x 150 cm",
-          "price": "11.99",
-          "amount": ""
-        },
-        {
-          "name": "Lichtblick Plissee Klemmfix, ohne Bohren, verspannt, ab 45 x 130 cm",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Strickjacke",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Latzhose",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Schlafoverall",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA Damen Umstandsleggings, 2 Stück",
-          "price": "9.99",
-          "amount": "Farbe: grau, schwarz Merkmal: extrahoch geschnitten"
-        },
-        {
-          "name": "SIMBA Disney Einschlafhilfe Plüschtier",
-          "price": "22.49",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby-Sweatanzug",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Fleece-Overall",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Bodys, 3 Stück",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Wickelbody, 3 Stück",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Mädchen Strumpfhose Vollfrottee Thermo, 2 Stück",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "JOIE Kindersitz i-Trillo FX – mit Iso-Fix, 100-150 cm, 4-12 Jahre",
-          "price": "79.99",
           "amount": ""
         },
         {
@@ -2684,107 +2054,687 @@
           "amount": ""
         },
         {
-          "name": "CEPA LEBREL Gran Reserva Rioja DOCa trocken, Rotwein 2015",
-          "price": "8.99",
+          "name": "HN8 SCHLAFSYSTEME 7-Zonen Taschenfederkern-Matratze »Dynamic TFK«, mit",
+          "price": "149.00",
           "amount": ""
         },
         {
-          "name": "ARESTEL Cava brut nature, Schaumwein",
-          "price": "6.99",
+          "name": "BALETTE deLuxe Gänsefeder/Daunen Kopfkissen Gold-Edition",
+          "price": "29.99",
           "amount": ""
         },
         {
-          "name": "4 + 2 Weinpaket BONOT PÉRE & FILS Bourgogne Chardonnay AOP trocken, Weißwein",
-          "price": "39.96",
-          "amount": "elegant & frisch Frankreich, Burgund Chardonnay, trocken"
-        },
-        {
-          "name": "Rheinhessen Wine Lovers Traumpaar Weissburgunder/Grauburgunder trocken,",
-          "price": "4.99",
-          "amount": "fruchtig & kr&auml;ftig Deutschland, Rheinhessen Cuv&eacute;e, trocken"
-        },
-        {
-          "name": "TAITTINGER Brut Reserve, Champagner",
-          "price": "42.99",
-          "amount": "saftig & mineralisch Frankreich, Champagne Cuv&eacute;e, brut"
-        },
-        {
-          "name": "SANSIBAR DELUXE Primitivo di Manduria Reserva DOC trocken, Rotwein 2021",
-          "price": "8.99",
+          "name": "BALETTE deLuxe Gänsedaunen- Kassettenbettdecke Gold-Edition",
+          "price": "119.00",
           "amount": ""
         },
         {
-          "name": "PATA NEGRA Tempranillo Rioja Crianza DOCa trocken, Rotwein 2020",
-          "price": "5.99",
+          "name": "f.a.n. Topper »BIG KOMFORT PLUS«, 7-Zonen Kaltschaum, mit Lüftungsband",
+          "price": "79.99",
           "amount": ""
         },
         {
-          "name": "PATA NEGRA Sauvignon Blanc/Verdejo Rueda DOC trocken, Weißwein 2024",
-          "price": "5.99",
+          "name": "BRECKLE 7-Zonen Kaltschaum-Matratze »Pro Body S 592«, für alle Körpertypen",
+          "price": "189.00",
           "amount": ""
         },
         {
-          "name": "BAUER Haselnuss Spirituose 33% Vol",
-          "price": "14.99",
+          "name": "LIVARNO Renforcé-Bettwäsche, 155 x 220 cm",
+          "price": "9.99",
           "amount": ""
         },
         {
-          "name": "GLENALBA Blended Scotch Whisky 21 Jahre Port Cask Finish 41,4% Vol",
-          "price": "44.99",
-          "amount": ""
-        },
-        {
-          "name": "GLENALBA Blended Scotch Whisky 30 Jahre PX Cask Finish 41,4% Vol",
-          "price": "59.99",
-          "amount": ""
-        },
-        {
-          "name": "THE ARRAN Single Malt Scotch Whisky 10 Jahre mit Geschenkbox 46% Vol",
-          "price": "35.99",
-          "amount": "elegant & exotisch Single Malt Scotch Whisky Schottland, Isle of Arran"
-        },
-        {
-          "name": "QUEEN MARGOT Blended Scotch Whisky 8 Jahre 40% Vol",
-          "price": "11.99",
-          "amount": ""
-        },
-        {
-          "name": "ARMILAR Tawny Port 10 Jahre 20% Vol",
-          "price": "11.99",
-          "amount": ""
-        },
-        {
-          "name": "DIMPLE Golden Selection Blended Scotch Whisky 40% Vol",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "SUNTORY Toki Suntory Whisky Japanischer Blended Whisky 43% Vol",
-          "price": "23.99",
-          "amount": ""
-        },
-        {
-          "name": "ROKU GIN The Japanese Craft Gin 43% Vol",
-          "price": "21.99",
-          "amount": ""
-        },
-        {
-          "name": "Kinder Matsch- und -Buddeljacke",
+          "name": "LIVARNO Renforcé-Bettwäsche, 200 x 220 cm",
           "price": "12.99",
           "amount": ""
         },
         {
-          "name": "Kinder Matsch- und -Buddelhose",
+          "name": "LIVARNO Renforcé-Bettwäsche, 135 x 200 cm",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Monalie Côtes de Provence rosé AOP trocken, Roséwein 2025",
+          "price": "7.99",
+          "amount": "fruchtig & frisch Frankreich, Provence Cuv&eacute;e, trocken"
+        },
+        {
+          "name": "FRANZIS Adventskalender",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "Minibuch-Adventskalender »Marvel / PAW Patrol / Peppa Pig«",
+          "price": "9.99",
+          "amount": "Genre: Kinder Altersempfehlung: 3+"
+        },
+        {
+          "name": "RAVENSBURGER Adventskalender",
+          "price": "19.99",
+          "amount": "Altersempfehlung: 4+ / 10+"
+        },
+        {
+          "name": "ESMARA Damen Premium Lammfellhausschuhe",
+          "price": "14.99",
+          "amount": "Farbe: braun, schwarz Merkmal: aus weichem Leder"
+        },
+        {
+          "name": "ESMARA MEN Herren Premium-Lammfellhausschuhe",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Kinder Pyjama",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Gerippte Langarmshirts, 2 Stück",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Oversize-Flanellbluse",
+          "price": "7.99",
+          "amount": "Farbe: beige, bordeaux, schwarz Merkmal: weit geschnitten"
+        },
+        {
+          "name": "ESMARA Damen Mantel",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Shaping-Jeggings",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Schultertasche",
+          "price": "6.99",
+          "amount": "Farbe: beige, schwarz Merkmal: verstellbarer Schultergurt"
+        },
+        {
+          "name": "ESMARA Damen Strickpullover",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Weste",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Jeans, Skinny Fit",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Strickkleid",
+          "price": "9.99",
+          "amount": "Farbe: beige, braun Merkmal: leger geschnitten"
+        },
+        {
+          "name": "ESMARA MEN Herren Langarmshirt",
+          "price": "5.99",
+          "amount": "Farbe: beige, khaki, navy Merkmal: in modischer Waffelrippstruktur"
+        },
+        {
+          "name": "ESMARA MEN Herren Grobstrick-Troyer",
+          "price": "12.99",
+          "amount": "Farbe: grau, navy Merkmal: modischer Stehkragen"
+        },
+        {
+          "name": "ESMARA MEN Herren Steppjacke",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA MEN Herren Cargo-Joggers",
+          "price": "12.99",
+          "amount": "Farbe: dunkelgr&uuml;n; schwarz Merkmal: mittlere Leibh&ouml;he"
+        },
+        {
+          "name": "ESMARA Damen Nicki-Hausanzug",
           "price": "9.99",
           "amount": ""
         },
         {
-          "name": "Buch Shappulus (von Mark Keller & Elmar Schäfer)",
+          "name": "ESMARA Damen Thermostrumpfhose mit Nude-Innenseite",
+          "price": "5.49",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Thermounterhemd",
+          "price": "6.99",
+          "amount": "Farbe: rose, schwarz Merkmal: angenehm weich"
+        },
+        {
+          "name": "ESMARA Damen Thermounterhose",
+          "price": "6.99",
+          "amount": "Farbe: rosa, schwarz Merkmal: angenehm weich"
+        },
+        {
+          "name": "LIVARNO LED-Lichtervorhang, 40 Stränge",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO LED-Fensterhänger",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO LED-Laterne mit Schneegestöber-Effekt und Musik",
           "price": "9.99",
-          "amount": "Anzahl Seiten: 160 Seiten Altersempfehlung: 8+"
+          "amount": "Merkmal: auch zum Aufh&auml;ngen Ma&szlig;e: L 13,5 x B 13,5 x H 30 cm"
+        },
+        {
+          "name": "TRONIC Kaminofen-Ventilator",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "TRONIC Konvektor",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "TRONIC Heizlüfter mit LCD + Fernbedienung",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "TRONIC Keramik-Turm-Heizlüfter »PTC TTHL 2000 C3«",
+          "price": "29.99",
+          "amount": "Leistung: 2000 W Ma&szlig;e: &Oslash; 21 x H 57,8 cm"
+        },
+        {
+          "name": "TRONIC Infrarot-Anti-Schimmel-Wandwärmer",
+          "price": "29.99",
+          "amount": "Bemessungsleistung: 35 W Kabellänge: 200 cm"
+        },
+        {
+          "name": "TRONIC Keramik Wandheizlüfter »TKWHB 2000 A1«",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "Genius Nicer Dicer »Chef«, 13-teilig",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "Premium-Gusseisen-Servierpfanne »Kürbis«, ca. Ø 27 cm",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Geschirr-Set »Porto«, 24-teilig",
+          "price": "54.99",
+          "amount": ""
+        },
+        {
+          "name": "SEVERIN Filterkaffeemaschine »KA 9210«",
+          "price": "89.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Heißluftfritteuse »SHFD 2150 B2«, 6,7 l",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "KRUPS Kaffeevollautomat Latt´Espress mit Milchbehälter »EA8298«",
+          "price": "349.00",
+          "amount": ""
+        },
+        {
+          "name": "GRUNDIG Dampfbürste »ST 6150 L«, 25 g/min.",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "GRUNDIG 2-in-1 Akkusauger »VCH 9831 L«",
+          "price": "89.99",
+          "amount": ""
+        },
+        {
+          "name": "PHILIPS Bodenstaubsauger »2000 Series- XD2152/22«, 3 l",
+          "price": "69.99",
+          "amount": ""
+        },
+        {
+          "name": "PHILIPS OneUp Elektrischer Mopp 3000 Series XV3101",
+          "price": "89.99",
+          "amount": ""
+        },
+        {
+          "name": "ROBOROCK Saug- und Wischroboter »Q7 TF+« mit Absaugstation",
+          "price": "209.00",
+          "amount": "Reinigungsmodus: Automatikmodus, Teppich-Boost-Modus, Leise-Modus"
+        },
+        {
+          "name": "ROWENTA X-Clean 2 Nass-Trocken-Staubsauger »GZ2251«",
+          "price": "199.00",
+          "amount": "Reinigungsmodus: 2 ECO & MAX Leistung: 120 W"
+        },
+        {
+          "name": "SILVERCREST Pasta-Maschine »SPM 220 B4«",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Digitaler Wasserkocher",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Geschirrset »Weihnachten«, 12-teilig",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Premium Doppelschlitz-Toaster",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "BRAUN Standmixer »JB3150BK«, ca. 1,5L",
+          "price": "59.99",
+          "amount": ""
+        },
+        {
+          "name": "Ritzenhoff Aperitifglas / Champus-Duett, 2 Stück",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Bohrschrauber »PABS 20-Li I9« ohne Akku – ohne Ladegerät",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20V Akku 4 Ah »PAP 204 A1«",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Bohrerschärfgerät »PBSG 92 A1«",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20V Akku-Winkelschleifer »PWSA 20-Li G4«, ohne Akku und Ladegerät",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Luftpumpe »PALP 20-Li C3« + 20 V Akku-Kompressor »PAK 20-Li",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Fächerscheiben-Set / Polierscheiben / Klettschleifteller mit",
+          "price": "3.49",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Schlagbohrschrauber »PSBSA 20-Li C3« mit Akku – mit Ladegerät",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Universalgebläse »PAUGB B2«, ohne Akku – ohne Ladegerät",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Säbelsäge »PSSA 20-Li B2«, ohne Akku und Ladegerät",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V / Akku-Handkreissäge »PHKSA 20-Li C4«, ohne Akku und Ladegerät",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Elektro-Laubsauger / -bläser »PELSB 2600 A1«",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Benzin-Gartenkultivator »PBGK 1400 F5«",
+          "price": "159.00",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Benzin-Kombigerät »PBK 4 C4«, 4in1",
+          "price": "99.99",
+          "amount": "Leerlaufdrehzahl: 3200&plusmn;300 1/min"
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 20V 12 Ah Smart-Akku »PAPP 2012 A1 NEXT GEN«, ohne",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 40 V Akku-Baumpflegesäge »PPAKS 40-Li B2«, ohne Akku und",
+          "price": "89.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 12V Akku-Kunststoff Schweißpistole PKSPA 12 A1 (mit integriertem Akku",
+          "price": "19.99",
+          "amount": "Aufheizzeit: 8&ndash;10 s Max. Temperatur: 650 &deg;C"
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Ratsche »PAR 20-Li A1«, ohne Akku und Ladegerät",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Aschesauger »PAS 20-Li 14 A1«, ohne Akkus – ohne Ladegerät",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Akku-Farbspritzpistole »PFSA 20-Li B2«, ohne Akku – ohne Ladegerät",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "GÜDE Werkstatteinrichtungs-Set »GWS« 6-tlg.",
+          "price": "699.00",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Waschsauger »PWS 20 F5«",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "DUNLOPILLO 7-Zonen-Matratze BALANCE »KS 1.000«",
+          "price": "309.00",
+          "amount": ""
+        },
+        {
+          "name": "DUNLOPILLO 7-Zonen-Tonnentaschen-Federkern-Matratze BALANCE »T 1.000«",
+          "price": "439.00",
+          "amount": ""
+        },
+        {
+          "name": "DUNLOPILLO 7-Zonen-Tonnentaschen-Federkern-Matratze SUPREME »T 1.000«",
+          "price": "539.00",
+          "amount": ""
+        },
+        {
+          "name": "DUNLOPILLO Premium Kopfkissen »Life«",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "DUNLOPILLO Premium Ganzjahres- Bettdecke Life",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "DUNLOPILLO Premium 4-Jahreszeiten-Bettdecke Life",
+          "price": "58.49",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Freeride-Jacke",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Freeride-Jacke",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Freeride-Hose",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Freeridejacke",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Freeridejacke",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Freeride-Hose",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Freeride-Hose",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Premium Photochromic Ski- und Snowboardbrille",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Schneestiefel",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Strickmütze",
+          "price": "4.99",
+          "amount": "Farbe: blau, pink, gemustert Merkmal: mit reflektierendem Deko-Garn"
+        },
+        {
+          "name": "CRIVIT Damen Herren Skihandschuhe",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Funktionsunterhose",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Funktionsunterhemd",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Funktionsunterhemd",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Winter-Accessoires",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Funktionsunterhose",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Multifunktionstuch",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Alpen Gaudi »AlpenRace Bob«, Lenkbob im Racing-Design",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen / Herren Fleecejacke",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Premium-Skihandschuhe",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Ski- und Snowboardhelm",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen / Herren Funktionsunterhemd",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen / Herren Funktionsunterhose",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Premium Damen Winter-Funktionsstrümpfe",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Herren Winter-Funktionsstrümpfe",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Outdoor-Handwärmer",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Turmwäscheständer",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "W5 Wäschekorb faltbar 37l",
+          "price": "7.99",
+          "amount": "Maße: 60 x 45 x 27 cm Fassungsvermögen: 37 l Traglast: max. 20 kg"
+        },
+        {
+          "name": "W5 Premium-Bügeltischbezug, 100% Baumwolle",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Premium-Dampfbügeleisen",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Polster- und Teppichreiniger »SPR 800 A1«",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "W5 Reinigungshelfer Starterset »Switch & Clean«",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Bodenstaubsauger Zyklon, beutellos",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Akku-Staubsauger Zyklon »SAS 24 A1«",
+          "price": "119.00",
+          "amount": ""
+        },
+        {
+          "name": "VILEDA Dampfmopp »Steam«",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "HAMMEL & CIE Riesling & Weißburgunder Pfalz QbA trocken, Weißwein 2024",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "DUCA DI SASSETA Vino Nobile di Montepulciano DOCG Riserva trocken, Rotwein 2018",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Cour Saint Liénard Grand Cru Saint-Émilion AOP trocken, Rotwein 2022",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "4 + 2 Weinpaket Pinot Noir Rosé Pays d'Oc IGP trocken, Roséwein",
+          "price": "27.96",
+          "amount": "w&uuml;rzig & fruchtig Frankreich, Languedoc Cuv&eacute;e, trocken"
+        },
+        {
+          "name": "CASATO DEI MEDICI RICCARDI Morellino di Scansano DOCG trocken, Rotwein 2024",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Halloween Rum Werwolf Edition 40% Vol",
+          "price": "8.88",
+          "amount": "kr&auml;ftig & w&uuml;rzig Rum Deutschland"
+        },
+        {
+          "name": "WEIZENSTOLZ Doppelweizenkorn 38% Vol",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Henri Dubois Champagner brut, Champagner",
+          "price": "21.99",
+          "amount": ""
+        },
+        {
+          "name": "HEIDSIECK & CO Monopole Red Top brut, Champagner",
+          "price": "26.99",
+          "amount": "fruchtig & elegant Frankreich, Champagne Cuv&eacute;e, trocken"
+        },
+        {
+          "name": "PENFOLDS BIN 28 Shiraz, Rotwein 2023",
+          "price": "29.00",
+          "amount": ""
+        },
+        {
+          "name": "KAHLÚA Coffee-Liqueur 16% Vol",
+          "price": "13.49",
+          "amount": ""
+        },
+        {
+          "name": "ROMANETTI Amaro Kräuterlikör 30% Vol",
+          "price": "4.99",
+          "amount": "bitter & kr&auml;ftig Kr&auml;uterlik&ouml;r Deutschland"
+        },
+        {
+          "name": "A.H. RIISE Rum Adventskalender, 24 x 0,02-l-Flasche, 40 - 60% vol",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "KLEINER FEIGLING Adventskalender 24 x 0,02l",
+          "price": "21.99",
+          "amount": ""
+        },
+        {
+          "name": "MAKER'S MARK Kentucky Straight Bourbon Whisky 45% Vol",
+          "price": "19.99",
+          "amount": ""
         }
       ],
-      "revision": "aktionsprospekt-12-10-2026-17-10-2026-a1d941"
+      "revision": "aktionsprospekt-19-10-2026-24-10-2026-5aac13"
     },
     {
       "id": "dm",
