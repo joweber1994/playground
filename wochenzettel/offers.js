@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-21.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-22.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W43",
   "validFrom": "2026-10-19",
   "validUntil": "2026-10-24",
-  "extractedAt": "2026-10-21",
+  "extractedAt": "2026-10-22",
   "stores": [
     {
       "id": "prechtl",
@@ -404,6 +404,11 @@
           "amount": ""
         },
         {
+          "name": "KLEINE SCHÄTZE Passionsfrüchte, Stück",
+          "price": "0.88",
+          "amount": ""
+        },
+        {
           "name": "NATUR LIEBLINGE Trauben hell, kernlos 500 g",
           "price": "1.39",
           "amount": ""
@@ -429,6 +434,11 @@
           "amount": ""
         },
         {
+          "name": "NATUR LIEBLINGE Mandarinen kernarm 750 g",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
           "name": "RIO D' ORO Orangendirektsaft 1 l",
           "price": "2.00",
           "amount": ""
@@ -436,6 +446,11 @@
         {
           "name": "OATLY! Haferdrink Barista 1 l",
           "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "FARMER NATURALS Feinste Nuss-Variation 200 g",
+          "price": "1.95",
           "amount": ""
         },
         {
@@ -467,6 +482,11 @@
           "name": "NATUR LIEBLINGE Rosenkohl 750 g",
           "price": "1.19",
           "amount": ""
+        },
+        {
+          "name": "Bio Naturland Hokkaido, lose",
+          "price": "1.89",
+          "amount": "1 kg"
         },
         {
           "name": "STORCK Toffifee 125 g",
@@ -524,7 +544,17 @@
           "amount": "1 kg"
         },
         {
+          "name": "ALDI Äpfel fein-säuerlich, Sorte: Elstar 1 kg",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
           "name": "Conference Birnen 1 kg",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "STORCK Knoppers Nussriegel 200 g, Haselnuss",
           "price": "1.49",
           "amount": ""
         },
@@ -569,11 +599,6 @@
           "amount": ""
         },
         {
-          "name": "CUCINA NOBILE Frische Tortelloni 400 g, Tomate-Mozzarella",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
           "name": "CUCINA NOBILE Frische Tortelloni 400 g, Spinat-Ricotta",
           "price": "1.19",
           "amount": ""
@@ -581,6 +606,21 @@
         {
           "name": "CUCINA NOBILE Frische Tortelloni 400 g, Käse",
           "price": "1.19",
+          "amount": ""
+        },
+        {
+          "name": "Pom-Bär 75 g, Original",
+          "price": "0.99",
+          "amount": ""
+        },
+        {
+          "name": "Pom-Bär 75 g, Ketchup Style",
+          "price": "0.99",
+          "amount": ""
+        },
+        {
+          "name": "Pom-Bär 75 g, Sour Creme Style",
+          "price": "0.99",
           "amount": ""
         },
         {
