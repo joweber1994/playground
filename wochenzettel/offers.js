@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-26.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-27.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W44",
   "validFrom": "2026-10-26",
   "validUntil": "2026-10-31",
-  "extractedAt": "2026-10-26",
+  "extractedAt": "2026-10-27",
   "stores": [
     {
       "id": "prechtl",
@@ -345,7 +345,7 @@
       "offers": [
         {
           "name": "Himbeeren 125 g",
-          "price": "1.99",
+          "price": "1.89",
           "amount": ""
         },
         {
@@ -385,7 +385,7 @@
         },
         {
           "name": "BESTES AUS DER REGION Karotten 2 kg",
-          "price": "1.19",
+          "price": "1.11",
           "amount": ""
         },
         {
@@ -445,12 +445,17 @@
         },
         {
           "name": "Bio Naturland Hokkaido, lose",
-          "price": "1.89",
+          "price": "1.29",
           "amount": "1 kg"
         },
         {
           "name": "MEINE METZGEREI Rindergulasch 500 g",
           "price": "6.69",
+          "amount": ""
+        },
+        {
+          "name": "JACOBS Krönung 500 g",
+          "price": "6.49",
           "amount": ""
         },
         {
@@ -480,7 +485,7 @@
         },
         {
           "name": "ALDI Äpfel fein-säuerlich, Sorte: Elstar 1 kg",
-          "price": "1.99",
+          "price": "1.69",
           "amount": ""
         },
         {
@@ -769,12 +774,12 @@
           "amount": ""
         },
         {
-          "name": "GOURMET Spareribs mariniert 600 g, Honey BBQ",
+          "name": "GOURMET FINEST CUISINE Spareribs mariniert 600 g, Honey BBQ",
           "price": "5.99",
           "amount": ""
         },
         {
-          "name": "GOURMET Spareribs mariniert 600 g, Sweet Chili",
+          "name": "GOURMET FINEST CUISINE Spareribs mariniert 600 g, Sweet Chili",
           "price": "5.99",
           "amount": ""
         }
@@ -1457,6 +1462,16 @@
           "name": "WILTMANN Salami*",
           "price": "1.29",
           "amount": "je 80 g"
+        },
+        {
+          "name": "Rosenkohl*",
+          "price": "1.11",
+          "amount": "je 750-g-Packung"
+        },
+        {
+          "name": "NATURGUT Bio Cherry-Romatomaten*",
+          "price": "1.29",
+          "amount": "je 250-g-Packung"
         },
         {
           "name": "JACOBS 3in1 Classic*",
