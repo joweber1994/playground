@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-27.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-28.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W44",
   "validFrom": "2026-10-26",
   "validUntil": "2026-10-31",
-  "extractedAt": "2026-10-27",
+  "extractedAt": "2026-10-28",
   "stores": [
     {
       "id": "prechtl",
@@ -354,6 +354,11 @@
           "amount": ""
         },
         {
+          "name": "WINTERTRAUM Oblaten Lebkuchen 200 g",
+          "price": "1.45",
+          "amount": ""
+        },
+        {
           "name": "BELLASAN Pflanzenfett 1 kg",
           "price": "2.29",
           "amount": ""
@@ -564,6 +569,11 @@
           "amount": ""
         },
         {
+          "name": "RED BULL Energy Drink 250 ml, White Edition",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
           "name": "KNORR Feinschmeckersuppe 59 g, Tomate",
           "price": "0.79",
           "amount": ""
@@ -701,6 +711,31 @@
         {
           "name": "NUR NUR NATUR Bio-Landhähnchen Flügel 350 g, Gewürzt",
           "price": "2.39",
+          "amount": ""
+        },
+        {
+          "name": "KNORR Basissauce 3 x 250 ml, Braten Extra",
+          "price": "0.79",
+          "amount": ""
+        },
+        {
+          "name": "KNORR Basissauce 3 x 250 ml, Schweinebraten",
+          "price": "0.79",
+          "amount": ""
+        },
+        {
+          "name": "KNORR Basissauce 3 x 250 ml, Geflügel Soße",
+          "price": "0.79",
+          "amount": ""
+        },
+        {
+          "name": "KNORR Basissauce 3 x 250 ml, Helle Soße",
+          "price": "0.79",
+          "amount": ""
+        },
+        {
+          "name": "KNORR Basissaucen 2 x 250 ml, Rahm Soße",
+          "price": "0.79",
           "amount": ""
         },
         {
