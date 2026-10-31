@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-28.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-10-31.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W44",
   "validFrom": "2026-10-26",
   "validUntil": "2026-10-31",
-  "extractedAt": "2026-10-28",
+  "extractedAt": "2026-10-31",
   "stores": [
     {
       "id": "prechtl",
@@ -1909,7 +1909,17 @@
           "amount": "je Stück"
         },
         {
+          "name": "TRUE STYLE Tieffußbett -Clogs*",
+          "price": "9.99",
+          "amount": "je Paar"
+        },
+        {
           "name": "SAVARIE Bügel-BH*",
+          "price": "9.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "SAVARIE Jacquard-Soft-BH*",
           "price": "9.99",
           "amount": "je Stück"
         },
@@ -1929,6 +1939,11 @@
           "amount": "je 5 Paar"
         },
         {
+          "name": "TRUE STYLE Herren-Retroshorts*",
+          "price": "9.99",
+          "amount": "je 5er-Packung"
+        },
+        {
           "name": "HP CANON Druckerpatronen*",
           "price": "13.99",
           "amount": "je Set/Packung"
@@ -1939,7 +1954,7 @@
     {
       "id": "lidl",
       "name": "Lidl",
-      "source": "https://www.lidl.de/l/prospekte/aktionsprospekt-26-10-2026-31-10-2026-84f6cc/ar/0?_ab=1&lf=HHZ",
+      "source": "https://www.lidl.de/l/prospekte/aktionsprospekt-26-10-2026-31-10-2026-3b6eba/ar/0?_ab=1&lf=HHZ",
       "note": "Aktionsprospekt 26.10.–31.10.2026, automatisch gelesen.",
       "otherCount": 0,
       "offers": [
@@ -1985,7 +2000,7 @@
         },
         {
           "name": "EMMA Matratze »Emma Express«, Aeroflex Taschenfedern",
-          "price": "199.00",
+          "price": "109.00",
           "amount": ""
         },
         {
@@ -2016,21 +2031,6 @@
         {
           "name": "JUSKYS Sofa Iseo mit Ottomane",
           "price": "799.00",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Lyocell-Satin-Bettwäsche, 135 x 200 cm",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Lyocell-Satin-Bettwäsche, 155 x 220 cm",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Lyocell-Satin-Bettwäsche, 200 x 220 cm",
-          "price": "29.99",
           "amount": ""
         },
         {
@@ -2579,7 +2579,7 @@
           "amount": ""
         },
         {
-          "name": "ESMARA MEN Herren Premium-Daunenjacke",
+          "name": "ESMARA Damen Premium-Daunensteppjacke",
           "price": "49.99",
           "amount": ""
         },
@@ -2589,7 +2589,7 @@
           "amount": ""
         },
         {
-          "name": "ESMARA Damen Premium-Daunensteppjacke",
+          "name": "ESMARA MEN Herren Premium-Daunenjacke",
           "price": "49.99",
           "amount": ""
         },
@@ -2646,11 +2646,6 @@
         {
           "name": "ASUS Vivobook X1504VAP, 38 cm (15 Zoll) Full-HD-Display und 16 GB RAM",
           "price": "549.00",
-          "amount": ""
-        },
-        {
-          "name": "EPSON Drucker »ET-1810«",
-          "price": "119.00",
           "amount": ""
         },
         {
@@ -2739,7 +2734,7 @@
           "amount": "Anzahl Seiten: 160 Seiten Altersempfehlung: 8+"
         }
       ],
-      "revision": "aktionsprospekt-26-10-2026-31-10-2026-84f6cc"
+      "revision": "aktionsprospekt-26-10-2026-31-10-2026-3b6eba"
     },
     {
       "id": "dm",
