@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-02.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-03.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W45",
   "validFrom": "2026-11-02",
   "validUntil": "2026-11-07",
-  "extractedAt": "2026-11-02",
+  "extractedAt": "2026-11-03",
   "stores": [
     {
       "id": "prechtl",
@@ -364,6 +364,16 @@
           "amount": ""
         },
         {
+          "name": "Porree / Lauch, Stück",
+          "price": "0.45",
+          "amount": ""
+        },
+        {
+          "name": "Zucchini, lose",
+          "price": "1.29",
+          "amount": "1 kg"
+        },
+        {
           "name": "NATUR LIEBLINGE Speisekartoffeln festkochend 2,5 kg",
           "price": "2.29",
           "amount": ""
@@ -374,6 +384,11 @@
           "amount": ""
         },
         {
+          "name": "NATUR LIEBLINGE Kaki Krumme Dinger 1 kg",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
           "name": "Zespri Kiwi Sungold, Stück",
           "price": "0.55",
           "amount": ""
@@ -381,11 +396,6 @@
         {
           "name": "KING'S CROWN Passierte Tomaten 500 g",
           "price": "0.45",
-          "amount": ""
-        },
-        {
-          "name": "NATUR LIEBLINGE Clementinen 1 kg",
-          "price": "1.49",
           "amount": ""
         },
         {
@@ -700,17 +710,17 @@
         },
         {
           "name": "LEIBNIZ Butterkeks, Schokolade 200 g",
-          "price": "1.19",
+          "price": "1.00",
           "amount": ""
         },
         {
           "name": "LEIBNIZ Butterkeks, 30 % weniger Zucker 150 g",
-          "price": "1.19",
+          "price": "1.00",
           "amount": ""
         },
         {
           "name": "LEIBNIZ Butterkeks, Butter 200 g",
-          "price": "1.19",
+          "price": "1.00",
           "amount": ""
         },
         {
@@ -1749,6 +1759,141 @@
           "amount": "je Bund"
         },
         {
+          "name": "MILPRIMA Deutsche Markenbutter*",
+          "price": "1.15",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "MILPRIMA Süßrahmbutter*",
+          "price": "1.15",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "MILPRIMA Lækkergården*",
+          "price": "1.15",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "PUDA Backpulver*",
+          "price": "0.45",
+          "amount": "je 10 x 15 g"
+        },
+        {
+          "name": "PUDA Trockenbackhefe*",
+          "price": "0.49",
+          "amount": "je 6 x 7 g"
+        },
+        {
+          "name": "NATURGUT Bio Vanille Extrakt*",
+          "price": "2.49",
+          "amount": "je 50 ml"
+        },
+        {
+          "name": "PUDA Rohrohrzucker*",
+          "price": "1.29",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Baguette Brötchen*",
+          "price": "0.59",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Kaiserbrötchen*",
+          "price": "0.69",
+          "amount": "je 220 g"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Schoko Brötchen*",
+          "price": "1.79",
+          "amount": "je 360 g"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Hörnchen*",
+          "price": "1.39",
+          "amount": "je 240 g"
+        },
+        {
+          "name": "PUDA Raspelschokolade Zartbitter*",
+          "price": "0.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "PUDA Raspelschokolade Vollmilch*",
+          "price": "0.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "PUDA Schokoladenstreusel Milch*",
+          "price": "2.49",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "PUDA Schokoladenstreusel Schoko*",
+          "price": "2.49",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "PUDA Schokotröpfchen Zartbitter*",
+          "price": "0.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "PUDA Schokotröpfchen Vollmilch*",
+          "price": "0.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "PUDA Schoko Chunks Zartbitter*",
+          "price": "0.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "PUDA Schoko Chunks Vollmilch*",
+          "price": "0.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "BLIK Allzwecktücher*",
+          "price": "0.99",
+          "amount": "je 80 Stück"
+        },
+        {
+          "name": "HOME IDEAS Allzweck & Gefrierbeutel*",
+          "price": "1.29",
+          "amount": "je 20 Stück"
+        },
+        {
+          "name": "HOME IDEAS Frühstücksbeutel*",
+          "price": "0.49",
+          "amount": "je 120 Stück"
+        },
+        {
+          "name": "HOME IDEAS Müllbeutel*",
+          "price": "0.99",
+          "amount": "je 50 Stück"
+        },
+        {
+          "name": "HOME IDEAS Duftmüllbeutel Waldbeere*",
+          "price": "1.49",
+          "amount": "je 30 Stück"
+        },
+        {
+          "name": "HOME IDEAS Duftmüllbeutel Limette*",
+          "price": "1.49",
+          "amount": "je 30 Stück"
+        },
+        {
+          "name": "HOME IDEAS Abfallsäcke*",
+          "price": "2.29",
+          "amount": "je 20 Stück"
+        },
+        {
+          "name": "HOME IDEAS Kompostbeutel*",
+          "price": "1.19",
+          "amount": "je 20 Stück"
+        },
+        {
           "name": "Herbststern*",
           "price": "2.99",
           "amount": "je Stück"
@@ -1826,6 +1971,16 @@
         {
           "name": "Avocado angereift*",
           "price": "0.89",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Gurke*",
+          "price": "0.77",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Kaki*",
+          "price": "0.49",
           "amount": "je Stück"
         },
         {
