@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-07.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-09.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -7,10 +7,10 @@
   else root.WochenzettelOffers = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   return {
-  "weekKey": "2026-W45",
-  "validFrom": "2026-11-02",
-  "validUntil": "2026-11-07",
-  "extractedAt": "2026-11-07",
+  "weekKey": "2026-W46",
+  "validFrom": "2026-11-09",
+  "validUntil": "2026-11-14",
+  "extractedAt": "2026-11-09",
   "stores": [
     {
       "id": "prechtl",
@@ -344,1348 +344,913 @@
       "otherCount": 0,
       "offers": [
         {
-          "name": "GOURMET FINEST CUISINE Hirschedelgulasch 500 g",
-          "price": "8.49",
+          "name": "Aperol 11 % 700 ml",
+          "price": "9.49",
           "amount": ""
         },
         {
-          "name": "COCA-COLA Cola Original 1,25 l",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "ALMARE Eismeergarnelen 100 g",
-          "price": "1.69",
-          "amount": ""
-        },
-        {
-          "name": "Bio Birnen 600 g",
-          "price": "2.19",
-          "amount": ""
-        },
-        {
-          "name": "Porree / Lauch, Stück",
-          "price": "0.45",
-          "amount": ""
-        },
-        {
-          "name": "Zucchini, lose",
-          "price": "1.29",
-          "amount": "1 kg"
-        },
-        {
-          "name": "NATUR LIEBLINGE Speisekartoffeln festkochend 2,5 kg",
-          "price": "2.29",
-          "amount": ""
-        },
-        {
-          "name": "Grapefruit, Stück",
+          "name": "MEINE BACKWELT Börekstange mit Spinat und Feta",
           "price": "0.49",
           "amount": ""
         },
         {
-          "name": "NATUR LIEBLINGE Kaki Krumme Dinger 1 kg",
+          "name": "CONDITOREI COPPENRATH & WIESE Unsere Goldstücke 450 g, Weizenbrötchen",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "SWEET VALLEY Sauerkirschen 350 g",
+          "price": "3.29",
+          "amount": ""
+        },
+        {
+          "name": "CONDITOREI COPPENRATH & WIESE Unsere Goldstücke 420 g, Dinkelbrötchen",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Baumstamm 100 g",
+          "price": "0.69",
+          "amount": ""
+        },
+        {
+          "name": "MILSANI Laktosefreie H-Sahne 200 g",
+          "price": "0.69",
+          "amount": ""
+        },
+        {
+          "name": "GEROLSTEINER Mineralwasser Medium 1,5 l",
+          "price": "0.75",
+          "amount": ""
+        },
+        {
+          "name": "GOLDEN SEAFOOD Norwegisches Lachsfilet 300 g",
+          "price": "4.49",
+          "amount": ""
+        },
+        {
+          "name": "Bio-Hackfleisch vom Rind 400 g",
+          "price": "4.69",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Hähnchen-Geschnetzeltes 400 g",
+          "price": "3.79",
+          "amount": ""
+        },
+        {
+          "name": "NATUR LIEBLINGE Datteltomaten 500 g",
+          "price": "1.89",
+          "amount": ""
+        },
+        {
+          "name": "NATUR LIEBLINGE Äpfel Krumme Dinger 2 kg",
           "price": "1.99",
           "amount": ""
         },
         {
           "name": "Zespri Kiwi Sungold, Stück",
-          "price": "0.55",
+          "price": "0.59",
           "amount": ""
         },
         {
-          "name": "KING'S CROWN Passierte Tomaten 500 g",
-          "price": "0.45",
+          "name": "Kleine Schätze Zitronen, Stück",
+          "price": "0.49",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Maronen 210 g",
-          "price": "2.69",
+          "name": "NATUR LIEBLINGE Spitzpaprika rot 500 g",
+          "price": "1.79",
           "amount": ""
         },
         {
-          "name": "NATUR LIEBLINGE Maronen frisch 500 g",
-          "price": "2.39",
+          "name": "NATUR LIEBLINGE Orangen 2 kg",
+          "price": "2.49",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Putenschnitzel Wiener Art 500 g",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "MEINE METZGEREI Schweine Schnitzel 400 g",
+          "name": "2025 Campo Antico Bio-Primitivo Puglia IGT 0,75 l",
           "price": "2.99",
           "amount": ""
         },
         {
-          "name": "BARISSIMO Kaffeepads 20 Stück, Entkoffeiniert",
-          "price": "1.89",
-          "amount": ""
-        },
-        {
-          "name": "BARISSIMO Kaffeepads 20 Stück, Milde Bohne",
-          "price": "1.89",
-          "amount": ""
-        },
-        {
-          "name": "BARISSIMO Kaffeepads 20 Stück, Crema",
-          "price": "1.89",
-          "amount": ""
-        },
-        {
-          "name": "BARISSIMO Kaffeepads 20 Stück, Espresso",
-          "price": "1.89",
-          "amount": ""
-        },
-        {
-          "name": "BARISSIMO Kaffeepads 20 Stück, Classic",
-          "price": "1.89",
-          "amount": ""
-        },
-        {
-          "name": "Bio Naturland Orangen 1 kg",
-          "price": "1.99",
-          "amount": ""
-        },
-        {
-          "name": "Bio Naturland Zitronen 500 g",
+          "name": "WINTERTRAUM Schokoladenkränze 200 g",
           "price": "1.19",
           "amount": ""
         },
         {
-          "name": "BIO NATURLAND Bio Rote Bete vakuumiert 500 g",
+          "name": "VALENSINA Orangensaft 1 l",
           "price": "1.29",
           "amount": ""
         },
         {
-          "name": "Bio Naturland Butternut, lose",
-          "price": "1.39",
-          "amount": "1 kg"
-        },
-        {
-          "name": "BARISSIMO Bio-Kaffeepads 140 g",
-          "price": "1.89",
+          "name": "MILSANI Laktosefreie H-Milch 1,5 % 1 l",
+          "price": "0.79",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Hackfleisch vom Rind 500 g",
+          "name": "MILSANI Laktosefreie H-Milch 3,5 % 1 l",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "Avocado, Stück",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "BIO NATURLAND Bio Snackmöhren 200 g",
+          "price": "0.99",
+          "amount": ""
+        },
+        {
+          "name": "NATUR LIEBLINGE Speisezwiebeln gelb 1,5 kg",
+          "price": "1.39",
+          "amount": ""
+        },
+        {
+          "name": "MEINE BACKWELT Super-Berliner mit Kakaocreme",
+          "price": "0.59",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Hähnchen-Unterkeule 1 kg",
+          "price": "4.39",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Hamburger vom Rind 400 g",
+          "price": "4.39",
+          "amount": ""
+        },
+        {
+          "name": "CHOCEUR Milchmäuse-Weihnachtsmaus 95 g",
+          "price": "1.19",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Schoko-Weihnachtsmann 110 g",
+          "price": "0.99",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Puten-Ministeaks 400 g",
           "price": "4.59",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Rösti-Sterne 600 g",
-          "price": "1.49",
+          "name": "2025 Stefan Bietighöfer Weißburgunder Réserve 0,75 l",
+          "price": "4.69",
           "amount": ""
         },
         {
-          "name": "HARIBO Color-Rado 340 g",
+          "name": "2025 Côtes Catalanes Rosé IGP 0,75 l",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Edelmarzipan Brote 200 g",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Marzipanhappen 125 g",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "2025 Bonito Gusto Valencia DOP 0,75 l",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Robert Schätzle - Baden Grauer Burgunder QbA 0,75 l",
+          "price": "3.69",
+          "amount": ""
+        },
+        {
+          "name": "COSTELLORE 2025 Toscana Vermentino IGT 0,75 l",
+          "price": "4.79",
+          "amount": ""
+        },
+        {
+          "name": "Markus Schneider - Rotwein Cuvée 0,75 l",
+          "price": "6.39",
+          "amount": ""
+        },
+        {
+          "name": "MEINE METZGEREI Schweine-Bratwurst 600 g",
+          "price": "2.69",
+          "amount": ""
+        },
+        {
+          "name": "BERGADER Der kleine Runde 150 g, Cremig-Würzig",
+          "price": "1.44",
+          "amount": ""
+        },
+        {
+          "name": "BERGADER Bavaria blu 150 g",
+          "price": "1.44",
+          "amount": ""
+        },
+        {
+          "name": "GOLDEN TOAST Toastbrot 500 g, Butter",
           "price": "0.99",
           "amount": ""
         },
         {
-          "name": "HARIBO Matador Mix 340 g",
+          "name": "GOLDEN TOAST Toastbrot 500 g, Vollkorn",
           "price": "0.99",
           "amount": ""
         },
         {
-          "name": "HARIBO Goldbären 340 g",
-          "price": "0.99",
+          "name": "WINTERTRAUM Choco Lolly 150 g, Vollmilch",
+          "price": "1.09",
           "amount": ""
         },
         {
-          "name": "NATURLIEBLINGE - KLEINE SCHÄTZ Datteln getrocknet und entsteint 200 g",
-          "price": "0.69",
+          "name": "WINTERTRAUM Lebkuchen Herzen 300 g, Zartbitter",
+          "price": "1.99",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Chicken Burger XXL 800 g",
-          "price": "5.79",
+          "name": "WINTERTRAUM Lebkuchen Herzen 300 g, Vollmilch",
+          "price": "1.99",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Schweine-Bratwurst 400 g",
-          "price": "2.29",
+          "name": "MARS SNICKERS Multipack 250 g",
+          "price": "1.99",
           "amount": ""
         },
         {
-          "name": "ALDI Äpfel süß-säuerlich 1 kg",
+          "name": "MARS TWIX Multipack 250 g",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "MARS Multipack 225 g",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "MILSANI Käsewürfel 220 g, Gouda & Maasdamer",
+          "price": "1.59",
+          "amount": ""
+        },
+        {
+          "name": "MILSANI Käsewürfel 220 g, Butterkäse & Edamer",
+          "price": "1.59",
+          "amount": ""
+        },
+        {
+          "name": "HERTA Finesse 100 g, Schinken",
           "price": "1.39",
           "amount": ""
         },
         {
-          "name": "DR. OETKER Backzutaten, Bourbon Vanille-Zucker 24 g",
-          "price": "0.99",
+          "name": "HERTA Finesse 100 g, Hähnchenbrust im Ofen",
+          "price": "1.39",
           "amount": ""
         },
         {
-          "name": "DR. OETKER Backzutaten, Backpulver 160 g",
-          "price": "0.99",
+          "name": "HERTA Finesse 100 g, Putenbrust",
+          "price": "1.39",
           "amount": ""
         },
         {
-          "name": "DR. OETKER Backzutaten, Vanillin-Zucker 80 g",
-          "price": "0.99",
+          "name": "BBQ Schweine-Nackensteak 600 g, mariniert, Paprika",
+          "price": "3.59",
           "amount": ""
         },
         {
-          "name": "DR. OETKER Backzutaten, Hefe 28 g",
-          "price": "0.99",
+          "name": "BBQ Schweine-Nackensteak 600 g, mariniert, Kräuter",
+          "price": "3.59",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Riesengarnelen, Kräutermarinade 400 g",
-          "price": "4.89",
+          "name": "PRIL Kraft-Gel Spülmittel 450 ml, Sensitive Aloe Vera",
+          "price": "1.39",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Riesengarnelen, Natur 360 g",
-          "price": "4.89",
-          "amount": ""
-        },
-        {
-          "name": "DELIKATO Meerrettich, Tafel-Meerrettich 190 g",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "DELIKATO Meerrettich, Sahne 185 g",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Rinderfond 400 ml",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Gemüsefond 400 ml",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Geflügelfond 400 ml",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "MILSANI Schmelzkäsezubereitung 200 g, Sahne",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "MILSANI Schmelzkäsezubereitung 200 g, Kräuter",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "MILSANI Schmelzkäsezubereitung 200 g, Leicht",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "MILSANI Schmelzkäsezubereitung 200 g, Gouda",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Cola Light 1,25 l",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Cola Zero 1,25 l",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Cola Koffeinfrei 1,25 l",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Mezzo Mix 1,25 l",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Fanta Orange 1,25 l",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "COCA-COLA Sprite 1,25 l",
-          "price": "1.19",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Erdbeere",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Kirsche",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Heidelbeere",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Ananas",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Stracciatella",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Pfirsich-Maracuja",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Himbeere",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Zitrone",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "EHRMANN Almighurt 150 g, Aprikose",
-          "price": "0.29",
-          "amount": ""
-        },
-        {
-          "name": "LANDFREUDE Eierspätzle 500 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "LANDFREUDE Schupfnudeln 500 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "LANDFREUDE Kartoffelknödel, Klassik 500 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "LANDFREUDE Kartoffelknödel, Mini 400 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "BBQ Hähnchensteaks mariniert, 550 g, Französische Kräuter",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "BBQ Hähnchensteaks mariniert, 550 g, Rote Paprika",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LORENZ Saltletts Sticks, Classic 250 g",
-          "price": "1.11",
-          "amount": ""
-        },
-        {
-          "name": "LORENZ Saltletts Sticks, Sesam 175 g",
-          "price": "1.11",
-          "amount": ""
-        },
-        {
-          "name": "LORENZ Saltletts Sticks, Vollkorn 175 g",
-          "price": "1.11",
-          "amount": ""
-        },
-        {
-          "name": "LEIBNIZ Butterkeks, Schokolade 200 g",
-          "price": "1.00",
-          "amount": ""
-        },
-        {
-          "name": "LEIBNIZ Butterkeks, 30 % weniger Zucker 150 g",
-          "price": "1.00",
-          "amount": ""
-        },
-        {
-          "name": "LEIBNIZ Butterkeks, Butter 200 g",
-          "price": "1.00",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Wildlachsfilet in Blätterteig 300 g, Spinat",
-          "price": "1.99",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Wildlachsfilet in Blätterteig 300 g, Dill",
-          "price": "1.99",
-          "amount": ""
-        },
-        {
-          "name": "BISCOTTO Cookeo Kekse 154 g, Klassik",
-          "price": "0.69",
-          "amount": ""
-        },
-        {
-          "name": "BISCOTTO Cookeo Kekse 154 g, Golden",
-          "price": "0.69",
-          "amount": ""
-        },
-        {
-          "name": "CAREFREE Slipeinlagen, Cotton Feel Normal 56 Stück",
-          "price": "2.22",
-          "amount": ""
-        },
-        {
-          "name": "SWEET VALLEY Apfelmus 360 g, Apfel",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "SWEET VALLEY Apfelmus 360 g, Birne",
-          "price": "0.89",
-          "amount": ""
-        },
-        {
-          "name": "WILTMANN Genießer Teller, Geflügel 80 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "WILTMANN Genießer Teller, Pfeffer 80 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "WILTMANN Genießer Teller, Feinschmecker 80 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "WILTMANN Genießer Teller, Peperoni 80 g",
-          "price": "1.29",
-          "amount": ""
-        },
-        {
-          "name": "KELLOGG'S Cerealien 420 g, Choco Krispies",
-          "price": "2.79",
-          "amount": ""
-        },
-        {
-          "name": "KELLOGG'S Cerealien 400 g, Frosties",
-          "price": "2.79",
-          "amount": ""
-        },
-        {
-          "name": "KELLOGG'S Cerealien 400 g, Smacks",
-          "price": "2.79",
-          "amount": ""
-        },
-        {
-          "name": "MILSANI Feiner Weichkäse mit Blauschimmel, 200 g, der Würzige",
-          "price": "1.79",
-          "amount": ""
-        },
-        {
-          "name": "MILSANI Feiner Weichkäse mit Blauschimmel, 200 g, der Aromatische",
-          "price": "1.79",
-          "amount": ""
-        },
-        {
-          "name": "ROMEO PREMIUM Hunde Nassfutter 150 g, Rinderpastete",
-          "price": "0.35",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Bio-Gourmet Kapern 180 g, Olivenöl",
-          "price": "2.19",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Bio-Gourmet Kapern 180 g, Mit Knoblauch",
-          "price": "2.19",
-          "amount": ""
-        },
-        {
-          "name": "HARIBO Maxipack Tropifrutti 340 g",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "HARIBO Maxipack Phantasia 340 g",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "Bio-Honig 500 g, Flüssig",
-          "price": "2.89",
-          "amount": ""
-        },
-        {
-          "name": "Bio-Honig 500 g, Cremig",
-          "price": "2.89",
-          "amount": ""
-        },
-        {
-          "name": "HARIBO Maxipack Super Wummis 340 g",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "HARIBO Maxipack Balla Balla 300 g",
-          "price": "0.99",
-          "amount": ""
-        },
-        {
-          "name": "PANTENE PRO-V Pflegespülung 350 ml, Repair & Care",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "PANTENE PRO-V Pflegespülung 350 ml, Volumen Pur",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "PANTENE PRO-V Pflegespülung 350 ml, Glatt & Seidig",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "PANTENE PRO-V Shampoo 500 ml, Repair & Care",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "PANTENE PRO-V Shampoo 500 ml, Volumen Pur",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "PANTENE PRO-V Shampoo 500 ml, Glatt & Seidig",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "GOURMET FINEST CUISINE Filoncino 400 g, Natur",
+          "name": "Pringles 185 g, Sour Cream",
           "price": "1.49",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Filoncino 400 g, Walnuss-Honig",
+          "name": "Pringles 185 g, Paprika",
           "price": "1.49",
           "amount": ""
         },
         {
-          "name": "PHILADELPHIA Frischkäse 195 g, Original",
-          "price": "1.11",
+          "name": "Pringles 185 g, Hot and Spicy",
+          "price": "1.49",
           "amount": ""
         },
         {
-          "name": "PHILADELPHIA Frischkäse 195 g, Kräuter",
-          "price": "1.11",
+          "name": "Pringles 185 g, Original",
+          "price": "1.49",
           "amount": ""
         },
         {
-          "name": "PHILADELPHIA Frischkäse 195 g, Balance",
-          "price": "1.11",
+          "name": "Pringles 185 g, Sweet Paprika",
+          "price": "1.49",
           "amount": ""
         },
         {
-          "name": "PHILADELPHIA Frischkäse 150 g, Milka",
-          "price": "1.11",
+          "name": "WINTERTRAUM Nougathappen 125 g, Nougat",
+          "price": "1.29",
           "amount": ""
         },
         {
-          "name": "PHILADELPHIA Frischkäse 175 g, Schnittlauch",
-          "price": "1.11",
+          "name": "AXE 3-in-1-Duschgel 400 ml, Black",
+          "price": "2.99",
           "amount": ""
         },
         {
-          "name": "MILSANI H-Schoko-Drink 0,5 l, Fettarm",
-          "price": "0.69",
+          "name": "AXE 3-in-1-Duschgel 400 ml, Dark Temptation",
+          "price": "2.99",
           "amount": ""
         },
         {
-          "name": "MILSANI H-Schoko-Drink 0,5 l, Vollfett",
-          "price": "0.69",
+          "name": "AXE 3-in-1-Duschgel 400 ml, Alaska",
+          "price": "2.99",
           "amount": ""
         },
         {
-          "name": "ORIGINAL WAGNER Piccolinis 270 g, Salami",
-          "price": "1.79",
+          "name": "AXE 3-in-1-Duschgel 400 ml, Epic Fresh",
+          "price": "2.99",
           "amount": ""
         },
         {
-          "name": "ORIGINAL WAGNER Piccolinis 270 g, Drei-Käse",
-          "price": "1.79",
+          "name": "MILSANI Cremiger Weichkäse 150 g, Würzig",
+          "price": "1.19",
           "amount": ""
         },
         {
-          "name": "ORIGINAL WAGNER Steinofenpizza 350 g, Mozzarella",
-          "price": "1.66",
+          "name": "MILSANI Cremiger Weichkäse 150 g, Pfeffer",
+          "price": "1.19",
           "amount": ""
         },
         {
-          "name": "ORIGINAL WAGNER Steinofenpizza 350 g, Diavolo",
-          "price": "1.66",
+          "name": "MILSANI Cremiger Weichkäse 150 g, Natur",
+          "price": "1.19",
           "amount": ""
         },
         {
-          "name": "ORIGINAL WAGNER Steinofenpizza 320 g, Salami",
-          "price": "1.66",
+          "name": "MILSANI Cremiger Weichkäse 150 g, Blauschimmel",
+          "price": "1.19",
           "amount": ""
         },
         {
-          "name": "ORIGINAL WAGNER Steinofenpizza 350 g, Speciale",
-          "price": "1.66",
+          "name": "CHOCEUR Milchmäuse Schneebälle 130 g, Milch-Haselnuss",
+          "price": "1.49",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Schweine-Koteletts 700 g, Rücken",
-          "price": "4.29",
+          "name": "CHOCEUR Milchmäuse Schneebälle 130 g, Milchcreme",
+          "price": "1.49",
           "amount": ""
         },
         {
-          "name": "MEINE METZGEREI Schweine-Koteletts 700 g, Nacken",
-          "price": "4.29",
+          "name": "WINTERTRAUM Kids-Adventskalender 75 g, Blau",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Kids-Adventskalender 75 g, Grün",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Kids-Adventskalender 75 g, Rot",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "Grünländer Plus Pack 156 g, Mild Nussig",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "Grünländer Plus Pack 156 g, Würzig",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "Grünländer Plus Pack 156 g, Chili Paprika",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "Grünländer Plus Pack 156 g, Bärlauch",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "Grünländer Plus Pack 156 g, Cremig",
+          "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Schokoweihnachtsfiguren 125 g, Santa",
+          "price": "1.39",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Schokoweihnachtsfiguren 125 g, Schneemann",
+          "price": "1.39",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Schokoweihnachtsfiguren 125 g, Bär",
+          "price": "1.39",
           "amount": ""
         }
       ],
-      "revision": "aldi-2026-45"
+      "revision": "aldi-2026-46"
     },
     {
       "id": "penny",
       "name": "Penny",
       "source": "https://www.penny.de/angebote",
-      "note": "Angebote der Woche 2026-45, automatisch gelesen.",
+      "note": "Angebote der Woche 2026-46, automatisch gelesen.",
       "otherCount": 0,
       "offers": [
         {
-          "name": "LEERDAMMER Käsescheiben*",
-          "price": "1.49",
+          "name": "DALLMAYR Kaffee prodomo*",
+          "price": "6.49",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "CHIQUITA Bananen*",
+          "price": "1.99",
+          "amount": "je kg"
+        },
+        {
+          "name": "MÜHLENHOF Frische Hähnchen-Schenkel*",
+          "price": "6.49",
+          "amount": "je 2.000-g-Packung"
+        },
+        {
+          "name": "ZOTT Sahnejoghurt*",
+          "price": "0.44",
           "amount": "je 140 g"
         },
         {
-          "name": "LEERDAMMER Trio-Scheiben*",
-          "price": "1.49",
-          "amount": "je 125 g"
-        },
-        {
-          "name": "Mango*",
-          "price": "0.79",
-          "amount": "je Stück"
-        },
-        {
-          "name": "IGLO Fischstäbchen*",
+          "name": "FERRERO Mon Chéri",
           "price": "2.79",
-          "amount": "je 450 g"
+          "amount": "je 157 g"
         },
         {
-          "name": "IGLO Backfisch-Stäbchen*",
+          "name": "FERRERO Küsschen*",
           "price": "2.79",
-          "amount": "je 364 g"
+          "amount": "je 178 g"
         },
         {
-          "name": "JACOBS Krönung*",
-          "price": "5.99",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "MÜHLENHOF Frische Hähnchen-Brustfilets*",
-          "price": "7.99",
-          "amount": "je 1.000 g"
-        },
-        {
-          "name": "BEST MOMENTS Knödel*",
-          "price": "1.69",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "Deutsche Speisekartoffeln*",
-          "price": "4.44",
-          "amount": "je 7,5-kg-Sack"
-        },
-        {
-          "name": "Granatapfel*",
+          "name": "BARILLA Pasta*",
           "price": "0.89",
-          "amount": "je Stück"
+          "amount": "je 500 g"
         },
         {
-          "name": "Clementinen mit Blatt*",
-          "price": "2.22",
-          "amount": "je 750-g-Packung"
+          "name": "HOHES C Saft*",
+          "price": "1.79",
+          "amount": "je 1I"
         },
         {
-          "name": "SIMPY SUNNY Protein-Mix*",
-          "price": "1.29",
-          "amount": "je 125 g"
+          "name": "Zitronen*",
+          "price": "1.19",
+          "amount": "je 750-g-Netz"
         },
         {
-          "name": "Deutsche Möhren*",
-          "price": "1.11",
-          "amount": "je 2-kg-Beutel"
+          "name": "Clementinen*",
+          "price": "2.49",
+          "amount": "je kg"
         },
         {
-          "name": "Paprika Mix*",
-          "price": "1.69",
+          "name": "Heidelbeeren*",
+          "price": "2.99",
+          "amount": "je 150-g-Schale"
+        },
+        {
+          "name": "Bio-Cherry Romatomaten*",
+          "price": "1.19",
+          "amount": "je 250-g-Schale"
+        },
+        {
+          "name": "Rucola*",
+          "price": "0.69",
+          "amount": "je 125-g-Packung"
+        },
+        {
+          "name": "Rote Paprika*",
+          "price": "1.99",
           "amount": "je 500-g-Packung"
         },
         {
-          "name": "BEN & JERRY’S Eisbecher*",
-          "price": "3.99",
-          "amount": "je 465 ml"
+          "name": "Deutscher bunter Möhren-Mix*",
+          "price": "0.99",
+          "amount": "je 750-g-Packung"
         },
         {
-          "name": "RAMA Brot­aufstrich*",
-          "price": "1.39",
-          "amount": "je 400 g"
+          "name": "GÉRAMONT Weichkäse*",
+          "price": "2.29",
+          "amount": "je 200 g"
         },
         {
-          "name": "FRAU ANTJE Beste Butter*",
-          "price": "1.29",
-          "amount": "je 250g"
-        },
-        {
-          "name": "MIREE Frischkäse*",
-          "price": "1.11",
+          "name": "GÉRAMONT Käsescheiben*",
+          "price": "2.29",
           "amount": "je 150 g"
         },
         {
-          "name": "SAINT ALBRAY Französischer Weichkäse*",
-          "price": "2.29",
+          "name": "ARLA Kærgården*",
+          "price": "1.29",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "LÄTTA Halbfettmargarine*",
+          "price": "1.19",
+          "amount": "je 450 g"
+        },
+        {
+          "name": "KERRYGOLD Cheddarscheiben*",
+          "price": "1.59",
+          "amount": "je 130 g"
+        },
+        {
+          "name": "EXQUISA Frischkäsezubereitung*",
+          "price": "1.11",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "SALAKIS Schafkäse*",
+          "price": "1.99",
           "amount": "je 180 g"
         },
         {
-          "name": "LINDENHOF Back-Camembert*",
-          "price": "2.69",
-          "amount": "je 350 g"
-        },
-        {
-          "name": "BAUER Cheestrings*",
-          "price": "1.99",
-          "amount": "je 4 x 20 g"
-        },
-        {
-          "name": "MÜLLER Froop*",
+          "name": "MÜLLER Joghurt mit der Ecke*",
           "price": "0.39",
           "amount": "je 150 g"
         },
         {
-          "name": "DR. OETKER Paula Pudding*",
-          "price": "1.49",
-          "amount": "je 4 x 125 g"
-        },
-        {
-          "name": "DANONE Fruchtzwerge XXL*",
-          "price": "2.89",
-          "amount": "je 6 x 100 g"
-        },
-        {
-          "name": "DR. OETKER Paula Snack*",
-          "price": "1.49",
-          "amount": "je 4 x 28 g"
-        },
-        {
-          "name": "OATLY Haferdrink*",
-          "price": "1.79",
-          "amount": "je 1 I"
-        },
-        {
-          "name": "PENNY READY Fertiggericht*",
-          "price": "3.59",
-          "amount": "je 1.000 g"
-        },
-        {
-          "name": "PENNY READY Super Smoothie*",
-          "price": "1.39",
-          "amount": "je 250 ml"
-        },
-        {
-          "name": "PENNY READY Kaffee*",
-          "price": "0.79",
-          "amount": "je 330 ml"
-        },
-        {
-          "name": "PENNY READY Frischer Blätterteig*",
-          "price": "0.95",
-          "amount": "je 275 g"
-        },
-        {
-          "name": "PENNY READY Rinderburger*",
-          "price": "2.79",
-          "amount": "je 2 x 160 g"
-        },
-        {
-          "name": "CORNY Müsliriegel Cinnamon Roll*",
-          "price": "1.79",
-          "amount": "je 6 x 23 g"
-        },
-        {
-          "name": "CORNY Müsliriegel Free Schoko-Banane*",
-          "price": "1.79",
-          "amount": "je 6 x 20 g"
-        },
-        {
-          "name": "HARIBO Fruchtgummi*",
-          "price": "1.29",
-          "amount": "je 340 g"
-        },
-        {
-          "name": "DAIM Pralinen*",
-          "price": "2.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "DR. OETKER Knusperhäuschen*",
-          "price": "7.99",
-          "amount": "je 403 g"
-        },
-        {
-          "name": "SCHOGETTEN Schokolade*",
-          "price": "0.99",
-          "amount": "je 100 g"
-        },
-        {
-          "name": "NESTLÉ After Eight*",
-          "price": "1.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "NESTLÉ Yes Törtchen*",
-          "price": "1.69",
-          "amount": "je 96 g"
-        },
-        {
-          "name": "MILKA Nussini Riegel*",
-          "price": "1.99",
-          "amount": "je 5 x 31,5 g"
-        },
-        {
-          "name": "CADBURY Wunderbar Riegel*",
-          "price": "1.99",
-          "amount": "je 5 x 37 g"
-        },
-        {
-          "name": "BAREBELLS Soft Bar*",
-          "price": "1.99",
-          "amount": "je 55 g"
-        },
-        {
-          "name": "FUNNY-FRISCH Intense Chips*",
-          "price": "1.19",
-          "amount": "je 110 g"
-        },
-        {
-          "name": "FUNNY-FRISCH Chipsfrisch*",
-          "price": "1.19",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "PUDA Backmischung*",
-          "price": "1.69",
-          "amount": "je 290 g"
-        },
-        {
-          "name": "PUDA Gehackte Früchte*",
-          "price": "1.99",
-          "amount": "je 15 g"
-        },
-        {
-          "name": "PUDA Dekor*",
-          "price": "1.69",
-          "amount": "je 75 g"
-        },
-        {
-          "name": "PUDA XXL Haselnusskerne*",
-          "price": "6.99",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "PUDA XXL Mandeln*",
-          "price": "5.79",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "PUDA XXL Walnuss­kerne*",
-          "price": "4.99",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "PUDA Backgewürz*",
-          "price": "0.79",
-          "amount": "je 15 g"
-        },
-        {
-          "name": "PUDA XXL Sultaninen*",
-          "price": "1.99",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "PUDA XXL Kokosraspel*",
-          "price": "1.99",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "PUDA XXL Weizenmehl*",
-          "price": "0.99",
-          "amount": "je 2 kg"
-        },
-        {
-          "name": "SÜD­ZUCKER Puder Zucker Mühle*",
-          "price": "1.69",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "SWEET FAMILY XXL Zucker*",
-          "price": "1.69",
-          "amount": "je 2 kg"
-        },
-        {
-          "name": "PUDA Mini Marshmallows*",
-          "price": "1.79",
-          "amount": "je 100 g"
-        },
-        {
-          "name": "SANELLA Streichfett*",
-          "price": "1.49",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "LANDLIEBE Haltbare Landmilch*",
-          "price": "0.99",
-          "amount": "je 1 I"
-        },
-        {
-          "name": "DR. RAUCH‘S Back-Minis*",
-          "price": "4.99",
-          "amount": "je 4 x 0,04 l"
-        },
-        {
-          "name": "STROH Inländer Rum*",
-          "price": "4.99",
-          "amount": "je 0,2 I"
-        },
-        {
-          "name": "MÜHLENHOF Frische Chicken-Wings*",
-          "price": "3.99",
-          "amount": "je 1.000-g-Packung"
-        },
-        {
-          "name": "Frische Geflügel-Hacksteaks*",
-          "price": "3.99",
-          "amount": "je 560-g-Packung"
-        },
-        {
-          "name": "Frischer Schweine-Nackenbraten*",
-          "price": "4.99",
-          "amount": "je kg"
-        },
-        {
-          "name": "MÜHLENHOF Frisches fettreduziertes Rinder-Hackfleisch*",
-          "price": "8.99",
-          "amount": "je 800-g-Packung"
-        },
-        {
-          "name": "MÜHLENHOF Frisches Rinder-Gulasch*",
-          "price": "6.99",
-          "amount": "je 500-g-Packung"
-        },
-        {
-          "name": "BUTCHER’S Frisches Pork Tomahawk Steak*",
-          "price": "2.99",
-          "amount": "z. B. 300 g"
-        },
-        {
-          "name": "¡QUE VIVA ESPAÑA! Serrano-Schinken*",
-          "price": "2.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "MÜHLENHOF XXL Käse-Bockwurst*",
-          "price": "3.99",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "MEICA Saft-Bockwurst oder Geflügel-Würstchen*",
-          "price": "1.79",
-          "amount": "je 380 g"
-        },
-        {
-          "name": "HOUDEK Kabanos*",
-          "price": "2.49",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "BÖKLUNDER Kochwurst*",
-          "price": "1.49",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "MORLINY Toastschinken*",
-          "price": "1.49",
-          "amount": "je 155 g"
-        },
-        {
-          "name": "STOCKMEYER Salami*",
-          "price": "1.99",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "TOMATO AL GUSTO Tomatensauce*",
-          "price": "1.49",
-          "amount": "je 390 g"
-        },
-        {
-          "name": "SAMYANG Tangle Instantnudeln*",
-          "price": "1.49",
-          "amount": "je 105 g"
-        },
-        {
-          "name": "KNORR Suppenliebe*",
-          "price": "0.69",
+          "name": "YFOOD Trinkmahlzeit*",
+          "price": "3.33",
           "amount": "je 500 ml"
         },
         {
-          "name": "KNORR Pasta Pot*",
-          "price": "0.99",
-          "amount": "je 63 g"
+          "name": "DANONE Actimel Drink*",
+          "price": "2.99",
+          "amount": "je 12 x 100 g"
         },
         {
-          "name": "KNORR Salatkrönung*",
-          "price": "0.79",
-          "amount": "je 6 x 90 ml"
+          "name": "MEICA Curry King Big Box*",
+          "price": "4.99",
+          "amount": "je 3 x 220 g"
         },
         {
-          "name": "KNORR Bouillon*",
-          "price": "1.49",
-          "amount": "je 4 I"
-        },
-        {
-          "name": "MONDAMIN Soßenbinder*",
-          "price": "1.29",
-          "amount": "je 275 g"
-        },
-        {
-          "name": "VEGETA XXL Würzmischung*",
-          "price": "1.79",
-          "amount": "je 300 g"
-        },
-        {
-          "name": "BAD REICHENHALLER Alpen Jod Salz*",
-          "price": "2.22",
-          "amount": "je 1.020 g"
-        },
-        {
-          "name": "BÄCKERKRÖNUNG Wienerle-Croissant mit Geflügelwürstchen*",
-          "price": "0.69",
-          "amount": "je Stück"
-        },
-        {
-          "name": "BÄCKERKRÖNUNG Biscoff-Donut*",
-          "price": "0.79",
-          "amount": "je Stück"
-        },
-        {
-          "name": "KÖLLN Haferfleks*",
-          "price": "3.79",
+          "name": "IGLO Apfel-Rotkohl*",
+          "price": "1.89",
           "amount": "je 750 g"
         },
         {
-          "name": "LANDLIEBE Konfitüre*",
-          "price": "1.69",
-          "amount": "je 200 g"
+          "name": "ORIGINAL WAGNER Airfryer Snack*",
+          "price": "1.79",
+          "amount": "je 195 g"
         },
         {
-          "name": "TEEKANNE Ländertee*",
-          "price": "2.99",
+          "name": "FROSTA Fertiggericht*",
+          "price": "4.79",
+          "amount": "je 800 g"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Apfeldreieck*",
+          "price": "1.00",
+          "amount": "je 2 Stück"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Mini Windbeutel*",
+          "price": "1.49",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Schokodonut*",
+          "price": "1.18",
+          "amount": "je 3 Stück"
+        },
+        {
+          "name": "BÄCKERKRÖNUNG Weizenbrötchen*",
+          "price": "1.19",
+          "amount": "je 560 g"
+        },
+        {
+          "name": "MILKA Schokolade*",
+          "price": "2.79",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "ALPIA Schokolade*",
+          "price": "0.89",
           "amount": "je 100 g"
         },
         {
-          "name": "BECKYS Herbsttee-Set*",
+          "name": "MERCI Tafelschokolade*",
+          "price": "1.49",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "FERRERO XXL Kinder Schokolade*",
+          "price": "4.99",
+          "amount": "je 4 x 100 g"
+        },
+        {
+          "name": "FERRERO XXL Yogurette*",
+          "price": "4.99",
+          "amount": "je 4 x 100 g"
+        },
+        {
+          "name": "FERRERO Rocher*",
+          "price": "5.55",
+          "amount": "je 375 g"
+        },
+        {
+          "name": "HARIBO Fruchtgummi*",
+          "price": "3.69",
+          "amount": "je 650 g"
+        },
+        {
+          "name": "OREO Kekse*",
+          "price": "1.29",
+          "amount": "je 154 g"
+        },
+        {
+          "name": "STORCK Knoppers*",
+          "price": "2.49",
+          "amount": "je 8 x 25 g"
+        },
+        {
+          "name": "CHOCO’LA Crunchy Waffel*",
+          "price": "1.45",
+          "amount": "je 8 x 25 g"
+        },
+        {
+          "name": "GRIESSON Soft Cake*",
+          "price": "1.59",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "STORCK XXL Riesen*",
+          "price": "2.89",
+          "amount": "je 377 g"
+        },
+        {
+          "name": "LORENZ NicNac’s*",
+          "price": "1.99",
+          "amount": "je 110 g"
+        },
+        {
+          "name": "BRAVO Paprika Peanut Cracks*",
+          "price": "0.99",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "RICOLA Bonbons*",
+          "price": "1.79",
+          "amount": "je 75 g"
+        },
+        {
+          "name": "DRESDNER STOLLEN*",
+          "price": "9.99",
+          "amount": "je 1.000 g"
+        },
+        {
+          "name": "MÜHLENHOF Frisches Hähnchen „Red Fire“*",
+          "price": "3.99",
+          "amount": "je kg"
+        },
+        {
+          "name": "Chicken Nuggets*",
+          "price": "6.99",
+          "amount": "je 1.200-g-Packung"
+        },
+        {
+          "name": "MÜHLENHOF Frisches Puten-Gulasch*",
+          "price": "7.77",
+          "amount": "je 800-g-Packung"
+        },
+        {
+          "name": "MÜHLENHOF Delikatess Lachs-Schinken*",
+          "price": "1.69",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "MÜHLENHOF Delikatess Zungen-Rotwurst*",
+          "price": "1.29",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "WIESENHOF Aufschnitt Hauchfein*",
+          "price": "1.49",
+          "amount": "je 80 g"
+        },
+        {
+          "name": "WILTMANN Leberpastete*",
+          "price": "1.49",
+          "amount": "je 125 g"
+        },
+        {
+          "name": "FERDI FUCHS Mini Salami auf’s Brot*",
+          "price": "1.19",
+          "amount": "je 80 g"
+        },
+        {
+          "name": "FERDI FUCHS Cocktailwürstchen*",
+          "price": "1.19",
+          "amount": "je 140 g"
+        },
+        {
+          "name": "VIVE LA FRANCE Französische Ringsalami oder Stangensalami*",
+          "price": "2.99",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "HOUDEK Kabanos*",
+          "price": "2.99",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "MAGGI-FIX Knusper Fisch*",
+          "price": "0.49",
+          "amount": "je 48 g"
+        },
+        {
+          "name": "BEN’S ORIGINAL Express Reis*",
+          "price": "1.29",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "BEN’S ORIGINAL Sauce*",
+          "price": "2.49",
+          "amount": "je 675 g"
+        },
+        {
+          "name": "BEN’S ORIGINAL Reis im Kochbeutel*",
+          "price": "2.49",
+          "amount": "je 875 g"
+        },
+        {
+          "name": "BEN’S ORIGINAL Reis-Klassiker*",
+          "price": "1.79",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "BEN’S ORIGINAL Paella*",
+          "price": "1.79",
+          "amount": "je 220 g"
+        },
+        {
+          "name": "MIRÁCOLI XXL Pastasauce*",
+          "price": "2.49",
+          "amount": "je 675 g"
+        },
+        {
+          "name": "MAGGI-FIX Knusper Mini Schnitzel*",
+          "price": "0.49",
+          "amount": "je 44 g"
+        },
+        {
+          "name": "MIRACEL WHIP Salatcreme*",
+          "price": "2.65",
+          "amount": "je 500 ml"
+        },
+        {
+          "name": "WÜRZ & CO Salatcreme*",
+          "price": "1.69",
+          "amount": "je 500 ml"
+        },
+        {
+          "name": "BERTOLLI Natives Olivenöl*",
+          "price": "5.99",
+          "amount": "je 500 ml"
+        },
+        {
+          "name": "DR. OETKER The Taste of Christmas Backmischung*",
+          "price": "2.29",
+          "amount": "je 375 g"
+        },
+        {
+          "name": "KABA Das Original*",
+          "price": "1.99",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "SCHWARTAU Samt Maxi Fruchtaufstrich Erdbeere*",
+          "price": "3.29",
+          "amount": "je 465 g"
+        },
+        {
+          "name": "SCHWARTAU Extra Maxi Konfitüre*",
+          "price": "3.29",
+          "amount": "je 600 g"
+        },
+        {
+          "name": "MÖVENPICK Caffè*",
+          "price": "13.99",
+          "amount": "je 1.000 g"
+        },
+        {
+          "name": "MEßMER Wintertee*",
+          "price": "1.79",
+          "amount": "je 45 g"
+        },
+        {
+          "name": "MEßMER Grüner Tee*",
+          "price": "2.35",
+          "amount": "je 43,75 g"
+        },
+        {
+          "name": "MAYFAIR Grüner Tee*",
+          "price": "0.89",
+          "amount": "je 43,75 g"
+        },
+        {
+          "name": "MELITTA Filtertüten*",
+          "price": "1.99",
+          "amount": "je 80 Stück"
+        },
+        {
+          "name": "PERSIL Color Kraft-Gel* oder Universal Pulver*",
+          "price": "16.99",
+          "amount": "je 4,5 l / je 4,95 kg"
+        },
+        {
+          "name": "COLGATE Zahncreme*",
+          "price": "4.99",
+          "amount": "je 4 x 75 ml"
+        },
+        {
+          "name": "COLGATE Zahnbürsten*",
+          "price": "2.99",
+          "amount": "je 6er-Packung"
+        },
+        {
+          "name": "ODOL-MED 3 Zahncreme*",
+          "price": "1.99",
+          "amount": "je 125 ml"
+        },
+        {
+          "name": "TODAYDENT Zahncreme Kräuter*",
+          "price": "0.55",
+          "amount": "je 125 ml"
+        },
+        {
+          "name": "GUHL Shampoo*",
+          "price": "5.99",
+          "amount": "je 2 x 250 ml"
+        },
+        {
+          "name": "DRESDNER ESSENZ Geschenkset*",
           "price": "4.99",
           "amount": "je Set"
         },
         {
-          "name": "BEST MOMENTS Gourmet-Ente*",
+          "name": "DRESDNER ESSENZ Duschgel*",
+          "price": "1.99",
+          "amount": "je 250 ml"
+        },
+        {
+          "name": "VERNEL*",
+          "price": "2.49",
+          "amount": "je 1,012 l"
+        },
+        {
+          "name": "CORAL Color*",
+          "price": "9.99",
+          "amount": "je 2,7 l"
+        },
+        {
+          "name": "FELIX Original*",
+          "price": "11.99",
+          "amount": "je 48 x 85 g"
+        },
+        {
+          "name": "RED BULL Energy-Drink*",
+          "price": "0.99",
+          "amount": "je 250 ml"
+        },
+        {
+          "name": "COCA-COLA Friendspack*",
           "price": "5.99",
-          "amount": "je 320 g"
+          "amount": "je 10 x 0,33 l"
         },
         {
-          "name": "BEST MOMENTS Röstisterne*",
-          "price": "2.29",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "BEST MOMENTS Herzoginkartoffeln*",
-          "price": "1.69",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "BEST MOMENTS Pommes Noisettes*",
-          "price": "1.99",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "BEST MOMENTS Barbarieentenbrustfilet*",
-          "price": "6.65",
-          "amount": "je 350 g"
-        },
-        {
-          "name": "BEST MOMENTS Barbarieentenkeule*",
+          "name": "JULES MUMM Sekt*",
           "price": "3.99",
-          "amount": "je 350 g"
+          "amount": "je 0,75 I"
         },
         {
-          "name": "BEST MOMENTS Hafermast Gänsebrust*",
-          "price": "21.99",
-          "amount": "je 1.000 g"
-        },
-        {
-          "name": "BEST MOMENTS Hafermast Gänsekeule*",
-          "price": "21.24",
-          "amount": "je 850 g"
-        },
-        {
-          "name": "BEST MOMENTS Fertiggericht mit Wild*",
-          "price": "3.99",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "BEST MOMENTS Fond*",
-          "price": "1.39",
-          "amount": "je 400 ml"
-        },
-        {
-          "name": "BEST MOMENTS Festtagssauce*",
-          "price": "1.39",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "BEST MOMENTS Wildgulasch*",
-          "price": "3.99",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "BEST MOMENTS Schlemmerlachs*",
-          "price": "3.99",
-          "amount": "je 350 g"
-        },
-        {
-          "name": "BEST MOMENTS Wintergemüse*",
-          "price": "2.29",
-          "amount": "je 750 g"
-        },
-        {
-          "name": "BEST MOMENTS Röschentrilogie*",
-          "price": "1.99",
-          "amount": "je 750 g"
-        },
-        {
-          "name": "BEST MOMENTS Rahmgemüse*",
-          "price": "1.99",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "BEST MOMENTS Steinpilze oder Pfifferlinge*",
-          "price": "3.49",
-          "amount": "je 300 g"
-        },
-        {
-          "name": "BEST MOMENTS Pilze*",
-          "price": "2.19",
-          "amount": "je 190 g"
-        },
-        {
-          "name": "BEST MOMENTS Rotkohl*",
-          "price": "1.29",
-          "amount": "je 680 g"
-        },
-        {
-          "name": "BEST MOMENTS Wildpreiselbeeren*",
-          "price": "2.29",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "BEST MOMENTS Mini-Knödel*",
-          "price": "1.49",
-          "amount": "je 400 g"
-        },
-        {
-          "name": "BEST MOMENTS Pastete mit Rehfleisch*",
-          "price": "1.99",
-          "amount": "je 160 g"
-        },
-        {
-          "name": "BEST MOMENTS Wildsalami*",
-          "price": "1.79",
-          "amount": "je 60 g"
-        },
-        {
-          "name": "BEST MOMENTS Butter­croissants*",
-          "price": "1.99",
-          "amount": "je 360 g"
-        },
-        {
-          "name": "BEST MOMENTS Zimtschnecken*",
-          "price": "3.99",
-          "amount": "je 510 g"
-        },
-        {
-          "name": "BEST MOMENTS Tannenbäume*",
-          "price": "2.29",
-          "amount": "je 6 x 85 ml"
-        },
-        {
-          "name": "BEST MOMENTS Zimtsterne*",
-          "price": "2.29",
-          "amount": "je 5 x 80 ml"
-        },
-        {
-          "name": "BEST MOMENTS Spekulatius-Eis*",
-          "price": "2.49",
-          "amount": "je 2 x 155 ml"
-        },
-        {
-          "name": "BEST MOMENTS Schoko-Früchte in belgischer Milchschokolade*",
-          "price": "2.99",
-          "amount": "je 150 g"
-        },
-        {
-          "name": "KUSCHELWEICH*",
-          "price": "1.99",
-          "amount": "je 1 l"
-        },
-        {
-          "name": "LENOR XXL All in 1 Color Pods*",
-          "price": "17.99",
-          "amount": "je 1.639 g"
-        },
-        {
-          "name": "GLISS Shampoo*",
-          "price": "2.49",
-          "amount": "je 250 ml"
-        },
-        {
-          "name": "GLISS Spülung*",
-          "price": "2.49",
-          "amount": "je 200 ml"
-        },
-        {
-          "name": "SENSODYNE Zahncreme*",
-          "price": "7.99",
-          "amount": "je 225 ml"
-        },
-        {
-          "name": "ODOL-MED3 All in one Mundspülung*",
-          "price": "2.79",
-          "amount": "je 500 ml"
-        },
-        {
-          "name": "AXE Duschgel*",
-          "price": "2.99",
-          "amount": "je 400 ml"
-        },
-        {
-          "name": "AXE Bodyspray*",
-          "price": "4.49",
-          "amount": "je 250 ml"
-        },
-        {
-          "name": "OLIVA Handcreme mit Olivenöl*",
-          "price": "1.29",
-          "amount": "je 30 ml"
-        },
-        {
-          "name": "OLIVA Bodylotion*",
-          "price": "2.99",
-          "amount": "je 400 ml"
-        },
-        {
-          "name": "OLIVA Körpercreme mit Olivenöl*",
-          "price": "2.29",
-          "amount": "je 250 ml"
-        },
-        {
-          "name": "OLIVA Antifaltencreme*",
-          "price": "3.79",
-          "amount": "je 50 ml"
-        },
-        {
-          "name": "OMNIVIT Meerwasser Nasenspray*",
-          "price": "1.79",
-          "amount": "je 20 ml"
-        },
-        {
-          "name": "OMNIVIT Salbei-Bonbons*",
-          "price": "0.50",
-          "amount": "je 50 g"
-        },
-        {
-          "name": "OMNIVIT Heiße Zitrone*",
-          "price": "1.79",
-          "amount": "je 160 g"
-        },
-        {
-          "name": "OMNIVIT Spitzwegerich Hustensaft V*",
-          "price": "2.15",
-          "amount": "je 200 ml"
-        },
-        {
-          "name": "OMNIVIT Sodbrennen Blocker*",
-          "price": "2.99",
-          "amount": "je 20 Stück"
-        },
-        {
-          "name": "OMNIVIT Wundpflaster*",
-          "price": "0.50",
-          "amount": "je 10 x 6 cm"
-        },
-        {
-          "name": "OMNIVIT Magnesium 400*",
-          "price": "2.99",
-          "amount": "je 60 Stück"
-        },
-        {
-          "name": "OMNIVIT A–Z Tabletten*",
-          "price": "2.99",
-          "amount": "je 141 g"
-        },
-        {
-          "name": "OMNIVIT B12 Vitamin Kur*",
+          "name": "ROTKÄPPCHEN Sekt*",
           "price": "4.99",
-          "amount": "je 80 ml"
-        },
-        {
-          "name": "OMNIVIT Brausetabletten*",
-          "price": "0.50",
-          "amount": "je 78 g"
-        },
-        {
-          "name": "OMO Vollwaschmittel Flüssig*",
-          "price": "12.99",
-          "amount": "je 5 I"
-        },
-        {
-          "name": "LENOR XXL Waschmittel*",
-          "price": "17.99",
-          "amount": "je 4,5 kg"
-        },
-        {
-          "name": "VOLVIC Vitamin +*",
-          "price": "1.39",
           "amount": "je 0,75 I"
         },
         {
@@ -1694,69 +1259,54 @@
           "amount": "je 0,75 I"
         },
         {
-          "name": "Italien STEFANO COLUCCI Prosecco Vino Frizzante DOC*",
-          "price": "2.99",
+          "name": "Italien Primitivo IGT*",
+          "price": "4.99",
           "amount": "je 0,75 I"
         },
         {
-          "name": "Italien LUGANA DOC*",
-          "price": "6.49",
+          "name": "Italien DOPPIO PASSO Moscato DOC*",
+          "price": "4.99",
           "amount": "je 0,75 I"
         },
         {
-          "name": "Pfalz 1538 Dornfelder Merlot*",
-          "price": "3.99",
-          "amount": "je 0,75 I"
+          "name": "SMIRNOFF Ice Original*",
+          "price": "1.99",
+          "amount": "je 0,25 I"
         },
         {
-          "name": "Rheinhessen BIANCA KRON Rivaner Grauburgunder*",
-          "price": "3.99",
-          "amount": "je 0,75 I"
-        },
-        {
-          "name": "Frankreich CHÂTEAU DAVID BEAULIEU Bordeaux Supérieur*",
-          "price": "3.99",
-          "amount": "je 0,75 I"
-        },
-        {
-          "name": "BAILEYS Original Irish Cream Liqueur*",
-          "price": "19.99",
-          "amount": "je 1,5 I"
-        },
-        {
-          "name": "CAPTAIN MORGAN Spiced, Barrel Bottle*",
-          "price": "19.99",
-          "amount": "je 1,5 I"
-        },
-        {
-          "name": "KALISKAYA Vodka Energy oder Lemon*",
-          "price": "1.69",
+          "name": "BULLEIT Whiskey & Cola*",
+          "price": "1.99",
           "amount": "je 0,33 I"
         },
         {
-          "name": "CORONA Extra*",
-          "price": "1.29",
-          "amount": "je 0,5 I"
+          "name": "CASELLA Amaretto*",
+          "price": "4.89",
+          "amount": "je 0,7 I"
         },
         {
-          "name": "WARSTEINER Pils Premium Verum*",
-          "price": "3.95",
-          "amount": "je 6 x 0,5 I"
+          "name": "TANQUERAY London Dry Gin*",
+          "price": "15.99",
+          "amount": "je 0,7 l"
         },
         {
-          "name": "Stacheldrahtpflanze*",
-          "price": "1.89",
+          "name": "JOHNNIE WALKER Black Label Blended Scotch Whisky*",
+          "price": "19.99",
+          "amount": "je 0,7 I"
+        },
+        {
+          "name": "Mini-Weihnachtsstern*",
+          "price": "1.49",
           "amount": "je Stück"
         },
         {
-          "name": "Besenheide gefärbt*",
-          "price": "1.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Fairtrade-Rosen*",
-          "price": "2.99",
+          "name": "Amaryllis*",
+          "price": "2.49",
           "amount": "je Bund"
+        },
+        {
+          "name": "Topfrose*",
+          "price": "2.99",
+          "amount": "je Stück"
         },
         {
           "name": "MILPRIMA Deutsche Markenbutter*",
@@ -1772,26 +1322,6 @@
           "name": "MILPRIMA Lækkergården*",
           "price": "1.15",
           "amount": "je 250 g"
-        },
-        {
-          "name": "PUDA Backpulver*",
-          "price": "0.45",
-          "amount": "je 10 x 15 g"
-        },
-        {
-          "name": "PUDA Trockenbackhefe*",
-          "price": "0.49",
-          "amount": "je 6 x 7 g"
-        },
-        {
-          "name": "NATURGUT Bio Vanille Extrakt*",
-          "price": "2.49",
-          "amount": "je 50 ml"
-        },
-        {
-          "name": "PUDA Rohrohrzucker*",
-          "price": "1.29",
-          "amount": "je 500 g"
         },
         {
           "name": "BÄCKERKRÖNUNG Baguette Brötchen*",
@@ -1814,12 +1344,32 @@
           "amount": "je 240 g"
         },
         {
-          "name": "PUDA Raspelschokolade Zartbitter*",
+          "name": "PUDA Backpulver*",
+          "price": "0.45",
+          "amount": "je 10 x 15 g"
+        },
+        {
+          "name": "PUDA Trockenbackhefe*",
+          "price": "0.49",
+          "amount": "je 6 x 7 g"
+        },
+        {
+          "name": "NATURGUT Bio Vanille Extrakt*",
+          "price": "2.49",
+          "amount": "je 50 ml"
+        },
+        {
+          "name": "PUDA Rohrohrzucker*",
+          "price": "1.29",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "PUDA Raspelschokolade Vollmilch*",
           "price": "0.99",
           "amount": "je 100 g"
         },
         {
-          "name": "PUDA Raspelschokolade Vollmilch*",
+          "name": "PUDA Raspelschokolade Zartbitter*",
           "price": "0.99",
           "amount": "je 100 g"
         },
@@ -1834,22 +1384,22 @@
           "amount": "je 400 g"
         },
         {
-          "name": "PUDA Schokotröpfchen Zartbitter*",
-          "price": "0.99",
-          "amount": "je 100 g"
-        },
-        {
           "name": "PUDA Schokotröpfchen Vollmilch*",
           "price": "0.99",
           "amount": "je 100 g"
         },
         {
-          "name": "PUDA Schoko Chunks Zartbitter*",
+          "name": "PUDA Schokotröpfchen Zartbitter*",
           "price": "0.99",
           "amount": "je 100 g"
         },
         {
           "name": "PUDA Schoko Chunks Vollmilch*",
+          "price": "0.99",
+          "amount": "je 100 g"
+        },
+        {
+          "name": "PUDA Schoko Chunks Zartbitter*",
           "price": "0.99",
           "amount": "je 100 g"
         },
@@ -1894,753 +1444,1173 @@
           "amount": "je 20 Stück"
         },
         {
-          "name": "Herbststern*",
-          "price": "2.99",
+          "name": "Weihnachtsstern*",
+          "price": "2.49",
           "amount": "je Stück"
         },
         {
           "name": "Christrose*",
-          "price": "5.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Gewachste Amarylliszwiebel*",
-          "price": "5.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "DR. OETKER Die Ofenfrische*",
-          "price": "1.79",
-          "amount": "je 390 g"
-        },
-        {
-          "name": "BECEL ProActiv Margarine*",
-          "price": "2.29",
-          "amount": "je 225 g"
-        },
-        {
-          "name": "LE RUSTIQUE Camembert*",
-          "price": "2.79",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "LINDENHOF XXL Gouda*",
-          "price": "3.33",
-          "amount": "je 500 g"
-        },
-        {
-          "name": "LANDLIEBE Sahne Pudding*",
-          "price": "0.99",
-          "amount": "je 330 g"
-        },
-        {
-          "name": "LANDLIEBE Grieß Pudding*",
-          "price": "0.99",
-          "amount": "je 330 g"
-        },
-        {
-          "name": "HOMANN Bratheringsfilets oder Bismarckhering*",
-          "price": "3.49",
-          "amount": "je 700 g"
-        },
-        {
-          "name": "SEAFOOD4YOU Dorade Royal*",
-          "price": "5.85",
-          "amount": "z. B. 450 g"
-        },
-        {
-          "name": "COPPENRATH & WIESE Lust auf Kuchen*",
-          "price": "3.49",
-          "amount": "je 550 g"
-        },
-        {
-          "name": "MÜHLENHOF Frisches Puten-Geschnetzeltes*",
-          "price": "6.99",
-          "amount": "je 800-g-Packung"
-        },
-        {
-          "name": "HERTA Finesse Aufschnitt*",
-          "price": "1.29",
-          "amount": "je 100 g"
-        },
-        {
-          "name": "AOSTE Stickado High Protein Salami-Sticks*",
-          "price": "1.79",
-          "amount": "je 60 g"
-        },
-        {
-          "name": "Avocado angereift*",
-          "price": "0.89",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Gurke*",
-          "price": "0.77",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Kaki*",
-          "price": "0.49",
-          "amount": "je Stück"
-        },
-        {
-          "name": "DALLMAYR Crema d’Oro*",
-          "price": "13.99",
-          "amount": "je 1.000 g"
-        },
-        {
-          "name": "BONDUELLE Junge Erbsen*",
-          "price": "1.49",
-          "amount": "je 2 x 200 g"
-        },
-        {
-          "name": "BONDUELLE Goldmais*",
-          "price": "1.49",
-          "amount": "je 2 x 150 g"
-        },
-        {
-          "name": "JUST SPICES Gewürz*",
-          "price": "2.99",
-          "amount": "je 55 g"
-        },
-        {
-          "name": "MAINTAL Hagebuttenkonfitüre extra*",
-          "price": "2.99",
-          "amount": "je 650 g"
-        },
-        {
-          "name": "CAOTINA Choco-Crème*",
-          "price": "3.49",
-          "amount": "je 300 g"
-        },
-        {
-          "name": "ÖLZ Rosinen Brötchen*",
-          "price": "1.99",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "ÖLZ Strudel*",
-          "price": "1.99",
-          "amount": "je 350 g"
-        },
-        {
-          "name": "TEEKANNE Bio-Kräutertee*",
-          "price": "2.22",
-          "amount": "je 36 g"
-        },
-        {
-          "name": "MELITTA Kaffeepads*",
-          "price": "1.99",
-          "amount": "je 112 g"
-        },
-        {
-          "name": "APPEL Zarte Filets vom Hering*",
-          "price": "1.11",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "RITTER SPORT Bunte Vielfalt*",
-          "price": "2.99",
-          "amount": "je 250 g"
-        },
-        {
-          "name": "RITTER SPORT Amicelli*",
-          "price": "2.99",
-          "amount": "je 200 g"
-        },
-        {
-          "name": "MILKA Choco Wafer*",
-          "price": "1.99",
-          "amount": "je 5 x 30 g"
-        },
-        {
-          "name": "MILKA Choco Mini Stars*",
-          "price": "1.99",
-          "amount": "je 5 x 37 g"
-        },
-        {
-          "name": "FERRERO Wonka Magic Hats*",
-          "price": "4.99",
-          "amount": "je 116,4 g"
-        },
-        {
-          "name": "FERRERO Wonka Oompa Loompa*",
-          "price": "1.19",
-          "amount": "je 71,5 g"
-        },
-        {
-          "name": "NESTLÉ KitKat*",
-          "price": "1.79",
-          "amount": "je 4 x 41,5 g"
-        },
-        {
-          "name": "STORCK Ice fresh*",
-          "price": "1.59",
-          "amount": "je 475 g"
-        },
-        {
-          "name": "STORCK Schoko Toffees*",
-          "price": "1.59",
-          "amount": "je 352 g"
-        },
-        {
-          "name": "WEISS Lebkuchenhexenhaus*",
-          "price": "6.99",
-          "amount": "je 900 g"
-        },
-        {
-          "name": "BÄCKERKRÖNUNG Lütticher Zuckerwaffeln*",
-          "price": "2.49",
-          "amount": "je 550 g"
-        },
-        {
-          "name": "TUC Cracker*",
-          "price": "0.99",
-          "amount": "je 100 g"
-        },
-        {
-          "name": "LORENZ Saltletts*",
           "price": "3.99",
-          "amount": "je 600 g"
-        },
-        {
-          "name": "AIRWAVES Kaugummi*",
-          "price": "2.95",
-          "amount": "je 50 Stück"
-        },
-        {
-          "name": "POLY PALETTE Creme Coloration*",
-          "price": "2.99",
           "amount": "je Stück"
         },
         {
-          "name": "TETESEPT Schaumbad*",
-          "price": "2.99",
-          "amount": "je 420 ml"
+          "name": "Herbstmix*",
+          "price": "5.99",
+          "amount": "je Tray"
         },
         {
-          "name": "TETESEPT Badeüberraschung Kids*",
+          "name": "DANONE Activia XXL*",
           "price": "2.99",
-          "amount": "je Stück"
+          "amount": "je 8 x 115 g"
         },
         {
-          "name": "VISS Reiniger*",
+          "name": "GRÜNLÄNDER Käsescheiben*",
+          "price": "2.99",
+          "amount": "je 240 g"
+        },
+        {
+          "name": "PRÉSIDENT Brie­spitze*",
+          "price": "2.49",
+          "amount": "je 200 g"
+        },
+        {
+          "name": "BEST MOMENTS Burrata*",
+          "price": "2.79",
+          "amount": "je 480 g"
+        },
+        {
+          "name": "DELI REFORM Einfach Kochen*",
           "price": "1.99",
           "amount": "je 750 ml"
         },
         {
-          "name": "ZEWA Wisch & Weg Original*",
-          "price": "2.49",
-          "amount": "je 4 x 45 Blatt"
+          "name": "POPP Eiersalat*",
+          "price": "1.79",
+          "amount": "je 200 g"
         },
         {
-          "name": "PURINA ONE Hydralife*",
-          "price": "2.99",
-          "amount": "je 6 x 50 g"
+          "name": "BEST MOMENTS Frisches Kaninchen*",
+          "price": "9.99",
+          "amount": "je kg"
         },
         {
-          "name": "PURINA ONE Bifensis Trockennahrung*",
-          "price": "2.99",
-          "amount": "je 750 g"
+          "name": "MÜHLENHOF Frische Hähnchen-Innenbrustfilets*",
+          "price": "8.49",
+          "amount": "je 1.000-g-Packung"
         },
         {
-          "name": "FELIX Knabbermix*",
+          "name": "CHARLY’S CHICKEN Hähnchenbrust*",
+          "price": "0.99",
+          "amount": "je 75 g"
+        },
+        {
+          "name": "MARTEN Salami-Sticks*",
           "price": "2.99",
           "amount": "je 200 g"
         },
         {
-          "name": "ROCKSTAR Energy Drink*",
-          "price": "0.88",
-          "amount": "je 0,5 l"
-        },
-        {
-          "name": "RAUCH Happy Day*",
+          "name": "Bio-Äpfel*",
           "price": "1.99",
-          "amount": "je 1 l"
+          "amount": "je 1-kg-Netz"
         },
         {
-          "name": "ROCKSTAR Mocktail*",
-          "price": "0.88",
-          "amount": "je 0,33 l"
+          "name": "Rosenkohl*",
+          "price": "1.11",
+          "amount": "je 750-g-Netz"
         },
         {
-          "name": "POWER­ADE*",
-          "price": "0.99",
-          "amount": "je 0,5 l"
+          "name": "LINDENHOF XXL Gouda*",
+          "price": "5.55",
+          "amount": "je 1.000 g"
         },
         {
-          "name": "JIM BEAM Bourbon Whiskey*",
-          "price": "10.99",
-          "amount": "je 0,7 l"
+          "name": "MÜHLENHOF XXL Delikatess Hinterschinken*",
+          "price": "1.99",
+          "amount": "je 350 g"
         },
         {
-          "name": "JIM BEAM Flavoured Whiskey*",
-          "price": "10.99",
-          "amount": "je 0,7 l"
+          "name": "MÜHLENHOF XXL Delikatess Salami*",
+          "price": "1.59",
+          "amount": "je 250 g"
         },
         {
-          "name": "DR. OETKER Götter Speise*",
-          "price": "0.44",
-          "amount": "je 150 g"
+          "name": "MÜHLENHOF XXL Delikatess Käse-Wiener*",
+          "price": "3.99",
+          "amount": "je 600 g"
         },
         {
-          "name": "KNORR Asia Noodles*",
-          "price": "0.49",
-          "amount": "je 70 g"
+          "name": "BERIDA XXL Räucherlachs*",
+          "price": "4.19",
+          "amount": "je 220 g"
         },
         {
-          "name": "HELA Gewürzketchup*",
-          "price": "1.89",
+          "name": "SAN FABIO XXL Pizza Margherita*",
+          "price": "3.49",
+          "amount": "je 1.200 g"
+        },
+        {
+          "name": "LANDMARK XXL Hähnchen Nuggets*",
+          "price": "4.19",
+          "amount": "je 600 g"
+        },
+        {
+          "name": "BERIDA XXL Fischstäbchen*",
+          "price": "4.99",
+          "amount": "je 900 g"
+        },
+        {
+          "name": "SAN FABIO XXL Spaghetti*",
+          "price": "1.19",
+          "amount": "je 1.000 g"
+        },
+        {
+          "name": "GUSTORIA XXL Eintopf*",
+          "price": "3.49",
+          "amount": "je 1.200 g"
+        },
+        {
+          "name": "MILPRIMA XXL Kondens­milch*",
+          "price": "0.79",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "WÜRZ & CO XXL Gewürz*",
+          "price": "1.15",
+          "amount": "je 85 g"
+        },
+        {
+          "name": "SIMPLY SUNNY XXL Cashewkerne*",
+          "price": "5.99",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "SIMPLY SUNNY XXL Premium Nuss-Mix*",
+          "price": "6.49",
+          "amount": "je 500 g"
+        },
+        {
+          "name": "BRAVO XXL Erdnüsse*",
+          "price": "3.49",
+          "amount": "je 1.000 g"
+        },
+        {
+          "name": "BRAVO XXL Kalifornische Pistazien*",
+          "price": "3.69",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "JACOBS Ganze Bohnen*",
+          "price": "12.99",
+          "amount": "je 1.000 g"
+        },
+        {
+          "name": "BARILLA Pesto*",
+          "price": "1.69",
+          "amount": "je 190 g"
+        },
+        {
+          "name": "NISSIN Cup Noodles*",
+          "price": "1.29",
+          "amount": "je 90 g"
+        },
+        {
+          "name": "MAGGI Delikatess Sauce*",
+          "price": "0.89",
+          "amount": "je 2 x 275 ml"
+        },
+        {
+          "name": "HEINZ Tomato Ketchup*",
+          "price": "2.99",
+          "amount": "je 1.170 ml"
+        },
+        {
+          "name": "HEINZ Mayonnaise*",
+          "price": "2.99",
           "amount": "je 800 ml"
         },
         {
-          "name": "STORCK Knoppers Riegel*",
-          "price": "1.69",
-          "amount": "je 5 x 40 g"
+          "name": "DR. OETKER Backmischung*",
+          "price": "2.49",
+          "amount": "je 275 g"
         },
         {
-          "name": "SCHLAF-GUT Betten-Set*",
-          "price": "24.99",
-          "amount": "je Set"
+          "name": "ZUEGG Fruchtaufstrich*",
+          "price": "2.49",
+          "amount": "je 330 g"
         },
         {
-          "name": "KESPER Küchenaufbewahrung*",
-          "price": "7.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "KESPER Küchenhelfer*",
+          "name": "LINO LADA Creme*",
           "price": "3.99",
-          "amount": "je Stück"
+          "amount": "je 350 g"
         },
         {
-          "name": "ZENKER Backform*",
-          "price": "8.99",
-          "amount": "je Stück"
+          "name": "LAVAZZA Kaffeepads*",
+          "price": "2.22",
+          "amount": "je 125 g"
         },
         {
-          "name": "ZENKER Weihnachtsausstechform und mehr*",
-          "price": "1.29",
-          "amount": "je Stück"
+          "name": "KRÜGER Family Cappuccino*",
+          "price": "2.79",
+          "amount": "je 500 g"
         },
         {
-          "name": "ROTHO Messbecher-Set*",
-          "price": "3.99",
-          "amount": "je Set"
+          "name": "STORCK Toffifee*",
+          "price": "2.99",
+          "amount": "je 375 g"
         },
         {
-          "name": "BOSCH Stabmixer-Set MSM24510*",
-          "price": "29.99",
-          "amount": "je Set"
+          "name": "FERRERO Giotto*",
+          "price": "3.65",
+          "amount": "je 4 x 38,7 g"
         },
         {
-          "name": "BOSCH Handmixer MFQ3010*",
-          "price": "19.99",
-          "amount": "je Stück"
+          "name": "ALPIA Schoko Brezeln*",
+          "price": "1.99",
+          "amount": "je 140 g"
         },
         {
-          "name": "CAMPRELLA Hauspantoletten*",
-          "price": "9.99",
-          "amount": "je Paar"
+          "name": "ALPIA Party Crunch*",
+          "price": "1.99",
+          "amount": "je 130 g"
         },
         {
-          "name": "KAPPA Sportsocken*",
-          "price": "7.99",
-          "amount": "je 10 Paar"
+          "name": "LINDT Weihnachtskugeln*",
+          "price": "2.99",
+          "amount": "je 90 g"
         },
         {
-          "name": "KAPPA Herren-Retroshorts*",
-          "price": "15.99",
-          "amount": "je 5er-Packung"
+          "name": "BAILEYS Cake Bites*",
+          "price": "2.49",
+          "amount": "je 210 g"
         },
         {
-          "name": "ANIME HEROES, DRAGON BALL, ONE PIECE oder NARUTO Anime-Manga-Actionfigur*",
-          "price": "14.99",
-          "amount": "je Stück"
+          "name": "BAILEYS Premium Mini Muffins*",
+          "price": "2.49",
+          "amount": "je 210 g"
         },
         {
-          "name": "ONE PIECE COSB!-Sammelfigur*",
-          "price": "9.99",
-          "amount": "je Box"
+          "name": "LORENZ Crunchips XXL*",
+          "price": "1.79",
+          "amount": "je 220 g"
         },
         {
-          "name": "FUNKO POP! Figur*",
-          "price": "8.99",
-          "amount": "je Stück"
+          "name": "PALMOLIVE Flüssigseife*",
+          "price": "1.99",
+          "amount": "je 2 x 300 ml"
         },
         {
-          "name": "HELLO KITTY AND FRIENDS oder ONE PIECE Plüschfigur*",
-          "price": "9.99",
-          "amount": "je Stück"
+          "name": "PALMOLIVE Duschgel*",
+          "price": "1.99",
+          "amount": "je 2 x 250 ml"
         },
         {
-          "name": "SIMBA DISNEY YUYUS Stitch-Plüschanhänger YUYUS Welle 1*",
+          "name": "FINISH Ultimate Plus*",
           "price": "12.99",
+          "amount": "je 902 g"
+        },
+        {
+          "name": "FINISH Power Classic*",
+          "price": "12.99",
+          "amount": "je 1.560 g"
+        },
+        {
+          "name": "FINISH Maschinenpfleger*",
+          "price": "3.99",
+          "amount": "je 68 g"
+        },
+        {
+          "name": "FINISH Klarspüler*",
+          "price": "3.99",
+          "amount": "je 1.150 ml"
+        },
+        {
+          "name": "PURINA Adventuros Nuggets*",
+          "price": "2.99",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "LIPTON Ice Tea*",
+          "price": "1.29",
+          "amount": "je 1,25 l"
+        },
+        {
+          "name": "JACK DANIEL’S Tennessee Whiskey*",
+          "price": "15.99",
+          "amount": "je 0,7 l"
+        },
+        {
+          "name": "RÜGENWALDER MÜHLE Veganer Aufschnitt*",
+          "price": "1.11",
+          "amount": "je 80 g"
+        },
+        {
+          "name": "MÜHLENHOF Rostbratwurst*",
+          "price": "2.99",
+          "amount": "je 540 g"
+        },
+        {
+          "name": "RAPSGOLD Rapsöl*",
+          "price": "2.99",
+          "amount": "je 750 ml"
+        },
+        {
+          "name": "NIMM 2 Lachgummi*",
+          "price": "0.99",
+          "amount": "je 225 g"
+        },
+        {
+          "name": "COCA-COLA, SPRITE, MEZZO MIX oder FANTA*",
+          "price": "1.19",
+          "amount": "je 1,25 l"
+        },
+        {
+          "name": "PHILIPS Bodenstaubsauger XD1121/10*",
+          "price": "69.99",
           "amount": "je Stück"
         },
         {
-          "name": "MONSTER JAM Monster-Truck*",
-          "price": "4.99",
-          "amount": "je Stück"
+          "name": "SWIRL Staubfilterbeutel-Jahrespackung*",
+          "price": "10.99",
+          "amount": "je 6er-Packung"
         },
         {
-          "name": "Deko aus Mangoholz*",
+          "name": "LICHTER BLITZ Akku-Handstaubsauger 19122*",
           "price": "17.99",
           "amount": "je Stück"
         },
         {
-          "name": "20er-LED-Weihnachtsstern*",
+          "name": "VILEDA Bodenwischer-Komplett-Set ULTRAMAX*",
+          "price": "22.99",
+          "amount": "je Set"
+        },
+        {
+          "name": "VILEDA Bodenwischersatzbezüge ULTRAMAX EXTRA*",
+          "price": "16.99",
+          "amount": "je 2er-Packung"
+        },
+        {
+          "name": "BERGNER Kochgeschirr DIAMOND*",
+          "price": "9.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "BERGNER Toaster BG-51401-BK/CR*",
+          "price": "12.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "BERGNER Wasserkocher BG-51400-BK/CR*",
+          "price": "12.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "TONIES Toniebox*",
+          "price": "69.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "TONIES Hörfigur*",
+          "price": "12.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "JADA Sammel-und-Spielfiguren-Set Hello Kitty and Friends*",
+          "price": "14.99",
+          "amount": "je Set"
+        },
+        {
+          "name": "HOT WHEELS PULL-BACK SPEEDERS Spielzeugauto*",
           "price": "7.99",
           "amount": "je Stück"
         },
         {
-          "name": "Filz-Deko*",
-          "price": "2.99",
+          "name": "HASBRO PLAY-DOH Knet-Set*",
+          "price": "12.99",
+          "amount": "je Set"
+        },
+        {
+          "name": "HASBRO PLAY-DOH Megameter*",
+          "price": "9.99",
+          "amount": "je 16 x 85-g-Packung (1 kg = 7.35)"
+        },
+        {
+          "name": "HASBRO PLAY-DOH Cookie- oder Pizza-&-Milchshake-Knet-Set*",
+          "price": "4.99",
+          "amount": "je Set"
+        },
+        {
+          "name": "TIPTOI Bücher*",
+          "price": "9.99",
           "amount": "je Stück"
+        },
+        {
+          "name": "SCHMIDT Kinderspiele*",
+          "price": "12.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "SCHMIDT PREMIUM QUALITY-Puzzle*",
+          "price": "9.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Adventskerzen*",
+          "price": "4.99",
+          "amount": "je 4er-/6er-Packung"
+        },
+        {
+          "name": "Wand-Deko mit Lametta*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "LED-Deko-Tannenbäume-Set*",
+          "price": "4.99",
+          "amount": "je Set"
+        },
+        {
+          "name": "LED-Fensterlichterkette*",
+          "price": "7.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "400er-LED-Lichterkette*",
+          "price": "12.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "LED-Deko-Häuser-Set*",
+          "price": "5.99",
+          "amount": "je Set"
         },
         {
           "name": "Weihnachts-Deko*",
-          "price": "3.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Duftlampen-Set*",
-          "price": "3.99",
-          "amount": "je Set"
-        },
-        {
-          "name": "200er-LED-Lichterkette*",
-          "price": "7.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Weihnachtlicher Kunstblumenzweig*",
           "price": "1.99",
           "amount": "je Stück"
         },
         {
-          "name": "Samttürschleife mit LEDs*",
-          "price": "3.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "HEUNEC Plüschfigur*",
-          "price": "3.99",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Raumduft*",
-          "price": "2.49",
-          "amount": "je Stück"
-        },
-        {
-          "name": "Duftkerze im Glas*",
+          "name": "Mini-Wichtel oder -Rentier*",
           "price": "1.49",
           "amount": "je Stück"
         },
         {
-          "name": "Plätzchendosen-Set*",
-          "price": "5.99",
-          "amount": "je 3er-Set"
+          "name": "LED-Echtwachskerzen-Set*",
+          "price": "9.99",
+          "amount": "je Set"
         },
         {
-          "name": "Filz-Tisch-Deko*",
-          "price": "3.49",
-          "amount": "je Stück/Packung"
+          "name": "LED-Tanne aus Glas*",
+          "price": "4.99",
+          "amount": "je Stück"
         },
         {
-          "name": "HOME IDEAS Seasons Servietten*",
-          "price": "1.49",
-          "amount": "je 40er-Packung"
-        },
-        {
-          "name": "Weihnachts-Bastel-Set*",
+          "name": "HOME IDEAS Seasons Fensterbild XXL*",
           "price": "2.99",
-          "amount": "je Set/Packung"
+          "amount": "je Stück"
         },
         {
-          "name": "CRAFTLAB Weihnachtskarten-Set*",
+          "name": "HOME IDEAS Seasons Fensterbild Pop-Up 3D XXL*",
+          "price": "2.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "HOME IDEAS Seasons Premium-Geschenkanhängerkärtchen-Set*",
           "price": "1.99",
           "amount": "je Set"
+        },
+        {
+          "name": "Eiknäuel MAXI*",
+          "price": "0.99",
+          "amount": "je Rolle"
+        },
+        {
+          "name": "Polybänder-Multispule*",
+          "price": "1.99",
+          "amount": "je Rolle"
+        },
+        {
+          "name": "HOME IDEAS Seasons Premium-Geschenkpapier*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Kinder-Geschenkpapier XXL*",
+          "price": "1.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Tafelkerzen*",
+          "price": "2.99",
+          "amount": "je 8er-Packung"
+        },
+        {
+          "name": "Adventskerzen RUSTIK*",
+          "price": "5.99",
+          "amount": "je 4er-Packung"
+        },
+        {
+          "name": "Tafelkerzen mit Kerzenhalter*",
+          "price": "2.99",
+          "amount": "je Set"
+        },
+        {
+          "name": "Tischdecke*",
+          "price": "4.99",
+          "amount": "je Stück"
+        },
+        {
+          "name": "Stuhlhusse*",
+          "price": "5.99",
+          "amount": "je Stück"
         }
       ],
-      "revision": "penny-2026-45"
+      "revision": "penny-2026-46"
     },
     {
       "id": "lidl",
       "name": "Lidl",
-      "source": "https://www.lidl.de/l/prospekte/aktionsprospekt-02-11-2026-07-11-2026-d34d64/ar/0?_ab=1&lf=HHZ",
-      "note": "Aktionsprospekt 2.11.–7.11.2026, automatisch gelesen.",
+      "source": "https://www.lidl.de/l/prospekte/aktionsprospekt-09-11-2026-14-11-2026-de787e/ar/0?_ab=1&lf=HHZ",
+      "note": "Aktionsprospekt 9.11.–14.11.2026, automatisch gelesen.",
       "otherCount": 0,
       "offers": [
         {
-          "name": "LUPILU Baby Winteroverall Lightweight, mit Daunen",
-          "price": "19.99",
+          "name": "PARKSIDE Herren Arbeitsbundhose, gefüttert",
+          "price": "9.99",
           "amount": ""
         },
         {
-          "name": "RAUCH BLUE Drehtürenschrank »Kemi«",
-          "price": "189.00",
+          "name": "PARKSIDE Gefütterte Herren Arbeitslatzhose",
+          "price": "9.99",
           "amount": ""
         },
         {
-          "name": "F.A.N. 7-Zonen-Boxspring-Matratze, integrierte Thermogel-Auflage",
-          "price": "240.56",
+          "name": "DIE MILLIONENIDEE Wärmflasche mit Aroma-Stein",
+          "price": "7.99",
           "amount": ""
         },
         {
-          "name": "F.A.N. 7-Zonen-Taschenfederkern-Matratze »Sweet Dream XXL«, mit Gelschaum-Topper",
-          "price": "209.00",
+          "name": "Wärmflasche mit Aroma-Stein",
+          "price": "7.99",
           "amount": ""
         },
         {
-          "name": "TXL COMFORT Comfort Matrastopper 90 x 200 cm, feuchtigkeitsregulierend",
-          "price": "39.99",
+          "name": "PARKSIDE PERFORMANCE Werkstatt-Sauger »PPWD 30 B2«, 260 Airwatt",
+          "price": "249.00",
           "amount": ""
         },
         {
-          "name": "TXL COMFORT Schurwolle Matratzenauflage Übergröße, 140 x 200",
-          "price": "49.99",
+          "name": "PARKSIDE PERFORMANCE Werkstatt-Sauger »PPWD 30 A1«, 99,995 % Filterleistung und",
+          "price": "249.00",
           "amount": ""
         },
         {
-          "name": "TXL COMFORT Schurwolle Kissen",
-          "price": "29.99",
+          "name": "PARKSIDE PERFORMANCE Exzenterschleifer »PPEXS 750 B2«, mit zuschaltbarem",
+          "price": "47.99",
           "amount": ""
         },
         {
-          "name": "TXL COMFORT 4-Jahreszeiten-Bettdecke 135 x 200 cm",
-          "price": "69.99",
+          "name": "PARKSIDE PERFORMANCE Pendelhubstichsäge »PPSTK 550 A1«",
+          "price": "54.99",
           "amount": ""
         },
         {
-          "name": "TXL COMFORT 4-Jahreszeiten-Bettdecke 155 x 220 cm",
-          "price": "89.99",
-          "amount": ""
-        },
-        {
-          "name": "TXL COMFORT Schurwolle Bettdecke 220 x 200 cm",
-          "price": "119.00",
-          "amount": ""
-        },
-        {
-          "name": "LIVARNO Langflor-Teppich, 80 x 150 cm",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Wand- und Deckenschleifer »PWDS 920 E5«, mit Teleskopfunktion",
-          "price": "79.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE 12V Akku-Rohrschneider »PARS 12-Li A1« mit Akku und Ladegerät",
+          "name": "PARKSIDE PERFORMANCE 20V Akku-LED-Strahler »PPBSTA 20-Li B2 « ohne Akku und",
           "price": "59.99",
           "amount": ""
         },
         {
-          "name": "PARKSIDE Nass-/Trockensauger »PWDL 40 A1«",
-          "price": "87.99",
-          "amount": "Leistung: 1500 W Saugleistung: 260 Airwatt Beh&auml;ltervolumen: 40 l"
-        },
-        {
-          "name": "PARKSIDE PERFORMANCE Multifunktions-Werkbank »PMFW 15 A1«",
-          "price": "119.00",
+          "name": "PARKSIDE PERFORMANCE Herren Softshelljacke, reflektierend",
+          "price": "29.99",
           "amount": ""
         },
         {
-          "name": "Güde Werkstattwagen Premium »GWSP 07«, Vollauszugschubladen",
-          "price": "229.00",
+          "name": "PARKSIDE PERFORMANCE Herren Arbeitsbundhose Softshell, reflektierend",
+          "price": "19.99",
           "amount": ""
         },
         {
-          "name": "PARKSIDE Benzin-Kombigerät »PBK 4 D5«",
-          "price": "139.00",
+          "name": "PARKSIDE PERFORMANCE Herren Softshellweste",
+          "price": "24.99",
           "amount": ""
         },
         {
-          "name": "PARKSIDE Spalt- und Universalaxt",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Benzin-Laubsauger/-bläser »PBLSB 26 A1«",
-          "price": "129.00",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE Multifunktionsleiter, max. Arbeitshöhe 3,52 m, aus Aluminium",
-          "price": "49.99",
-          "amount": ""
-        },
-        {
-          "name": "PARKSIDE PERFORMANCE Benzin-Kettensäge mit Elektrostart »PPBKS 56 C3«",
-          "price": "99.99",
-          "amount": ""
-        },
-        {
-          "name": "GÜDE Kehrmaschine »GKM 100.1«, mit Easy Startfunktion",
-          "price": "899.00",
-          "amount": "Antriebsart: Benzinmotor Fassungsverm&ouml;gen: ca. 72 l"
-        },
-        {
-          "name": "Smooth & Spiced (Rum-Basis) 35% Vol",
-          "price": "5.29",
-          "amount": ""
-        },
-        {
-          "name": "DELUXE Eierlikör 17% Vol",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "BEN BRACKEN Single Malt Scotch Whisky Mini-Pack 3 x 0,05 l, 40% Vol",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "DON PAPA Baroko (Rum-Basis) 40% Vol",
-          "price": "26.99",
-          "amount": ""
-        },
-        {
-          "name": "DON PAPA Masskara Spirit Drink 40% Vol",
-          "price": "27.99",
-          "amount": "w&uuml;rzig & exotisch Rumspirituose Phillippinen"
-        },
-        {
-          "name": "Gin Collection Ginpaket 4 x 0,05 l, 37,5-40% Vol",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "GOLDHAUCH Alter Mirabellen Brand 40% Vol",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "GOLDHAUCH Haselnuss Edeldestillat 40% Vol",
-          "price": "9.99",
-          "amount": "Mit intensivem Aroma nach knackigen N&uuml;ssen und Nougat"
-        },
-        {
-          "name": "SILVERCREST Matcha-Set, 5-teilig",
-          "price": "11.99",
-          "amount": ""
-        },
-        {
-          "name": "Deutscher Premium Glühwein Weiß",
-          "price": "2.49",
-          "amount": ""
-        },
-        {
-          "name": "Deutscher Premium Glühwein Rot",
-          "price": "2.49",
-          "amount": ""
-        },
-        {
-          "name": "MAESTRO DE PIGO Glühwein Rot Primitivo 11,5% Vol",
-          "price": "2.49",
-          "amount": "samtig & w&uuml;rzig Roter Gl&uuml;hwein Deutschland"
-        },
-        {
-          "name": "LIVARNO LED-Lichterkette, mit 8 Lichteffekten",
+          "name": "PARKSIDE Boxer, 3 Stück",
           "price": "5.99",
           "amount": ""
         },
         {
-          "name": "LIVARNO LED-Baum, H 150 cm",
-          "price": "14.99",
-          "amount": "Max. Leistung: 5 W Lichtfarbe: Warmwei&szlig;"
-        },
-        {
-          "name": "LIVARNO LED-Dekoleuchte",
-          "price": "4.99",
+          "name": "SILVERCREST Heißluftfritteuse »SHFD 2000 D1«, 4,7 l",
+          "price": "34.99",
           "amount": ""
         },
         {
-          "name": "LIVARNO LED-Windlichter / LED-Dekokugeln, 3er Set",
-          "price": "14.99",
+          "name": "SILVERCREST Heißluftfritteuse »SHFD 2000 D2«",
+          "price": "34.99",
           "amount": ""
         },
         {
-          "name": "LIVARNO LED-Weihnachtsdekoration",
-          "price": "3.99",
+          "name": "SILVERCREST Heißluftfritteuse",
+          "price": "34.99",
           "amount": ""
         },
         {
-          "name": "YANKEE CANDLE Duftkerze »Home Inspiration«",
-          "price": "11.99",
+          "name": "SILVERCREST Doppelschlitz-Toaster »STC 850 E4«",
+          "price": "19.99",
           "amount": ""
         },
         {
-          "name": "LUPILU Kinder Schlupfmütze",
-          "price": "6.99",
+          "name": "SILVERCREST SILVERCREST Wasserkocher »SWKC 3000 G3«",
+          "price": "19.99",
           "amount": ""
         },
         {
-          "name": "LUPILU Kinder Teddyfleece-Jacke",
-          "price": "14.99",
+          "name": "SILVERCREST Mikrowelle »SMWC 700 D2«, ca 20 l",
+          "price": "49.99",
           "amount": ""
         },
         {
-          "name": "LUPILU Kinder Thermo-Denimjogger",
-          "price": "6.99",
+          "name": "SILVERCREST Mikrowelle »SMWC 700 D2«. ca. 20 l",
+          "price": "49.99",
           "amount": ""
         },
         {
-          "name": "LUPILU Kinder Slips, 4 Stück",
-          "price": "1.99",
+          "name": "SILVERCREST Küchenmaschine »SKM 600 F1«",
+          "price": "44.99",
           "amount": ""
         },
         {
-          "name": "LUPILU Kinder Strickkleid mit Tasche",
-          "price": "7.99",
-          "amount": "Farbe: pink; rosa Merkmal: inkl. passender Umh&auml;ngetasche"
-        },
-        {
-          "name": "LUPILU Kleinkinder Sweatpullover",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Kinder Thermo-Leggings, 2 Stück",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Kleinkinder Sweathose",
-          "price": "3.59",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Kinder Thermo-Jeggings",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Kinder-Thermo-Socken, 5 Paar",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Kinder Stiefel",
+          "name": "SILVERCREST Vorratsdosen-Set, 8 Stück",
           "price": "12.99",
           "amount": ""
         },
         {
-          "name": "LUPILU Premium Baby Strick Set",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Strumpfhosen, 2 Stück",
+          "name": "SILVERCREST Springform / Königskuchenform / Gugelhupfform",
           "price": "4.99",
           "amount": ""
         },
         {
-          "name": "LUPILU Baby Schlafoverall, 2 Stück",
+          "name": "SILVERCREST Geschirr-Set aus Porzellan, 18-teilig mit matter Glasur",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Milchaufschäumer »SMSP 500 A1«",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Espressomaschine »SEM 1100 E1«",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Elektrische Kaffeemühle »SKME 180 D1«",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "ARMILAR Portwein Late Bottled Vintage 2020",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "CASATO DEI MEDICI RICCARDI Chianti Classico DOCG Riserva trocken, Rotwein 2021",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "POMMERY Brut Royal, Champagner",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "Fine Calvados 40% Vol",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "Grappa Amarone Barrique 40% Vol",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "DELUXE Schwarzwälder Kirschwasser 1 Jahr Holzfassreifung 40% Vol",
+          "price": "12.99",
+          "amount": "vollmundig & fruchtig Kirschwasser Deutschland"
+        },
+        {
+          "name": "Premium Superb Vodka 5-fach destilliert 42% Vol",
+          "price": "9.49",
+          "amount": ""
+        },
+        {
+          "name": "MR. FINTON'S Vodka 40% Vol",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "BEN BRACKEN Highland Single Malt Scotch Whisky 40% Vol",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "DELUXE Alter Mirabellenbrand 1 Jahr 40% Vol",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "MR. FINTON'S Rum 40% Vol",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "MR. FINTON'S Gin 40% Vol",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "DELUXE Pistazien Sahnelikör 15% Vol",
           "price": "6.99",
+          "amount": "nussig & cremig Lik&ouml;r Deutschland"
+        },
+        {
+          "name": "JAGDSTOLZ Jagertee 40% Vol",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "ROMANETTI Aperitivo Rosato 15% Vol",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "BULLEIT Bourbon Frontier Kentucky Straight Bourbon Whiskey 45% Vol",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "ABERFELDY 12 Years Old Highland Single Malt Scotch Whisky mit Geschenkbox 40%",
+          "price": "29.99",
+          "amount": "komplex & w&uuml;rzig Single Malt Scotch Whisky Schottland, Highlands"
+        },
+        {
+          "name": "BOTUCAL Mantuano Rum 40% Vol",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "RON ZACAPA Solera Gran Reserva Rum mit Geschenkbox 40% Vol",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "6 x 0,75-l-Flasche Weinpaket Dutailly Muscadet Sèvre et Maine AOP trocken,",
+          "price": "29.99",
+          "amount": "saftig & frisch Frankreich, Loire Muscadet, trocken"
+        },
+        {
+          "name": "MASSARI Sambuca 40% Vol",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "EFE Raki Fresh Grapes 45% Vol",
+          "price": "13.99",
+          "amount": ""
+        },
+        {
+          "name": "ÀNIMA NEGRA ÀN/2 Mallorca VdT Illes Balears trocken, Rotwein 2022",
+          "price": "19.90",
+          "amount": ""
+        },
+        {
+          "name": "CA' DEL LAGO Rosso del Pegher IGT Trevenezie trocken, Rotwein 2023",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Mavrodafne Reserve Patras PDO lieblich, Likörwein",
+          "price": "8.99",
+          "amount": "w&uuml;rzig & intensiv Griechenland, Patras Mavrodaphne, lieblich"
+        },
+        {
+          "name": "Greco Beneventano IGT trocken, Weißwein 2024",
+          "price": "6.39",
+          "amount": ""
+        },
+        {
+          "name": "Comte de Treillière Crémant de Loire AOC brut, Schaumwein",
+          "price": "8.99",
+          "amount": "elegant & fruchtig Frankreich, Loire Cuv&eacute;e, brut"
+        },
+        {
+          "name": "Prosecco Superiore Valdobbiadene DOCG extra trocken, Schaumwein 2024",
+          "price": "7.77",
+          "amount": "frisch & elegant Italien, Venetien Glera, extra trocken"
+        },
+        {
+          "name": "BUSHMILLS Single Malt Irish Whiskey 10 Jahre mit Geschenkbox 40% Vol",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "ABRACHAN Double Cask Matured Blended Malt Scotch Whisky 13 Jahre 45% Vol",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "THE TARGE Highland Single Grain Scotch Whisky 18 Jahre 44% Vol",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "THE TARGE Highland Single Grain Scotch Whisky 25 Jahre 44% Vol",
+          "price": "44.99",
+          "amount": ""
+        },
+        {
+          "name": "BEN BRACKEN Highland Single Malt Scotch Whisky Peated & Smoky 17 Jahre 40% Vol",
+          "price": "47.99",
+          "amount": ""
+        },
+        {
+          "name": "BEN BRACKEN Highland Peated Single Malt Scotch Whisky 20 Jahre 40 % Vol",
+          "price": "54.99",
+          "amount": ""
+        },
+        {
+          "name": "BEN BRACKEN Islay Single Malt Scotch Whisky 18 Jahre 46% Vol",
+          "price": "64.99",
+          "amount": ""
+        },
+        {
+          "name": "BEN BRACKEN Speyside Single Malt Scotch Whisky 27 Jahre 40% Vol",
+          "price": "69.99",
+          "amount": ""
+        },
+        {
+          "name": "Glühwein Rot Dornfelder 11,3% Vol",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "Primitivo Salento IGP trocken, Rotwein 2025",
+          "price": "4.89",
+          "amount": ""
+        },
+        {
+          "name": "Vin d'Alsace Gewürztraminer AOP halbtrocken, Weißwein 2024",
+          "price": "5.99",
+          "amount": "floral & fruchtig Frankreich, Elsass Gew&uuml;rztraminer , halbtrocken"
+        },
+        {
+          "name": "LEGO CITY 60502 »Flughafen mit Flugzeug«",
+          "price": "59.99",
+          "amount": "Anzahl Teile: 887 Altersempfehlung: 8+"
+        },
+        {
+          "name": "BAYER DESIGN Schminkkopf »Charlene Super Model«",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "BAYER DESIGN Kombi-Puppenwagen Grande Megaset",
+          "price": "64.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Stofftier mit Nachtlicht",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "MONI Ferngesteuerter Gelände-Monster Truck »Mega Grave Digger«",
+          "price": "99.99",
+          "amount": "Merkmal: mit Fernsteuerung Altersempfehlung: 4+"
+        },
+        {
+          "name": "SILVERCREST Fensterputzroboter »SFSR 72 A1«",
+          "price": "89.99",
+          "amount": ""
+        },
+        {
+          "name": "PHILIPS Dampfbügelstation »PSG2001/80«",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "BOSCH Akku-Staubsauger »Serie 2 BBHF2PARQ«, 16 V",
+          "price": "119.00",
+          "amount": ""
+        },
+        {
+          "name": "SHARK Hartbodenreiniger »Hydrovac WD210EU«",
+          "price": "169.00",
+          "amount": "Teleskoprohr: nein Aktionsradius: 88,5 m&sup2;"
+        },
+        {
+          "name": "GRUNDIG 2-in-1-Akku-Stielstaubsauger »VCP 3630 L«",
+          "price": "64.99",
+          "amount": ""
+        },
+        {
+          "name": "VILEDA Dampfreiniger »Steam XXL«, 1550 W",
+          "price": "64.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Geschirr-Set, 18-teilig",
+          "price": "69.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Raclette 4 Personen SGRA 600 A1",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Kühlschrank mit Gefrierfach SKGK 113 A1",
+          "price": "179.00",
+          "amount": "K&uuml;hlen + Gefrieren: ja Ma&szlig;e: L 55,3 x B 57,4 x H 84,5 cm"
+        },
+        {
+          "name": "SILVERCREST Gefrierschrank SGF 88 A1",
+          "price": "179.00",
+          "amount": "Ma&szlig;e: L 55,3 x B 57,4 x H 84,5 cm"
+        },
+        {
+          "name": "KRUPS Kaffeevollautomat",
+          "price": "249.00",
+          "amount": ""
+        },
+        {
+          "name": "COSORI Heißluftfritteuse Turbo Tower »CAF-DC121-AEUR«, 10,8 L",
+          "price": "169.00",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO LED-Lichtervorhang / LED-Lichternetz",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO LED-Lichterkette",
+          "price": "4.99",
+          "amount": "Max. Leistung: 0,03 W je LED Lichtfarbe: warmwei&szlig; / mehrfarbig"
+        },
+        {
+          "name": "LIVARNO LED-Weihnachtsstern",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO LED-Solar-Lichterkette",
+          "price": "3.59",
+          "amount": ""
+        },
+        {
+          "name": "Farbrolle mit Wechselbezügen",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "DIE MILLIONENIDEE Rollfix Farbrolle mit Wechselbezügen",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "GENIUS NICER DICER Smart, Set 6-teilig",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "COOX Springform, mit Glasboden, 18 cm",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "EMSA BLUDROP Color Trinkflasche",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "NINJA Heißluftfritteuse »AF110EU«, 4,7 l",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "GSW GSW Energiespartopf, 24 cm, 4 L",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "SINGER Nähmaschine »323L SERENADE«",
+          "price": "119.00",
+          "amount": "Stichmuster: 23 Stichl&auml;nge: max. 4 mm Stichbreite: max. 4,5 mm"
+        },
+        {
+          "name": "PARKSIDE Werkzeugkoffer, 35-teilig",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V Mähroboter »PAMRC 250 A1 City«, mit Akku und Ladestation",
+          "price": "149.00",
+          "amount": "Aus der Serie PARKSIDE X 20 V Team Schnittbreite: ca. 16 cm"
+        },
+        {
+          "name": "SINGER Aufbewahrungstasche, für alle SINGER Näh- und Overlockmaschinen",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 20V Akku-Schlagbohrschrauber »PSBSAP 20-Li C3«, ohne Akku",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20V Akku 4 Ah »PAP 204 A1«",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 20 V / 4 Ah Smart-Akku »PAPP 204 A1«, ohne Ladegerät",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 20 V / 8 Ah Smart-Akku »PAPP 208 A1«, ohne Ladegerät",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE 20 V / 4,5 A Akku-Schnellladegerät »PLG 20 C3«",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 4 V Akku-Kreuzlinienlaser »PKLLP 360 B3«, mit",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 20V Akku-Schwingschleifer »PAMSP 20-Li A2« / 20V",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE Getriebelose Ratschen Best PGLR 2 A1 Getriebelose Ratschen",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE Meißelschraubendreher-Satz",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 20 V Akku-Stichsäge »PSSPA 20-Li F4« ohne Akku und",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE 20 V Akku-Hobel »PPHA 20-Li C3« ohne Akku – ohne Ladegerät",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Herren Jacke",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE Einhand - Blindnietzange",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE PERFORMANCE Bit-Set Impact 40tlg.",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "PARKSIDE Herren S3 Sicherheitsstiefel",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Waschbecken-Unterschrank »Corfu«",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Badezimmer-Seitenschrank »Corfu«",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Bad-Seitenschrank »Corfu«",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO Bad-Hochschrank »Corfu«",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
+          "name": "CIEN BEAUTY Premium-Ionen-Haartrockner",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "CIEN Premium-Rotationsrasierer »Series 900«",
+          "price": "24.99",
+          "amount": "Betriebsart: Akku Anwendung: Nass- oder Trockenrasuren"
+        },
+        {
+          "name": "ESMARA KIDS Kinder Sweatanzug",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA MEN Herren Sweathoodie »Weihnachten«",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA MEN Herren Sweathose »Weihnachten«",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Kleinkinder Sweatanzug, 2tlg.",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Baby Plüschanzug",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Kinder Velourskleid",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA MEN Herren Premium Strickpullover",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "ESMARA Damen Weihnachtspullover",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Oversize-Plüsch-Hoodie",
+          "price": "7.99",
           "amount": ""
         },
         {
@@ -2649,657 +2619,177 @@
           "amount": ""
         },
         {
-          "name": "LUPILU Baby Jogginghosen, 2 Stück",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA KIDS Kinder Thermoleggings, 2 Stück",
-          "price": "5.99",
-          "amount": "Farbe: navy; schwarz Merkmal: hoher Baumwollanteil"
-        },
-        {
-          "name": "ESMARA KIDS Kinder Thermosocken, 5 Stück",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Bodys, 3 Stück",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA KIDS Kinder Boots",
-          "price": "12.99",
-          "amount": "Farbe: braun; navy Merkmal: gepolsterte Decksohle"
-        },
-        {
-          "name": "ESMARA Damen Thermo-Steppmantel",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA Damen Grobstrickpullover",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA Damen Strickkleid",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA Premium Damen Winterstiefel",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA Damen Teddyfleece-Jacke",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA MEN Herren Thermo-Langarmshirt",
-          "price": "5.99",
-          "amount": "Farbe: braun, grau, schwarz Merkmal: k&ouml;rpernah geschnitten"
-        },
-        {
-          "name": "ESMARA Damen Thermo-Langarmshirt",
-          "price": "5.99",
-          "amount": "Farbe: grau, pink, schwarz Merkmal: tailliert geschnitten"
-        },
-        {
-          "name": "ESMARA MEN Herren Jacke Strickfleece",
-          "price": "9.99",
-          "amount": "Farbe: beige/braun, braun, navy Merkmal: leger geschnitten"
-        },
-        {
-          "name": "ESMARA Damen Thermo-Jeggings",
-          "price": "9.99",
-          "amount": "Farbe: blau, schwarz Merkmal: Gummizugbund"
-        },
-        {
-          "name": "ESMARA MEN Herren Pullover Strick",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA MEN Herren Thermojeans, Straight Fit, normale Leibhöhe",
-          "price": "12.99",
-          "amount": "Farbe: dunkelblau, grau Passform: Straight Fit Merkmal: 5-Pocket-Style"
-        },
-        {
-          "name": "ESMARA Damen Boots",
-          "price": "8.99",
-          "amount": "Farbe: braun, hellbraun, schwarz Merkmal: Wildleder-Optik"
-        },
-        {
-          "name": "ESMARA Damen Thermoleggings",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA MEN Herren Premium-Merino-Mix-Thermounterhemd",
-          "price": "16.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA Damen Premium-Merino-Mix-Thermounterhose",
-          "price": "16.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA Damen Premium-Merino-Mix-Thermounterhemd",
-          "price": "16.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA MEN Herren Premium-Merino-Mix-Thermounterhose",
-          "price": "16.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA Thermo-Leggings",
-          "price": "4.99",
-          "amount": "Farbe: grau, schwarz Merkmal: weich und w&auml;rmend"
-        },
-        {
-          "name": "ESMARA Damen Thermo-Leggings",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "ESMARA MEN Herren Boxer, 5 Stück",
-          "price": "5.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Premium-Damen Sweatpullover",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Funktionsshirt",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Yogasocken, 2 Stück",
-          "price": "2.69",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Relaxhose",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "CHRISTOPEIT SPORT Kraftstation »SP 5000«",
-          "price": "599.00",
-          "amount": ""
-        },
-        {
-          "name": "Christopeit Sport Kraftstation »SP 2000«",
-          "price": "349.00",
-          "amount": ""
-        },
-        {
-          "name": "CHRISTOPEIT Crosstrainer Ergometer »EL 8000«, Kinomap App",
-          "price": "499.00",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Sportschuhe",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "CHRISTOPEIT Heimtrainer »AL 2000 Pro«",
-          "price": "279.00",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Herren Sportschuhe",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Funktionstrainingsjacke",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Funktionstights",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "CRIVIT Damen Sport Bustier",
-          "price": "7.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Magnetbausätze Themenwelten",
-          "price": "12.99",
-          "amount": "Anzahl Teile: 30; 50 Altersempfehlung: 2+;3+"
-        },
-        {
-          "name": "LUPILU Kugelbahn, 140 Teile",
-          "price": "9.99",
-          "amount": "Anzahl Teile: 140 Altersempfehlung: 3+"
-        },
-        {
-          "name": "LUPILU Spielzeug-Elektrowerkzeuge »PARKSIDE«",
-          "price": "9.99",
-          "amount": "Merkmal: im PARKSIDE-Design Altersempfehlung: 3+"
-        },
-        {
-          "name": "PLAY DOH Knete-Set »Garten / Regenbogen«",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "PLAY DOH Spiel-Sets, mit viel Zubehör",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "LEGO CITY 60486 »Elektro-Supersportwagen«",
-          "price": "6.99",
-          "amount": "Anzahl Teile: 109 Altersempfehlung: 5+"
-        },
-        {
-          "name": "LEGO SPEED CHAMPIONS 77251 »McLaren F1 Team MCL38 Rennauto«",
-          "price": "16.99",
-          "amount": ""
-        },
-        {
-          "name": "LEGO NINJAGO 71853 »Duell mit Jays Drachen-Mech«",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "LEGO DUPLO 10913 »Steinebox«",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "LEGO Aufbewahrungsbox mit 6 Noppen, stapelbar",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Holzkugelbahn / Turm 2in1 / Tierdomino",
-          "price": "14.99",
-          "amount": "Altersempfehlung: Holzkugelbahn; Turm 2in1: 2+; Tierdomino: 3+"
-        },
-        {
-          "name": "LUPILU Lernpuzzle",
-          "price": "4.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Baby Holz Spielzeug »Montessori-Stil«",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Autotransporter / Schaukelpferd",
-          "price": "24.99",
-          "amount": "Merkmal: aus Holz Altersempfehlung: 1+"
-        },
-        {
-          "name": "LUPILU Bausteine",
-          "price": "5.99",
-          "amount": "Merkmal: f&ouml;rdert spielerisch Kreativit&auml;t"
-        },
-        {
-          "name": "LUPILU Montessori-Holzspielzeug",
-          "price": "9.99",
-          "amount": "Merkmal: aus Holz Altersempfehlung: 1+/ 1&frac12;+/ 3+"
-        },
-        {
-          "name": "HAPE Piano / Drums / Guitar",
-          "price": "14.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Stäbchen-Spiel / Holz-Gedächtnisspiel / Buchstabenwürfel-Spiel /",
-          "price": "7.99",
-          "amount": "Merkmal: aus Holz Altersempfehlung: 3+"
-        },
-        {
-          "name": "LUPILU Holz Morotikbaum / Motorikspieltisch",
-          "price": "29.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Holz Motorikspiele",
-          "price": "9.99",
-          "amount": "Altersempfehlung: 1+ / 1&frac12;+"
-        },
-        {
-          "name": "LUPILU Holz Küche Deluxe",
-          "price": "99.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Holz Balancewippe",
-          "price": "39.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Küchengeräte, 2er Set",
-          "price": "9.99",
-          "amount": "Merkmal: 2er Set Altersempfehlung: 3+"
-        },
-        {
-          "name": "LUPILU 2-in-1-Kletterleiter und -Rutsche",
-          "price": "29.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Holz Kletterdreieck",
-          "price": "34.99",
-          "amount": ""
-        },
-        {
-          "name": "BAYER DESIGN Kombi-Puppenwagen-Set »Xeo«",
-          "price": "59.99",
-          "amount": ""
-        },
-        {
-          "name": "HÄUSSLING Royal Kopfkissen mit Federn & Daunen",
-          "price": "29.99",
-          "amount": ""
-        },
-        {
-          "name": "HÄUSSLING Royal Daunen-Kassettenbettdecke warm",
-          "price": "119.00",
-          "amount": ""
-        },
-        {
-          "name": "BIERBAUM Feinbiber-Bettwäsche",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "BIERBAUM Biber-Spannbetttuch, 100-180 x 200 cm",
-          "price": "12.99",
-          "amount": ""
-        },
-        {
-          "name": "F.A.N. 7-Zonen-Tonnentaschenfederkern-Matratze »Flex Side Clima T«",
-          "price": "219.00",
-          "amount": ""
-        },
-        {
-          "name": "F.A.N. 7-Zonen-Hybridschaum-Topperauflage »fan Flex Side Clima«",
-          "price": "99.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Premium-Etagere, 3-stufig",
+          "name": "ESMARA Damen Strick-Leggings »Weihnachten«",
           "price": "8.99",
           "amount": ""
         },
         {
-          "name": "BRAUN Toaster Breakfast 1 2 Schlitztoaster, 900W",
+          "name": "LUPILU Kleinkinder Pyjama",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Kunststoff Spielzeugkasse und Cafe",
+          "price": "14.99",
+          "amount": "Altersempfehlung: ab 3 Jahren"
+        },
+        {
+          "name": "STEIFF Kuscheltier Girta Giraffe / Hase Tilda / Teddybär Terry",
+          "price": "14.99",
+          "amount": "Merkmal: Knopf im Ohr H&ouml;he in cm: 7 - 12 cm Altersempfehlung: 0+"
+        },
+        {
+          "name": "HOT WHEELS Spielset »City Gorilla Slam Attack / City Croco Pizza Attack«",
           "price": "19.99",
-          "amount": ""
+          "amount": "Altersempfehlung: 4+"
         },
         {
-          "name": "BRAUN Wasserkocher »WK1100«, 2200 Watt",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Backformen mit ILAG-Antihaftbeschichtung",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Edelstahl-Besteck-Set, 16-tlg.",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "PHILIPS Heißluftfritteuse »2000 Series NA229/00«, ca. 4,2 l",
-          "price": "54.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Kaffeebecher, to Go, 500 ml",
-          "price": "3.99",
-          "amount": "Farbe: Schwarz, Beige"
-        },
-        {
-          "name": "SILVERCREST Tritan-Trinkflasche, 1 l",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "W5 Abfalleimer, Edelstahl mit Mülltrennsystem, 2 x 15 l",
+          "name": "GABBY´S DOLLHOUSE Puppenhaus »Celebration Dollhouse«",
           "price": "49.99",
+          "amount": "Altersempfehlung: 3+ Besonderheit: mit Sound- und Musikfunktionen"
+        },
+        {
+          "name": "Kinder Wissensbuch",
+          "price": "3.99",
+          "amount": "Genre: Kindersachbuch Altersempfehlung: ab 10 Jahren"
+        },
+        {
+          "name": "LUPILU Fahrzeuge mit Licht und Sound",
+          "price": "9.99",
+          "amount": "Merkmal: mit 6 Sounds Altersempfehlung: 3+"
+        },
+        {
+          "name": "LIVARNO Samt-Tagesdecke, 200 x 220 cm",
+          "price": "9.99",
           "amount": ""
         },
         {
-          "name": "SILVERCREST Edelstahl-Isolierbecher",
+          "name": "LIVARNO Tischdecke mit Glitzereffekt, 140 x 240 cm",
           "price": "6.99",
+          "amount": "Farbe: beige; rot kariert Ma&szlig;e: 140 x 240 cm"
+        },
+        {
+          "name": "LIVARNO Kunstfell-Teppich, 60 x 90 cm",
+          "price": "5.99",
           "amount": ""
         },
         {
-          "name": "SILVERCREST Eiscrememaschine Freezy »SECM 800 A1«",
-          "price": "99.99",
+          "name": "LIVARNO Kochfestes Kopfkissen, 40 x 80 cm",
+          "price": "3.99",
           "amount": ""
         },
         {
-          "name": "SODASTREAM Wassersprudler »Gaia«, inkl. 1 l Flasche und Zylinder",
-          "price": "39.99",
-          "amount": ""
+          "name": "LIVARNO Bettdecke kochfest warm, 155 x 220 cm",
+          "price": "14.99",
+          "amount": "F&uuml;llung: 100 % Polyester Gr&ouml;&szlig;e: 155 x 220 cm"
         },
         {
-          "name": "SODASTREAM 2 Ersatzflaschen »Gaia«",
+          "name": "LIVARNO Fellhocker",
           "price": "11.99",
           "amount": ""
         },
         {
-          "name": "TEFAL Pfannenset »Ingenio Light Cook«, 3-teilig",
-          "price": "29.99",
-          "amount": ""
-        },
-        {
-          "name": "KRUPS Kaffeevollautomat Sensation »EA910A« mit Milchdüse",
-          "price": "299.00",
-          "amount": ""
-        },
-        {
-          "name": "TEFAL OptiGrill »GC7P08«, 2000 W",
-          "price": "79.99",
-          "amount": ""
-        },
-        {
-          "name": "SILVERCREST Reiskocher SRK 400 D2",
-          "price": "17.99",
-          "amount": ""
-        },
-        {
-          "name": "BRAUN Küchenmaschine schwarz »FP3132BK«, 800W",
-          "price": "89.99",
-          "amount": ""
-        },
-        {
-          "name": "ERNESTO Edelstahl-Besteck-Set mit Kunststoffgriff, 24-teilig",
-          "price": "5.99",
-          "amount": ""
-        },
-        {
-          "name": "TOGNANA Tafelservice VIDA, 18-tlg., Porzellan",
+          "name": "LIVARNO HOME Sitzbank klappbar",
           "price": "34.99",
           "amount": ""
         },
         {
-          "name": "KRUPS Espresso-Siebträgermaschine »Virtuoso Essential XP4418«",
-          "price": "119.00",
-          "amount": "Fassungsverm&ouml;gen Wassertank: 1,1 l"
+          "name": "FJÖDUR 3-Kammer-Kopfkissen mit 80% Daunen",
+          "price": "24.99",
+          "amount": ""
         },
         {
-          "name": "SEVERIN Pizzaofen »PG 8575«",
+          "name": "F.A.N. Topper „Gel-Feeling“, 7-Zonen-Gelschaumkern",
+          "price": "104.00",
+          "amount": ""
+        },
+        {
+          "name": "BECO 7-Zonen-Kaltschaum-Matratze Marissa",
+          "price": "99.99",
+          "amount": ""
+        },
+        {
+          "name": "LIVARNO 7-Zonen-Hybridschaummatratze »Comfort Plus«, H3",
           "price": "129.00",
           "amount": ""
         },
         {
-          "name": "LUPILU Spielküche / PARKSIDE-Werkbank",
-          "price": "34.99",
-          "amount": "Merkmal: mit Licht und Sound Altersempfehlung: 3+"
+          "name": "BRECKLE Matratze »Flex Air«, 7-Zonen Taschenfederkern",
+          "price": "159.00",
+          "amount": ""
         },
         {
-          "name": "LUPILU Spielzeug-Küchenzubehör",
+          "name": "SAMSUNG Fernseher »GU55U7079HUXZG«, 139 cm (55 Zoll)",
+          "price": "359.00",
+          "amount": ""
+        },
+        {
+          "name": "TRONIC Funkmaus",
           "price": "4.99",
           "amount": ""
         },
         {
-          "name": "LUPILU Holz-Babypuppenmöbel",
-          "price": "14.99",
+          "name": "CHIQ Gaming Monitor »27F900«, 69 cm (27 Zoll) Full HD 180 Hz",
+          "price": "129.00",
           "amount": ""
         },
         {
-          "name": "LEGO BOTANICALS 10348 »Japanischer Roter Ahorn – Bonsai-Baum«",
-          "price": "38.99",
-          "amount": "Anzahl Teile: 474 Altersempfehlung: 18+"
+          "name": "TRONIC Soundbar 2.0 Sound Dolby Atmos",
+          "price": "69.99",
+          "amount": ""
         },
         {
-          "name": "SMOBY Spiel-Waschküche »Rowenta«",
+          "name": "LIVARNO Lowboard",
+          "price": "69.99",
+          "amount": ""
+        },
+        {
+          "name": "SILVERCREST Smart Home-Zwischenstecker 3er-Set, kompatibel mit der Lidl Home App",
+          "price": "29.99",
+          "amount": "3 x Smart Home-Zwischenstecker, kompatibel mit der Lidl Home App"
+        },
+        {
+          "name": "JUSKYS Juskys Bürostuhl »Montreal« im sportlichen Racer Design",
           "price": "59.99",
           "amount": ""
         },
         {
-          "name": "LAURASTAR Dampf-Bügelsystem »Go«, zusammenklappbar",
-          "price": "599.00",
-          "amount": ""
-        },
-        {
-          "name": "PHILIPS Dampfbügeleisen »2000 Series DST2020/30«, mit Keramiksohle",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "SINGER Nähmaschine »M3205«",
+          "name": "INTER LINK Schülerschreibtisch »Matts 3 in 1«, höhenverstellbar",
           "price": "119.00",
           "amount": ""
         },
         {
-          "name": "SINGER Schneiderpuppe Größe S/M, rot",
-          "price": "149.00",
-          "amount": ""
-        },
-        {
-          "name": "SINGER Schneiderpuppe Größe M/L, grau",
-          "price": "149.00",
-          "amount": ""
-        },
-        {
-          "name": "SINGER Overlock-Nähmaschine »S14-954«",
-          "price": "199.00",
-          "amount": ""
-        },
-        {
-          "name": "Rocking Rabbit Weißburgunder & his best bunnies by Jana Hauck QbA trocken,",
-          "price": "4.99",
-          "amount": "Verkaufsstart: 05.11.2026"
-        },
-        {
-          "name": "JOHANNINGER Jo Bio Rosé QbA trocken, Roséwein 2025",
-          "price": "4.99",
-          "amount": "Verkaufsstart: 05.11.2026"
-        },
-        {
-          "name": "Lieblingsheld Riesling QbA trocken, Weißwein 2025",
-          "price": "4.99",
-          "amount": "Verkaufsstart: 05.11.2026"
-        },
-        {
-          "name": "MUSSLER Cuvée Liebe QbA trocken, Rotwein",
-          "price": "6.99",
-          "amount": "Verkaufsstart: 05.11.2026"
-        },
-        {
-          "name": "Podere Macinatico Vernaccia di San Gimignano DOCG trocken, Weißwein 2025",
-          "price": "5.59",
-          "amount": "fruchtig & w&uuml;rzig Italien, Toskana Vernaccia, trocken"
-        },
-        {
-          "name": "WEINGUT CHRISTOPHER DEIß Weißburgunder & Chardonnay QbA trocken vegan, Weißwein",
-          "price": "5.90",
-          "amount": ""
-        },
-        {
-          "name": "SCAVI & RAY Ca' Scavi Lugana DOC trocken, Weißwein 2024",
-          "price": "9.99",
-          "amount": ""
-        },
-        {
-          "name": "BOEKENHOUTSKLOOF The Chocolate Block Swartland WO trocken vegan, Rotwein 2023",
-          "price": "21.99",
-          "amount": ""
-        },
-        {
-          "name": "Identità Primitivo di Manduria DOC halbtrocken, Rotwein 2023",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "6 x 0,75-l-Flasche Weinpaket Pinot Grigio Garda DOP trocken, Weißwein",
-          "price": "27.99",
-          "amount": "fruchtig & elegant Italien, Venetien Pinot Grigio, trocken"
-        },
-        {
-          "name": "CAVES D’ESCLANS Whispering Angel Côtes de Provence AOC trocken, Roséwein 2025",
-          "price": "18.99",
-          "amount": ""
-        },
-        {
-          "name": "POMMERY Brut Rosé Royal, Champagner",
-          "price": "42.99",
-          "amount": ""
-        },
-        {
-          "name": "GRASOVKA Bisongrass Vodka 38% Vol",
-          "price": "9.99",
-          "amount": "Vodka Polen"
-        },
-        {
-          "name": "THE GLENLIVET Speyside Single Malt Scotch Whisky 18 Jahre mit Geschenkbox 40%",
+          "name": "TRONIC Rotorloser Heizventilator mit LED",
           "price": "79.99",
+          "amount": "Leistung: 2000 W Heizstufen: 10"
+        },
+        {
+          "name": "VCM Kleiderregal »Dacho«, mit offenen Fächern",
+          "price": "74.99",
           "amount": ""
         },
         {
-          "name": "GLENFARCLAS Highland Single Malt Scotch Whisky 15 Jahre mit Geschenkbox 46% Vol",
-          "price": "59.99",
+          "name": "HOMCOM Schlafsessel",
+          "price": "149.00",
           "amount": ""
         },
         {
-          "name": "LAPHROAIG Oak Select Islay Single Malt Scotch Whisky mit Geschenkbox 40% Vol",
-          "price": "25.99",
-          "amount": ""
-        },
-        {
-          "name": "FLOR DE CAÑA Centenario Rum 12 Jahre 40% Vol",
-          "price": "24.99",
-          "amount": ""
-        },
-        {
-          "name": "UNICUM Kräuterlikör 40% Vol",
-          "price": "11.99",
-          "amount": "kr&auml;ftig & w&uuml;rzig Kr&auml;uterlik&ouml;r Ungarn"
-        },
-        {
-          "name": "PIRCHER Wiliams Edelbrand 40% Vol",
-          "price": "15.99",
-          "amount": ""
-        },
-        {
-          "name": "Chablis AOP trocken, Weißwein 2025",
-          "price": "11.99",
-          "amount": ""
-        },
-        {
-          "name": "Châteauneuf-du-Pape AOP trocken, Rotwein 2024",
-          "price": "19.99",
-          "amount": ""
-        },
-        {
-          "name": "BOLLINGER Special Cuvée brut, Champagner",
+          "name": "SANSIBAR DELUXE Geschenkbox Feinschmecker",
           "price": "49.99",
           "amount": ""
         },
         {
-          "name": "CHÂTEAU LES MOINES Cru Bourgeois AOC Médoc trocken, Rotwein 2018",
-          "price": "11.99",
+          "name": "SANSIBAR DELUXE Geschenkbox Strandkorb",
+          "price": "29.99",
           "amount": ""
         },
         {
-          "name": "MIRAVAL Côtes de Provence AOP trocken, Roséwein 2024",
-          "price": "17.90",
-          "amount": "fruchtig & frisch Frankreich, Provence Cuv&eacute;e, trocken"
-        },
-        {
-          "name": "Les Aumôniers Séguret Côtes du Rhône Villages AOP trocken, Rotwein 2025",
-          "price": "6.99",
+          "name": "SANSIBAR DELUXE Geschenkbox Schatzkiste",
+          "price": "79.99",
           "amount": ""
-        },
-        {
-          "name": "Cuvée Prestige Crémant de Bourgogne AOP Brut, Schaumwein",
-          "price": "7.99",
-          "amount": "frisch & elegant Frankreich, Burgund Cuv&eacute;e, brut"
-        },
-        {
-          "name": "Buch Shappulus (von Mark Keller & Elmar Schäfer)",
-          "price": "9.99",
-          "amount": "Anzahl Seiten: 160 Seiten Altersempfehlung: 8+"
         }
       ],
-      "revision": "aktionsprospekt-02-11-2026-07-11-2026-d34d64"
+      "revision": "aktionsprospekt-09-11-2026-14-11-2026-de787e"
     },
     {
       "id": "dm",
@@ -4064,10 +3554,1550 @@
     {
       "id": "rossmann",
       "name": "Rossmann",
-      "source": "https://www.meinprospekt.de/contentViewer/dynamic/8ce49fea-a0a0-46a5-b690-6edb87566092",
-      "note": "Mein Drogeriemarkt 2.11.–13.11.2026, automatisch gelesen.",
+      "source": "https://www.meinprospekt.de/contentViewer/dynamic/64dff418-51f1-410c-83bc-9cd36708a4a4",
+      "note": "Mein Drogeriemarkt 2.11.–20.11.2026, automatisch gelesen.",
       "otherCount": 0,
       "offers": [
+        {
+          "name": "Vernel Weichspüler",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Bitterliebe 3-in-1 Darm Komplex",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "Sodastream Crystal 3.0 Wassersprudler Titan",
+          "price": "79.99",
+          "amount": ""
+        },
+        {
+          "name": "Kinder-Wärmflasche",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Adventskranz mit Teelichtgläsern",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Wellaflex Haarspray",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "Dekowelt Premium Geschenkpapiere",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "L'Oréal Excellence Creme Coloration",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Squishy Dumpling",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Melitta Filterkaffee",
+          "price": "4.95",
+          "amount": ""
+        },
+        {
+          "name": "Zewa Wisch & Weg",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "Lenor Waschmittel Flüssig",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Grußkarte Standard",
+          "price": "0.50",
+          "amount": ""
+        },
+        {
+          "name": "Jacobs Espresso Sticks",
+          "price": "1.80",
+          "amount": ""
+        },
+        {
+          "name": "bugatti Man Eau de Toilette",
+          "price": "15.49",
+          "amount": ""
+        },
+        {
+          "name": "Caline Woman Eau de Parfum",
+          "price": "4.44",
+          "amount": ""
+        },
+        {
+          "name": "ideenwelt Teelichtkarussell",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "ideenwelt Kinder-Bastelkoffer",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Ligretto Kartenspiel",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Weihnachtssocken",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Zauberwürfel-Set",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Magnetbausteine",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Silikon-Federmappe",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Diamant-Sticker-Malbuch",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Meine ersten Spiele",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Outdoor-Stern",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Keksdose",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Magnetbuch",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Magnetpuzzlebuch",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "ideenwelt Weihnachtsplüsch",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Pixibox Weihnachten",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "ideenwelt Micro-LED-Lichterkette",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Ideenwelt LED-Keramik-Laterne",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Konzentrationsspiel",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Trefl Puzzle",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Plüsch-Hausschuhe",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Weihnachtsspieluhr zum Aufziehen",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "LED-Leuchte Baum",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Lammwoll-Hose Unisex",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "LED-Weihnachtsbaumkerzen",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "Terminplaner 2027 Hardcover",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "Stanger Goldspray",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "LED-Stern",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "Smart-Tag-Karte",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Lammwollsocken",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "LED-Echtwachs-Stabkerzen",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "playmobil Rentierschlitten oder Foto Santa Claus",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Weihnachtshänger zum Bemalen",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "edding Festive Lackmarker",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "LED-Leuchte Stern",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "IDEENWELT Steptasche",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Pyjama 2-teilig",
+          "price": "16.99",
+          "amount": ""
+        },
+        {
+          "name": "Bustier mit Ajour-Muster Mauve",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Weltraumprojektor",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "Deko-Wichtel Klein",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Geschenkpapier-Organizer",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Weihnachtsbaumkugel",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Lammwoll-Nierenwärmer Unisex",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Deko-Tanne",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Lammwoll-Shirt Unisex",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "Goldfarbene Creolen",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "LED-Baum",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Ohrringe",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "Kreativbuch",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "tesa Promo-Pack",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Adventsgesteck Stern",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Goldfarbene Ohrringe",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Holzschreibtafel",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "Akku-Heißklebepistole",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "SIX und TOSH Goldfarbene Creolen",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Zeitlose funkelnde Ohrringe",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "Halskette",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Florale Ohrringe",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "ideenwelt Mini-Auto",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Hot Wheels",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Silberfarbenes Armband",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Doppellagige Halskette",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "Keramik-Teelicht-Häuschen",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "IDEENWELT Heißklebestifte",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "King's Crown Beuteltee",
+          "price": "0.99",
+          "amount": ""
+        },
+        {
+          "name": "Ideenwelt Glasteekanne",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Rubin Licht LED-Kerze Home oder Love",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Domol Perfume & Style Raumbduft",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Dekowelt Deko-Teddy-Knoten",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Ideenwelt Tasse",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Kirschkernkissen",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Sanitas Rotlichtlampe SIL 06",
+          "price": "13.49",
+          "amount": ""
+        },
+        {
+          "name": "Fusswohl Pflegebalsam",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "altapharma Basenbad Lavendel",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Under2wear Kuschelsocke",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "altapharma Heiße Zitrone-Limette",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Bestview Augentropfen Aloe+",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Bestview Lesehilfe Modell 1",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Rubin Papiertüten",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Dekowelt Glas-Geschenkanhänger",
+          "price": "3.49",
+          "amount": ""
+        },
+        {
+          "name": "Dekowelt Kordelband",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Schreibwelt Bastelschere",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Schreibwelt Alleskleber",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Schreibwelt Doppelfasermaler",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Tanner Wichtel-Strickleiter",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Tanner Wichtel-Strickzeug",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Tanner Wichtelset-Kaminfeuer",
+          "price": "6.49",
+          "amount": ""
+        },
+        {
+          "name": "Tanner Wichtelset-Bäckere",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Tanner Wichtel-Schlitten",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Tanner Wichtel-Postkasten",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Tanner Wichtel-Umzugspalette",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Shirin Beauty Bodymist",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "Mehira Perfumes Mehira",
+          "price": "16.99",
+          "amount": ""
+        },
+        {
+          "name": "Karl Lagerfeld Pour Femme oder Pour Homme",
+          "price": "17.49",
+          "amount": ""
+        },
+        {
+          "name": "Calvin Klein Euphoria Eau de Parfum",
+          "price": "32.99",
+          "amount": ""
+        },
+        {
+          "name": "JOOP! Parfum Pour Femme Eau de Toilette",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "Laura Biagiotti Roma Donna Eau de Toilette",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "Otto Kern Royal Addiction Champagne",
+          "price": "13.13",
+          "amount": ""
+        },
+        {
+          "name": "Diesel Woman Eau de Parfum oder Man Eau de Toilette",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "DKNY Be Delicious oder Woman Eau de Parfum",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "Betty Barclay Woman Eau de Toilette",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Etienne Aigner X Limited Eau de Toilette",
+          "price": "22.99",
+          "amount": ""
+        },
+        {
+          "name": "JOOP! Homme Eau de Parfum",
+          "price": "32.99",
+          "amount": ""
+        },
+        {
+          "name": "Laura Biagiotti Laura Eau de Toilette",
+          "price": "16.99",
+          "amount": ""
+        },
+        {
+          "name": "Joop! Jump Eau de Toilette",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "bruno banani Man Eau de Toilette",
+          "price": "17.99",
+          "amount": ""
+        },
+        {
+          "name": "Azzaro Pour Homme Eau de Toilette",
+          "price": "39.99",
+          "amount": ""
+        },
+        {
+          "name": "JOOP! Le Bain Eau de Parfum",
+          "price": "21.99",
+          "amount": ""
+        },
+        {
+          "name": "Aigner Cara Mia Ti Amo",
+          "price": "21.99",
+          "amount": ""
+        },
+        {
+          "name": "Joop! Eau de Parfum",
+          "price": "21.99",
+          "amount": ""
+        },
+        {
+          "name": "Nihan Eau de Parfum",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Aviator Energy",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "Tabac Aftershave",
+          "price": "10.49",
+          "amount": ""
+        },
+        {
+          "name": "Chopard Casmir",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "LeGer Eau de Parfum",
+          "price": "18.88",
+          "amount": ""
+        },
+        {
+          "name": "Aigner Début Eau de Parfum",
+          "price": "21.99",
+          "amount": ""
+        },
+        {
+          "name": "Superdry Woman oder Man Eau de Toilette",
+          "price": "13.13",
+          "amount": ""
+        },
+        {
+          "name": "Iceberg Twice Homme Eau de Toilette",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "Reynolds & Reynolds For Him",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "Strellson Man Eau de Parfum",
+          "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "Vanderbilt Red Eau de Parfum",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "4711 Echt Kölnisch Wasser Eau de Cologne",
+          "price": "5.55",
+          "amount": ""
+        },
+        {
+          "name": "Hawaiian Tropic Bodymist",
+          "price": "8.88",
+          "amount": ""
+        },
+        {
+          "name": "Etienne Aigner Statement",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "Laura Biagiotti Laura Shower Gel",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Mexx Man Eau de Parfum",
+          "price": "14.99",
+          "amount": ""
+        },
+        {
+          "name": "Calvin Klein Be oder One Eau de Toilette",
+          "price": "44.99",
+          "amount": ""
+        },
+        {
+          "name": "Aigner No.1 Pour Homme Eau de Toilette",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "Swiss Arabian Eau de Parfum",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "Otto Kern Man Eau de Parfum",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "Aigner Blue Emotion Eau de Toilette",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Burberry Brit Sheer oder Brit Men Eau de Parfum",
+          "price": "29.99",
+          "amount": ""
+        },
+        {
+          "name": "Calvin Klein Euphoria For Her Eau de Parfum",
+          "price": "54.99",
+          "amount": ""
+        },
+        {
+          "name": "Tommy Hilfiger Boy Geschenkset",
+          "price": "34.99",
+          "amount": ""
+        },
+        {
+          "name": "Esprit Feel Good oder Pure For Her",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "Bench Together Geschenkset",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Peony Lychee Geschenkset",
+          "price": "15.99",
+          "amount": ""
+        },
+        {
+          "name": "No Cosmetics Little Winter Ritual Geschenkset",
+          "price": "8.99",
+          "amount": ""
+        },
+        {
+          "name": "Accentra Geschenkset",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Bilou Calm Down With Me Geschenkset",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Câline Geschenkset",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Etienne Aigner Private Number Women Bath & Showergel",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Alterra Geschenkset Sanddornträume",
+          "price": "4.29",
+          "amount": ""
+        },
+        {
+          "name": "Christina Aguilera Eau de Parfum",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Nivea Men Rasierschaum Hydrocare",
+          "price": "2.79",
+          "amount": ""
+        },
+        {
+          "name": "Mustang oder Tom Tailor Geschenksets",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Dove Men Geschenkset",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Bruno Banani Man oder Woman Geschenkset",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "Dresdner Essenz Geschenkset Für Dich",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Kneipp Geschenkset Lieblingsmensch",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Gillette Labs Body + Intimate Rasierer",
+          "price": "9.10",
+          "amount": ""
+        },
+        {
+          "name": "Elizabeth Arden Green Tea Eau de Parfum",
+          "price": "8.49",
+          "amount": ""
+        },
+        {
+          "name": "bruno banani Woman Eau de Parfum",
+          "price": "16.49",
+          "amount": ""
+        },
+        {
+          "name": "Dove Geschenkset",
+          "price": "10.99",
+          "amount": ""
+        },
+        {
+          "name": "AIGNER Cara Mia Ti Bacio oder Solo Tu Eau de Parfum",
+          "price": "16.16",
+          "amount": ""
+        },
+        {
+          "name": "Etienne Aigner Explosive Duschgel",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "ISANA Geschenkset Cinnamon Roll",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Esprit Woman Eau de Parfum",
+          "price": "7.49",
+          "amount": ""
+        },
+        {
+          "name": "Gillette Labs Face Rasierapparat",
+          "price": "11.90",
+          "amount": ""
+        },
+        {
+          "name": "Gillette Venus Intim Rasierer",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Bruno Banani Deospray Man",
+          "price": "3.29",
+          "amount": ""
+        },
+        {
+          "name": "Isana Cremedusche Pearl",
+          "price": "0.55",
+          "amount": ""
+        },
+        {
+          "name": "Nivea Deospray",
+          "price": "2.39",
+          "amount": ""
+        },
+        {
+          "name": "Alterra Shampoo oder Spülung",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Tetesept Badezusatz",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "Isana Schaumbad Traumzeit",
+          "price": "1.19",
+          "amount": ""
+        },
+        {
+          "name": "Nivea Dusche",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "Palmolive Dusche",
+          "price": "0.99",
+          "amount": ""
+        },
+        {
+          "name": "Veet Expert Intim-Haarentfernungs-Set",
+          "price": "8.49",
+          "amount": ""
+        },
+        {
+          "name": "Rexona Maximum Protection Deospray",
+          "price": "3.49",
+          "amount": ""
+        },
+        {
+          "name": "Isana Professional Haaröl",
+          "price": "2.79",
+          "amount": ""
+        },
+        {
+          "name": "Rexona Nonstop Protection Deospray",
+          "price": "2.69",
+          "amount": ""
+        },
+        {
+          "name": "Old Spice Deospray",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "CD Deospray",
+          "price": "2.19",
+          "amount": ""
+        },
+        {
+          "name": "Kneipp Dusche",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "Fusswohl Frischesohlen",
+          "price": "2.69",
+          "amount": ""
+        },
+        {
+          "name": "Neutrogena Deep Moisture Bodylotion",
+          "price": "2.80",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Raumspray Cardamom & Tonka",
+          "price": "12.99",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Hand&Body Cleanser Rosemary Ginger",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Duschschaum Bergamot & Cedarwood",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Duschvorhang",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Seifenspender",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Kosmetikspiegel",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "Jean & Len Hand & Body Balm Peony & Lychee",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Jean&Len Raumduft Green Tea & Citrus",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Alouette Kosmetiktücher",
+          "price": "0.79",
+          "amount": ""
+        },
+        {
+          "name": "SHYNE Keratin Coloration",
+          "price": "11.99",
+          "amount": ""
+        },
+        {
+          "name": "Pantene Pro-V Maske",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Syoss Haarspray",
+          "price": "4.49",
+          "amount": ""
+        },
+        {
+          "name": "Neutrogena Hydro Boost Aqua Creme",
+          "price": "6.80",
+          "amount": ""
+        },
+        {
+          "name": "Garnier Olia Coloration",
+          "price": "5.99",
+          "amount": ""
+        },
+        {
+          "name": "Isana Q10 Anti-Falten Power oder Hydro Booster Augen-Pads",
+          "price": "3.49",
+          "amount": ""
+        },
+        {
+          "name": "Selfie Project Tuchmaske",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "Pantene Pro-V Shampoo oder Spülung",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Palette Intensiv Coloration",
+          "price": "3.29",
+          "amount": ""
+        },
+        {
+          "name": "Isana Augen Make-up Entferner Soft Pads Ölhaltig",
+          "price": "0.76",
+          "amount": ""
+        },
+        {
+          "name": "Schaebens Tuchmaske",
+          "price": "1.19",
+          "amount": ""
+        },
+        {
+          "name": "Weleda Straffende Tagespflege Granatapfel",
+          "price": "14.36",
+          "amount": ""
+        },
+        {
+          "name": "Guhl Shampoo",
+          "price": "3.29",
+          "amount": ""
+        },
+        {
+          "name": "Schwarzkopf Gliss Express-Repairspülung",
+          "price": "4.25",
+          "amount": ""
+        },
+        {
+          "name": "Nivea Q10 Anti-Falten Power Tagespflege LSF 30",
+          "price": "11.95",
+          "amount": ""
+        },
+        {
+          "name": "Isana Wimpern- & Augenbrauenfarbe Schwarz",
+          "price": "3.20",
+          "amount": ""
+        },
+        {
+          "name": "L'Oréal Revitalift Laser X3 Tagespflege",
+          "price": "11.20",
+          "amount": ""
+        },
+        {
+          "name": "Nivea Vital Soja Anti-Age",
+          "price": "10.45",
+          "amount": ""
+        },
+        {
+          "name": "Schwarzkopf Gliss Shampoo",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "Head & Shoulders Shampoo",
+          "price": "6.29",
+          "amount": ""
+        },
+        {
+          "name": "Hero Mighty Patch The Original Pickel-Pflaster",
+          "price": "8.95",
+          "amount": ""
+        },
+        {
+          "name": "Sensodyne Clinical Repair oder White",
+          "price": "6.79",
+          "amount": ""
+        },
+        {
+          "name": "altapharma Melatonin Depot Schlaf-Komplex",
+          "price": "3.49",
+          "amount": ""
+        },
+        {
+          "name": "Elmex Zahncreme Sensitive Professional",
+          "price": "6.29",
+          "amount": ""
+        },
+        {
+          "name": "Sensodyne Zahncreme Sensitiv Fluorid oder Extra Frisch",
+          "price": "3.79",
+          "amount": ""
+        },
+        {
+          "name": "Prokudent Interdental-Bürstchen",
+          "price": "1.65",
+          "amount": ""
+        },
+        {
+          "name": "Oral-B Pro Kids 3+",
+          "price": "13.99",
+          "amount": ""
+        },
+        {
+          "name": "Altapharma Kollagen 5000 + Hyaluron 100",
+          "price": "18.99",
+          "amount": ""
+        },
+        {
+          "name": "Colgate Zahncreme Total",
+          "price": "2.75",
+          "amount": ""
+        },
+        {
+          "name": "Sensodyne Zahncreme Multicare",
+          "price": "4.49",
+          "amount": ""
+        },
+        {
+          "name": "Prokudent Aufsteckzahnbürste",
+          "price": "5.49",
+          "amount": ""
+        },
+        {
+          "name": "Oral-B Elektrische Zahnbürste Vitality Pro",
+          "price": "19.99",
+          "amount": ""
+        },
+        {
+          "name": "prokudent Aufsteckzahnbürste Cross Clean",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "altapharma Ginkgo",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Sensodyne Zahncreme Pro Schmelz",
+          "price": "4.79",
+          "amount": ""
+        },
+        {
+          "name": "Meridol Mundspülung Zahnfleischschutz",
+          "price": "5.79",
+          "amount": ""
+        },
+        {
+          "name": "Oral-B Elektrische Zahnbürste iO Series 3",
+          "price": "44.99",
+          "amount": ""
+        },
+        {
+          "name": "Aronal & Elmex Zahncreme Doppel-Schutz Zahnfleisch & Zähne",
+          "price": "6.79",
+          "amount": ""
+        },
+        {
+          "name": "Babydream Regenmacher",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Milka Choco Mini Stars",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Edel-Nuss-Mix",
+          "price": "5.55",
+          "amount": ""
+        },
+        {
+          "name": "Snickers Schokoriegel",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "Yogi Tea",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "Leibniz Butterkeks",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Milka Favourites",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Tuc",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "Babydream Bio Kekse",
+          "price": "0.99",
+          "amount": ""
+        },
+        {
+          "name": "Krüger Cappuccino",
+          "price": "2.79",
+          "amount": ""
+        },
+        {
+          "name": "Schloss Bockfliess Wein/Secco",
+          "price": "4.49",
+          "amount": ""
+        },
+        {
+          "name": "Extra Professional Mints Pastillen",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "Tic Tac",
+          "price": "1.49",
+          "amount": ""
+        },
+        {
+          "name": "WellMix Proteinriegel",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "Mikado Milchschokolade",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Bebivita Quetschbeutel",
+          "price": "2.65",
+          "amount": ""
+        },
+        {
+          "name": "Mars Mixed Minis",
+          "price": "4.29",
+          "amount": ""
+        },
+        {
+          "name": "WellMix Magnesium Liquid",
+          "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "King's Crown Früchtetee",
+          "price": "2.29",
+          "amount": ""
+        },
+        {
+          "name": "Domol Foltenglatt & Textilerfrischer",
+          "price": "1.04",
+          "amount": ""
+        },
+        {
+          "name": "Facelle Diskret Hygiene-Einlagen Men",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Facelle Diskret Hygiene-Einlagen",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Domol Hygiene-Spüler",
+          "price": "1.00",
+          "amount": ""
+        },
+        {
+          "name": "Sagrotan Badreiniger",
+          "price": "2.79",
+          "amount": ""
+        },
+        {
+          "name": "Domol WC-Gel Duftstempel Starter-Set",
+          "price": "1.36",
+          "amount": ""
+        },
+        {
+          "name": "Coral Waschmittel Flüssig",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Carefree Slipeinlagen",
+          "price": "2.22",
+          "amount": ""
+        },
+        {
+          "name": "Always Discreet Pants",
+          "price": "7.77",
+          "amount": ""
+        },
+        {
+          "name": "Sagrotan Wäsche Hygienespüler",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Ariel All in 1 Pods Waschmittel",
+          "price": "9.99",
+          "amount": ""
+        },
+        {
+          "name": "Lenor Weichspüler",
+          "price": "3.79",
+          "amount": ""
+        },
+        {
+          "name": "WC Frisch Premium Selbst Aktiv",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "domol Weichspüler",
+          "price": "1.04",
+          "amount": ""
+        },
+        {
+          "name": "WC Frisch Kraft Aktiv Duftspüler Trio",
+          "price": "3.79",
+          "amount": ""
+        },
+        {
+          "name": "Perwoll Renew 7 Weichspüler",
+          "price": "3.49",
+          "amount": ""
+        },
+        {
+          "name": "Facelle Slipeinlagen Extra Lang",
+          "price": "1.11",
+          "amount": ""
+        },
+        {
+          "name": "Febreze Duftstecker 3Volution Nachfüller",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Multi-Gyn ActiGel oder FloraBalance",
+          "price": "10.99",
+          "amount": ""
+        },
+        {
+          "name": "Persil Waschmittel Gel",
+          "price": "4.99",
+          "amount": ""
+        },
+        {
+          "name": "Domol Perfume & Style Duftkerze",
+          "price": "1.84",
+          "amount": ""
+        },
+        {
+          "name": "Flink & Sauber Bügelflasche",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Flink & Sauber Küchensieb",
+          "price": "6.49",
+          "amount": ""
+        },
+        {
+          "name": "Flink & Sauber Muffinform",
+          "price": "8.49",
+          "amount": ""
+        },
+        {
+          "name": "Flink & Sauber Königskuchenform",
+          "price": "4.49",
+          "amount": ""
+        },
+        {
+          "name": "Flink & Sauber Heissluft-Fritteusen-Einsatz",
+          "price": "3.29",
+          "amount": ""
+        },
+        {
+          "name": "Rubin Gefrierbeutel",
+          "price": "0.69",
+          "amount": ""
+        },
+        {
+          "name": "Flink & Sauber Baumwoll-Geschirrtücher",
+          "price": "3.49",
+          "amount": ""
+        },
+        {
+          "name": "Flink & Sauber Teigroller Bambus",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "Stevenson Stabfeuerzeug Flexi",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Sheba Ka",
+          "price": "0.49",
+          "amount": ""
+        },
+        {
+          "name": "Somat Spülmaschinencaps oder -tabs",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "Swirl Staubsaugerbeutel",
+          "price": "8.49",
+          "amount": ""
+        },
+        {
+          "name": "Domol Spülmittel",
+          "price": "0.80",
+          "amount": ""
+        },
+        {
+          "name": "Alouette Küchentücher XXL-Rolle 3-lagig",
+          "price": "3.45",
+          "amount": ""
+        },
+        {
+          "name": "Winston Spaß-Trio oder Milky Menü",
+          "price": "0.44",
+          "amount": ""
+        },
+        {
+          "name": "Tempo Taschentücher",
+          "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "Sheba Fresh & Fine",
+          "price": "2.19",
+          "amount": ""
+        },
+        {
+          "name": "Alouette Taschentücher",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "Winston Feine Pastete Pute",
+          "price": "0.25",
+          "amount": ""
+        },
+        {
+          "name": "Flink & Sauber Einmal-Handschuhe Nitril oder Latex",
+          "price": "4.49",
+          "amount": ""
+        },
+        {
+          "name": "Rubin Backpapier-Rolle",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Der General Allzweckreiniger",
+          "price": "1.59",
+          "amount": ""
+        },
+        {
+          "name": "Rubin Licht Dauerbrenner",
+          "price": "0.80",
+          "amount": ""
+        },
+        {
+          "name": "Rubin Müllbeutel mit Duft oder Geruchsstopp",
+          "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "Fairy Spülmittel",
+          "price": "1.29",
+          "amount": ""
+        },
+        {
+          "name": "Winston Katze Schleckerli",
+          "price": "0.99",
+          "amount": ""
+        },
+        {
+          "name": "Antikal Kalkreiniger Spray",
+          "price": "2.59",
+          "amount": ""
+        },
+        {
+          "name": "Viss Bad & Dusche",
+          "price": "1.99",
+          "amount": ""
+        },
+        {
+          "name": "Vitakraft Hundesnacks",
+          "price": "1.79",
+          "amount": ""
+        },
         {
           "name": "Plüsch-Anhänger Hatsune Miku",
           "price": "19.99",
@@ -5034,7 +6064,7 @@
           "amount": ""
         }
       ],
-      "revision": "8ce49fea-a0a0-46a5-b690-6edb87566092"
+      "revision": "64dff418-51f1-410c-83bc-9cd36708a4a4,74fb619f-34b5-45c2-8b1a-86f1c4c3fe5c,8ce49fea-a0a0-46a5-b690-6edb87566092"
     }
   ],
   "unavailable": [
