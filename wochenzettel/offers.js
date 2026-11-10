@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-09.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-10.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W46",
   "validFrom": "2026-11-09",
   "validUntil": "2026-11-14",
-  "extractedAt": "2026-11-09",
+  "extractedAt": "2026-11-10",
   "stores": [
     {
       "id": "prechtl",
@@ -399,6 +399,16 @@
           "amount": ""
         },
         {
+          "name": "Rotkohl, lose",
+          "price": "0.88",
+          "amount": "1 kg"
+        },
+        {
+          "name": "Gurke, Stück",
+          "price": "0.75",
+          "amount": ""
+        },
+        {
           "name": "NATUR LIEBLINGE Datteltomaten 500 g",
           "price": "1.89",
           "amount": ""
@@ -417,6 +427,11 @@
           "name": "Kleine Schätze Zitronen, Stück",
           "price": "0.49",
           "amount": ""
+        },
+        {
+          "name": "Süßkartoffeln, lose",
+          "price": "1.39",
+          "amount": "1 kg"
         },
         {
           "name": "NATUR LIEBLINGE Spitzpaprika rot 500 g",
@@ -456,6 +471,11 @@
         {
           "name": "Avocado, Stück",
           "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "Mango, Stück",
+          "price": "1.19",
           "amount": ""
         },
         {
@@ -506,16 +526,6 @@
         {
           "name": "2025 Côtes Catalanes Rosé IGP 0,75 l",
           "price": "2.99",
-          "amount": ""
-        },
-        {
-          "name": "WINTERTRAUM Edelmarzipan Brote 200 g",
-          "price": "1.79",
-          "amount": ""
-        },
-        {
-          "name": "WINTERTRAUM Marzipanhappen 125 g",
-          "price": "1.29",
           "amount": ""
         },
         {
