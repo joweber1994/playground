@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-10.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-11.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W46",
   "validFrom": "2026-11-09",
   "validUntil": "2026-11-14",
-  "extractedAt": "2026-11-10",
+  "extractedAt": "2026-11-11",
   "stores": [
     {
       "id": "prechtl",
@@ -526,6 +526,16 @@
         {
           "name": "2025 Côtes Catalanes Rosé IGP 0,75 l",
           "price": "2.99",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Edelmarzipan Brote 200 g",
+          "price": "1.79",
+          "amount": ""
+        },
+        {
+          "name": "WINTERTRAUM Marzipanhappen 125 g",
+          "price": "1.29",
           "amount": ""
         },
         {
