@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-16.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-17.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W47",
   "validFrom": "2026-11-16",
   "validUntil": "2026-11-21",
-  "extractedAt": "2026-11-16",
+  "extractedAt": "2026-11-17",
   "stores": [
     {
       "id": "prechtl",
@@ -434,11 +434,6 @@
           "amount": ""
         },
         {
-          "name": "Kaki, Stück",
-          "price": "0.49",
-          "amount": ""
-        },
-        {
           "name": "Porree / Lauch, Stück",
           "price": "0.45",
           "amount": ""
@@ -447,6 +442,11 @@
           "name": "Zucchini, lose",
           "price": "1.29",
           "amount": "1 kg"
+        },
+        {
+          "name": "NATUR LIEBLINGE Paprika Mix 500 g",
+          "price": "1.59",
+          "amount": ""
         },
         {
           "name": "NATUR LIEBLINGE Speisekartoffeln festkochend 2,5 kg",
@@ -467,6 +467,11 @@
           "name": "Fenchel, lose",
           "price": "1.99",
           "amount": "1 kg"
+        },
+        {
+          "name": "NATUR LIEBLINGE Maronen 500 g",
+          "price": "2.49",
+          "amount": ""
         },
         {
           "name": "Kinder Riegel 210 g",
@@ -491,6 +496,11 @@
         {
           "name": "BACK FAMILY Mandeln 200 g, Natur",
           "price": "1.69",
+          "amount": ""
+        },
+        {
+          "name": "NATUR LIEBLINGE Mini Romarispentomaten 300 g",
+          "price": "2.22",
           "amount": ""
         },
         {
@@ -549,8 +559,8 @@
           "amount": ""
         },
         {
-          "name": "ALDI Clementinen 2 kg",
-          "price": "3.33",
+          "name": "STORCK Knoppers 200 g",
+          "price": "1.49",
           "amount": ""
         },
         {
@@ -1139,6 +1149,11 @@
           "amount": "je 400 g"
         },
         {
+          "name": "KÖLLN Knusper Hafer-Müsli*",
+          "price": "2.49",
+          "amount": "je 380 g"
+        },
+        {
           "name": "ERASCO Heisse Tasse*",
           "price": "0.99",
           "amount": "je 60 g"
@@ -1147,11 +1162,6 @@
           "name": "BÄCKERKRÖNUNG Buttercroissant*",
           "price": "1.00",
           "amount": "je 3 Stück"
-        },
-        {
-          "name": "KÖLLN Knusper Hafer-Müsli*",
-          "price": "2.49",
-          "amount": "je 380 g"
         },
         {
           "name": "LANDLIEBE Konfitüre*",
@@ -1324,6 +1334,61 @@
           "amount": "je Stück"
         },
         {
+          "name": "LUCKY DOG Pastete oder Ragout*",
+          "price": "0.79",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "LUCKY DOG Saftige Happen*",
+          "price": "1.39",
+          "amount": "je 1.240 g"
+        },
+        {
+          "name": "LUCKY DOG Pastete oder Ragout*",
+          "price": "0.55",
+          "amount": "je 300 g"
+        },
+        {
+          "name": "ZOOROYAL Delikate Stückchen*",
+          "price": "0.89",
+          "amount": "je 400 g"
+        },
+        {
+          "name": "ZOOROYAL Grillhappen*",
+          "price": "0.35",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "ZOOROYAL Grill-Happen*",
+          "price": "0.35",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "ZOOROYAL Pastete*",
+          "price": "0.35",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "ZOOROYAL Pastete Junior*",
+          "price": "0.35",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "LUCKY CAT Knusperkissen*",
+          "price": "0.85",
+          "amount": "je 150 g"
+        },
+        {
+          "name": "LUCKY DOG Knabbersticks Rind*",
+          "price": "1.69",
+          "amount": "je 16 x 11 g"
+        },
+        {
+          "name": "LUCKY DOG Knabbersticks Wild*",
+          "price": "1.69",
+          "amount": "je 16 x 11 g"
+        },
+        {
           "name": "Adventsgesteck in Reihe*",
           "price": "9.99",
           "amount": "je Stück"
@@ -1432,6 +1497,16 @@
           "name": "NATURGUT Deutsche Bio-Kartoffeln*",
           "price": "1.79",
           "amount": "je 1,5-kg-Netz"
+        },
+        {
+          "name": "Gurke*",
+          "price": "0.69",
+          "amount": "je Stück"
+        },
+        {
+          "name": "NATURGUT Bio Avocado*",
+          "price": "1.49",
+          "amount": "je 250-g-Zellulosenetz"
         },
         {
           "name": "PUDA Backmischung Bratapfelkuchen*",
