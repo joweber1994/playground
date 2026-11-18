@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-17.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-18.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W47",
   "validFrom": "2026-11-16",
   "validUntil": "2026-11-21",
-  "extractedAt": "2026-11-17",
+  "extractedAt": "2026-11-18",
   "stores": [
     {
       "id": "prechtl",
@@ -414,6 +414,11 @@
           "amount": ""
         },
         {
+          "name": "GOLDEN SEAFOOD Kabeljau Rückenfilet 250 g",
+          "price": "6.79",
+          "amount": ""
+        },
+        {
           "name": "MEINE METZGEREI Gulasch vom Schwein 500 g",
           "price": "2.99",
           "amount": ""
@@ -556,6 +561,11 @@
         {
           "name": "BACK FAMILY Dinkelmehl Type 630 1 kg",
           "price": "0.89",
+          "amount": ""
+        },
+        {
+          "name": "ALDI Äpfel rot 1 kg",
+          "price": "1.79",
           "amount": ""
         },
         {
@@ -2080,12 +2090,12 @@
         },
         {
           "name": "DIE MILLIONENIDEE Rollfix Farbrolle mit Wechselbezügen",
-          "price": "14.99",
+          "price": "7.99",
           "amount": ""
         },
         {
           "name": "DIE MILLIONENIDEE Happy Hotty Wärmflasche mit Aroma-Stein",
-          "price": "9.99",
+          "price": "7.99",
           "amount": ""
         },
         {
@@ -2111,11 +2121,6 @@
         {
           "name": "EFE Raki Gold 45% vol",
           "price": "16.99",
-          "amount": ""
-        },
-        {
-          "name": "TAITTINGER Prestige Rosé Cuvée brut, Champagner",
-          "price": "49.99",
           "amount": ""
         },
         {
@@ -2159,6 +2164,11 @@
           "amount": "klar & kr&auml;ftig Tequila Mexiko"
         },
         {
+          "name": "TAITTINGER Prestige Rosé Cuvée brut, Champagner",
+          "price": "49.99",
+          "amount": ""
+        },
+        {
           "name": "Charles de Cazanove Tradition Père & Fils Premier Cru brut, Champagner",
           "price": "23.99",
           "amount": ""
@@ -2195,7 +2205,7 @@
         },
         {
           "name": "LOCH LOMOND Single Malt Scotch Whisky 18 Jahre 46% Vol",
-          "price": "79.99",
+          "price": "69.99",
           "amount": ""
         },
         {
@@ -2305,7 +2315,7 @@
         },
         {
           "name": "SILVERCREST Kaffeevollautomat »SKVA 1450 A2«",
-          "price": "229.00",
+          "price": "222.00",
           "amount": ""
         },
         {
@@ -2349,6 +2359,16 @@
           "amount": ""
         },
         {
+          "name": "CRIVIT E-Bike »Classic« , 27,5 Zoll",
+          "price": "899.00",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT E-Bike Faltrad »FoldX 530«",
+          "price": "899.00",
+          "amount": ""
+        },
+        {
           "name": "CRIVIT Damen Skijacke mit THERMOLITE EcoMade-Technologie",
           "price": "24.99",
           "amount": ""
@@ -2356,6 +2376,11 @@
         {
           "name": "CRIVIT Herren Skijacke mit THERMOLITE EcoMade-Technologie",
           "price": "24.99",
+          "amount": ""
+        },
+        {
+          "name": "CRIVIT Damen Skihose mit RECCO-Ortungssystem",
+          "price": "29.99",
           "amount": ""
         },
         {
@@ -2536,31 +2561,6 @@
         {
           "name": "Nico Feuerwerk Feuerwerk Golden Empire Verbundbatterie, 80 Schuss",
           "price": "89.99",
-          "amount": ""
-        },
-        {
-          "name": "Buch Shappulus (von Mark Keller & Elmar Schäfer)",
-          "price": "9.99",
-          "amount": "Anzahl Seiten: 160 Seiten Altersempfehlung: 8+"
-        },
-        {
-          "name": "LUPILU Kinder-Unterwäsche-Set »Pokémon«",
-          "price": "3.99",
-          "amount": ""
-        },
-        {
-          "name": "LUPILU Kinder Langarmshirts, 2 Stück",
-          "price": "6.99",
-          "amount": ""
-        },
-        {
-          "name": "MINECRAFT Sitzbox",
-          "price": "6.99",
-          "amount": "Max. Belastung: 20 kg Ma&szlig;e: L 30 x B 30 x H 30 cm"
-        },
-        {
-          "name": "LUPILU Kinder Pyjama",
-          "price": "7.99",
           "amount": ""
         },
         {
@@ -2817,6 +2817,31 @@
           "name": "LUPILU Kleinkinder Sweathose",
           "price": "5.99",
           "amount": "Farbe: grau, rosa Merkmal: Eingrifftaschen"
+        },
+        {
+          "name": "LUPILU Kinder-Unterwäsche-Set »Pokémon«",
+          "price": "3.99",
+          "amount": ""
+        },
+        {
+          "name": "LUPILU Kinder Langarmshirts, 2 Stück",
+          "price": "6.99",
+          "amount": ""
+        },
+        {
+          "name": "MINECRAFT Sitzbox",
+          "price": "6.99",
+          "amount": "Max. Belastung: 20 kg Ma&szlig;e: L 30 x B 30 x H 30 cm"
+        },
+        {
+          "name": "LUPILU Kinder Pyjama",
+          "price": "7.99",
+          "amount": ""
+        },
+        {
+          "name": "Buch Shappulus (von Mark Keller & Elmar Schäfer)",
+          "price": "9.99",
+          "amount": "Anzahl Seiten: 160 Seiten Altersempfehlung: 8+"
         },
         {
           "name": "Barbera d'Asti DOCG Superiore trocken, Rotwein 2021",
