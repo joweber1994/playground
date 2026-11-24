@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-23.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-24.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W48",
   "validFrom": "2026-11-23",
   "validUntil": "2026-11-28",
-  "extractedAt": "2026-11-23",
+  "extractedAt": "2026-11-24",
   "stores": [
     {
       "id": "prechtl",
@@ -389,8 +389,23 @@
           "amount": ""
         },
         {
+          "name": "Gurke, Stück",
+          "price": "0.59",
+          "amount": ""
+        },
+        {
+          "name": "NATUR LIEBLINGE Kaki Krumme Dinger 1 kg",
+          "price": "2.29",
+          "amount": ""
+        },
+        {
           "name": "NATUR LIEBLINGE Orangen 2 kg",
           "price": "2.49",
+          "amount": ""
+        },
+        {
+          "name": "NATUR LIEBLINGE Cocktailrispentomaten 500 g",
+          "price": "2.19",
           "amount": ""
         },
         {
@@ -794,6 +809,16 @@
           "amount": ""
         },
         {
+          "name": "HARIBO Pico Balla 160 g",
+          "price": "0.65",
+          "amount": ""
+        },
+        {
+          "name": "HARIBO Pico Balla Sour 160 g",
+          "price": "0.65",
+          "amount": ""
+        },
+        {
           "name": "WESTMINSTER Ingwer Tee Mix 45 g, Ingwer-Orange",
           "price": "0.89",
           "amount": ""
@@ -924,12 +949,12 @@
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Handgelegter Kochschinken 125 g, Hell geräuchert",
+          "name": "GOURMET FINEST CUISINE Handgelegter Kochschinken 125 g, hell geräuchert",
           "price": "1.59",
           "amount": ""
         },
         {
-          "name": "GOURMET FINEST CUISINE Handgelegter Kochschinken 125 g, Dunkel geräuchert",
+          "name": "GOURMET FINEST CUISINE Handgelegter Kochschinken 125 g, dunkel geräuchert",
           "price": "1.59",
           "amount": ""
         },
@@ -1634,9 +1659,9 @@
           "amount": "je 500 g"
         },
         {
-          "name": "ARIEL Color flüssig*",
-          "price": "19.99",
-          "amount": "je 4,995 l"
+          "name": "LENOR Waschmittel*",
+          "price": "4.99",
+          "amount": "je 900 ml"
         },
         {
           "name": "LENOR Weichspüler*",
@@ -1689,9 +1714,9 @@
           "amount": "je 500 m"
         },
         {
-          "name": "LENOR Waschmittel*",
-          "price": "4.99",
-          "amount": "je 900 ml"
+          "name": "ARIEL Color flüssig*",
+          "price": "19.99",
+          "amount": "je 4,995 l"
         },
         {
           "name": "ARIEL Universal Pulver*",
@@ -1876,6 +1901,16 @@
         {
           "name": "Romatomaten*",
           "price": "1.29",
+          "amount": "je 500-g-Schale"
+        },
+        {
+          "name": "Kaki*",
+          "price": "0.45",
+          "amount": "je Stück"
+        },
+        {
+          "name": "NATURGUT Bio Rispentomaten*",
+          "price": "1.79",
           "amount": "je 500-g-Schale"
         },
         {
