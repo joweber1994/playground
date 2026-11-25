@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-24.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-25.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W48",
   "validFrom": "2026-11-23",
   "validUntil": "2026-11-28",
-  "extractedAt": "2026-11-24",
+  "extractedAt": "2026-11-25",
   "stores": [
     {
       "id": "prechtl",
@@ -2690,6 +2690,11 @@
         },
         {
           "name": "EMMA Matratze »Emma Express«, Aeroflex Taschenfedern",
+          "price": "109.00",
+          "amount": ""
+        },
+        {
+          "name": "EMMA Matratze »Emma Express«, Aeroflex Taschenfedern, 90 x 200 cm",
           "price": "109.00",
           "amount": ""
         },
