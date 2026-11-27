@@ -1,4 +1,4 @@
-/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-25.
+/* Wochenzettel – Angebote, automatisch gelesen am 2026-11-27.
    node wochenzettel/refresh-offers.js --write schreibt diese Datei neu.
    Die Seite liest dieselben Quellen beim Öffnen noch einmal nach. */
 (function (root, factory) {
@@ -10,7 +10,7 @@
   "weekKey": "2026-W48",
   "validFrom": "2026-11-23",
   "validUntil": "2026-11-28",
-  "extractedAt": "2026-11-25",
+  "extractedAt": "2026-11-27",
   "stores": [
     {
       "id": "prechtl",
@@ -1782,6 +1782,21 @@
           "name": "Weihnachtswichtel mit Konifere*",
           "price": "4.99",
           "amount": "je Stück"
+        },
+        {
+          "name": "MILPRIMA Deutsche Markenbutter*",
+          "price": "0.99",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "MILPRIMA Süßrahmbutter*",
+          "price": "0.99",
+          "amount": "je 250 g"
+        },
+        {
+          "name": "MILPRIMA Lækkergården*",
+          "price": "0.99",
+          "amount": "je 250 g"
         },
         {
           "name": "LUCKY DOG Pastete oder Ragout*",
